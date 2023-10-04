@@ -1,5 +1,8 @@
 import 'package:expense_tracker/view/authentication/get_started.dart';
+import 'package:expense_tracker/view/authentication/login.dart';
+import 'package:expense_tracker/view/authentication/signup.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 void main() {
   runApp(const MyApp());
@@ -10,9 +13,15 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const MaterialApp(
-        debugShowCheckedModeBanner: false,
-        title: 'Expense tracker',
-        home: GetStartedScreen());
+    return GetMaterialApp(
+      debugShowCheckedModeBanner: false,
+      title: 'Expense tracker',
+      initialRoute: '/',
+      getPages: [
+        GetPage(name: '/', page: () => const GetStartedScreen()),
+        GetPage(name: '/login', page: () => const LoginScreen()),
+        GetPage(name: '/signup', page: () => const ScreenSignup()),
+      ],
+    );
   }
 }

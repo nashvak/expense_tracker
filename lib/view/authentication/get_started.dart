@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 
+import '../../custom_widgets/button.dart';
 import '../../custom_widgets/sizedbox.dart';
 
 class GetStartedScreen extends StatelessWidget {
@@ -11,7 +13,7 @@ class GetStartedScreen extends StatelessWidget {
     return Scaffold(
       body: Padding(
         padding:
-            const EdgeInsets.only(left: 25, right: 25, top: 100, bottom: 100),
+            const EdgeInsets.only(left: 25, right: 25, top: 100, bottom: 70),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.start,
           crossAxisAlignment: CrossAxisAlignment.center,
@@ -30,40 +32,20 @@ class GetStartedScreen extends StatelessWidget {
               textAlign: TextAlign.center,
               style: TextStyle(fontSize: 17),
             ),
-            height50,
-            CustomButton(
-              title: "Get Started",
-              onTap: () {},
+            Expanded(
+              child: Align(
+                alignment: FractionalOffset.bottomCenter,
+                child: CustomButton(
+                  title: "Get Started",
+                  onTap: () {
+                    Get.toNamed('/login');
+                  },
+                ),
+              ),
             ),
           ],
         ),
       ),
-    );
-  }
-}
-
-class CustomButton extends StatelessWidget {
-  final String title;
-  final void Function() onTap;
-  const CustomButton({
-    required this.title,
-    required this.onTap,
-    super.key,
-  });
-
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      width: double.infinity,
-      height: 60,
-      decoration: BoxDecoration(
-          color: Colors.teal.shade400, borderRadius: BorderRadius.circular(40)),
-      child: Center(
-          child: Text(
-        title,
-        style: GoogleFonts.lato(
-            fontSize: 25, fontWeight: FontWeight.w700, color: Colors.white),
-      )),
     );
   }
 }

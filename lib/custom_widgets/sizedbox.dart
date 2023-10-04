@@ -12,3 +12,10 @@ Widget height20 = const SizedBox(
 Widget height50 = const SizedBox(
   height: 50,
 );
+
+TextStyle titleStyle() {
+  return const TextStyle(
+    fontSize: 16,
+    //fontWeight: FontWeight.bold,
+  );
+}
