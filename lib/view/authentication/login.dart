@@ -87,7 +87,7 @@ class LoginScreen extends StatelessWidget {
                       CustomButton(
                         title: 'Login',
                         onTap: () {
-                          Get.toNamed('/signup');
+                          Get.offNamed('/home');
                         },
                       ),
                       height10,
@@ -100,7 +100,7 @@ class LoginScreen extends StatelessWidget {
                                   style: titleStyle()),
                               GestureDetector(
                                 onTap: () {
-                                  Get.toNamed('/signup');
+                                  Get.offNamed('/signup');
                                 },
                                 child: Text(
                                   "Sign in",

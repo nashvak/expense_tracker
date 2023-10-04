@@ -38,7 +38,7 @@ class GetStartedScreen extends StatelessWidget {
                 child: CustomButton(
                   title: "Get Started",
                   onTap: () {
-                    Get.toNamed('/login');
+                    Get.offNamed('/login');
                   },
                 ),
               ),
