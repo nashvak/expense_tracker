@@ -1,4 +1,4 @@
-import 'package:expense_tracker/custom_widgets/sizedbox.dart';
+import 'package:expense_tracker/custom_widgets/common/sizedbox.dart';
 import 'package:flutter/material.dart';
 
 import '../../constatnts/colors.dart';

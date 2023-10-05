@@ -1,9 +1,11 @@
 import 'package:expense_tracker/constatnts/colors.dart';
-import 'package:expense_tracker/custom_widgets/button.dart';
-import 'package:expense_tracker/custom_widgets/sizedbox.dart';
+
+import 'package:expense_tracker/custom_widgets/common/sizedbox.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:google_fonts/google_fonts.dart';
+
+import '../../custom_widgets/common/button.dart';
+import '../../custom_widgets/loginPage/login_widgets.dart';
 
 class ScreenSignup extends StatelessWidget {
   const ScreenSignup({super.key});
@@ -48,81 +50,36 @@ class ScreenSignup extends StatelessWidget {
                       //   style: titleStyle(),
                       // ),
                       height10,
-                      Container(
-                          height: 55,
-                          decoration: BoxDecoration(
-                            color: const Color.fromARGB(136, 216, 216, 210),
-                            borderRadius: BorderRadius.circular(40),
-                          ),
-                          child: const TextField(
-                            showCursor: false,
-                            decoration: InputDecoration(
-                              hintText: 'Name',
-                              border: InputBorder.none,
-                              contentPadding: EdgeInsets.all(20),
-                            ),
-                          )),
+                      CustomTextField(
+                        title: 'Name',
+                      ),
                       height30,
                       // Text(
                       //   'Email',
                       //   style: titleStyle(),
                       // ),
                       height10,
-                      Container(
-                          height: 55,
-                          decoration: BoxDecoration(
-                            color: const Color.fromARGB(136, 216, 216, 210),
-                            borderRadius: BorderRadius.circular(40),
-                          ),
-                          child: const TextField(
-                            showCursor: false,
-                            decoration: InputDecoration(
-                              hintText: 'Email',
-                              border: InputBorder.none,
-                              contentPadding: EdgeInsets.all(20),
-                            ),
-                          )),
+                      CustomTextField(
+                        title: 'Email',
+                      ),
                       height30,
                       // Text(
                       //   'Email',
                       //   style: titleStyle(),
                       // ),
                       height10,
-                      Container(
-                          height: 55,
-                          decoration: BoxDecoration(
-                            color: const Color.fromARGB(136, 216, 216, 210),
-                            borderRadius: BorderRadius.circular(40),
-                          ),
-                          child: const TextField(
-                            showCursor: false,
-                            decoration: InputDecoration(
-                              hintText: 'Password',
-                              border: InputBorder.none,
-                              contentPadding: EdgeInsets.all(20),
-                              suffixIcon: Icon(Icons.visibility),
-                            ),
-                          )),
+                      CustomTextField(
+                        title: 'Password',
+                        icon: Icon(Icons.visibility),
+                      ),
                       height30,
                       // Text(
                       //   'Password',
                       //   style: titleStyle(),
                       // ),
                       height10,
-                      Container(
-                        height: 55,
-                        decoration: BoxDecoration(
-                          color: const Color.fromARGB(136, 216, 216, 210),
-                          borderRadius: BorderRadius.circular(40),
-                        ),
-                        child: const TextField(
-                          showCursor: false,
-                          decoration: InputDecoration(
-                            border: InputBorder.none,
-                            contentPadding: EdgeInsets.all(20),
-                            hintText: 'Confirm password',
-                          ),
-                        ),
+                      CustomTextField(
+                        title: 'Confirm password',
                       ),
                       height50,
                       CustomButton(
@@ -131,26 +88,14 @@ class ScreenSignup extends StatelessWidget {
                           Get.offNamed('/home');
                         },
                       ),
-                      height10,
-                      Align(
-                          alignment: FractionalOffset.bottomCenter,
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              Text("already have an account? ",
-                                  style: titleStyle()),
-                              GestureDetector(
-                                onTap: () {
-                                  Get.offNamed('/login');
-                                },
-                                child: Text(
-                                  "Log in",
-                                  style: titleStyle()
-                                      .copyWith(color: Appcolor.primaryColor),
-                                ),
-                              ),
-                            ],
-                          )),
+                      height20,
+
+                      BottomText(
+                          title: "already have an account? ",
+                          title2: "Log in",
+                          ontap: () {
+                            Get.offNamed('/login');
+                          })
                     ],
                   ),
                 ),
