@@ -45,70 +45,138 @@ class ScreenHome extends StatelessWidget {
                   ),
                 ),
                 child: Stack(
+                  //fit: StackFit.expand,
                   children: [
                     Positioned(
                       top: 130,
                       left: 30,
+                      right: 30,
+                      bottom: 0,
                       child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          const Text("Recent Transaction"),
-                          height10,
-                          Row(
-                            children: [
-                              Container(
-                                decoration: ShapeDecoration(
-                                    color: Colors.white,
-                                    shape: RoundedRectangleBorder(
-                                        borderRadius:
-                                            BorderRadius.circular(26))),
-                                child: const Padding(
-                                  padding: EdgeInsets.symmetric(
-                                      horizontal: 10, vertical: 5),
-                                  child: Text("All"),
+                          Container(
+                            color: Colors.green,
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                const Text("Recent Transaction"),
+                                height10,
+                                Row(
+                                  children: [
+                                    Container(
+                                      height: 35,
+                                      decoration: ShapeDecoration(
+                                        color: Colors.white,
+                                        shape: RoundedRectangleBorder(
+                                            borderRadius:
+                                                BorderRadius.circular(26)),
+                                      ),
+                                      child: const Padding(
+                                        padding: EdgeInsets.symmetric(
+                                            horizontal: 10, vertical: 10),
+                                        child: Text("All"),
+                                      ),
+                                    ),
+                                    const SizedBox(
+                                      width: 10,
+                                    ),
+                                    Container(
+                                      decoration: ShapeDecoration(
+                                        color: Colors.white,
+                                        shape: RoundedRectangleBorder(
+                                          borderRadius:
+                                              BorderRadius.circular(26),
+                                        ),
+                                      ),
+                                      child: const Padding(
+                                        padding: EdgeInsets.symmetric(
+                                            horizontal: 10, vertical: 5),
+                                        child: Row(
+                                          children: [
+                                            Icon(Icons.arrow_upward),
+                                            Text("Income"),
+                                          ],
+                                        ),
+                                      ),
+                                    ),
+                                    const SizedBox(
+                                      width: 10,
+                                    ),
+                                    Container(
+                                      decoration: ShapeDecoration(
+                                        color: Colors.white,
+                                        shape: RoundedRectangleBorder(
+                                          borderRadius:
+                                              BorderRadius.circular(26),
+                                        ),
+                                      ),
+                                      child: const Padding(
+                                        padding: EdgeInsets.symmetric(
+                                            horizontal: 10, vertical: 5),
+                                        child: Row(
+                                          children: [
+                                            Icon(Icons.arrow_downward),
+                                            Text("Expense"),
+                                          ],
+                                        ),
+                                      ),
+                                    ),
+                                  ],
                                 ),
-                              ),
-                              const SizedBox(
-                                width: 10,
-                              ),
-                              Container(
-                                decoration: ShapeDecoration(
-                                    color: Colors.white,
-                                    shape: RoundedRectangleBorder(
-                                        borderRadius:
-                                            BorderRadius.circular(26))),
-                                child: const Padding(
-                                  padding: EdgeInsets.symmetric(
-                                      horizontal: 10, vertical: 5),
-                                  child: Row(
-                                    children: [
-                                      Icon(Icons.arrow_upward),
-                                      Text("Income"),
-                                    ],
+                              ],
+                            ),
+                          ),
+                          height30,
+                          Container(
+                            color: Colors.red,
+                            child: SingleChildScrollView(
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Card(
+                                    child: ListTile(
+                                      title: Text("jvf"),
+                                    ),
                                   ),
-                                ),
-                              ),
-                              const SizedBox(
-                                width: 10,
-                              ),
-                              Container(
-                                decoration: ShapeDecoration(
-                                    color: Colors.white,
-                                    shape: RoundedRectangleBorder(
-                                        borderRadius:
-                                            BorderRadius.circular(26))),
-                                child: const Padding(
-                                  padding: EdgeInsets.symmetric(
-                                      horizontal: 10, vertical: 5),
-                                  child: Row(
-                                    children: [
-                                      Icon(Icons.arrow_downward),
-                                      Text("Expense"),
-                                    ],
+                                  height20,
+                                  Card(
+                                    child: ListTile(
+                                      title: Text("jvf"),
+                                    ),
                                   ),
-                                ),
+                                  height20,
+                                  Card(
+                                    child: ListTile(
+                                      title: Text("jvf"),
+                                    ),
+                                  ),
+                                  height20,
+                                  Card(
+                                    child: ListTile(
+                                      title: Text("jvf"),
+                                    ),
+                                  ),
+                                  height20,
+                                  Card(
+                                    child: ListTile(
+                                      title: Text("jvf"),
+                                    ),
+                                  ),
+                                  height20,
+                                  Card(
+                                    child: ListTile(
+                                      title: Text("jvf"),
+                                    ),
+                                  ),
+                                  height20,
+                                  Card(
+                                    child: ListTile(
+                                      title: Text("jvf"),
+                                    ),
+                                  ),
+                                ],
                               ),
-                            ],
+                            ),
                           ),
                         ],
                       ),
