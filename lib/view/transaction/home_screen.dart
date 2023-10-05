@@ -35,103 +35,97 @@ class ScreenHome extends StatelessWidget {
             Positioned(
               top: 250,
               left: 0,
-              width: MediaQuery.of(context).size.width,
-              height: MediaQuery.of(context).size.height,
+              right: 0,
+              bottom: 0,
               child: Container(
+                height: MediaQuery.of(context).size.height,
+                width: MediaQuery.of(context).size.width,
                 decoration: ShapeDecoration(
                   color: const Color.fromARGB(255, 223, 223, 223),
                   shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(26),
+                    borderRadius: BorderRadius.only(
+                      topLeft: Radius.circular(25),
+                      topRight: Radius.circular(25),
+                    ),
                   ),
                 ),
-                child: Stack(
-                  //fit: StackFit.expand,
-                  children: [
-                    Positioned(
-                      top: 130,
-                      left: 30,
-                      right: 30,
-                      bottom: 0,
-                      child: Column(
-                        children: [
-                          Container(
-                            color: Colors.green,
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                const Text("Recent Transaction"),
-                                height10,
-                                Row(
+                child: Padding(
+                  padding: const EdgeInsets.only(
+                      top: 150, left: 30, right: 30, bottom: 0),
+                  child: Container(
+                    color: Colors.green,
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        const Text("Recent Transaction"),
+                        height10,
+                        Row(
+                          children: [
+                            Container(
+                              height: 35,
+                              decoration: ShapeDecoration(
+                                color: Colors.white,
+                                shape: RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(26)),
+                              ),
+                              child: const Padding(
+                                padding: EdgeInsets.symmetric(
+                                    horizontal: 10, vertical: 10),
+                                child: Text("All"),
+                              ),
+                            ),
+                            const SizedBox(
+                              width: 10,
+                            ),
+                            Container(
+                              decoration: ShapeDecoration(
+                                color: Colors.white,
+                                shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(26),
+                                ),
+                              ),
+                              child: const Padding(
+                                padding: EdgeInsets.symmetric(
+                                    horizontal: 10, vertical: 5),
+                                child: Row(
                                   children: [
-                                    Container(
-                                      height: 35,
-                                      decoration: ShapeDecoration(
-                                        color: Colors.white,
-                                        shape: RoundedRectangleBorder(
-                                            borderRadius:
-                                                BorderRadius.circular(26)),
-                                      ),
-                                      child: const Padding(
-                                        padding: EdgeInsets.symmetric(
-                                            horizontal: 10, vertical: 10),
-                                        child: Text("All"),
-                                      ),
-                                    ),
-                                    const SizedBox(
-                                      width: 10,
-                                    ),
-                                    Container(
-                                      decoration: ShapeDecoration(
-                                        color: Colors.white,
-                                        shape: RoundedRectangleBorder(
-                                          borderRadius:
-                                              BorderRadius.circular(26),
-                                        ),
-                                      ),
-                                      child: const Padding(
-                                        padding: EdgeInsets.symmetric(
-                                            horizontal: 10, vertical: 5),
-                                        child: Row(
-                                          children: [
-                                            Icon(Icons.arrow_upward),
-                                            Text("Income"),
-                                          ],
-                                        ),
-                                      ),
-                                    ),
-                                    const SizedBox(
-                                      width: 10,
-                                    ),
-                                    Container(
-                                      decoration: ShapeDecoration(
-                                        color: Colors.white,
-                                        shape: RoundedRectangleBorder(
-                                          borderRadius:
-                                              BorderRadius.circular(26),
-                                        ),
-                                      ),
-                                      child: const Padding(
-                                        padding: EdgeInsets.symmetric(
-                                            horizontal: 10, vertical: 5),
-                                        child: Row(
-                                          children: [
-                                            Icon(Icons.arrow_downward),
-                                            Text("Expense"),
-                                          ],
-                                        ),
-                                      ),
-                                    ),
+                                    Icon(Icons.arrow_upward),
+                                    Text("Income"),
                                   ],
                                 ),
-                              ],
+                              ),
                             ),
-                          ),
-                          height30,
-                          Container(
+                            const SizedBox(
+                              width: 10,
+                            ),
+                            Container(
+                              decoration: ShapeDecoration(
+                                color: Colors.white,
+                                shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(26),
+                                ),
+                              ),
+                              child: const Padding(
+                                padding: EdgeInsets.symmetric(
+                                    horizontal: 10, vertical: 5),
+                                child: Row(
+                                  children: [
+                                    Icon(Icons.arrow_downward),
+                                    Text("Expense"),
+                                  ],
+                                ),
+                              ),
+                            ),
+                          ],
+                        ),
+                        height10,
+                        Expanded(
+                          child: Container(
+                            height: MediaQuery.of(context).size.height,
+                            width: MediaQuery.of(context).size.width,
                             color: Colors.red,
                             child: SingleChildScrollView(
                               child: Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
                                   Card(
                                     child: ListTile(
@@ -178,10 +172,11 @@ class ScreenHome extends StatelessWidget {
                               ),
                             ),
                           ),
-                        ],
-                      ),
+                        )
+                      ],
                     ),
-                  ],
+                  ),
+                  //
                 ),
               ),
             ),
