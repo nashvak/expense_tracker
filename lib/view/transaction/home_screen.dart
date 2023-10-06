@@ -1,6 +1,7 @@
 import 'package:expense_tracker/custom_widgets/common/sizedbox.dart';
 import 'package:flutter/material.dart';
 import '../../constatnts/colors.dart';
+import '../../custom_widgets/home_screen/home_screen_widgets.dart';
 
 class ScreenHome extends StatelessWidget {
   const ScreenHome({super.key});
@@ -86,54 +87,18 @@ class ScreenHome extends StatelessWidget {
                                         fontWeight: FontWeight.w500)),
                               ),
                             ),
+                            BlankSpace(
+                              width: 10,
+                            ),
+                            const SortButton(
+                                title: 'Income',
+                                icon: Icon(Icons.arrow_upward)),
                             const SizedBox(
                               width: 10,
                             ),
-                            Container(
-                              decoration: ShapeDecoration(
-                                color: Colors.white,
-                                shape: RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.circular(26),
-                                ),
-                              ),
-                              child: const Padding(
-                                padding: EdgeInsets.symmetric(
-                                    horizontal: 10, vertical: 5),
-                                child: Row(
-                                  children: [
-                                    Icon(Icons.arrow_upward),
-                                    Text("Income",
-                                        style: TextStyle(
-                                            fontSize: 16,
-                                            fontWeight: FontWeight.w500)),
-                                  ],
-                                ),
-                              ),
-                            ),
-                            const SizedBox(
-                              width: 10,
-                            ),
-                            Container(
-                              decoration: ShapeDecoration(
-                                color: Colors.white,
-                                shape: RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.circular(26),
-                                ),
-                              ),
-                              child: const Padding(
-                                padding: EdgeInsets.symmetric(
-                                    horizontal: 10, vertical: 5),
-                                child: Row(
-                                  children: [
-                                    Icon(Icons.arrow_downward),
-                                    Text("Expense",
-                                        style: TextStyle(
-                                            fontSize: 16,
-                                            fontWeight: FontWeight.w500)),
-                                  ],
-                                ),
-                              ),
-                            ),
+                            const SortButton(
+                                title: 'Expense',
+                                icon: Icon(Icons.arrow_downward))
                           ],
                         ),
                         height10,
@@ -147,162 +112,21 @@ class ScreenHome extends StatelessWidget {
                               child: Column(
                                 children: [
                                   height20,
-                                  ListTile(
-                                    contentPadding: EdgeInsets.symmetric(
-                                        horizontal: 0, vertical: 0),
-                                    leading: Container(
-                                        decoration: const BoxDecoration(
-                                          color: Appcolor.primaryColor,
-                                          shape: BoxShape.circle,
-                                        ),
-                                        child: const Padding(
-                                          padding: EdgeInsets.all(10),
-                                          child: Icon(Icons.phone_android),
-                                        )),
-                                    title: const Text(
-                                      "Mobile Recharge",
-                                      style: TextStyle(
-                                          fontSize: 18,
-                                          fontWeight: FontWeight.w500),
-                                    ),
-                                    subtitle: const Text(
-                                      '6/12/23 9:30 am',
-                                      style: TextStyle(
-                                          fontSize: 14,
-                                          fontWeight: FontWeight.w400),
-                                    ),
-                                    trailing: const Text(
-                                      "₹ 500",
-                                      style: TextStyle(
-                                          fontSize: 18,
-                                          fontWeight: FontWeight.bold),
-                                    ),
-                                  ),
-                                  ListTile(
-                                    contentPadding: EdgeInsets.symmetric(
-                                        horizontal: 0, vertical: 0),
-                                    leading: Container(
-                                        decoration: const BoxDecoration(
-                                          color: Appcolor.primaryColor,
-                                          shape: BoxShape.circle,
-                                        ),
-                                        child: const Padding(
-                                          padding: EdgeInsets.all(10),
-                                          child: Icon(Icons.phone_android),
-                                        )),
-                                    title: const Text("Mobile Recharge",
-                                        style: TextStyle(
-                                            fontSize: 18,
-                                            fontWeight: FontWeight.w500)),
-                                    subtitle: const Text('6/12/23 9:30 am',
-                                        style: TextStyle(
-                                            fontSize: 14,
-                                            fontWeight: FontWeight.w400)),
-                                    trailing: const Text("₹ 500",
-                                        style: TextStyle(
-                                            fontSize: 18,
-                                            fontWeight: FontWeight.bold)),
-                                  ),
-                                  ListTile(
-                                    contentPadding: EdgeInsets.symmetric(
-                                        horizontal: 0, vertical: 0),
-                                    leading: Container(
-                                        decoration: const BoxDecoration(
-                                          color: Appcolor.primaryColor,
-                                          shape: BoxShape.circle,
-                                        ),
-                                        child: const Padding(
-                                          padding: EdgeInsets.all(10),
-                                          child: Icon(Icons.phone_android),
-                                        )),
-                                    title: const Text("Mobile Recharge",
-                                        style: TextStyle(
-                                            fontSize: 18,
-                                            fontWeight: FontWeight.w500)),
-                                    subtitle: const Text('6/12/23 9:30 am',
-                                        style: TextStyle(
-                                            fontSize: 14,
-                                            fontWeight: FontWeight.w400)),
-                                    trailing: const Text("₹ 500",
-                                        style: TextStyle(
-                                            fontSize: 18,
-                                            fontWeight: FontWeight.bold)),
-                                  ),
-                                  ListTile(
-                                    contentPadding: EdgeInsets.symmetric(
-                                        horizontal: 0, vertical: 0),
-                                    leading: Container(
-                                        decoration: const BoxDecoration(
-                                          color: Appcolor.primaryColor,
-                                          shape: BoxShape.circle,
-                                        ),
-                                        child: const Padding(
-                                          padding: EdgeInsets.all(10),
-                                          child: Icon(Icons.phone_android),
-                                        )),
-                                    title: const Text("Mobile Recharge",
-                                        style: TextStyle(
-                                            fontSize: 18,
-                                            fontWeight: FontWeight.w500)),
-                                    subtitle: const Text('6/12/23 9:30 am',
-                                        style: TextStyle(
-                                            fontSize: 14,
-                                            fontWeight: FontWeight.w400)),
-                                    trailing: const Text("₹ 500",
-                                        style: TextStyle(
-                                            fontSize: 18,
-                                            fontWeight: FontWeight.bold)),
-                                  ),
-                                  ListTile(
-                                    contentPadding: EdgeInsets.symmetric(
-                                        horizontal: 0, vertical: 0),
-                                    leading: Container(
-                                        decoration: const BoxDecoration(
-                                          color: Appcolor.primaryColor,
-                                          shape: BoxShape.circle,
-                                        ),
-                                        child: const Padding(
-                                          padding: EdgeInsets.all(10),
-                                          child: Icon(Icons.phone_android),
-                                        )),
-                                    title: const Text("Mobile Recharge",
-                                        style: TextStyle(
-                                            fontSize: 18,
-                                            fontWeight: FontWeight.w500)),
-                                    subtitle: const Text('6/12/23 9:30 am',
-                                        style: TextStyle(
-                                            fontSize: 14,
-                                            fontWeight: FontWeight.w400)),
-                                    trailing: const Text("₹ 500",
-                                        style: TextStyle(
-                                            fontSize: 18,
-                                            fontWeight: FontWeight.bold)),
-                                  ),
-                                  ListTile(
-                                    contentPadding: EdgeInsets.symmetric(
-                                        horizontal: 0, vertical: 0),
-                                    leading: Container(
-                                        decoration: const BoxDecoration(
-                                          color: Appcolor.primaryColor,
-                                          shape: BoxShape.circle,
-                                        ),
-                                        child: const Padding(
-                                          padding: EdgeInsets.all(10),
-                                          child: Icon(Icons.phone_android),
-                                        )),
-                                    title: const Text("Mobile Recharge",
-                                        style: TextStyle(
-                                            fontSize: 18,
-                                            fontWeight: FontWeight.w500)),
-                                    subtitle: const Text('6/12/23 9:30 am',
-                                        style: TextStyle(
-                                            fontSize: 14,
-                                            fontWeight: FontWeight.w400)),
-                                    trailing: const Text("₹ 500",
-                                        style: TextStyle(
-                                            fontSize: 18,
-                                            fontWeight: FontWeight.bold)),
-                                  ),
+                                  const Listtile(
+                                      amount: 250,
+                                      date: '1/10/23 6:30pm',
+                                      icon: Icon(Icons.phone_android),
+                                      title: 'Electricity bill'),
+                                  const Listtile(
+                                      amount: 499,
+                                      date: '21/09/23 2:30pm',
+                                      icon: Icon(Icons.phone_android),
+                                      title: 'Mobile recharge'),
+                                  const Listtile(
+                                      amount: 6000,
+                                      date: '11/09/23 10:00am',
+                                      icon: Icon(Icons.phone_android),
+                                      title: 'Car EMI'),
                                 ],
                               ),
                             ),
