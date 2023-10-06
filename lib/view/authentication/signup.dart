@@ -20,12 +20,12 @@ class ScreenSignup extends StatelessWidget {
       backgroundColor: Appcolor.primaryColor,
       body: Column(
         children: [
-          Text(
+          const Text(
             "Create an account",
             style: TextStyle(
                 color: Colors.white, fontSize: 30, fontWeight: FontWeight.bold),
           ),
-          Text("Let us know about yourself",
+          const Text("Let us know about yourself",
               style: TextStyle(color: Colors.white, fontSize: 15)),
           height30,
           Expanded(
@@ -45,39 +45,20 @@ class ScreenSignup extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       height50,
-                      // Text(
-                      //   'Email',
-                      //   style: titleStyle(),
-                      // ),
                       height10,
                       CustomTextField(
                         title: 'Name',
                       ),
-                      height30,
-                      // Text(
-                      //   'Email',
-                      //   style: titleStyle(),
-                      // ),
-                      height10,
+                      height40,
                       CustomTextField(
                         title: 'Email',
                       ),
-                      height30,
-                      // Text(
-                      //   'Email',
-                      //   style: titleStyle(),
-                      // ),
-                      height10,
+                      height40,
                       CustomTextField(
                         title: 'Password',
-                        icon: Icon(Icons.visibility),
+                        icon: const Icon(Icons.visibility),
                       ),
-                      height30,
-                      // Text(
-                      //   'Password',
-                      //   style: titleStyle(),
-                      // ),
-                      height10,
+                      height40,
                       CustomTextField(
                         title: 'Confirm password',
                       ),
@@ -89,7 +70,6 @@ class ScreenSignup extends StatelessWidget {
                         },
                       ),
                       height20,
-
                       BottomText(
                           title: "already have an account? ",
                           title2: "Log in",

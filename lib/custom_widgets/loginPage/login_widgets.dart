@@ -4,7 +4,7 @@ import '../../constatnts/colors.dart';
 import '../common/sizedbox.dart';
 
 class CustomTextField extends StatelessWidget {
-  CustomTextField({this.icon, required this.title, super.key});
+  const CustomTextField({this.icon, required this.title, super.key});
   final Icon? icon;
   final String title;
   @override
