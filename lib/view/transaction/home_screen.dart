@@ -1,6 +1,9 @@
 import 'package:expense_tracker/custom_widgets/common/sizedbox.dart';
+import 'package:expense_tracker/view/transaction/view_transaction.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import '../../constatnts/colors.dart';
+import '../../custom_widgets/common/decoration.dart';
 import '../../custom_widgets/home_screen/home_screen_widgets.dart';
 
 class ScreenHome extends StatelessWidget {
@@ -45,18 +48,11 @@ class ScreenHome extends StatelessWidget {
               child: Container(
                 height: MediaQuery.of(context).size.height,
                 width: MediaQuery.of(context).size.width,
-                decoration: const ShapeDecoration(
-                  color: Appcolor.tertiaryColor,
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.only(
-                      topLeft: Radius.circular(25),
-                      topRight: Radius.circular(25),
-                    ),
-                  ),
-                ),
+                decoration:
+                    backgroundCurveDecoration(color: Appcolor.tertiaryColor),
                 child: Padding(
                   padding: const EdgeInsets.only(
-                      top: 150, left: 30, right: 30, bottom: 0),
+                      top: 120, left: 30, right: 30, bottom: 0),
                   child: Container(
                     //color: Colors.green,
                     child: Column(
@@ -72,12 +68,7 @@ class ScreenHome extends StatelessWidget {
                           children: [
                             Container(
                               //height: 35,
-                              decoration: ShapeDecoration(
-                                color: Colors.white,
-                                shape: RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.circular(26),
-                                ),
-                              ),
+                              decoration: cardDecoration(color: Appcolor.white),
                               child: const Padding(
                                 padding: EdgeInsets.symmetric(
                                     horizontal: 10, vertical: 10),
@@ -115,27 +106,39 @@ class ScreenHome extends StatelessWidget {
                               child: Column(
                                 children: [
                                   height20,
-                                  const Listtile(
+                                  Listtile(
+                                      ontap: () {
+                                        Get.to(
+                                          () => const ScreenViewTransaction(),
+                                          fullscreenDialog: true,
+                                          // duration: Duration(milliseconds: 500),
+                                          transition: Transition.downToUp,
+                                        );
+                                      },
                                       amount: 250,
                                       date: '1/10/23 6:30pm',
                                       icon: Icon(Icons.phone_android),
                                       title: 'Electricity bill'),
-                                  const Listtile(
+                                  Listtile(
+                                      ontap: () {},
                                       amount: 499,
                                       date: '21/09/23 2:30pm',
                                       icon: Icon(Icons.phone_android),
                                       title: 'Mobile recharge'),
-                                  const Listtile(
+                                  Listtile(
+                                      ontap: () {},
                                       amount: 6000,
                                       date: '11/09/23 10:00am',
                                       icon: Icon(Icons.phone_android),
                                       title: 'Car EMI'),
-                                  const Listtile(
+                                  Listtile(
+                                      ontap: () {},
                                       amount: 250,
                                       date: '1/10/23 6:30pm',
                                       icon: Icon(Icons.phone_android),
                                       title: 'Electricity bill'),
-                                  const Listtile(
+                                  Listtile(
+                                      ontap: () {},
                                       amount: 499,
                                       date: '21/09/23 2:30pm',
                                       icon: Icon(Icons.phone_android),
@@ -159,12 +162,8 @@ class ScreenHome extends StatelessWidget {
               height: 200,
               //width: MediaQuery.of(context).size.width,
               child: Container(
-                decoration: ShapeDecoration(
-                  color: const Color.fromARGB(255, 92, 209, 230),
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(26),
-                  ),
-                ),
+                decoration:
+                    cardDecoration(color: Color.fromARGB(255, 92, 209, 230)),
                 child: Stack(
                   children: [
                     Column(

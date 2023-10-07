@@ -1,4 +1,5 @@
 import 'package:expense_tracker/constatnts/colors.dart';
+import 'package:expense_tracker/custom_widgets/common/decoration.dart';
 
 import 'package:expense_tracker/custom_widgets/common/sizedbox.dart';
 import 'package:flutter/material.dart';
@@ -31,13 +32,7 @@ class ScreenSignup extends StatelessWidget {
           Expanded(
             child: Container(
               width: double.infinity,
-              decoration: const BoxDecoration(
-                color: Colors.white,
-                borderRadius: BorderRadius.only(
-                  topLeft: Radius.circular(25),
-                  topRight: Radius.circular(25),
-                ),
-              ),
+              decoration: backgroundCurveDecoration(color: Appcolor.white),
               child: FractionallySizedBox(
                 widthFactor: 0.85,
                 child: SingleChildScrollView(
