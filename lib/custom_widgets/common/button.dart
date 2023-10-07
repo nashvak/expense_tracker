@@ -34,3 +34,37 @@ class CustomButton extends StatelessWidget {
     );
   }
 }
+
+class Cancelbutton extends StatelessWidget {
+  final String title;
+  final void Function() onTap;
+  const Cancelbutton({
+    required this.title,
+    required this.onTap,
+    super.key,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return GestureDetector(
+      onTap: onTap,
+      child: Container(
+        width: double.infinity,
+        height: 60,
+        decoration: BoxDecoration(
+          color: Appcolor.white,
+          borderRadius: BorderRadius.circular(40),
+        ),
+        child: Center(
+          child: Text(
+            title,
+            style: GoogleFonts.lato(
+                fontSize: 25,
+                fontWeight: FontWeight.w700,
+                color: Appcolor.primaryColor),
+          ),
+        ),
+      ),
+    );
+  }
+}
