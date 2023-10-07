@@ -67,7 +67,7 @@ class LoginScreen extends StatelessWidget {
                       CustomButton(
                         title: 'Login',
                         onTap: () {
-                          Get.offNamed('/home');
+                          Get.offNamed('/bottom');
                         },
                       ),
                       height20,

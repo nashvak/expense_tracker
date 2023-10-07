@@ -46,7 +46,7 @@ class ScreenHome extends StatelessWidget {
                 height: MediaQuery.of(context).size.height,
                 width: MediaQuery.of(context).size.width,
                 decoration: const ShapeDecoration(
-                  color: Color.fromARGB(255, 223, 223, 223),
+                  color: Appcolor.tertiaryColor,
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.only(
                       topLeft: Radius.circular(25),
@@ -81,10 +81,12 @@ class ScreenHome extends StatelessWidget {
                               child: const Padding(
                                 padding: EdgeInsets.symmetric(
                                     horizontal: 10, vertical: 10),
-                                child: Text("All",
-                                    style: TextStyle(
-                                        fontSize: 16,
-                                        fontWeight: FontWeight.w500)),
+                                child: Text(
+                                  "All",
+                                  style: TextStyle(
+                                      fontSize: 16,
+                                      fontWeight: FontWeight.w500),
+                                ),
                               ),
                             ),
                             BlankSpace(
@@ -105,7 +107,8 @@ class ScreenHome extends StatelessWidget {
                         Expanded(
                           child: Container(
                             //color: Colors.red,
-                            height: MediaQuery.of(context).size.height,
+                            //height: MediaQuery.of(context).size.height,
+                            height: 50,
                             width: MediaQuery.of(context).size.width,
                             // color: Colors.red,
                             child: SingleChildScrollView(
@@ -127,6 +130,16 @@ class ScreenHome extends StatelessWidget {
                                       date: '11/09/23 10:00am',
                                       icon: Icon(Icons.phone_android),
                                       title: 'Car EMI'),
+                                  const Listtile(
+                                      amount: 250,
+                                      date: '1/10/23 6:30pm',
+                                      icon: Icon(Icons.phone_android),
+                                      title: 'Electricity bill'),
+                                  const Listtile(
+                                      amount: 499,
+                                      date: '21/09/23 2:30pm',
+                                      icon: Icon(Icons.phone_android),
+                                      title: 'Mobile recharge'),
                                 ],
                               ),
                             ),
