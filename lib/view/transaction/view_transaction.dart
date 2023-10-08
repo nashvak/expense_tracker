@@ -34,147 +34,149 @@ class ScreenViewTransaction extends StatelessWidget {
       ),
       body: Padding(
         padding: const EdgeInsets.all(20),
-        child: Column(
-          children: [
-            Container(
-              decoration: cardDecoration(color: Colors.white),
-              height: MediaQuery.of(context).size.height / 9,
-              width: MediaQuery.of(context).size.width / 1,
-              padding: const EdgeInsets.only(left: 20),
-              //color: Colors.red,
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  const Text(
-                    'Transaction type',
-                    style: TextStyle(color: Appcolor.primaryColor),
-                  ),
-                  TextFormField(
-                    decoration: const InputDecoration(
-                        border: InputBorder.none, hintText: 'Expense'),
-                  ),
-                ],
+        child: SingleChildScrollView(
+          child: Column(
+            children: [
+              Container(
+                decoration: cardDecoration(color: Colors.white),
+                height: MediaQuery.of(context).size.height / 9,
+                width: MediaQuery.of(context).size.width / 1,
+                padding: const EdgeInsets.only(left: 20),
+                //color: Colors.red,
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    const Text(
+                      'Transaction type',
+                      style: TextStyle(color: Appcolor.primaryColor),
+                    ),
+                    TextFormField(
+                      decoration: const InputDecoration(
+                          border: InputBorder.none, hintText: 'Expense'),
+                    ),
+                  ],
+                ),
               ),
-            ),
-            height30,
-            Container(
-              decoration: cardDecoration(color: Colors.white),
-              height: MediaQuery.of(context).size.height / 5,
-              width: MediaQuery.of(context).size.width,
-              padding: const EdgeInsets.only(left: 20),
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  const Text(
-                    'Catagory',
-                    style: TextStyle(color: Appcolor.primaryColor),
-                  ),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Container(
-                        decoration: const BoxDecoration(
-                          color: Appcolor.primaryColor,
-                          shape: BoxShape.circle,
-                        ),
-                        child: const Padding(
-                          padding: EdgeInsets.all(10),
-                          child: Icon(
-                            Icons.phone,
-                            color: Colors.white,
+              height30,
+              Container(
+                decoration: cardDecoration(color: Colors.white),
+                height: MediaQuery.of(context).size.height / 5,
+                width: MediaQuery.of(context).size.width,
+                padding: const EdgeInsets.only(left: 20),
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    const Text(
+                      'Catagory',
+                      style: TextStyle(color: Appcolor.primaryColor),
+                    ),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Container(
+                          decoration: const BoxDecoration(
+                            color: Appcolor.primaryColor,
+                            shape: BoxShape.circle,
+                          ),
+                          child: const Padding(
+                            padding: EdgeInsets.all(10),
+                            child: Icon(
+                              Icons.phone,
+                              color: Colors.white,
+                            ),
                           ),
                         ),
-                      ),
-                      BlankSpace(
-                        width: 15,
-                      ),
-                      Expanded(
-                        child: Column(
-                          children: [
-                            TextFormField(
-                              decoration: const InputDecoration.collapsed(
-                                border: InputBorder.none,
-                                hintText: 'Mobile Recharge',
-                                hintStyle: TextStyle(
-                                    fontSize: 18,
-                                    color: Colors.black,
-                                    fontWeight: FontWeight.w500),
-                              ),
-                            ),
-                            TextFormField(
-                              decoration: const InputDecoration.collapsed(
-                                  border: InputBorder.none,
-                                  hintText: '06/10/23',
-                                  hintStyle: TextStyle(fontSize: 14)),
-                            ),
-                          ],
+                        BlankSpace(
+                          width: 15,
                         ),
-                      )
-                    ],
-                  )
+                        Expanded(
+                          child: Column(
+                            children: [
+                              TextFormField(
+                                decoration: const InputDecoration.collapsed(
+                                  border: InputBorder.none,
+                                  hintText: 'Mobile Recharge',
+                                  hintStyle: TextStyle(
+                                      fontSize: 18,
+                                      color: Colors.black,
+                                      fontWeight: FontWeight.w500),
+                                ),
+                              ),
+                              TextFormField(
+                                decoration: const InputDecoration.collapsed(
+                                    border: InputBorder.none,
+                                    hintText: '06/10/23',
+                                    hintStyle: TextStyle(fontSize: 14)),
+                              ),
+                            ],
+                          ),
+                        )
+                      ],
+                    )
 
-                  // Container(Row(
-                  //   // mainAxisAlignment: MainAxisAlignment.start,
-                  //   // crossAxisAlignment: CrossAxisAlignment.center,
-                  //   children: [
-                  //     Container(
-                  //         decoration: const BoxDecoration(
-                  //           color: Appcolor.primaryColor,
-                  //           shape: BoxShape.circle,
-                  //         ),
-                  //         child: const Padding(
-                  //           padding: EdgeInsets.all(10),
-                  //           child: Icon(
-                  //             Icons.phone,
-                  //             color: Colors.white,
-                  //           ),
-                  //         )),
-                  //     BlankSpace(
-                  //       width: 10,
-                  //     ),
-                  //     Column(
-                  //       children: [
-                  //         Expanded(
-                  //           child: TextFormField(
-                  //             decoration: const InputDecoration(
-                  //                 border: InputBorder.none,
-                  //                 hintText: 'Expense'),
-                  //           ),
-                  //         ),
-                  //       ],
-                  //     )
-                  //   ],
-                  // ))
-                ],
+                    // Container(Row(
+                    //   // mainAxisAlignment: MainAxisAlignment.start,
+                    //   // crossAxisAlignment: CrossAxisAlignment.center,
+                    //   children: [
+                    //     Container(
+                    //         decoration: const BoxDecoration(
+                    //           color: Appcolor.primaryColor,
+                    //           shape: BoxShape.circle,
+                    //         ),
+                    //         child: const Padding(
+                    //           padding: EdgeInsets.all(10),
+                    //           child: Icon(
+                    //             Icons.phone,
+                    //             color: Colors.white,
+                    //           ),
+                    //         )),
+                    //     BlankSpace(
+                    //       width: 10,
+                    //     ),
+                    //     Column(
+                    //       children: [
+                    //         Expanded(
+                    //           child: TextFormField(
+                    //             decoration: const InputDecoration(
+                    //                 border: InputBorder.none,
+                    //                 hintText: 'Expense'),
+                    //           ),
+                    //         ),
+                    //       ],
+                    //     )
+                    //   ],
+                    // ))
+                  ],
+                ),
               ),
-            ),
-            BlankSpace(
-              height: 30,
-            ),
-            Container(
-              decoration: cardDecoration(color: Colors.white),
-              height: MediaQuery.of(context).size.height / 9,
-              width: MediaQuery.of(context).size.width / 1,
-              padding: const EdgeInsets.only(left: 20),
-              //color: Colors.red,
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  const Text(
-                    'Amount',
-                    style: TextStyle(color: Appcolor.primaryColor),
-                  ),
-                  TextFormField(
-                    decoration: const InputDecoration(
-                        border: InputBorder.none, hintText: '500'),
-                  ),
-                ],
+              BlankSpace(
+                height: 30,
               ),
-            ),
-          ],
+              Container(
+                decoration: cardDecoration(color: Colors.white),
+                height: MediaQuery.of(context).size.height / 9,
+                width: MediaQuery.of(context).size.width / 1,
+                padding: const EdgeInsets.only(left: 20),
+                //color: Colors.red,
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    const Text(
+                      'Amount',
+                      style: TextStyle(color: Appcolor.primaryColor),
+                    ),
+                    TextFormField(
+                      decoration: const InputDecoration(
+                          border: InputBorder.none, hintText: '500'),
+                    ),
+                  ],
+                ),
+              ),
+            ],
+          ),
         ),
       ),
     );
