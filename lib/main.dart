@@ -1,6 +1,7 @@
 import 'package:expense_tracker/view/authentication/get_started.dart';
 import 'package:expense_tracker/view/authentication/login.dart';
 import 'package:expense_tracker/view/authentication/signup.dart';
+import 'package:expense_tracker/view/authentication/splash_screen.dart';
 import 'package:expense_tracker/view/remainder/add_remainder.dart';
 import 'package:expense_tracker/view/remainder/edit_remainder.dart';
 import 'package:expense_tracker/view/remainder/remainder_screen.dart';
@@ -25,7 +26,8 @@ class MyApp extends StatelessWidget {
       title: 'Expense tracker',
       initialRoute: '/',
       getPages: [
-        GetPage(name: '/', page: () => const GetStartedScreen()),
+        GetPage(name: '/', page: () => const ScreenSplash()),
+        GetPage(name: '/getstarted', page: () => const GetStartedScreen()),
         GetPage(name: '/login', page: () => const LoginScreen()),
         GetPage(name: '/signup', page: () => const ScreenSignup()),
         GetPage(name: '/home', page: () => const ScreenHome()),
