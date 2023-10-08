@@ -42,6 +42,9 @@ class ScreenRemainder extends StatelessWidget {
               child: ListView.separated(
                 itemBuilder: (context, index) {
                   return ListTile(
+                    onTap: () {
+                      Get.toNamed('/editremainder');
+                    },
                     contentPadding: const EdgeInsets.all(0),
                     leading: Container(
                         decoration: const BoxDecoration(

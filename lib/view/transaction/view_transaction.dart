@@ -30,7 +30,7 @@ class ScreenViewTransaction extends StatelessWidget {
           )
         ],
         elevation: 0,
-        backgroundColor: Appcolor.tertiaryColor,
+        backgroundColor: Colors.transparent,
       ),
       body: Padding(
         padding: const EdgeInsets.all(20),

@@ -2,6 +2,7 @@ import 'package:expense_tracker/view/authentication/get_started.dart';
 import 'package:expense_tracker/view/authentication/login.dart';
 import 'package:expense_tracker/view/authentication/signup.dart';
 import 'package:expense_tracker/view/remainder/add_remainder.dart';
+import 'package:expense_tracker/view/remainder/edit_remainder.dart';
 import 'package:expense_tracker/view/remainder/remainder_screen.dart';
 import 'package:expense_tracker/view/transaction/add_transaction.dart';
 import 'package:expense_tracker/view/transaction/dashboard/bottom_nav.dart';
@@ -36,6 +37,7 @@ class MyApp extends StatelessWidget {
             name: '/addtransaction', page: () => const ScreenAddTransaction()),
         GetPage(name: '/addremainder', page: () => const ScreenAddRemainder()),
         GetPage(name: '/remainder', page: () => ScreenRemainder()),
+        GetPage(name: '/editremainder', page: () => ScreenEditRemainder()),
       ],
     );
   }
