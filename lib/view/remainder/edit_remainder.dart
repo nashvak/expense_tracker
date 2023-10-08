@@ -3,7 +3,7 @@ import 'package:get/get.dart';
 
 import '../../custom_widgets/common/button.dart';
 import '../../custom_widgets/common/sizedbox.dart';
-import '../../custom_widgets/loginPage/login_widgets.dart';
+import '../../custom_widgets/common/login_widgets.dart';
 
 class ScreenEditRemainder extends StatelessWidget {
   const ScreenEditRemainder({super.key});
@@ -12,14 +12,14 @@ class ScreenEditRemainder extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(
+        title: const Text(
           'Edit Remainder',
           style: TextStyle(color: Colors.black),
         ),
         centerTitle: true,
         backgroundColor: Colors.transparent,
         elevation: 0,
-        iconTheme: IconThemeData(color: Colors.black),
+        iconTheme: const IconThemeData(color: Colors.black),
         leadingWidth: 100,
       ),
       body: SingleChildScrollView(
@@ -28,15 +28,15 @@ class ScreenEditRemainder extends StatelessWidget {
         child: Column(
           children: [
             height30,
-            CustomTextField(title: 'Title'),
+            const CustomTextField(title: 'Title'),
             height30,
-            CustomTextField(title: 'Date'),
+            const CustomTextField(title: 'Date'),
             height30,
-            CustomTextField(title: 'Time'),
+            const CustomTextField(title: 'Time'),
             height30,
-            CustomTextField(title: 'Amount'),
+            const CustomTextField(title: 'Amount'),
             height30,
-            CustomTextField(title: 'Catagory'),
+            const CustomTextField(title: 'Catagory'),
             height50,
             CustomButton(
                 title: 'Edit Remainder',

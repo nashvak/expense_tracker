@@ -6,7 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 import '../../custom_widgets/common/button.dart';
-import '../../custom_widgets/loginPage/login_widgets.dart';
+import '../../custom_widgets/common/login_widgets.dart';
 
 class ScreenSignup extends StatelessWidget {
   const ScreenSignup({super.key});
@@ -41,20 +41,20 @@ class ScreenSignup extends StatelessWidget {
                     children: [
                       height50,
                       height10,
-                      CustomTextField(
+                      const CustomTextField(
                         title: 'Name',
                       ),
                       height40,
-                      CustomTextField(
+                      const CustomTextField(
                         title: 'Email',
                       ),
                       height40,
-                      CustomTextField(
+                      const CustomTextField(
                         title: 'Password',
-                        icon: const Icon(Icons.visibility),
+                        icon: Icon(Icons.visibility),
                       ),
                       height40,
-                      CustomTextField(
+                      const CustomTextField(
                         title: 'Confirm password',
                       ),
                       height50,

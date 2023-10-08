@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 import '../../constatnts/colors.dart';
-import '../common/sizedbox.dart';
+import 'sizedbox.dart';
 
 class CustomTextField extends StatelessWidget {
   const CustomTextField({this.icon, required this.title, super.key});
@@ -16,10 +16,10 @@ class CustomTextField extends StatelessWidget {
         borderRadius: BorderRadius.circular(40),
       ),
       child: TextFormField(
-        cursorColor: Color.fromARGB(255, 120, 120, 120),
+        cursorColor: const Color.fromARGB(255, 120, 120, 120),
         decoration: InputDecoration(
             border: InputBorder.none,
-            contentPadding: EdgeInsets.all(20),
+            contentPadding: const EdgeInsets.all(20),
             hintText: title,
             suffixIcon: icon),
       ),

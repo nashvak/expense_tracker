@@ -37,7 +37,8 @@ class MyApp extends StatelessWidget {
             name: '/addtransaction', page: () => const ScreenAddTransaction()),
         GetPage(name: '/addremainder', page: () => const ScreenAddRemainder()),
         GetPage(name: '/remainder', page: () => ScreenRemainder()),
-        GetPage(name: '/editremainder', page: () => ScreenEditRemainder()),
+        GetPage(
+            name: '/editremainder', page: () => const ScreenEditRemainder()),
       ],
     );
   }

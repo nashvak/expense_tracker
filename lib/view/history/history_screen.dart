@@ -1,10 +1,8 @@
 import 'package:expense_tracker/constatnts/colors.dart';
 import 'package:expense_tracker/custom_widgets/common/sizedbox.dart';
-import 'package:expense_tracker/custom_widgets/home_screen/home_screen_widgets.dart';
+import 'package:expense_tracker/custom_widgets/common/home_screen_widgets.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-
-import '../../custom_widgets/common/decoration.dart';
 
 class ScreenHistory extends StatelessWidget {
   const ScreenHistory({super.key});
@@ -28,19 +26,20 @@ class ScreenHistory extends StatelessWidget {
           children: [
             Row(
               children: [
-                SortButton(
+                const SortButton(
                   title: "All",
                   icon: Icon(Icons.arrow_drop_down),
                 ),
                 BlankSpace(
                   width: 20,
                 ),
-                SortButton(
+                const SortButton(
                     title: 'Catagory', icon: Icon(Icons.arrow_drop_down)),
                 BlankSpace(
                   width: 20,
                 ),
-                SortButton(title: 'Date', icon: Icon(Icons.arrow_drop_down))
+                const SortButton(
+                    title: 'Date', icon: Icon(Icons.arrow_drop_down))
               ],
             ),
             height40,
@@ -53,7 +52,7 @@ class ScreenHistory extends StatelessWidget {
                           },
                           amount: 200,
                           date: '12/3/23',
-                          icon: Icon(Icons.car_crash),
+                          icon: const Icon(Icons.car_crash),
                           title: 'Car service');
                     },
                     separatorBuilder: (context, index) {

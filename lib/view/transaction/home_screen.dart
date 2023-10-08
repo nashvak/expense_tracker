@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import '../../constatnts/colors.dart';
 import '../../custom_widgets/common/decoration.dart';
-import '../../custom_widgets/home_screen/home_screen_widgets.dart';
+import '../../custom_widgets/common/home_screen_widgets.dart';
 
 class ScreenHome extends StatelessWidget {
   const ScreenHome({super.key});
@@ -117,31 +117,31 @@ class ScreenHome extends StatelessWidget {
                                       },
                                       amount: 250,
                                       date: '1/10/23 6:30pm',
-                                      icon: Icon(Icons.phone_android),
+                                      icon: const Icon(Icons.phone_android),
                                       title: 'Electricity bill'),
                                   Listtile(
                                       ontap: () {},
                                       amount: 499,
                                       date: '21/09/23 2:30pm',
-                                      icon: Icon(Icons.phone_android),
+                                      icon: const Icon(Icons.phone_android),
                                       title: 'Mobile recharge'),
                                   Listtile(
                                       ontap: () {},
                                       amount: 6000,
                                       date: '11/09/23 10:00am',
-                                      icon: Icon(Icons.phone_android),
+                                      icon: const Icon(Icons.phone_android),
                                       title: 'Car EMI'),
                                   Listtile(
                                       ontap: () {},
                                       amount: 250,
                                       date: '1/10/23 6:30pm',
-                                      icon: Icon(Icons.phone_android),
+                                      icon: const Icon(Icons.phone_android),
                                       title: 'Electricity bill'),
                                   Listtile(
                                       ontap: () {},
                                       amount: 499,
                                       date: '21/09/23 2:30pm',
-                                      icon: Icon(Icons.phone_android),
+                                      icon: const Icon(Icons.phone_android),
                                       title: 'Mobile recharge'),
                                 ],
                               ),
@@ -162,8 +162,8 @@ class ScreenHome extends StatelessWidget {
               height: 200,
               //width: MediaQuery.of(context).size.width,
               child: Container(
-                decoration:
-                    cardDecoration(color: Color.fromARGB(255, 92, 209, 230)),
+                decoration: cardDecoration(
+                    color: const Color.fromARGB(255, 92, 209, 230)),
                 child: Stack(
                   children: [
                     Column(

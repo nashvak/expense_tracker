@@ -2,9 +2,8 @@ import 'package:expense_tracker/constatnts/colors.dart';
 import 'package:expense_tracker/custom_widgets/common/button.dart';
 import 'package:flutter/material.dart';
 import 'package:toggle_switch/toggle_switch.dart';
-
 import '../../custom_widgets/common/sizedbox.dart';
-import '../../custom_widgets/loginPage/login_widgets.dart';
+import '../../custom_widgets/common/login_widgets.dart';
 
 class ScreenAddTransaction extends StatelessWidget {
   const ScreenAddTransaction({super.key});
@@ -21,36 +20,36 @@ class ScreenAddTransaction extends StatelessWidget {
               minHeight: 50,
               cornerRadius: 10,
               fontSize: 20,
-              activeBgColor: [
+              activeBgColor: const [
                 Appcolor.primaryColor,
               ],
               activeFgColor: Colors.white,
-              inactiveBgColor: Color.fromARGB(255, 191, 224, 230),
+              inactiveBgColor: const Color.fromARGB(255, 191, 224, 230),
               totalSwitches: 2,
-              labels: ['Income', 'Expense'],
+              labels: const ['Income', 'Expense'],
               onToggle: (index) {
                 print('$index');
               },
             ),
             height30,
-            CustomTextField(
+            const CustomTextField(
               title: 'Amount',
             ),
             height30,
-            CustomTextField(
+            const CustomTextField(
               title: 'Date',
               icon: Icon(Icons.calendar_month),
             ),
             height30,
-            CustomTextField(
+            const CustomTextField(
               title: 'Description',
             ),
             height30,
-            CustomTextField(
+            const CustomTextField(
               title: 'Catagory',
             ),
             height30,
-            CustomTextField(
+            const CustomTextField(
               title: 'Payment mode',
             ),
             // DropdownButton(items: [], onChanged: ((value) {

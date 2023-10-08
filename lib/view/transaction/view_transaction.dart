@@ -1,4 +1,5 @@
 import 'package:expense_tracker/constatnts/colors.dart';
+import 'package:expense_tracker/custom_widgets/common/button.dart';
 import 'package:expense_tracker/custom_widgets/common/decoration.dart';
 import 'package:expense_tracker/custom_widgets/common/sizedbox.dart';
 import 'package:flutter/material.dart';
@@ -12,7 +13,7 @@ class ScreenViewTransaction extends StatelessWidget {
       backgroundColor: Appcolor.tertiaryColor,
       appBar: AppBar(
         titleSpacing: 8,
-        iconTheme: IconThemeData(color: Colors.black),
+        iconTheme: const IconThemeData(color: Colors.black),
         centerTitle: true,
         title: const Text(
           "Edit",
@@ -23,7 +24,7 @@ class ScreenViewTransaction extends StatelessWidget {
             padding: const EdgeInsets.only(right: 15),
             child: TextButton(
                 onPressed: () {},
-                child: Text(
+                child: const Text(
                   "Save",
                   style: TextStyle(color: Appcolor.primaryColor, fontSize: 17),
                 )),
@@ -115,39 +116,6 @@ class ScreenViewTransaction extends StatelessWidget {
                         )
                       ],
                     )
-
-                    // Container(Row(
-                    //   // mainAxisAlignment: MainAxisAlignment.start,
-                    //   // crossAxisAlignment: CrossAxisAlignment.center,
-                    //   children: [
-                    //     Container(
-                    //         decoration: const BoxDecoration(
-                    //           color: Appcolor.primaryColor,
-                    //           shape: BoxShape.circle,
-                    //         ),
-                    //         child: const Padding(
-                    //           padding: EdgeInsets.all(10),
-                    //           child: Icon(
-                    //             Icons.phone,
-                    //             color: Colors.white,
-                    //           ),
-                    //         )),
-                    //     BlankSpace(
-                    //       width: 10,
-                    //     ),
-                    //     Column(
-                    //       children: [
-                    //         Expanded(
-                    //           child: TextFormField(
-                    //             decoration: const InputDecoration(
-                    //                 border: InputBorder.none,
-                    //                 hintText: 'Expense'),
-                    //           ),
-                    //         ),
-                    //       ],
-                    //     )
-                    //   ],
-                    // ))
                   ],
                 ),
               ),
@@ -175,6 +143,10 @@ class ScreenViewTransaction extends StatelessWidget {
                   ],
                 ),
               ),
+              BlankSpace(
+                height: 30,
+              ),
+              CustomButton(title: 'Delete Transaction', onTap: () {}),
             ],
           ),
         ),

@@ -2,7 +2,7 @@ import 'package:expense_tracker/constatnts/colors.dart';
 import 'package:expense_tracker/custom_widgets/common/button.dart';
 import 'package:expense_tracker/custom_widgets/common/decoration.dart';
 import 'package:expense_tracker/custom_widgets/common/sizedbox.dart';
-import 'package:expense_tracker/custom_widgets/loginPage/login_widgets.dart';
+import 'package:expense_tracker/custom_widgets/common/login_widgets.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -45,7 +45,7 @@ class LoginScreen extends StatelessWidget {
                         style: titleStyle(),
                       ),
                       height10,
-                      CustomTextField(
+                      const CustomTextField(
                         title: 'Email',
                       ),
                       height30,
@@ -54,7 +54,7 @@ class LoginScreen extends StatelessWidget {
                         style: titleStyle(),
                       ),
                       height10,
-                      CustomTextField(
+                      const CustomTextField(
                         title: 'Password',
                         icon: Icon(Icons.visibility),
                       ),
