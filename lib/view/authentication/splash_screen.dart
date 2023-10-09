@@ -43,7 +43,7 @@ class _ScreenSplashState extends State<ScreenSplash> {
               fit: BoxFit.fitHeight,
             ),
             Text(
-              'Expenso',
+              'Expensly',
               style: GoogleFonts.lato(fontSize: 25),
             )
           ],

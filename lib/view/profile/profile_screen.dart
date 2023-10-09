@@ -1,5 +1,6 @@
 import 'package:expense_tracker/constatnts/colors.dart';
 import 'package:expense_tracker/custom_widgets/common/sizedbox.dart';
+import 'package:expense_tracker/custom_widgets/common/textstyle.dart';
 import 'package:flutter/material.dart';
 
 class ScreenProfile extends StatelessWidget {
@@ -16,9 +17,9 @@ class ScreenProfile extends StatelessWidget {
     return Scaffold(
       backgroundColor: Appcolor.tertiaryColor,
       appBar: AppBar(
-        title: const Text(
+        title: Text(
           'Profile ',
-          style: TextStyle(color: Colors.black, fontSize: 26),
+          style: screenTitleText(),
         ),
         backgroundColor: Colors.transparent,
         elevation: 0,

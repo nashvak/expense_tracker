@@ -8,6 +8,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 
+import '../../custom_widgets/common/textstyle.dart';
 import '../../custom_widgets/login&signup/bottom_text.dart';
 
 class LoginScreen extends StatelessWidget {
@@ -38,7 +39,9 @@ class LoginScreen extends StatelessWidget {
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        height50,
+                        BlankSpace(
+                          height: 50,
+                        ),
                         Align(
                           alignment: Alignment.center,
                           child: Text(
@@ -46,24 +49,34 @@ class LoginScreen extends StatelessWidget {
                             style: GoogleFonts.lato(fontSize: 24),
                           ),
                         ),
-                        height30,
+                        BlankSpace(
+                          height: 30,
+                        ),
                         Text(
                           'Email',
-                          style: titleStyle(),
+                          style: textFieldtitle(),
                         ),
-                        height10,
+
+                        BlankSpace(
+                          height: 10,
+                        ),
                         CustomTextField(
                           obscure: false,
                           validator: emailValidator,
                           controller: emailController,
                           title: 'Email',
                         ),
-                        height30,
+
+                        BlankSpace(
+                          height: 30,
+                        ),
                         Text(
                           'Password',
-                          style: titleStyle(),
+                          style: textFieldtitle(),
                         ),
-                        height10,
+                        BlankSpace(
+                          height: 10,
+                        ),
                         CustomTextField(
                           obscure: true,
                           controller: passController,
@@ -71,14 +84,19 @@ class LoginScreen extends StatelessWidget {
                           title: 'Password',
                           icon: const Icon(Icons.visibility),
                         ),
-                        height50,
+
+                        BlankSpace(
+                          height: 50,
+                        ),
                         CustomButton(
                           title: 'Login',
                           onTap: () {
                             Get.offNamed('/bottom');
                           },
                         ),
-                        height20,
+                        BlankSpace(
+                          height: 20,
+                        ),
                         BottomText(
                             title: "Don't have an account? ",
                             title2: "Sign in",

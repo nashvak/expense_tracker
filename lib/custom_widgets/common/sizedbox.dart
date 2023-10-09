@@ -16,24 +16,6 @@ Widget height50 = const SizedBox(
   height: 50,
 );
 
-TextStyle titleStyle() {
-  return const TextStyle(
-    fontSize: 16,
-    //fontWeight: FontWeight.bold,
-  );
-}
-
-TextStyle heading(
-    {Color textColor = Colors.white,
-    FontWeight weight = FontWeight.bold,
-    double size = 14}) {
-  return TextStyle(
-    fontWeight: weight,
-    color: textColor,
-    fontSize: size,
-  );
-}
-
 class BlankSpace extends StatelessWidget {
   BlankSpace({this.height, this.width, super.key});
   final double? height;

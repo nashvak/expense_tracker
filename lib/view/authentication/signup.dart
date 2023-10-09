@@ -47,22 +47,23 @@ class ScreenSignup extends StatelessWidget {
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        height50,
-                        height10,
+                        BlankSpace(
+                          height: 60,
+                        ),
                         CustomTextField(
                           obscure: false,
                           controller: nameController,
                           validator: nameValidator,
                           title: 'Name',
                         ),
-                        height40,
+                        BlankSpace(height: 40),
                         CustomTextField(
                           obscure: false,
                           controller: emailController,
                           validator: emailValidator,
                           title: 'Email',
                         ),
-                        height40,
+                        BlankSpace(height: 40),
                         CustomTextField(
                           obscure: true,
                           controller: passController,
@@ -70,7 +71,7 @@ class ScreenSignup extends StatelessWidget {
                           title: 'Password',
                           icon: const Icon(Icons.visibility),
                         ),
-                        height40,
+                        BlankSpace(height: 40),
                         CustomTextField(
                           obscure: true,
                           controller: confimPassController,
@@ -82,7 +83,7 @@ class ScreenSignup extends StatelessWidget {
                           },
                           title: 'Confirm password',
                         ),
-                        height50,
+                        BlankSpace(height: 50),
                         CustomButton(
                           title: 'Register',
                           onTap: () {
@@ -91,7 +92,7 @@ class ScreenSignup extends StatelessWidget {
                             }
                           },
                         ),
-                        height20,
+                        BlankSpace(height: 20),
                         BottomText(
                             title: "already have an account? ",
                             title2: "Log in",

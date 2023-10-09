@@ -1,6 +1,7 @@
 import 'package:expense_tracker/constatnts/colors.dart';
 import 'package:expense_tracker/custom_widgets/common/sizedbox.dart';
 import 'package:expense_tracker/custom_widgets/common/home_screen_widgets.dart';
+import 'package:expense_tracker/custom_widgets/common/textstyle.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -12,10 +13,9 @@ class ScreenHistory extends StatelessWidget {
     return Scaffold(
       backgroundColor: Appcolor.tertiaryColor,
       appBar: AppBar(
-        title: const Text(
+        title: Text(
           'History',
-          style: TextStyle(
-              color: Colors.black, fontSize: 25, fontWeight: FontWeight.bold),
+          style: screenTitleText(),
         ),
         elevation: 0,
         backgroundColor: Colors.transparent,

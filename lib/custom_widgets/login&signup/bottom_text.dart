@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 
 import '../../constatnts/colors.dart';
-import '../common/sizedbox.dart';
+
+import '../common/textstyle.dart';
 
 class BottomText extends StatelessWidget {
   const BottomText(
@@ -18,12 +19,12 @@ class BottomText extends StatelessWidget {
     return Row(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
-        Text(title, style: titleStyle()),
+        Text(title, style: textFieldtitle()),
         GestureDetector(
           onTap: ontap,
           child: Text(
             title2,
-            style: titleStyle().copyWith(color: Appcolor.primaryColor),
+            style: textFieldtitle().copyWith(color: Appcolor.primaryColor),
           ),
         ),
       ],

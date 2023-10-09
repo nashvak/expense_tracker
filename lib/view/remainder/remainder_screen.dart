@@ -1,4 +1,5 @@
 import 'package:expense_tracker/custom_widgets/common/sizedbox.dart';
+import 'package:expense_tracker/custom_widgets/common/textstyle.dart';
 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -20,12 +21,9 @@ class ScreenRemainder extends StatelessWidget {
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                const Text(
+                Text(
                   'Remainder ',
-                  style: TextStyle(
-                      color: Colors.black,
-                      fontWeight: FontWeight.bold,
-                      fontSize: 25),
+                  style: screenTitleText(),
                 ),
                 GestureDetector(
                   onTap: () {

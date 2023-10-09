@@ -70,6 +70,10 @@ class CustomTextField extends StatelessWidget {
           borderRadius: BorderRadius.circular(50),
           borderSide: BorderSide(width: 1, color: Appcolor.tertiaryColor),
         ),
+        focusedErrorBorder: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(50),
+          borderSide: BorderSide(width: 1, color: Appcolor.tertiaryColor),
+        ),
       ),
     );
   }

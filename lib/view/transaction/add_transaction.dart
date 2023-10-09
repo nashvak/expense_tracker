@@ -1,6 +1,7 @@
 import 'package:expense_tracker/constatnts/colors.dart';
 import 'package:expense_tracker/custom_widgets/common/button.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:toggle_switch/toggle_switch.dart';
 import '../../custom_widgets/common/sizedbox.dart';
 import '../../custom_widgets/login&signup/textfield.dart';
@@ -90,12 +91,12 @@ class ScreenAddTransaction extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 Container(
-                    width: MediaQuery.of(context).size.width / 2.5,
+                    width: Get.width / 2.5,
                     child: Cancelbutton(title: 'Cancel', onTap: () {})),
 
                 //CustomButton(title: 'Add', onTap: () {}),
                 Container(
-                    width: MediaQuery.of(context).size.width / 2.5,
+                    width: Get.width / 2.5,
                     child: CustomButton(title: 'Add', onTap: () {})),
               ],
             )
