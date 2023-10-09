@@ -66,32 +66,75 @@ class ScreenHome extends StatelessWidget {
                         height20,
                         Row(
                           children: [
-                            Container(
-                              //height: 35,
-                              decoration: cardDecoration(color: Appcolor.white),
-                              child: const Padding(
-                                padding: EdgeInsets.symmetric(
-                                    horizontal: 10, vertical: 10),
-                                child: Text(
-                                  "All",
-                                  style: TextStyle(
-                                      fontSize: 16,
-                                      fontWeight: FontWeight.w500),
+                            GestureDetector(
+                              onTap: () {
+                                Get.bottomSheet(
+                                  Container(
+                                    decoration: const ShapeDecoration(
+                                      color: Colors.white,
+                                      shape: RoundedRectangleBorder(
+                                        borderRadius: BorderRadius.only(
+                                            topLeft: Radius.circular(25),
+                                            topRight: Radius.circular(25)),
+                                      ),
+                                    ),
+                                    child: Wrap(
+                                      children: [
+                                        ListTile(
+                                          title: const Text('All'),
+                                          onTap: () {
+                                            Get.back();
+                                          },
+                                        ),
+                                        ListTile(
+                                          title: const Text('Income'),
+                                          onTap: () {
+                                            Get.back();
+                                          },
+                                        ),
+                                        ListTile(
+                                          title: const Text('Expense'),
+                                          onTap: () {
+                                            Get.back();
+                                          },
+                                        ),
+                                      ],
+                                    ),
+                                  ),
+                                );
+                              },
+                              child: Container(
+                                //height: 35,
+                                decoration:
+                                    cardDecoration(color: Appcolor.white),
+                                child: const Padding(
+                                  padding: EdgeInsets.symmetric(
+                                      horizontal: 10, vertical: 10),
+                                  child: Text(
+                                    "All",
+                                    style: TextStyle(
+                                        fontSize: 16,
+                                        fontWeight: FontWeight.w500),
+                                  ),
                                 ),
                               ),
                             ),
                             BlankSpace(
                               width: 10,
                             ),
-                            const SortButton(
-                                title: 'Income',
-                                icon: Icon(Icons.arrow_upward)),
+                            SortButton(
+                              ontap: () {},
+                              title: 'Income',
+                              icon: Icon(Icons.arrow_upward),
+                            ),
                             const SizedBox(
                               width: 10,
                             ),
-                            const SortButton(
-                                title: 'Expense',
-                                icon: Icon(Icons.arrow_downward))
+                            SortButton(
+                              ontap: () {},
+                              title: 'Expense',
+                              icon: Icon(Icons.arrow_downward),
+                            )
                           ],
                         ),
                         height10,

@@ -3,28 +3,36 @@ import 'package:flutter/material.dart';
 import '../../constatnts/colors.dart';
 
 class SortButton extends StatelessWidget {
-  const SortButton({required this.title, required this.icon, super.key});
+  SortButton(
+      {required this.title,
+      required this.ontap,
+      required this.icon,
+      super.key});
   final String title;
   final Icon icon;
+  void Function() ontap;
   @override
   Widget build(BuildContext context) {
-    return Container(
-      decoration: ShapeDecoration(
-        color: Colors.white,
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(26),
+    return GestureDetector(
+      onTap: ontap,
+      child: Container(
+        decoration: ShapeDecoration(
+          color: Colors.white,
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(26),
+          ),
         ),
-      ),
-      child: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
-        child: Row(
-          children: [
-            // Icon(Icons.arrow_downward),
-            icon,
-            Text(title,
-                style:
-                    const TextStyle(fontSize: 16, fontWeight: FontWeight.w500)),
-          ],
+        child: Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
+          child: Row(
+            children: [
+              // Icon(Icons.arrow_downward),
+              icon,
+              Text(title,
+                  style: const TextStyle(
+                      fontSize: 16, fontWeight: FontWeight.w500)),
+            ],
+          ),
         ),
       ),
     );

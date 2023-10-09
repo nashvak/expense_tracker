@@ -3,11 +3,16 @@ import 'package:expense_tracker/custom_widgets/common/button.dart';
 import 'package:flutter/material.dart';
 import 'package:toggle_switch/toggle_switch.dart';
 import '../../custom_widgets/common/sizedbox.dart';
-import '../../custom_widgets/common/login_widgets.dart';
+import '../../custom_widgets/login&signup/textfield.dart';
 
 class ScreenAddTransaction extends StatelessWidget {
-  const ScreenAddTransaction({super.key});
-
+  ScreenAddTransaction({super.key});
+  final formkey = GlobalKey<FormState>();
+  final amountController = TextEditingController();
+  final dateController = TextEditingController();
+  final descriptionController = TextEditingController();
+  final catagoryController = TextEditingController();
+  final paymentController = TextEditingController();
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -32,24 +37,49 @@ class ScreenAddTransaction extends StatelessWidget {
               },
             ),
             height30,
-            const CustomTextField(
+            CustomTextField(
+              obscure: false,
+              validator: (value) {
+                return null;
+              },
+              controller: amountController,
               title: 'Amount',
             ),
             height30,
-            const CustomTextField(
+            CustomTextField(
+              obscure: false,
+              validator: (value) {
+                return null;
+              },
+              controller: dateController,
               title: 'Date',
               icon: Icon(Icons.calendar_month),
             ),
             height30,
-            const CustomTextField(
+            CustomTextField(
+              obscure: false,
+              validator: (value) {
+                return null;
+              },
+              controller: descriptionController,
               title: 'Description',
             ),
             height30,
-            const CustomTextField(
+            CustomTextField(
+              obscure: false,
+              validator: (value) {
+                return null;
+              },
+              controller: catagoryController,
               title: 'Catagory',
             ),
             height30,
-            const CustomTextField(
+            CustomTextField(
+              obscure: false,
+              controller: paymentController,
+              validator: (value) {
+                return null;
+              },
               title: 'Payment mode',
             ),
             // DropdownButton(items: [], onChanged: ((value) {

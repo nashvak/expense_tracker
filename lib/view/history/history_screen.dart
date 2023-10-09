@@ -26,20 +26,130 @@ class ScreenHistory extends StatelessWidget {
           children: [
             Row(
               children: [
-                const SortButton(
+                SortButton(
+                  ontap: () {
+                    Get.bottomSheet(
+                      Container(
+                        decoration: const ShapeDecoration(
+                          color: Colors.white,
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.only(
+                                topLeft: Radius.circular(25),
+                                topRight: Radius.circular(25)),
+                          ),
+                        ),
+                        child: Wrap(
+                          children: [
+                            ListTile(
+                              title: const Text('All'),
+                              onTap: () {
+                                Get.back();
+                              },
+                            ),
+                            ListTile(
+                              title: const Text('Income'),
+                              onTap: () {
+                                Get.back();
+                              },
+                            ),
+                            ListTile(
+                              title: const Text('Expense'),
+                              onTap: () {
+                                Get.back();
+                              },
+                            ),
+                          ],
+                        ),
+                      ),
+                    );
+                  },
                   title: "All",
-                  icon: Icon(Icons.arrow_drop_down),
+                  icon: const Icon(Icons.arrow_drop_down),
                 ),
                 BlankSpace(
                   width: 20,
                 ),
-                const SortButton(
-                    title: 'Catagory', icon: Icon(Icons.arrow_drop_down)),
+                SortButton(
+                    ontap: () {
+                      Get.bottomSheet(
+                        Container(
+                          decoration: const ShapeDecoration(
+                            color: Colors.white,
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.only(
+                                  topLeft: Radius.circular(25),
+                                  topRight: Radius.circular(25)),
+                            ),
+                          ),
+                          child: Wrap(
+                            children: [
+                              ListTile(
+                                title: const Text('Electricity bill'),
+                                onTap: () {
+                                  Get.back();
+                                },
+                              ),
+                              ListTile(
+                                title: const Text('Car service'),
+                                onTap: () {
+                                  Get.back();
+                                },
+                              ),
+                              ListTile(
+                                title: const Text('Mobile Recharge'),
+                                onTap: () {
+                                  Get.back();
+                                },
+                              ),
+                            ],
+                          ),
+                        ),
+                      );
+                    },
+                    title: 'Catagory',
+                    icon: const Icon(Icons.arrow_drop_down)),
                 BlankSpace(
                   width: 20,
                 ),
-                const SortButton(
-                    title: 'Date', icon: Icon(Icons.arrow_drop_down))
+                SortButton(
+                    ontap: () {
+                      Get.bottomSheet(
+                        Container(
+                          decoration: const ShapeDecoration(
+                            color: Colors.white,
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.only(
+                                  topLeft: Radius.circular(25),
+                                  topRight: Radius.circular(25)),
+                            ),
+                          ),
+                          child: Wrap(
+                            children: [
+                              ListTile(
+                                title: const Text('All'),
+                                onTap: () {
+                                  Get.back();
+                                },
+                              ),
+                              ListTile(
+                                title: const Text('Income'),
+                                onTap: () {
+                                  Get.back();
+                                },
+                              ),
+                              ListTile(
+                                title: const Text('Expense'),
+                                onTap: () {
+                                  Get.back();
+                                },
+                              ),
+                            ],
+                          ),
+                        ),
+                      );
+                    },
+                    title: 'Date',
+                    icon: const Icon(Icons.arrow_drop_down))
               ],
             ),
             height40,

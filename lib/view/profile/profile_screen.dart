@@ -31,7 +31,7 @@ class ScreenProfile extends StatelessWidget {
               decoration: BoxDecoration(
                   border: Border.all(color: Appcolor.primaryColor),
                   borderRadius: BorderRadius.circular(60)),
-              child: CircleAvatar(
+              child: const CircleAvatar(
                 radius: 60,
                 backgroundColor: Appcolor.tertiaryColor,
                 //child: Image.asset('images/expense-logo.png'),

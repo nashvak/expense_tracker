@@ -1,12 +1,17 @@
 import 'package:expense_tracker/custom_widgets/common/button.dart';
 import 'package:expense_tracker/custom_widgets/common/sizedbox.dart';
-import 'package:expense_tracker/custom_widgets/common/login_widgets.dart';
+import 'package:expense_tracker/custom_widgets/login&signup/textfield.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 class ScreenAddRemainder extends StatelessWidget {
-  const ScreenAddRemainder({super.key});
-
+  ScreenAddRemainder({super.key});
+  final formkey = GlobalKey<FormState>();
+  final titleController = TextEditingController();
+  final dateController = TextEditingController();
+  final timeController = TextEditingController();
+  final amountController = TextEditingController();
+  final catagoryController = TextEditingController();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -27,15 +32,50 @@ class ScreenAddRemainder extends StatelessWidget {
         child: Column(
           children: [
             height30,
-            const CustomTextField(title: 'Title'),
+            CustomTextField(
+              obscure: false,
+              title: 'Title',
+              validator: (value) {
+                return null;
+              },
+              controller: titleController,
+            ),
             height30,
-            const CustomTextField(title: 'Date'),
+            CustomTextField(
+              obscure: false,
+              title: 'Date',
+              validator: (value) {
+                return null;
+              },
+              controller: dateController,
+            ),
             height30,
-            const CustomTextField(title: 'Time'),
+            CustomTextField(
+              obscure: false,
+              title: 'Time',
+              validator: (value) {
+                return null;
+              },
+              controller: timeController,
+            ),
             height30,
-            const CustomTextField(title: 'Amount'),
+            CustomTextField(
+              obscure: false,
+              title: 'Amount',
+              validator: (value) {
+                return null;
+              },
+              controller: amountController,
+            ),
             height30,
-            const CustomTextField(title: 'Catagory'),
+            CustomTextField(
+              obscure: false,
+              title: 'Catagory',
+              validator: (value) {
+                return null;
+              },
+              controller: catagoryController,
+            ),
             height50,
             CustomButton(
                 title: 'Add Remainder',

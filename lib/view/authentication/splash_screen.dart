@@ -12,15 +12,19 @@ class ScreenSplash extends StatefulWidget {
 }
 
 class _ScreenSplashState extends State<ScreenSplash> {
+  Timer? _timer;
   @override
   void initState() {
-    getstarted();
+    navigation();
     super.initState();
   }
 
-  void getstarted() {
-    Timer.periodic(Duration(seconds: 3), (timer) {
-      Get.toNamed('/getstarted');
+  void navigation() {
+    _timer = Timer(const Duration(seconds: 2), () {
+      if (mounted) {
+        // Check if the widget is still in the tree
+        Get.offNamed('/getstarted');
+      }
     });
   }
 
@@ -46,5 +50,11 @@ class _ScreenSplashState extends State<ScreenSplash> {
         ),
       ),
     );
+  }
+
+  @override
+  void dispose() {
+    _timer?.cancel(); // Cancel the timer if it's still active
+    super.dispose();
   }
 }
