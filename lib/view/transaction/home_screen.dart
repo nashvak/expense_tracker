@@ -4,7 +4,8 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import '../../constatnts/colors.dart';
 import '../../custom_widgets/common/decoration.dart';
-import '../../custom_widgets/common/home_screen_widgets.dart';
+import '../../custom_widgets/home_screen/appbar.dart';
+import '../../custom_widgets/home_screen/button.dart';
 
 class ScreenHome extends StatelessWidget {
   const ScreenHome({super.key});
@@ -14,31 +15,17 @@ class ScreenHome extends StatelessWidget {
     return Scaffold(
       backgroundColor: Appcolor.primaryColor,
       body: SizedBox(
-        height: double.infinity,
-        width: double.infinity,
+        height: Get.height,
+        width: Get.width,
         child: Stack(
           children: [
             const Positioned(
               top: 50,
               left: 30,
+              right: 30,
               // height: 200,
               // width: double.infinity,
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(
-                    'Hello,',
-                    style: TextStyle(fontSize: 25, color: Colors.white),
-                  ),
-                  Text(
-                    'Nashva',
-                    style: TextStyle(
-                      fontSize: 30,
-                      color: Colors.white,
-                    ),
-                  ),
-                ],
-              ),
+              child: HomescreenAppbar(),
             ),
             Positioned(
               top: 250,
@@ -53,7 +40,7 @@ class ScreenHome extends StatelessWidget {
                 child: Padding(
                   padding: const EdgeInsets.only(
                       top: 120, left: 30, right: 30, bottom: 0),
-                  child: Container(
+                  child: SizedBox(
                     //color: Colors.green,
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
@@ -119,13 +106,13 @@ class ScreenHome extends StatelessWidget {
                                 ),
                               ),
                             ),
-                            BlankSpace(
+                            const BlankSpace(
                               width: 10,
                             ),
                             SortButton(
                               ontap: () {},
                               title: 'Income',
-                              icon: Icon(Icons.arrow_upward),
+                              icon: const Icon(Icons.arrow_upward),
                             ),
                             const SizedBox(
                               width: 10,
@@ -133,13 +120,13 @@ class ScreenHome extends StatelessWidget {
                             SortButton(
                               ontap: () {},
                               title: 'Expense',
-                              icon: Icon(Icons.arrow_downward),
+                              icon: const Icon(Icons.arrow_downward),
                             )
                           ],
                         ),
                         height10,
                         Expanded(
-                          child: Container(
+                          child: SizedBox(
                             //color: Colors.red,
                             //height: MediaQuery.of(context).size.height,
                             height: 50,

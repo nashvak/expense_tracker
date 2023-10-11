@@ -29,7 +29,7 @@ class ScreenRemainder extends StatelessWidget {
                   onTap: () {
                     Get.toNamed('/addremainder');
                   },
-                  child: Icon(
+                  child: const Icon(
                     Icons.add,
                     size: 35,
                   ),

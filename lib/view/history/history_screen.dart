@@ -1,6 +1,6 @@
 import 'package:expense_tracker/constatnts/colors.dart';
 import 'package:expense_tracker/custom_widgets/common/sizedbox.dart';
-import 'package:expense_tracker/custom_widgets/common/home_screen_widgets.dart';
+import 'package:expense_tracker/custom_widgets/home_screen/button.dart';
 import 'package:expense_tracker/custom_widgets/common/textstyle.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -66,7 +66,7 @@ class ScreenHistory extends StatelessWidget {
                   title: "All",
                   icon: const Icon(Icons.arrow_drop_down),
                 ),
-                BlankSpace(
+                const BlankSpace(
                   width: 20,
                 ),
                 SortButton(
@@ -108,7 +108,7 @@ class ScreenHistory extends StatelessWidget {
                     },
                     title: 'Catagory',
                     icon: const Icon(Icons.arrow_drop_down)),
-                BlankSpace(
+                const BlankSpace(
                   width: 20,
                 ),
                 SortButton(
@@ -166,7 +166,7 @@ class ScreenHistory extends StatelessWidget {
                           title: 'Car service');
                     },
                     separatorBuilder: (context, index) {
-                      return BlankSpace(
+                      return const BlankSpace(
                         height: 10,
                       );
                     },

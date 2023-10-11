@@ -1,4 +1,5 @@
 import 'package:expense_tracker/constatnts/colors.dart';
+import 'package:expense_tracker/controller/password_controller.dart';
 import 'package:expense_tracker/custom_widgets/common/decoration.dart';
 
 import 'package:expense_tracker/custom_widgets/common/sizedbox.dart';
@@ -17,6 +18,7 @@ class ScreenSignup extends StatelessWidget {
   final emailController = TextEditingController();
   final passController = TextEditingController();
   final confimPassController = TextEditingController();
+  final PasswordController pass = Get.put(PasswordController());
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -47,7 +49,7 @@ class ScreenSignup extends StatelessWidget {
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        BlankSpace(
+                        const BlankSpace(
                           height: 60,
                         ),
                         CustomTextField(
@@ -56,22 +58,31 @@ class ScreenSignup extends StatelessWidget {
                           validator: nameValidator,
                           title: 'Name',
                         ),
-                        BlankSpace(height: 40),
+                        const BlankSpace(height: 40),
                         CustomTextField(
                           obscure: false,
                           controller: emailController,
                           validator: emailValidator,
                           title: 'Email',
                         ),
-                        BlankSpace(height: 40),
-                        CustomTextField(
-                          obscure: true,
-                          controller: passController,
-                          validator: passwordValidator,
-                          title: 'Password',
-                          icon: const Icon(Icons.visibility),
+                        const BlankSpace(height: 40),
+                        Obx(
+                          () => CustomTextField(
+                            obscure: pass.visibility.value,
+                            controller: passController,
+                            validator: passwordValidator,
+                            title: 'Password',
+                            icon: IconButton(
+                              onPressed: () {
+                                pass.changeVisibility(pass.visibility.value);
+                              },
+                              icon: Icon(pass.visibility.value
+                                  ? Icons.visibility
+                                  : Icons.visibility_off),
+                            ),
+                          ),
                         ),
-                        BlankSpace(height: 40),
+                        const BlankSpace(height: 40),
                         CustomTextField(
                           obscure: true,
                           controller: confimPassController,
@@ -83,7 +94,7 @@ class ScreenSignup extends StatelessWidget {
                           },
                           title: 'Confirm password',
                         ),
-                        BlankSpace(height: 50),
+                        const BlankSpace(height: 50),
                         CustomButton(
                           title: 'Register',
                           onTap: () {
@@ -92,7 +103,7 @@ class ScreenSignup extends StatelessWidget {
                             }
                           },
                         ),
-                        BlankSpace(height: 20),
+                        const BlankSpace(height: 20),
                         BottomText(
                             title: "already have an account? ",
                             title2: "Log in",

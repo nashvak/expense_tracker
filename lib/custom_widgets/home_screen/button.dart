@@ -3,14 +3,14 @@ import 'package:flutter/material.dart';
 import '../../constatnts/colors.dart';
 
 class SortButton extends StatelessWidget {
-  SortButton(
+  const SortButton(
       {required this.title,
       required this.ontap,
       required this.icon,
       super.key});
   final String title;
   final Icon icon;
-  void Function() ontap;
+  final void Function() ontap;
   @override
   Widget build(BuildContext context) {
     return GestureDetector(

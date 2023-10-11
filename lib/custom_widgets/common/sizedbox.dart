@@ -17,7 +17,7 @@ Widget height50 = const SizedBox(
 );
 
 class BlankSpace extends StatelessWidget {
-  BlankSpace({this.height, this.width, super.key});
+  const BlankSpace({this.height, this.width, super.key});
   final double? height;
   final double? width;
   @override

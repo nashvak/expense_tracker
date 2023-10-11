@@ -16,91 +16,103 @@ class ScreenAddTransaction extends StatelessWidget {
   final paymentController = TextEditingController();
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.only(top: 80, left: 20, right: 20),
-      child: SingleChildScrollView(
-        child: Column(
-          children: [
-            ToggleSwitch(
-              minWidth: 120,
-              minHeight: 50,
-              cornerRadius: 10,
-              fontSize: 20,
-              activeBgColor: const [
-                Appcolor.primaryColor,
-              ],
-              activeFgColor: Colors.white,
-              inactiveBgColor: const Color.fromARGB(255, 191, 224, 230),
-              totalSwitches: 2,
-              labels: const ['Income', 'Expense'],
-              onToggle: (index) {
-                print('$index');
-              },
-            ),
-            height30,
-            CustomTextField(
-              obscure: false,
-              validator: (value) {
-                return null;
-              },
-              controller: amountController,
-              title: 'Amount',
-            ),
-            height30,
-            CustomTextField(
-              obscure: false,
-              validator: (value) {
-                return null;
-              },
-              controller: dateController,
-              title: 'Date',
-              icon: Icon(Icons.calendar_month),
-            ),
-            height30,
-            CustomTextField(
-              obscure: false,
-              validator: (value) {
-                return null;
-              },
-              controller: descriptionController,
-              title: 'Description',
-            ),
-            height30,
-            CustomTextField(
-              obscure: false,
-              validator: (value) {
-                return null;
-              },
-              controller: catagoryController,
-              title: 'Catagory',
-            ),
-            height30,
-            CustomTextField(
-              obscure: false,
-              controller: paymentController,
-              validator: (value) {
-                return null;
-              },
-              title: 'Payment mode',
-            ),
-            // DropdownButton(items: [], onChanged: ((value) {
+    return Scaffold(
+      body: Padding(
+        padding: const EdgeInsets.only(top: 80, left: 20, right: 20),
+        child: SingleChildScrollView(
+          child: Column(
+            children: [
+              ToggleSwitch(
+                minWidth: 120,
+                minHeight: 50,
+                cornerRadius: 10,
+                fontSize: 20,
+                activeBgColor: const [
+                  Appcolor.primaryColor,
+                ],
+                activeFgColor: Colors.white,
+                inactiveBgColor: const Color.fromARGB(255, 191, 224, 230),
+                totalSwitches: 2,
+                labels: const ['Income', 'Expense'],
+                onToggle: (index) {
+                  // print('$index');
+                },
+              ),
+              height30,
+              CustomTextField(
+                obscure: false,
+                validator: (value) {
+                  return null;
+                },
+                controller: amountController,
+                title: 'Amount',
+              ),
+              height30,
+              CustomTextField(
+                obscure: false,
+                validator: (value) {
+                  return null;
+                },
+                controller: dateController,
+                title: 'Date',
+                icon: IconButton(
+                    onPressed: () {},
+                    icon: const Icon(Icons.calendar_month_outlined)),
+              ),
+              height30,
+              CustomTextField(
+                obscure: false,
+                validator: (value) {
+                  return null;
+                },
+                controller: descriptionController,
+                title: 'Description',
+              ),
+              height30,
+              CustomTextField(
+                obscure: false,
+                validator: (value) {
+                  return null;
+                },
+                controller: catagoryController,
+                title: 'Catagory',
+              ),
+              height30,
+              CustomTextField(
+                obscure: false,
+                controller: paymentController,
+                validator: (value) {
+                  return null;
+                },
+                title: 'Payment mode',
+              ),
+              // DropdownButton(items: [], onChanged: ((value) {
 
-            // })),
-            height30,
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Container(
-                    width: Get.width / 2.5,
-                    child: Cancelbutton(title: 'Cancel', onTap: () {})),
+              // })),
+              height30,
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  SizedBox(
+                      width: Get.width / 2.5,
+                      child: Cancelbutton(
+                          title: 'Cancel',
+                          onTap: () {
+                            Get.back();
+                          })),
 
-                //CustomButton(title: 'Add', onTap: () {}),
-                Container(
-                    width: Get.width / 2.5,
-                    child: CustomButton(title: 'Add', onTap: () {})),
-              ],
-            )
-          ],
+                  //CustomButton(title: 'Add', onTap: () {}),
+                  SizedBox(
+                      width: Get.width / 2.5,
+                      child: CustomButton(
+                          title: 'Add',
+                          onTap: () {
+                            Get.back();
+                          })),
+                ],
+              )
+            ],
+          ),
         ),
       ),
     );

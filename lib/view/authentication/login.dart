@@ -4,10 +4,12 @@ import 'package:expense_tracker/custom_widgets/common/decoration.dart';
 import 'package:expense_tracker/custom_widgets/common/sizedbox.dart';
 import 'package:expense_tracker/custom_widgets/login&signup/textfield.dart';
 import 'package:expense_tracker/custom_widgets/login&signup/validators.dart';
+import 'package:expense_tracker/view/transaction/dashboard/bottom_nav.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 
+import '../../controller/password_controller.dart';
 import '../../custom_widgets/common/textstyle.dart';
 import '../../custom_widgets/login&signup/bottom_text.dart';
 
@@ -16,6 +18,7 @@ class LoginScreen extends StatelessWidget {
   final formKey = GlobalKey<FormState>();
   final emailController = TextEditingController();
   final passController = TextEditingController();
+  final PasswordController pass = Get.put(PasswordController());
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -39,7 +42,7 @@ class LoginScreen extends StatelessWidget {
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        BlankSpace(
+                        const BlankSpace(
                           height: 50,
                         ),
                         Align(
@@ -49,7 +52,7 @@ class LoginScreen extends StatelessWidget {
                             style: GoogleFonts.lato(fontSize: 24),
                           ),
                         ),
-                        BlankSpace(
+                        const BlankSpace(
                           height: 30,
                         ),
                         Text(
@@ -57,44 +60,54 @@ class LoginScreen extends StatelessWidget {
                           style: textFieldtitle(),
                         ),
 
-                        BlankSpace(
+                        const BlankSpace(
                           height: 10,
                         ),
                         CustomTextField(
                           obscure: false,
                           validator: emailValidator,
                           controller: emailController,
-                          title: 'Email',
+                          title: '',
                         ),
 
-                        BlankSpace(
+                        const BlankSpace(
                           height: 30,
                         ),
                         Text(
                           'Password',
                           style: textFieldtitle(),
                         ),
-                        BlankSpace(
+                        const BlankSpace(
                           height: 10,
                         ),
-                        CustomTextField(
-                          obscure: true,
-                          controller: passController,
-                          validator: passwordValidator,
-                          title: 'Password',
-                          icon: const Icon(Icons.visibility),
+                        Obx(
+                          () => CustomTextField(
+                            obscure: pass.visibility.value,
+                            controller: passController,
+                            validator: passwordValidator,
+                            title: 'Password',
+                            icon: IconButton(
+                              onPressed: () {
+                                pass.changeVisibility(pass.visibility.value);
+                              },
+                              icon: Icon(pass.visibility.value
+                                  ? Icons.visibility
+                                  : Icons.visibility_off),
+                            ),
+                          ),
                         ),
 
-                        BlankSpace(
+                        const BlankSpace(
                           height: 50,
                         ),
                         CustomButton(
                           title: 'Login',
                           onTap: () {
                             Get.offNamed('/bottom');
+                            Get.off(const BottomNav());
                           },
                         ),
-                        BlankSpace(
+                        const BlankSpace(
                           height: 20,
                         ),
                         BottomText(

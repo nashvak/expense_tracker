@@ -3,6 +3,7 @@ import 'package:expense_tracker/custom_widgets/common/button.dart';
 import 'package:expense_tracker/custom_widgets/common/decoration.dart';
 import 'package:expense_tracker/custom_widgets/common/sizedbox.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 class ScreenViewTransaction extends StatelessWidget {
   const ScreenViewTransaction({super.key});
@@ -89,7 +90,7 @@ class ScreenViewTransaction extends StatelessWidget {
                             ),
                           ),
                         ),
-                        BlankSpace(
+                        const BlankSpace(
                           width: 15,
                         ),
                         Expanded(
@@ -119,7 +120,7 @@ class ScreenViewTransaction extends StatelessWidget {
                   ],
                 ),
               ),
-              BlankSpace(
+              const BlankSpace(
                 height: 30,
               ),
               Container(
@@ -143,10 +144,27 @@ class ScreenViewTransaction extends StatelessWidget {
                   ],
                 ),
               ),
-              BlankSpace(
+              const BlankSpace(
                 height: 30,
               ),
-              CustomButton(title: 'Delete Transaction', onTap: () {}),
+              CustomButton(
+                  title: 'Delete Transaction',
+                  onTap: () {
+                    Get.defaultDialog(
+                      title: 'Delete record',
+                      middleText: 'Do you want to delete this record',
+                      backgroundColor: Appcolor.primaryColor,
+                      radius: 40,
+                      contentPadding: const EdgeInsets.all(10),
+                      titlePadding: const EdgeInsets.all(20),
+                      textCancel: 'Cancel', //default style
+                      textConfirm: 'Ok',
+                      cancelTextColor: Colors.white,
+                      onCancel: () {},
+                      onConfirm: () {},
+                      buttonColor: Colors.white,
+                    );
+                  }),
             ],
           ),
         ),
