@@ -1,10 +1,10 @@
 import 'package:expense_tracker/constatnts/colors.dart';
-import 'package:expense_tracker/custom_widgets/common/button.dart';
+import 'package:expense_tracker/constatnts/custom_widgets/common/button.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:toggle_switch/toggle_switch.dart';
-import '../../custom_widgets/common/sizedbox.dart';
-import '../../custom_widgets/login&signup/textfield.dart';
+import '../../constatnts/custom_widgets/common/sizedbox.dart';
+import '../../constatnts/custom_widgets/login&signup/textfield.dart';
 
 class ScreenAddTransaction extends StatelessWidget {
   ScreenAddTransaction({super.key});

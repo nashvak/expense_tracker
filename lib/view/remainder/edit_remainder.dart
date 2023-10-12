@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-import '../../custom_widgets/common/button.dart';
-import '../../custom_widgets/common/sizedbox.dart';
-import '../../custom_widgets/login&signup/textfield.dart';
+import '../../constatnts/custom_widgets/common/button.dart';
+import '../../constatnts/custom_widgets/common/sizedbox.dart';
+import '../../constatnts/custom_widgets/login&signup/textfield.dart';
 
 class ScreenEditRemainder extends StatelessWidget {
   ScreenEditRemainder({super.key});

@@ -1,5 +1,5 @@
-import 'package:expense_tracker/custom_widgets/common/sizedbox.dart';
-import 'package:expense_tracker/custom_widgets/common/textstyle.dart';
+import 'package:expense_tracker/constatnts/custom_widgets/common/sizedbox.dart';
+import 'package:expense_tracker/constatnts/custom_widgets/common/textstyle.dart';
 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';

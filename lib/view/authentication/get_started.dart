@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-import '../../custom_widgets/common/button.dart';
-import '../../custom_widgets/common/sizedbox.dart';
+import '../../constatnts/custom_widgets/common/button.dart';
+import '../../constatnts/custom_widgets/common/sizedbox.dart';
 
 class GetStartedScreen extends StatelessWidget {
   const GetStartedScreen({super.key});

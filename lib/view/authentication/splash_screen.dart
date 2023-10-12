@@ -20,7 +20,7 @@ class _ScreenSplashState extends State<ScreenSplash> {
   }
 
   void navigation() {
-    _timer = Timer(const Duration(seconds: 2), () {
+    _timer = Timer(const Duration(seconds: 10), () {
       if (mounted) {
         // Check if the widget is still in the tree
         Get.offNamed('/getstarted');
@@ -54,7 +54,7 @@ class _ScreenSplashState extends State<ScreenSplash> {
 
   @override
   void dispose() {
-    _timer?.cancel(); // Cancel the timer if it's still active
+    _timer?.cancel();
     super.dispose();
   }
 }

@@ -1,3 +1,4 @@
+import 'package:expense_tracker/repository/auth_repository.dart';
 import 'package:expense_tracker/view/authentication/get_started.dart';
 import 'package:expense_tracker/view/authentication/login.dart';
 import 'package:expense_tracker/view/authentication/signup.dart';
@@ -6,13 +7,24 @@ import 'package:expense_tracker/view/remainder/add_remainder.dart';
 import 'package:expense_tracker/view/remainder/edit_remainder.dart';
 import 'package:expense_tracker/view/remainder/remainder_screen.dart';
 import 'package:expense_tracker/view/transaction/add_transaction.dart';
-import 'package:expense_tracker/view/transaction/dashboard/bottom_nav.dart';
+import 'package:expense_tracker/view/transaction/bottom_nav.dart';
 import 'package:expense_tracker/view/transaction/home_screen.dart';
 import 'package:expense_tracker/view/transaction/view_transaction.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-void main() {
+import 'package:hive_flutter/hive_flutter.dart';
+//import 'package:path_provider/path_provider.dart';
+
+import 'models/auth_model/auth_model.dart';
+
+Future<void> main() async {
+  // WidgetsFlutterBinding.ensureInitialized();
+  // Directory directory = await getApplicationDocumentsDirectory();
+  // Hive.init(directory.path);
+  // Hive.initFlutter();
+  Hive.registerAdapter<AuthModel>(AuthModelAdapter());
+  await AuthRepository.openBox();
   runApp(const MyApp());
 }
 

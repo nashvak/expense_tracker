@@ -1,15 +1,15 @@
 import 'package:expense_tracker/constatnts/colors.dart';
 import 'package:expense_tracker/controller/password_controller.dart';
-import 'package:expense_tracker/custom_widgets/common/decoration.dart';
+import 'package:expense_tracker/constatnts/custom_widgets/common/decoration.dart';
 
-import 'package:expense_tracker/custom_widgets/common/sizedbox.dart';
-import 'package:expense_tracker/custom_widgets/login&signup/validators.dart';
+import 'package:expense_tracker/constatnts/custom_widgets/common/sizedbox.dart';
+import 'package:expense_tracker/constatnts/custom_widgets/login&signup/validators.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-import '../../custom_widgets/common/button.dart';
-import '../../custom_widgets/login&signup/bottom_text.dart';
-import '../../custom_widgets/login&signup/textfield.dart';
+import '../../constatnts/custom_widgets/common/button.dart';
+import '../../constatnts/custom_widgets/login&signup/bottom_text.dart';
+import '../../constatnts/custom_widgets/login&signup/textfield.dart';
 
 class ScreenSignup extends StatelessWidget {
   ScreenSignup({super.key});
@@ -34,8 +34,10 @@ class ScreenSignup extends StatelessWidget {
             style: TextStyle(
                 color: Colors.white, fontSize: 30, fontWeight: FontWeight.bold),
           ),
-          const Text("Let us know about yourself",
-              style: TextStyle(color: Colors.white, fontSize: 15)),
+          const Text(
+            "Let us know about yourself",
+            style: TextStyle(color: Colors.white, fontSize: 15),
+          ),
           height30,
           Expanded(
             child: Container(

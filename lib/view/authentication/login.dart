@@ -1,17 +1,17 @@
 import 'package:expense_tracker/constatnts/colors.dart';
-import 'package:expense_tracker/custom_widgets/common/button.dart';
-import 'package:expense_tracker/custom_widgets/common/decoration.dart';
-import 'package:expense_tracker/custom_widgets/common/sizedbox.dart';
-import 'package:expense_tracker/custom_widgets/login&signup/textfield.dart';
-import 'package:expense_tracker/custom_widgets/login&signup/validators.dart';
-import 'package:expense_tracker/view/transaction/dashboard/bottom_nav.dart';
+import 'package:expense_tracker/constatnts/custom_widgets/common/button.dart';
+import 'package:expense_tracker/constatnts/custom_widgets/common/decoration.dart';
+import 'package:expense_tracker/constatnts/custom_widgets/common/sizedbox.dart';
+import 'package:expense_tracker/constatnts/custom_widgets/login&signup/textfield.dart';
+import 'package:expense_tracker/constatnts/custom_widgets/login&signup/validators.dart';
+import 'package:expense_tracker/view/transaction/bottom_nav.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 import '../../controller/password_controller.dart';
-import '../../custom_widgets/common/textstyle.dart';
-import '../../custom_widgets/login&signup/bottom_text.dart';
+import '../../constatnts/custom_widgets/common/textstyle.dart';
+import '../../constatnts/custom_widgets/login&signup/bottom_text.dart';
 
 class LoginScreen extends StatelessWidget {
   LoginScreen({super.key});
