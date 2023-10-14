@@ -50,81 +50,81 @@ class ScreenHome extends StatelessWidget {
                           style: TextStyle(
                               fontSize: 20, fontWeight: FontWeight.bold),
                         ),
-                        height20,
-                        Row(
-                          children: [
-                            GestureDetector(
-                              onTap: () {
-                                Get.bottomSheet(
-                                  Container(
-                                    decoration: const ShapeDecoration(
-                                      color: Colors.white,
-                                      shape: RoundedRectangleBorder(
-                                        borderRadius: BorderRadius.only(
-                                            topLeft: Radius.circular(25),
-                                            topRight: Radius.circular(25)),
-                                      ),
-                                    ),
-                                    child: Wrap(
-                                      children: [
-                                        ListTile(
-                                          title: const Text('All'),
-                                          onTap: () {
-                                            Get.back();
-                                          },
-                                        ),
-                                        ListTile(
-                                          title: const Text('Income'),
-                                          onTap: () {
-                                            Get.back();
-                                          },
-                                        ),
-                                        ListTile(
-                                          title: const Text('Expense'),
-                                          onTap: () {
-                                            Get.back();
-                                          },
-                                        ),
-                                      ],
-                                    ),
-                                  ),
-                                );
-                              },
-                              child: Container(
-                                //height: 35,
-                                decoration:
-                                    cardDecoration(color: Appcolor.white),
-                                child: const Padding(
-                                  padding: EdgeInsets.symmetric(
-                                      horizontal: 10, vertical: 10),
-                                  child: Text(
-                                    "All",
-                                    style: TextStyle(
-                                        fontSize: 16,
-                                        fontWeight: FontWeight.w500),
-                                  ),
-                                ),
-                              ),
-                            ),
-                            const BlankSpace(
-                              width: 10,
-                            ),
-                            SortButton(
-                              ontap: () {},
-                              title: 'Income',
-                              icon: const Icon(Icons.arrow_upward),
-                            ),
-                            const SizedBox(
-                              width: 10,
-                            ),
-                            SortButton(
-                              ontap: () {},
-                              title: 'Expense',
-                              icon: const Icon(Icons.arrow_downward),
-                            )
-                          ],
-                        ),
-                        height10,
+                        //height20,
+                        // Row(
+                        //   children: [
+                        //     GestureDetector(
+                        //       onTap: () {
+                        //         Get.bottomSheet(
+                        //           Container(
+                        //             decoration: const ShapeDecoration(
+                        //               color: Colors.white,
+                        //               shape: RoundedRectangleBorder(
+                        //                 borderRadius: BorderRadius.only(
+                        //                     topLeft: Radius.circular(25),
+                        //                     topRight: Radius.circular(25)),
+                        //               ),
+                        //             ),
+                        //             child: Wrap(
+                        //               children: [
+                        //                 ListTile(
+                        //                   title: const Text('All'),
+                        //                   onTap: () {
+                        //                     Get.back();
+                        //                   },
+                        //                 ),
+                        //                 ListTile(
+                        //                   title: const Text('Income'),
+                        //                   onTap: () {
+                        //                     Get.back();
+                        //                   },
+                        //                 ),
+                        //                 ListTile(
+                        //                   title: const Text('Expense'),
+                        //                   onTap: () {
+                        //                     Get.back();
+                        //                   },
+                        //                 ),
+                        //               ],
+                        //             ),
+                        //           ),
+                        //         );
+                        //       },
+                        //       child: Container(
+                        //         //height: 35,
+                        //         decoration:
+                        //             cardDecoration(color: Appcolor.white),
+                        //         child: const Padding(
+                        //           padding: EdgeInsets.symmetric(
+                        //               horizontal: 10, vertical: 10),
+                        //           child: Text(
+                        //             "All",
+                        //             style: TextStyle(
+                        //                 fontSize: 16,
+                        //                 fontWeight: FontWeight.w500),
+                        //           ),
+                        //         ),
+                        //       ),
+                        //     ),
+                        //     const BlankSpace(
+                        //       width: 10,
+                        //     ),
+                        //     SortButton(
+                        //       ontap: () {},
+                        //       title: 'Income',
+                        //       icon: const Icon(Icons.arrow_upward),
+                        //     ),
+                        //     const SizedBox(
+                        //       width: 10,
+                        //     ),
+                        //     SortButton(
+                        //       ontap: () {},
+                        //       title: 'Expense',
+                        //       icon: const Icon(Icons.arrow_downward),
+                        //     )
+                        //   ],
+                        // ),
+                        //height10,
                         Expanded(
                           child: SizedBox(
                             //color: Colors.red,
@@ -147,7 +147,9 @@ class ScreenHome extends StatelessWidget {
                                       },
                                       amount: 250,
                                       date: '1/10/23 6:30pm',
-                                      icon: const Icon(Icons.phone_android),
+                                      icon: const Icon(
+                                        Icons.phone_android,
+                                      ),
                                       title: 'Electricity bill'),
                                   Listtile(
                                       ontap: () {},

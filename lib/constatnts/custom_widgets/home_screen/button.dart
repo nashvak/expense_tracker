@@ -67,6 +67,10 @@ class Listtile extends StatelessWidget {
               padding: const EdgeInsets.all(10),
               child: icon,
             )),
+        // leading: CircleAvatar(
+        //   backgroundColor: Appcolor.primaryColor,
+        //   child: icon,
+        // ),
         title: Text(
           title,
           style: const TextStyle(fontSize: 18, fontWeight: FontWeight.w500),

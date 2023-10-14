@@ -1,15 +1,18 @@
 import 'package:expense_tracker/constatnts/colors.dart';
 import 'package:expense_tracker/constatnts/custom_widgets/common/sizedbox.dart';
 import 'package:expense_tracker/constatnts/custom_widgets/common/textstyle.dart';
+import 'package:expense_tracker/view/authentication/get_started.dart';
+import 'package:expense_tracker/view/authentication/login.dart';
 import 'package:flutter/material.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class ScreenProfile extends StatelessWidget {
   ScreenProfile({super.key});
   final List<String> title = ['Nashva k', 'nashvak@gmail.com', 'Logout'];
-  final List<Icon> icons = [
-    const Icon(Icons.person),
-    const Icon(Icons.email),
-    const Icon(Icons.logout)
+  final List<IconButton> icons = [
+    IconButton(onPressed: () {}, icon: Icon(Icons.person)),
+    IconButton(onPressed: () {}, icon: Icon(Icons.email)),
+    IconButton(onPressed: () {}, icon: Icon(Icons.logout))
   ];
 
   @override
@@ -23,6 +26,23 @@ class ScreenProfile extends StatelessWidget {
         ),
         backgroundColor: Colors.transparent,
         elevation: 0,
+        actions: [
+          IconButton(
+            onPressed: () async {
+              var pref = await SharedPreferences.getInstance();
+              //pref.setBool(SplashScreenState.KEYLOGIN, false);
+              await pref.clear();
+              // ignore: use_build_context_synchronously
+              Navigator.pushReplacement(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => GetStartedScreen(),
+                ),
+              );
+            },
+            icon: Icon(Icons.logout),
+          ),
+        ],
       ),
       body: Padding(
         padding: const EdgeInsets.only(left: 20, right: 20, top: 50, bottom: 0),
@@ -44,9 +64,11 @@ class ScreenProfile extends StatelessWidget {
               height: 200,
               width: MediaQuery.of(context).size.width,
               decoration: ShapeDecoration(
-                  color: Colors.white,
-                  shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(15))),
+                color: Colors.white,
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(15),
+                ),
+              ),
               child: ListView.separated(
                   itemBuilder: (context, index) {
                     return ListTile(

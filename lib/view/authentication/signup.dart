@@ -1,24 +1,51 @@
 import 'package:expense_tracker/constatnts/colors.dart';
+import 'package:expense_tracker/controller/auth_controller.dart';
 import 'package:expense_tracker/controller/password_controller.dart';
 import 'package:expense_tracker/constatnts/custom_widgets/common/decoration.dart';
 
 import 'package:expense_tracker/constatnts/custom_widgets/common/sizedbox.dart';
 import 'package:expense_tracker/constatnts/custom_widgets/login&signup/validators.dart';
+import 'package:expense_tracker/models/auth_model/auth_model.dart';
+import 'package:expense_tracker/view/authentication/splash_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 import '../../constatnts/custom_widgets/common/button.dart';
 import '../../constatnts/custom_widgets/login&signup/bottom_text.dart';
 import '../../constatnts/custom_widgets/login&signup/textfield.dart';
 
-class ScreenSignup extends StatelessWidget {
+class ScreenSignup extends StatefulWidget {
   ScreenSignup({super.key});
+
+  @override
+  State<ScreenSignup> createState() => _ScreenSignupState();
+}
+
+class _ScreenSignupState extends State<ScreenSignup> {
   final formkey = GlobalKey<FormState>();
+
   final nameController = TextEditingController();
+
   final emailController = TextEditingController();
+
   final passController = TextEditingController();
+
   final confimPassController = TextEditingController();
+
   final PasswordController pass = Get.put(PasswordController());
+
+  final AuthController authController = Get.put(AuthController());
+
+  @override
+  void dispose() {
+    nameController.dispose();
+    emailController.dispose();
+    passController.dispose();
+    confimPassController.dispose();
+    super.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -41,7 +68,7 @@ class ScreenSignup extends StatelessWidget {
           height30,
           Expanded(
             child: Container(
-              width: double.infinity,
+              width: Get.size.width,
               decoration: backgroundCurveDecoration(color: Appcolor.white),
               child: FractionallySizedBox(
                 widthFactor: 0.85,
@@ -89,7 +116,8 @@ class ScreenSignup extends StatelessWidget {
                           obscure: true,
                           controller: confimPassController,
                           validator: (value) {
-                            if (passController != confimPassController) {
+                            if (passController.text !=
+                                confimPassController.text) {
                               return 'password not correct';
                             }
                             return null;
@@ -99,9 +127,20 @@ class ScreenSignup extends StatelessWidget {
                         const BlankSpace(height: 50),
                         CustomButton(
                           title: 'Register',
-                          onTap: () {
+                          onTap: () async {
                             if (formkey.currentState!.validate()) {
+                              var pref = await SharedPreferences.getInstance();
+                              pref.setBool(ScreenSplashState.keyToLogin, true);
+
+                              authController.createNote(
+                                  auth: AuthModel(
+                                      name: nameController.text,
+                                      email: emailController.text,
+                                      password: passController.text));
                               Get.offNamed('/bottom');
+                            } else {
+                              Get.snackbar(
+                                  'Error', 'Error occured while creating user');
                             }
                           },
                         ),

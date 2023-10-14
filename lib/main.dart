@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:expense_tracker/repository/auth_repository.dart';
 import 'package:expense_tracker/view/authentication/get_started.dart';
 import 'package:expense_tracker/view/authentication/login.dart';
@@ -14,15 +16,15 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 import 'package:hive_flutter/hive_flutter.dart';
-//import 'package:path_provider/path_provider.dart';
+import 'package:path_provider/path_provider.dart';
 
 import 'models/auth_model/auth_model.dart';
 
 Future<void> main() async {
-  // WidgetsFlutterBinding.ensureInitialized();
-  // Directory directory = await getApplicationDocumentsDirectory();
-  // Hive.init(directory.path);
-  // Hive.initFlutter();
+  WidgetsFlutterBinding.ensureInitialized();
+  Directory directory = await getApplicationDocumentsDirectory();
+  Hive.init(directory.path);
+  Hive.initFlutter();
   Hive.registerAdapter<AuthModel>(AuthModelAdapter());
   await AuthRepository.openBox();
   runApp(const MyApp());
