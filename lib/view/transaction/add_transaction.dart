@@ -6,14 +6,44 @@ import 'package:toggle_switch/toggle_switch.dart';
 import '../../constatnts/custom_widgets/common/sizedbox.dart';
 import '../../constatnts/custom_widgets/login&signup/textfield.dart';
 
-class ScreenAddTransaction extends StatelessWidget {
+class ScreenAddTransaction extends StatefulWidget {
   ScreenAddTransaction({super.key});
+
+  @override
+  State<ScreenAddTransaction> createState() => _ScreenAddTransactionState();
+}
+
+class _ScreenAddTransactionState extends State<ScreenAddTransaction> {
   final formkey = GlobalKey<FormState>();
+
   final amountController = TextEditingController();
+
   final dateController = TextEditingController();
+
   final descriptionController = TextEditingController();
+
   final catagoryController = TextEditingController();
+
   final paymentController = TextEditingController();
+  String? selectedCatagory = null;
+  String? selectedPaymentMode = null;
+
+  List<DropdownMenuItem<String>> get catagory {
+    List<DropdownMenuItem<String>> menuItems = [
+      DropdownMenuItem(child: Text("Income"), value: "income"),
+      DropdownMenuItem(child: Text("Expense"), value: "expense"),
+    ];
+    return menuItems;
+  }
+
+  List<DropdownMenuItem<String>> get paymentmode {
+    List<DropdownMenuItem<String>> menuItems = [
+      DropdownMenuItem(child: Text("By Cash"), value: "cash"),
+      DropdownMenuItem(child: Text("By Bank"), value: "bank"),
+    ];
+    return menuItems;
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -69,26 +99,59 @@ class ScreenAddTransaction extends StatelessWidget {
                 title: 'Description',
               ),
               height30,
-              CustomTextField(
-                obscure: false,
-                validator: (value) {
-                  return null;
-                },
-                controller: catagoryController,
-                title: 'Catagory',
-              ),
+              DropdownButtonFormField(
+                  hint: Text('Catagory '),
+                  decoration: InputDecoration(
+                    enabledBorder: OutlineInputBorder(
+                      borderSide:
+                          BorderSide(color: Appcolor.tertiaryColor, width: 1),
+                      borderRadius: BorderRadius.circular(50),
+                    ),
+                    focusedBorder: OutlineInputBorder(
+                      borderSide:
+                          BorderSide(color: Appcolor.tertiaryColor, width: 1),
+                      borderRadius: BorderRadius.circular(50),
+                    ),
+                    filled: true,
+                    fillColor: Appcolor.tertiaryColor,
+                  ),
+                  validator: (value) =>
+                      value == null ? "Select Catagory" : null,
+                  dropdownColor: Appcolor.tertiaryColor,
+                  value: selectedCatagory,
+                  onChanged: (String? newValue) {
+                    setState(() {
+                      selectedCatagory = newValue!;
+                    });
+                  },
+                  items: catagory),
               height30,
-              CustomTextField(
-                obscure: false,
-                controller: paymentController,
-                validator: (value) {
-                  return null;
-                },
-                title: 'Payment mode',
-              ),
-              // DropdownButton(items: [], onChanged: ((value) {
-
-              // })),
+              DropdownButtonFormField(
+                  hint: Text('Payment mode '),
+                  decoration: InputDecoration(
+                    enabledBorder: OutlineInputBorder(
+                      borderSide:
+                          BorderSide(color: Appcolor.tertiaryColor, width: 1),
+                      borderRadius: BorderRadius.circular(50),
+                    ),
+                    focusedBorder: OutlineInputBorder(
+                      borderSide:
+                          BorderSide(color: Appcolor.tertiaryColor, width: 1),
+                      borderRadius: BorderRadius.circular(50),
+                    ),
+                    filled: true,
+                    fillColor: Appcolor.tertiaryColor,
+                  ),
+                  validator: (value) =>
+                      value == null ? "Select Payment mode" : null,
+                  dropdownColor: Appcolor.tertiaryColor,
+                  value: selectedPaymentMode,
+                  onChanged: (String? newValue) {
+                    setState(() {
+                      selectedPaymentMode = newValue!;
+                    });
+                  },
+                  items: paymentmode),
               height30,
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
