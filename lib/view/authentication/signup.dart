@@ -16,7 +16,7 @@ import '../../constatnts/custom_widgets/login&signup/bottom_text.dart';
 import '../../constatnts/custom_widgets/login&signup/textfield.dart';
 
 class ScreenSignup extends StatefulWidget {
-  ScreenSignup({super.key});
+  const ScreenSignup({super.key});
 
   @override
   State<ScreenSignup> createState() => _ScreenSignupState();

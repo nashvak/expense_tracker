@@ -69,12 +69,14 @@ class ScreenSplashState extends State<ScreenSplash> {
               MaterialPageRoute(builder: (ctx) => const ScreenHome()),
               (route) => false);
         } else {
-          Navigator.pushReplacement(context,
-              MaterialPageRoute(builder: (context) => GetStartedScreen()));
+          Navigator.pushReplacement(
+              context,
+              MaterialPageRoute(
+                  builder: (context) => const GetStartedScreen()));
         }
       } else {
         Navigator.pushReplacement(context,
-            MaterialPageRoute(builder: (context) => GetStartedScreen()));
+            MaterialPageRoute(builder: (context) => const GetStartedScreen()));
       }
     });
   }

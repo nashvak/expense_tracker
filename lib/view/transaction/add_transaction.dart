@@ -5,16 +5,17 @@ import 'package:get/get.dart';
 import 'package:toggle_switch/toggle_switch.dart';
 import '../../constatnts/custom_widgets/common/sizedbox.dart';
 import '../../constatnts/custom_widgets/login&signup/textfield.dart';
+import 'package:intl/intl.dart';
 
 class ScreenAddTransaction extends StatefulWidget {
-  ScreenAddTransaction({super.key});
+  const ScreenAddTransaction({super.key});
 
   @override
   State<ScreenAddTransaction> createState() => _ScreenAddTransactionState();
 }
 
 class _ScreenAddTransactionState extends State<ScreenAddTransaction> {
-  final formkey = GlobalKey<FormState>();
+  final addFormkey = GlobalKey<FormState>();
 
   final amountController = TextEditingController();
 
@@ -25,21 +26,14 @@ class _ScreenAddTransactionState extends State<ScreenAddTransaction> {
   final catagoryController = TextEditingController();
 
   final paymentController = TextEditingController();
-  String? selectedCatagory = null;
-  String? selectedPaymentMode = null;
 
-  List<DropdownMenuItem<String>> get catagory {
-    List<DropdownMenuItem<String>> menuItems = [
-      DropdownMenuItem(child: Text("Income"), value: "income"),
-      DropdownMenuItem(child: Text("Expense"), value: "expense"),
-    ];
-    return menuItems;
-  }
+  //String? selectedCatagory = null;
+  String? selectedPaymentMode;
 
   List<DropdownMenuItem<String>> get paymentmode {
     List<DropdownMenuItem<String>> menuItems = [
-      DropdownMenuItem(child: Text("By Cash"), value: "cash"),
-      DropdownMenuItem(child: Text("By Bank"), value: "bank"),
+      const DropdownMenuItem(value: "cash", child: Text("By Cash")),
+      const DropdownMenuItem(value: "bank", child: Text("By Bank")),
     ];
     return menuItems;
   }
@@ -50,131 +44,124 @@ class _ScreenAddTransactionState extends State<ScreenAddTransaction> {
       body: Padding(
         padding: const EdgeInsets.only(top: 80, left: 20, right: 20),
         child: SingleChildScrollView(
-          child: Column(
-            children: [
-              ToggleSwitch(
-                minWidth: 120,
-                minHeight: 50,
-                cornerRadius: 10,
-                fontSize: 20,
-                activeBgColor: const [
-                  Appcolor.primaryColor,
-                ],
-                activeFgColor: Colors.white,
-                inactiveBgColor: const Color.fromARGB(255, 191, 224, 230),
-                totalSwitches: 2,
-                labels: const ['Income', 'Expense'],
-                onToggle: (index) {
-                  // print('$index');
-                },
-              ),
-              height30,
-              CustomTextField(
-                obscure: false,
-                validator: (value) {
-                  return null;
-                },
-                controller: amountController,
-                title: 'Amount',
-              ),
-              height30,
-              CustomTextField(
-                obscure: false,
-                validator: (value) {
-                  return null;
-                },
-                controller: dateController,
-                title: 'Date',
-                icon: IconButton(
-                    onPressed: () {},
-                    icon: const Icon(Icons.calendar_month_outlined)),
-              ),
-              height30,
-              CustomTextField(
-                obscure: false,
-                validator: (value) {
-                  return null;
-                },
-                controller: descriptionController,
-                title: 'Description',
-              ),
-              height30,
-              DropdownButtonFormField(
-                  hint: Text('Catagory '),
-                  decoration: InputDecoration(
-                    enabledBorder: OutlineInputBorder(
-                      borderSide:
-                          BorderSide(color: Appcolor.tertiaryColor, width: 1),
-                      borderRadius: BorderRadius.circular(50),
-                    ),
-                    focusedBorder: OutlineInputBorder(
-                      borderSide:
-                          BorderSide(color: Appcolor.tertiaryColor, width: 1),
-                      borderRadius: BorderRadius.circular(50),
-                    ),
-                    filled: true,
-                    fillColor: Appcolor.tertiaryColor,
-                  ),
-                  validator: (value) =>
-                      value == null ? "Select Catagory" : null,
-                  dropdownColor: Appcolor.tertiaryColor,
-                  value: selectedCatagory,
-                  onChanged: (String? newValue) {
-                    setState(() {
-                      selectedCatagory = newValue!;
-                    });
+          child: Form(
+            key: addFormkey,
+            child: Column(
+              children: [
+                ToggleSwitch(
+                  minWidth: 120,
+                  minHeight: 50,
+                  cornerRadius: 10,
+                  fontSize: 20,
+                  activeBgColor: const [
+                    Appcolor.primaryColor,
+                  ],
+                  activeFgColor: Colors.white,
+                  inactiveBgColor: const Color.fromARGB(255, 191, 224, 230),
+                  totalSwitches: 2,
+                  labels: const ['Income', 'Expense'],
+                  onToggle: (index) {
+                    if (index == 0) {
+                      catagoryController.text = 'income';
+                    } else {
+                      catagoryController.text = 'expense';
+                    }
+                    print(catagoryController.text);
                   },
-                  items: catagory),
-              height30,
-              DropdownButtonFormField(
-                  hint: Text('Payment mode '),
-                  decoration: InputDecoration(
-                    enabledBorder: OutlineInputBorder(
-                      borderSide:
-                          BorderSide(color: Appcolor.tertiaryColor, width: 1),
-                      borderRadius: BorderRadius.circular(50),
-                    ),
-                    focusedBorder: OutlineInputBorder(
-                      borderSide:
-                          BorderSide(color: Appcolor.tertiaryColor, width: 1),
-                      borderRadius: BorderRadius.circular(50),
-                    ),
-                    filled: true,
-                    fillColor: Appcolor.tertiaryColor,
-                  ),
-                  validator: (value) =>
-                      value == null ? "Select Payment mode" : null,
-                  dropdownColor: Appcolor.tertiaryColor,
-                  value: selectedPaymentMode,
-                  onChanged: (String? newValue) {
-                    setState(() {
-                      selectedPaymentMode = newValue!;
-                    });
+                ),
+                height30,
+                height20,
+                CustomTextField(
+                  obscure: false,
+                  validator: (value) {
+                    return null;
                   },
-                  items: paymentmode),
-              height30,
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  SizedBox(
-                      width: Get.width / 2.5,
-                      child: Cancelbutton(
-                          title: 'Cancel',
-                          onTap: () {
-                            Get.back();
-                          })),
+                  controller: amountController,
+                  title: 'Amount',
+                ),
+                height30,
+                CustomTextField(
+                  readonly: true,
+                  obscure: false,
+                  validator: (value) {
+                    return null;
+                  },
+                  controller: dateController,
+                  title: 'Date',
+                  ontap: () async {
+                    DateTime? pickedDate = await showDatePicker(
+                        context: context,
+                        initialDate: DateTime.now(),
+                        firstDate: DateTime(2023),
+                        lastDate: DateTime(2024));
+                    if (pickedDate != null) {
+                      setState(() {});
+                      dateController.text =
+                          DateFormat('yyyy-MM-dd').format(pickedDate);
+                    }
+                  },
+                ),
+                height30,
+                CustomTextField(
+                  obscure: false,
+                  validator: (value) {
+                    return null;
+                  },
+                  controller: descriptionController,
+                  title: 'Description',
+                ),
+                height30,
+                DropdownButtonFormField(
+                    hint: const Text('Payment mode '),
+                    decoration: InputDecoration(
+                      enabledBorder: OutlineInputBorder(
+                        borderSide: const BorderSide(
+                            color: Appcolor.tertiaryColor, width: 1),
+                        borderRadius: BorderRadius.circular(50),
+                      ),
+                      focusedBorder: OutlineInputBorder(
+                        borderSide: const BorderSide(
+                            color: Appcolor.tertiaryColor, width: 1),
+                        borderRadius: BorderRadius.circular(50),
+                      ),
+                      filled: true,
+                      fillColor: Appcolor.tertiaryColor,
+                    ),
+                    validator: (value) =>
+                        value == null ? "Select Payment mode" : null,
+                    dropdownColor: Appcolor.tertiaryColor,
+                    value: selectedPaymentMode,
+                    onChanged: (String? newValue) {
+                      setState(() {
+                        selectedPaymentMode = newValue!;
+                      });
+                    },
+                    items: paymentmode),
+                height30,
+                height20,
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    SizedBox(
+                        width: Get.width / 2.5,
+                        child: Cancelbutton(
+                            title: 'Cancel',
+                            onTap: () {
+                              Get.back();
+                            })),
 
-                  //CustomButton(title: 'Add', onTap: () {}),
-                  SizedBox(
-                      width: Get.width / 2.5,
-                      child: CustomButton(
-                          title: 'Add',
-                          onTap: () {
-                            Get.back();
-                          })),
-                ],
-              )
-            ],
+                    //CustomButton(title: 'Add', onTap: () {}),
+                    SizedBox(
+                        width: Get.width / 2.5,
+                        child: CustomButton(
+                            title: 'Add',
+                            onTap: () {
+                              Get.back();
+                            })),
+                  ],
+                )
+              ],
+            ),
           ),
         ),
       ),

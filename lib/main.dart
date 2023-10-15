@@ -43,13 +43,14 @@ class MyApp extends StatelessWidget {
         GetPage(name: '/', page: () => const ScreenSplash()),
         GetPage(name: '/getstarted', page: () => const GetStartedScreen()),
         GetPage(name: '/login', page: () => LoginScreen()),
-        GetPage(name: '/signup', page: () => ScreenSignup()),
+        GetPage(name: '/signup', page: () => const ScreenSignup()),
         GetPage(name: '/home', page: () => const ScreenHome()),
         GetPage(name: '/bottom', page: () => const BottomNav()),
         GetPage(
             name: '/viewtransaction',
             page: () => const ScreenViewTransaction()),
-        GetPage(name: '/addtransaction', page: () => ScreenAddTransaction()),
+        GetPage(
+            name: '/addtransaction', page: () => const ScreenAddTransaction()),
         GetPage(name: '/addremainder', page: () => ScreenAddRemainder()),
         GetPage(name: '/remainder', page: () => ScreenRemainder()),
         GetPage(name: '/editremainder', page: () => ScreenEditRemainder()),
