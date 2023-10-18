@@ -63,7 +63,7 @@ class ScreenViewTransaction extends StatelessWidget {
               height30,
               Container(
                 decoration: cardDecoration(color: Colors.white),
-                height: MediaQuery.of(context).size.height / 5,
+                height: MediaQuery.of(context).size.height / 7,
                 width: MediaQuery.of(context).size.width,
                 padding: const EdgeInsets.only(left: 20),
                 child: Column(

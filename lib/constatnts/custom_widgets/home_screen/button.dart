@@ -26,11 +26,10 @@ class SortButton extends StatelessWidget {
           padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
           child: Row(
             children: [
-              // Icon(Icons.arrow_downward),
-              icon,
               Text(title,
                   style: const TextStyle(
                       fontSize: 16, fontWeight: FontWeight.w500)),
+              icon,
             ],
           ),
         ),

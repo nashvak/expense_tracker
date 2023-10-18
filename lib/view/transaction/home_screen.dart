@@ -146,7 +146,7 @@ class ScreenHome extends StatelessWidget {
                                         );
                                       },
                                       amount: 250,
-                                      date: '1/10/23 6:30pm',
+                                      date: '1/10/23 ',
                                       icon: const Icon(
                                         Icons.phone_android,
                                       ),
@@ -154,25 +154,25 @@ class ScreenHome extends StatelessWidget {
                                   Listtile(
                                       ontap: () {},
                                       amount: 499,
-                                      date: '21/09/23 2:30pm',
+                                      date: '21/09/23 ',
                                       icon: const Icon(Icons.phone_android),
                                       title: 'Mobile recharge'),
                                   Listtile(
                                       ontap: () {},
                                       amount: 6000,
-                                      date: '11/09/23 10:00am',
+                                      date: '11/09/23 ',
                                       icon: const Icon(Icons.phone_android),
                                       title: 'Car EMI'),
                                   Listtile(
                                       ontap: () {},
                                       amount: 250,
-                                      date: '1/10/23 6:30pm',
+                                      date: '1/10/23',
                                       icon: const Icon(Icons.phone_android),
                                       title: 'Electricity bill'),
                                   Listtile(
                                       ontap: () {},
                                       amount: 499,
-                                      date: '21/09/23 2:30pm',
+                                      date: '21/09/23 ',
                                       icon: const Icon(Icons.phone_android),
                                       title: 'Mobile recharge'),
                                 ],

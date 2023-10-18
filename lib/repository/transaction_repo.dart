@@ -1,9 +1,8 @@
-import 'package:expense_tracker/models/auth_model/auth_model.dart';
-import 'package:hive_flutter/hive_flutter.dart';
+// import 'package:expense_tracker/models/transaction_model/transaction_model.dart';
+// import 'package:hive_flutter/hive_flutter.dart';
 
-class AuthRepository {
-  static const String transactionBox = 'transactionsBox';
-  static openBox() async => await Hive.openBox<AuthModel>(transactionBox);
-  static Box getBox() => Hive.box<AuthModel>(transactionBox);
-  static closeBox() async => await Hive.box(transactionBox).close();
-}
+// class TransRepository {
+//   static openBox() async => await Hive.openBox<Transaction>(transactionBox);
+//   static Box getBox() => Hive.box<Transaction>(transactionBox);
+//   static closeBox() async => await Hive.box(transactionBox).close();
+// }

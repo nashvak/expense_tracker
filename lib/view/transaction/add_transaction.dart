@@ -1,5 +1,6 @@
 import 'package:expense_tracker/constatnts/colors.dart';
 import 'package:expense_tracker/constatnts/custom_widgets/common/button.dart';
+import 'package:expense_tracker/models/transaction_model/transaction_model.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:toggle_switch/toggle_switch.dart';
@@ -97,7 +98,7 @@ class _ScreenAddTransactionState extends State<ScreenAddTransaction> {
                     if (pickedDate != null) {
                       setState(() {});
                       dateController.text =
-                          DateFormat('yyyy-MM-dd').format(pickedDate);
+                          DateFormat('dd/MM/yyyy').format(pickedDate);
                     }
                   },
                 ),
@@ -134,6 +135,8 @@ class _ScreenAddTransactionState extends State<ScreenAddTransaction> {
                     onChanged: (String? newValue) {
                       setState(() {
                         selectedPaymentMode = newValue!;
+                        paymentController.text = selectedPaymentMode.toString();
+                        print(paymentController.text);
                       });
                     },
                     items: paymentmode),
@@ -143,12 +146,14 @@ class _ScreenAddTransactionState extends State<ScreenAddTransaction> {
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     SizedBox(
-                        width: Get.width / 2.5,
-                        child: Cancelbutton(
-                            title: 'Cancel',
-                            onTap: () {
-                              Get.back();
-                            })),
+                      width: Get.width / 2.5,
+                      child: Cancelbutton(
+                        title: 'Cancel',
+                        onTap: () {
+                          Get.back();
+                        },
+                      ),
+                    ),
 
                     //CustomButton(title: 'Add', onTap: () {}),
                     SizedBox(
@@ -156,6 +161,14 @@ class _ScreenAddTransactionState extends State<ScreenAddTransaction> {
                         child: CustomButton(
                             title: 'Add',
                             onTap: () {
+                              if (addFormkey.currentState!.validate()) {
+                                Transaction transaction = Transaction(
+                                    description: descriptionController.text,
+                                    amount: int.parse(amountController.text),
+                                    date: DateTime.parse(dateController.text),
+                                    mode: PaymentMode.bank,
+                                    type: CatagoryType.expense);
+                              }
                               Get.back();
                             })),
                   ],

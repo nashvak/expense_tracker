@@ -25,7 +25,7 @@ class _BottomNavState extends State<BottomNav> {
   List<Widget> screens = [
     const ScreenHome(),
     //ScreenAddTransaction(),
-    const ScreenHistory(),
+    ScreenHistory(),
     ScreenRemainder(),
     ScreenProfile(),
   ];
