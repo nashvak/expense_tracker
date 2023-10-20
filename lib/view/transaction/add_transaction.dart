@@ -1,12 +1,13 @@
 import 'package:expense_tracker/constatnts/colors.dart';
 import 'package:expense_tracker/constatnts/custom_widgets/common/button.dart';
+import 'package:expense_tracker/controller/transaction_controller.dart';
 import 'package:expense_tracker/models/transaction_model/transaction_model.dart';
+
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:toggle_switch/toggle_switch.dart';
 import '../../constatnts/custom_widgets/common/sizedbox.dart';
 import '../../constatnts/custom_widgets/login&signup/textfield.dart';
-import 'package:intl/intl.dart';
 
 class ScreenAddTransaction extends StatefulWidget {
   const ScreenAddTransaction({super.key});
@@ -24,20 +25,10 @@ class _ScreenAddTransactionState extends State<ScreenAddTransaction> {
 
   final descriptionController = TextEditingController();
 
-  final catagoryController = TextEditingController();
+  PaymentMode? selectedPaymentMode;
+  CatagoryType selectedCatagory = CatagoryType.income;
 
-  final paymentController = TextEditingController();
-
-  //String? selectedCatagory = null;
-  String? selectedPaymentMode;
-
-  List<DropdownMenuItem<String>> get paymentmode {
-    List<DropdownMenuItem<String>> menuItems = [
-      const DropdownMenuItem(value: "cash", child: Text("By Cash")),
-      const DropdownMenuItem(value: "bank", child: Text("By Bank")),
-    ];
-    return menuItems;
-  }
+  final TransactionController controller = Get.put(TransactionController());
 
   @override
   Widget build(BuildContext context) {
@@ -50,6 +41,8 @@ class _ScreenAddTransactionState extends State<ScreenAddTransaction> {
             child: Column(
               children: [
                 ToggleSwitch(
+                  initialLabelIndex:
+                      selectedCatagory == CatagoryType.income ? 0 : 1,
                   minWidth: 120,
                   minHeight: 50,
                   cornerRadius: 10,
@@ -62,12 +55,12 @@ class _ScreenAddTransactionState extends State<ScreenAddTransaction> {
                   totalSwitches: 2,
                   labels: const ['Income', 'Expense'],
                   onToggle: (index) {
-                    if (index == 0) {
-                      catagoryController.text = 'income';
-                    } else {
-                      catagoryController.text = 'expense';
-                    }
-                    print(catagoryController.text);
+                    setState(() {
+                      selectedCatagory = (index == 0)
+                          ? CatagoryType.income
+                          : CatagoryType.expense;
+                      print(selectedCatagory);
+                    });
                   },
                 ),
                 height30,
@@ -95,10 +88,12 @@ class _ScreenAddTransactionState extends State<ScreenAddTransaction> {
                         initialDate: DateTime.now(),
                         firstDate: DateTime(2023),
                         lastDate: DateTime(2024));
+
                     if (pickedDate != null) {
                       setState(() {});
-                      dateController.text =
-                          DateFormat('dd/MM/yyyy').format(pickedDate);
+                      dateController.text = pickedDate.toString();
+                      print(dateController.text);
+                      // DateFormat('dd/MM/yyyy').format(pickedDate);
                     }
                   },
                 ),
@@ -112,34 +107,43 @@ class _ScreenAddTransactionState extends State<ScreenAddTransaction> {
                   title: 'Description',
                 ),
                 height30,
-                DropdownButtonFormField(
-                    hint: const Text('Payment mode '),
-                    decoration: InputDecoration(
-                      enabledBorder: OutlineInputBorder(
-                        borderSide: const BorderSide(
-                            color: Appcolor.tertiaryColor, width: 1),
-                        borderRadius: BorderRadius.circular(50),
-                      ),
-                      focusedBorder: OutlineInputBorder(
-                        borderSide: const BorderSide(
-                            color: Appcolor.tertiaryColor, width: 1),
-                        borderRadius: BorderRadius.circular(50),
-                      ),
-                      filled: true,
-                      fillColor: Appcolor.tertiaryColor,
+                DropdownButtonFormField<PaymentMode>(
+                  hint: const Text('Payment mode '),
+                  decoration: InputDecoration(
+                    enabledBorder: OutlineInputBorder(
+                      borderSide: const BorderSide(
+                          color: Appcolor.tertiaryColor, width: 1),
+                      borderRadius: BorderRadius.circular(50),
                     ),
-                    validator: (value) =>
-                        value == null ? "Select Payment mode" : null,
-                    dropdownColor: Appcolor.tertiaryColor,
-                    value: selectedPaymentMode,
-                    onChanged: (String? newValue) {
-                      setState(() {
-                        selectedPaymentMode = newValue!;
-                        paymentController.text = selectedPaymentMode.toString();
-                        print(paymentController.text);
-                      });
-                    },
-                    items: paymentmode),
+                    focusedBorder: OutlineInputBorder(
+                      borderSide: const BorderSide(
+                          color: Appcolor.tertiaryColor, width: 1),
+                      borderRadius: BorderRadius.circular(50),
+                    ),
+                    filled: true,
+                    fillColor: Appcolor.tertiaryColor,
+                  ),
+                  validator: (value) =>
+                      value == null ? "Select Payment mode" : null,
+                  dropdownColor: Appcolor.tertiaryColor,
+                  value: selectedPaymentMode,
+                  onChanged: (PaymentMode? newValue) {
+                    setState(() {
+                      selectedPaymentMode = newValue!;
+
+                      print(selectedPaymentMode);
+                    });
+                  },
+                  items: PaymentMode.values.map((PaymentMode mode) {
+                    return DropdownMenuItem<PaymentMode>(
+                      value: mode,
+                      child: Text(mode
+                          .toString()
+                          .split('.')
+                          .last), // To display the enum value as a string
+                    );
+                  }).toList(),
+                ),
                 height30,
                 height20,
                 Row(
@@ -157,20 +161,24 @@ class _ScreenAddTransactionState extends State<ScreenAddTransaction> {
 
                     //CustomButton(title: 'Add', onTap: () {}),
                     SizedBox(
-                        width: Get.width / 2.5,
-                        child: CustomButton(
-                            title: 'Add',
-                            onTap: () {
-                              if (addFormkey.currentState!.validate()) {
-                                Transaction transaction = Transaction(
-                                    description: descriptionController.text,
-                                    amount: int.parse(amountController.text),
-                                    date: DateTime.parse(dateController.text),
-                                    mode: PaymentMode.bank,
-                                    type: CatagoryType.expense);
-                              }
-                              Get.back();
-                            })),
+                      width: Get.width / 2.5,
+                      child: CustomButton(
+                        title: 'Add',
+                        onTap: () {
+                          if (addFormkey.currentState!.validate()) {
+                            Transaction transaction = Transaction(
+                                description: descriptionController.text,
+                                amount: int.parse(amountController.text),
+                                date: DateTime.parse(dateController.text),
+                                mode: selectedPaymentMode!,
+                                type: selectedCatagory);
+                            controller.createTransaction(
+                                transaction: transaction);
+                            Get.back();
+                          }
+                        },
+                      ),
+                    ),
                   ],
                 )
               ],

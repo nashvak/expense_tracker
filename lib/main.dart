@@ -2,7 +2,6 @@ import 'dart:io';
 
 import 'package:expense_tracker/models/transaction_model/transaction_model.dart';
 import 'package:expense_tracker/repository/auth_repository.dart';
-import 'package:expense_tracker/repository/transaction_repo.dart';
 import 'package:expense_tracker/view/authentication/get_started.dart';
 import 'package:expense_tracker/view/authentication/login.dart';
 import 'package:expense_tracker/view/authentication/signup.dart';
@@ -29,6 +28,8 @@ Future<void> main() async {
   Hive.initFlutter();
   Hive.registerAdapter<AuthModel>(AuthModelAdapter());
   Hive.registerAdapter<Transaction>(TransactionAdapter());
+  Hive.registerAdapter<PaymentMode>(PaymentModeAdapter());
+  Hive.registerAdapter<CatagoryType>(CatagoryTypeAdapter());
   await AuthRepository.openBox();
   await Hive.openBox<Transaction>('transactionBox');
   runApp(const MyApp());

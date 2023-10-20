@@ -3,8 +3,6 @@ import 'package:expense_tracker/constatnts/custom_widgets/common/sizedbox.dart';
 import 'package:expense_tracker/constatnts/custom_widgets/home_screen/button.dart';
 import 'package:expense_tracker/constatnts/custom_widgets/common/textstyle.dart';
 import 'package:expense_tracker/controller/transaction_controller.dart';
-import 'package:expense_tracker/models/transaction_model/transaction_model.dart';
-
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -12,6 +10,7 @@ class ScreenHistory extends StatelessWidget {
   ScreenHistory({super.key});
   final TransactionController transactionController =
       Get.put(TransactionController());
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -174,7 +173,7 @@ class ScreenHistory extends StatelessWidget {
                           //     date: trans.date.toString(),
                           //     icon: const Icon(Icons.car_crash),
                           //     title: trans.description);
-                          return ListTile(
+                          return const ListTile(
                               //   title: Text(trans.description),
                               );
                         } else {
