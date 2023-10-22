@@ -2,14 +2,20 @@ import 'package:expense_tracker/constatnts/colors.dart';
 import 'package:expense_tracker/constatnts/custom_widgets/common/button.dart';
 import 'package:expense_tracker/constatnts/custom_widgets/common/decoration.dart';
 import 'package:expense_tracker/constatnts/custom_widgets/common/sizedbox.dart';
+import 'package:expense_tracker/controller/transaction_controller.dart';
+import 'package:expense_tracker/models/transaction_model/transaction_model.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 class ScreenViewTransaction extends StatelessWidget {
-  const ScreenViewTransaction({super.key});
-
+  ScreenViewTransaction({super.key});
+  final int index = Get.arguments;
+  final TransactionController transactionController =
+      Get.put(TransactionController());
   @override
   Widget build(BuildContext context) {
+    Transaction tr = transactionController.transactionBox.getAt(index);
+    //print(tr.description);
     return Scaffold(
       backgroundColor: Appcolor.tertiaryColor,
       appBar: AppBar(
@@ -97,9 +103,9 @@ class ScreenViewTransaction extends StatelessWidget {
                           child: Column(
                             children: [
                               TextFormField(
-                                decoration: const InputDecoration.collapsed(
+                                decoration: InputDecoration.collapsed(
                                   border: InputBorder.none,
-                                  hintText: 'Mobile Recharge',
+                                  hintText: tr.description,
                                   hintStyle: TextStyle(
                                       fontSize: 18,
                                       color: Colors.black,
@@ -107,9 +113,9 @@ class ScreenViewTransaction extends StatelessWidget {
                                 ),
                               ),
                               TextFormField(
-                                decoration: const InputDecoration.collapsed(
+                                decoration: InputDecoration.collapsed(
                                     border: InputBorder.none,
-                                    hintText: '06/10/23',
+                                    hintText: tr.date.toString(),
                                     hintStyle: TextStyle(fontSize: 14)),
                               ),
                             ],
@@ -138,8 +144,9 @@ class ScreenViewTransaction extends StatelessWidget {
                       style: TextStyle(color: Appcolor.primaryColor),
                     ),
                     TextFormField(
-                      decoration: const InputDecoration(
-                          border: InputBorder.none, hintText: '500'),
+                      decoration: InputDecoration(
+                          border: InputBorder.none,
+                          hintText: tr.amount.toString()),
                     ),
                   ],
                 ),

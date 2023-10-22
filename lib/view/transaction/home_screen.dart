@@ -139,7 +139,7 @@ class ScreenHome extends StatelessWidget {
                                   Listtile(
                                       ontap: () {
                                         Get.to(
-                                          () => const ScreenViewTransaction(),
+                                          () => ScreenViewTransaction(),
                                           fullscreenDialog: true,
                                           // duration: Duration(milliseconds: 500),
                                           transition: Transition.downToUp,

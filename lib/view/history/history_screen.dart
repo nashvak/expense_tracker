@@ -3,6 +3,8 @@ import 'package:expense_tracker/constatnts/custom_widgets/common/sizedbox.dart';
 import 'package:expense_tracker/constatnts/custom_widgets/home_screen/button.dart';
 import 'package:expense_tracker/constatnts/custom_widgets/common/textstyle.dart';
 import 'package:expense_tracker/controller/transaction_controller.dart';
+import 'package:expense_tracker/models/transaction_model/transaction_model.dart';
+import 'package:expense_tracker/view/transaction/view_transaction.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -162,25 +164,16 @@ class ScreenHistory extends StatelessWidget {
                 builder: (controller) {
                   return ListView.separated(
                       itemBuilder: (context, index) {
-                        if (controller.transactionCount > 0) {
-                          // Transaction trans =
-                          //     controller.transactionBox.getAt(index);
-                          // return Listtile(
-                          //     ontap: () {
-                          //       Get.toNamed('/viewtransaction');
-                          //     },
-                          //     amount: trans.amount.toDouble(),
-                          //     date: trans.date.toString(),
-                          //     icon: const Icon(Icons.car_crash),
-                          //     title: trans.description);
-                          return const ListTile(
-                              //   title: Text(trans.description),
-                              );
-                        } else {
-                          return const Center(
-                            child: Text('List is empty'),
-                          );
-                        }
+                        Transaction tr = controller.transactionBox.getAt(index);
+                        return Listtile(
+                            ontap: () {
+                              Get.to(() => ScreenViewTransaction(),
+                                  arguments: index);
+                            },
+                            amount: tr.amount.toDouble(),
+                            date: tr.date.toString(),
+                            icon: Icon(Icons.phone_android),
+                            title: tr.description);
                       },
                       separatorBuilder: (context, index) {
                         return const BlankSpace(
@@ -190,28 +183,7 @@ class ScreenHistory extends StatelessWidget {
                       itemCount: controller.transactionCount);
                 },
               ),
-              // child: StreamBuilder(
-              //   stream: TransRepository.getBox().watch(),
-              //   builder: (context, snapshot) {
-              //     if (snapshot.connectionState == ConnectionState.waiting) {
-              //       return CircularProgressIndicator();
-              //     } else if (snapshot.hasError) {
-              //       return Text('Error: ${snapshot.error}');
-              //     } else {
-              //       var users = userBox.values.toList();
-              //       return ListView.builder(
-              //         itemCount: users.length,
-              //         itemBuilder: (context, index) {
-              //           var user = users[index];
-              //           return ListTile(
-              //             title: Text(user.name),
-              //             subtitle: Text('Age: ${user.age}'),
-              //           );
-              //         },
-              //       );
-              //     }
-              //   },
-              // ),
+              //
             ),
           ],
         ),
