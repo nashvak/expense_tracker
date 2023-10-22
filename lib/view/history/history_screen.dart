@@ -6,6 +6,7 @@ import 'package:expense_tracker/controller/transaction_controller.dart';
 import 'package:expense_tracker/models/transaction_model/transaction_model.dart';
 import 'package:expense_tracker/view/transaction/view_transaction.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:get/get.dart';
 
 class ScreenHistory extends StatelessWidget {
@@ -165,15 +166,36 @@ class ScreenHistory extends StatelessWidget {
                   return ListView.separated(
                       itemBuilder: (context, index) {
                         Transaction tr = controller.transactionBox.getAt(index);
-                        return Listtile(
-                            ontap: () {
-                              Get.to(() => ScreenViewTransaction(),
-                                  arguments: index);
-                            },
-                            amount: tr.amount.toDouble(),
-                            date: tr.date.toString(),
-                            icon: Icon(Icons.phone_android),
-                            title: tr.description);
+                        return Slidable(
+                          key: UniqueKey(),
+                          endActionPane: ActionPane(
+                              dismissible: DismissiblePane(
+                                onDismissed: () {
+                                  controller.deleteTransaction(index: index);
+                                },
+                              ),
+                              motion: const DrawerMotion(),
+                              children: [
+                                SlidableAction(
+                                  onPressed: (context) {
+                                    controller.deleteTransaction(index: index);
+                                  },
+                                  backgroundColor: const Color(0xFFFE4A49),
+                                  foregroundColor: Colors.white,
+                                  icon: Icons.delete,
+                                  //label: 'Delete',
+                                ),
+                              ]),
+                          child: Listtile(
+                              ontap: () {
+                                Get.to(() => ScreenViewTransaction(),
+                                    arguments: index);
+                              },
+                              amount: tr.amount.toDouble(),
+                              date: tr.date.toString(),
+                              icon: Icon(Icons.phone_android),
+                              title: tr.description),
+                        );
                       },
                       separatorBuilder: (context, index) {
                         return const BlankSpace(
