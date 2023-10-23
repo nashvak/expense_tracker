@@ -1,3 +1,4 @@
+import 'package:expense_tracker/models/transaction_model/transaction_model.dart';
 import 'package:flutter/material.dart';
 
 import '../../colors.dart';
@@ -39,17 +40,18 @@ class SortButton extends StatelessWidget {
 }
 
 class Listtile extends StatelessWidget {
-  const Listtile(
+  Listtile(
       {required this.ontap,
       required this.amount,
       required this.date,
-      required this.icon,
       required this.title,
+      required this.type,
       super.key});
   final String title;
   final String date;
   final double amount;
-  final Icon icon;
+  CatagoryType type;
+
   final void Function() ontap;
   @override
   Widget build(BuildContext context) {
@@ -59,12 +61,20 @@ class Listtile extends StatelessWidget {
         contentPadding: const EdgeInsets.symmetric(horizontal: 0, vertical: 0),
         leading: Container(
             decoration: const BoxDecoration(
-              color: Appcolor.primaryColor,
+              color: Appcolor.white,
               shape: BoxShape.circle,
             ),
             child: Padding(
               padding: const EdgeInsets.all(10),
-              child: icon,
+              child: type == CatagoryType.income
+                  ? Icon(
+                      Icons.arrow_upward,
+                      color: Colors.green,
+                    )
+                  : Icon(
+                      Icons.arrow_downward,
+                      color: Colors.red,
+                    ),
             )),
         // leading: CircleAvatar(
         //   backgroundColor: Appcolor.primaryColor,
@@ -79,8 +89,11 @@ class Listtile extends StatelessWidget {
           style: const TextStyle(fontSize: 14, fontWeight: FontWeight.w400),
         ),
         trailing: Text(
-          amount.toString(),
-          style: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+          type == CatagoryType.expense ? "- $amount" : "+ $amount",
+          style: TextStyle(
+              fontSize: 18,
+              fontWeight: FontWeight.bold,
+              color: type == CatagoryType.expense ? Colors.red : Colors.green),
         ),
       ),
     );

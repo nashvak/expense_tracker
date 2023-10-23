@@ -1,5 +1,7 @@
 import 'package:expense_tracker/models/transaction_model/transaction_model.dart';
+import 'package:flutter/material.dart';
 import 'package:hive_flutter/hive_flutter.dart';
+part 'reminder_model.g.dart';
 
 @HiveType(typeId: 5)
 class Remainder extends HiveObject {
@@ -12,7 +14,7 @@ class Remainder extends HiveObject {
   @HiveField(2)
   DateTime date;
   @HiveField(3)
-  DateTime time;
+  TimeOfDay time;
 
   @HiveField(4)
   final CatagoryType type;

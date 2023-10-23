@@ -8,6 +8,7 @@ import 'package:expense_tracker/view/transaction/view_transaction.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:get/get.dart';
+import 'package:intl/intl.dart';
 
 class ScreenHistory extends StatelessWidget {
   ScreenHistory({super.key});
@@ -187,13 +188,13 @@ class ScreenHistory extends StatelessWidget {
                                 ),
                               ]),
                           child: Listtile(
+                              type: tr.type,
                               ontap: () {
                                 Get.to(() => ScreenViewTransaction(),
                                     arguments: index);
                               },
                               amount: tr.amount.toDouble(),
-                              date: tr.date.toString(),
-                              icon: Icon(Icons.phone_android),
+                              date: DateFormat('yyyy-MM-dd').format(tr.date),
                               title: tr.description),
                         );
                       },

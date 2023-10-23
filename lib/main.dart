@@ -1,5 +1,6 @@
 import 'dart:io';
 
+import 'package:expense_tracker/models/reminder_model/reminder_model.dart';
 import 'package:expense_tracker/models/transaction_model/transaction_model.dart';
 import 'package:expense_tracker/repository/auth_repository.dart';
 import 'package:expense_tracker/view/authentication/get_started.dart';
@@ -30,8 +31,10 @@ Future<void> main() async {
   Hive.registerAdapter<Transaction>(TransactionAdapter());
   Hive.registerAdapter<PaymentMode>(PaymentModeAdapter());
   Hive.registerAdapter<CatagoryType>(CatagoryTypeAdapter());
+  Hive.registerAdapter<Remainder>(RemainderAdapter());
   await AuthRepository.openBox();
   await Hive.openBox<Transaction>('transactionBox');
+  await Hive.openBox<Remainder>('remainderBox');
   runApp(const MyApp());
 }
 

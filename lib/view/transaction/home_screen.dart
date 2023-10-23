@@ -136,45 +136,45 @@ class ScreenHome extends StatelessWidget {
                               child: Column(
                                 children: [
                                   height20,
-                                  Listtile(
-                                      ontap: () {
-                                        Get.to(
-                                          () => ScreenViewTransaction(),
-                                          fullscreenDialog: true,
-                                          // duration: Duration(milliseconds: 500),
-                                          transition: Transition.downToUp,
-                                        );
-                                      },
-                                      amount: 250,
-                                      date: '1/10/23 ',
-                                      icon: const Icon(
-                                        Icons.phone_android,
-                                      ),
-                                      title: 'Electricity bill'),
-                                  Listtile(
-                                      ontap: () {},
-                                      amount: 499,
-                                      date: '21/09/23 ',
-                                      icon: const Icon(Icons.phone_android),
-                                      title: 'Mobile recharge'),
-                                  Listtile(
-                                      ontap: () {},
-                                      amount: 6000,
-                                      date: '11/09/23 ',
-                                      icon: const Icon(Icons.phone_android),
-                                      title: 'Car EMI'),
-                                  Listtile(
-                                      ontap: () {},
-                                      amount: 250,
-                                      date: '1/10/23',
-                                      icon: const Icon(Icons.phone_android),
-                                      title: 'Electricity bill'),
-                                  Listtile(
-                                      ontap: () {},
-                                      amount: 499,
-                                      date: '21/09/23 ',
-                                      icon: const Icon(Icons.phone_android),
-                                      title: 'Mobile recharge'),
+                                  // Listtile(
+                                  //     ontap: () {
+                                  //       Get.to(
+                                  //         () => ScreenViewTransaction(),
+                                  //         fullscreenDialog: true,
+                                  //         // duration: Duration(milliseconds: 500),
+                                  //         transition: Transition.downToUp,
+                                  //       );
+                                  //     },
+                                  //     amount: 250,
+                                  //     date: '1/10/23 ',
+                                  //     icon: const Icon(
+                                  //       Icons.phone_android,
+                                  //     ),
+                                  //     title: 'Electricity bill'),
+                                  // Listtile(
+                                  //     ontap: () {},
+                                  //     amount: 499,
+                                  //     date: '21/09/23 ',
+                                  //     icon: const Icon(Icons.phone_android),
+                                  //     title: 'Mobile recharge'),
+                                  // Listtile(
+                                  //     ontap: () {},
+                                  //     amount: 6000,
+                                  //     date: '11/09/23 ',
+                                  //     icon: const Icon(Icons.phone_android),
+                                  //     title: 'Car EMI'),
+                                  // Listtile(
+                                  //     ontap: () {},
+                                  //     amount: 250,
+                                  //     date: '1/10/23',
+                                  //     icon: const Icon(Icons.phone_android),
+                                  //     title: 'Electricity bill'),
+                                  // Listtile(
+                                  //     ontap: () {},
+                                  //     amount: 499,
+                                  //     date: '21/09/23 ',
+                                  //     icon: const Icon(Icons.phone_android),
+                                  //     title: 'Mobile recharge'),
                                 ],
                               ),
                             ),
