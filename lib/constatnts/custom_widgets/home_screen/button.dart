@@ -40,7 +40,7 @@ class SortButton extends StatelessWidget {
 }
 
 class Listtile extends StatelessWidget {
-  Listtile(
+  const Listtile(
       {required this.ontap,
       required this.amount,
       required this.date,
@@ -50,7 +50,7 @@ class Listtile extends StatelessWidget {
   final String title;
   final String date;
   final double amount;
-  CatagoryType type;
+  final CatagoryType type;
 
   final void Function() ontap;
   @override
@@ -67,11 +67,11 @@ class Listtile extends StatelessWidget {
             child: Padding(
               padding: const EdgeInsets.all(10),
               child: type == CatagoryType.income
-                  ? Icon(
+                  ? const Icon(
                       Icons.arrow_upward,
                       color: Colors.green,
                     )
-                  : Icon(
+                  : const Icon(
                       Icons.arrow_downward,
                       color: Colors.red,
                     ),

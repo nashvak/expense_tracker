@@ -1,11 +1,10 @@
 import 'package:expense_tracker/constatnts/custom_widgets/common/sizedbox.dart';
-import 'package:expense_tracker/view/transaction/view_transaction.dart';
+
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import '../../constatnts/colors.dart';
 import '../../constatnts/custom_widgets/common/decoration.dart';
 import '../../constatnts/custom_widgets/home_screen/appbar.dart';
-import '../../constatnts/custom_widgets/home_screen/button.dart';
 
 class ScreenHome extends StatelessWidget {
   const ScreenHome({super.key});

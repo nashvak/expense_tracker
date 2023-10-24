@@ -6,13 +6,15 @@ import 'package:expense_tracker/constatnts/custom_widgets/common/decoration.dart
 import 'package:expense_tracker/constatnts/custom_widgets/common/sizedbox.dart';
 import 'package:expense_tracker/constatnts/custom_widgets/login&signup/validators.dart';
 import 'package:expense_tracker/models/auth_model/auth_model.dart';
+
 import 'package:expense_tracker/view/authentication/splash_screen.dart';
+
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import '../../constatnts/custom_widgets/common/button.dart';
-import '../../constatnts/custom_widgets/login&signup/bottom_text.dart';
+
 import '../../constatnts/custom_widgets/login&signup/textfield.dart';
 
 class ScreenSignup extends StatefulWidget {
@@ -132,7 +134,7 @@ class _ScreenSignupState extends State<ScreenSignup> {
                               var pref = await SharedPreferences.getInstance();
                               pref.setBool(ScreenSplashState.keyToLogin, true);
 
-                              authController.createNote(
+                              authController.createUser(
                                   auth: AuthModel(
                                       name: nameController.text,
                                       email: emailController.text,
@@ -145,12 +147,13 @@ class _ScreenSignupState extends State<ScreenSignup> {
                           },
                         ),
                         const BlankSpace(height: 20),
-                        BottomText(
-                            title: "already have an account? ",
-                            title2: "Log in",
-                            ontap: () {
-                              Get.offNamed('/login');
-                            })
+                        // BottomText(
+                        //     title: "already have an account? ",
+                        //     title2: "Log in",
+                        //     ontap: () {
+                        //       // Get.offNamed('/login');
+                        //       Get.to(Users());
+                        //     })
                       ],
                     ),
                   ),

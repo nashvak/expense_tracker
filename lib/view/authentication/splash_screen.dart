@@ -1,8 +1,8 @@
 import 'dart:async';
 
 import 'package:expense_tracker/view/authentication/get_started.dart';
+import 'package:expense_tracker/view/transaction/bottom_nav.dart';
 
-import 'package:expense_tracker/view/transaction/home_screen.dart';
 import 'package:flutter/material.dart';
 
 import 'package:google_fonts/google_fonts.dart';
@@ -66,7 +66,7 @@ class ScreenSplashState extends State<ScreenSplash> {
         if (isLoggedIn) {
           Navigator.pushAndRemoveUntil(
               context,
-              MaterialPageRoute(builder: (ctx) => const ScreenHome()),
+              MaterialPageRoute(builder: (ctx) => const BottomNav()),
               (route) => false);
         } else {
           Navigator.pushReplacement(

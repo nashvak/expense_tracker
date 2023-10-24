@@ -1,18 +1,32 @@
 import 'package:expense_tracker/constatnts/colors.dart';
 import 'package:expense_tracker/constatnts/custom_widgets/common/sizedbox.dart';
 import 'package:expense_tracker/constatnts/custom_widgets/common/textstyle.dart';
+import 'package:expense_tracker/controller/auth_controller.dart';
+import 'package:expense_tracker/models/auth_model/auth_model.dart';
 import 'package:expense_tracker/view/authentication/get_started.dart';
+import 'package:expense_tracker/view/authentication/login.dart';
 
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class ScreenProfile extends StatelessWidget {
   ScreenProfile({super.key});
-  final List<String> title = ['Nashva k', 'nashvak@gmail.com', 'Logout'];
+  final AuthController authController = Get.put(AuthController());
+
   final List<IconButton> icons = [
-    IconButton(onPressed: () {}, icon: const Icon(Icons.person)),
-    IconButton(onPressed: () {}, icon: const Icon(Icons.email)),
-    IconButton(onPressed: () {}, icon: const Icon(Icons.logout))
+    IconButton(
+      onPressed: () {},
+      icon: const Icon(Icons.person),
+    ),
+    IconButton(
+      onPressed: () {},
+      icon: const Icon(Icons.email),
+    ),
+    IconButton(
+      onPressed: () {},
+      icon: const Icon(Icons.logout),
+    )
   ];
 
   @override
@@ -24,14 +38,22 @@ class ScreenProfile extends StatelessWidget {
           'Profile ',
           style: screenTitleText(),
         ),
+        iconTheme: const IconThemeData(color: Colors.black),
         backgroundColor: Colors.transparent,
         elevation: 0,
         actions: [
+          IconButton(
+            onPressed: () {
+              Get.to(Users());
+            },
+            icon: const Icon(Icons.settings),
+          ),
           IconButton(
             onPressed: () async {
               var pref = await SharedPreferences.getInstance();
 
               await pref.clear();
+
               // ignore: use_build_context_synchronously
               Navigator.pushReplacement(
                 context,
@@ -39,8 +61,11 @@ class ScreenProfile extends StatelessWidget {
                   builder: (context) => const GetStartedScreen(),
                 ),
               );
+              authController.authBox.clear();
             },
-            icon: const Icon(Icons.logout),
+            icon: const Icon(
+              Icons.logout,
+            ),
           ),
         ],
       ),
@@ -61,7 +86,7 @@ class ScreenProfile extends StatelessWidget {
             ),
             height40,
             Container(
-              height: 200,
+              height: MediaQuery.of(context).size.height / 4,
               width: MediaQuery.of(context).size.width,
               decoration: ShapeDecoration(
                 color: Colors.white,
@@ -71,6 +96,12 @@ class ScreenProfile extends StatelessWidget {
               ),
               child: ListView.separated(
                   itemBuilder: (context, index) {
+                    AuthModel user = authController.authBox.getAt(0);
+                    final List<String> title = [
+                      user.name,
+                      user.email,
+                      'Delete all data'
+                    ];
                     return ListTile(
                       leading: icons[index],
                       title: Text(title[index]),
@@ -82,7 +113,7 @@ class ScreenProfile extends StatelessWidget {
                     );
                   },
                   itemCount: 3),
-            )
+            ),
           ],
         ),
       ),

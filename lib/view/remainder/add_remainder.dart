@@ -10,7 +10,7 @@ import 'package:get/get.dart';
 import 'package:intl/intl.dart';
 
 class ScreenAddRemainder extends StatefulWidget {
-  ScreenAddRemainder({super.key});
+  const ScreenAddRemainder({super.key});
 
   @override
   State<ScreenAddRemainder> createState() => _ScreenAddRemainderState();

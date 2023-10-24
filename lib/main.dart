@@ -2,9 +2,9 @@ import 'dart:io';
 
 import 'package:expense_tracker/models/reminder_model/reminder_model.dart';
 import 'package:expense_tracker/models/transaction_model/transaction_model.dart';
-import 'package:expense_tracker/repository/auth_repository.dart';
+
 import 'package:expense_tracker/view/authentication/get_started.dart';
-import 'package:expense_tracker/view/authentication/login.dart';
+
 import 'package:expense_tracker/view/authentication/signup.dart';
 import 'package:expense_tracker/view/authentication/splash_screen.dart';
 import 'package:expense_tracker/view/remainder/add_remainder.dart';
@@ -32,7 +32,7 @@ Future<void> main() async {
   Hive.registerAdapter<PaymentMode>(PaymentModeAdapter());
   Hive.registerAdapter<CatagoryType>(CatagoryTypeAdapter());
   Hive.registerAdapter<Remainder>(RemainderAdapter());
-  await AuthRepository.openBox();
+  await Hive.openBox<AuthModel>('AuthBox');
   await Hive.openBox<Transaction>('transactionBox');
   await Hive.openBox<Remainder>('remainderBox');
   runApp(const MyApp());
@@ -50,14 +50,14 @@ class MyApp extends StatelessWidget {
       getPages: [
         GetPage(name: '/', page: () => const ScreenSplash()),
         GetPage(name: '/getstarted', page: () => const GetStartedScreen()),
-        GetPage(name: '/login', page: () => LoginScreen()),
+        //GetPage(name: '/login', page: () => LoginScreen()),
         GetPage(name: '/signup', page: () => const ScreenSignup()),
         GetPage(name: '/home', page: () => const ScreenHome()),
         GetPage(name: '/bottom', page: () => const BottomNav()),
         GetPage(name: '/viewtransaction', page: () => ScreenViewTransaction()),
         GetPage(
             name: '/addtransaction', page: () => const ScreenAddTransaction()),
-        GetPage(name: '/addremainder', page: () => ScreenAddRemainder()),
+        GetPage(name: '/addremainder', page: () => const ScreenAddRemainder()),
         GetPage(name: '/remainder', page: () => ScreenRemainder()),
         GetPage(name: '/editremainder', page: () => ScreenEditRemainder()),
       ],

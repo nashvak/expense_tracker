@@ -5,6 +5,7 @@ import 'package:expense_tracker/models/transaction_model/transaction_model.dart'
 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:intl/intl.dart';
 import 'package:toggle_switch/toggle_switch.dart';
 import '../../constatnts/custom_widgets/common/sizedbox.dart';
 import '../../constatnts/custom_widgets/login&signup/textfield.dart';
@@ -18,16 +19,12 @@ class ScreenAddTransaction extends StatefulWidget {
 
 class _ScreenAddTransactionState extends State<ScreenAddTransaction> {
   final addFormkey = GlobalKey<FormState>();
-
   final amountController = TextEditingController();
-
   final dateController = TextEditingController();
-
   final descriptionController = TextEditingController();
-
   PaymentMode? selectedPaymentMode;
   CatagoryType selectedCatagory = CatagoryType.income;
-
+  DateTime? pickedDate;
   final TransactionController controller = Get.put(TransactionController());
 
   @override
@@ -83,7 +80,7 @@ class _ScreenAddTransactionState extends State<ScreenAddTransaction> {
                   controller: dateController,
                   title: 'Date',
                   ontap: () async {
-                    DateTime? pickedDate = await showDatePicker(
+                    pickedDate = await showDatePicker(
                         context: context,
                         initialDate: DateTime.now(),
                         firstDate: DateTime(2023),
@@ -91,9 +88,8 @@ class _ScreenAddTransactionState extends State<ScreenAddTransaction> {
 
                     if (pickedDate != null) {
                       setState(() {});
-                      dateController.text = pickedDate.toString();
-                      print(dateController.text);
-                      // DateFormat('dd/MM/yyyy').format(pickedDate);
+                      dateController.text =
+                          DateFormat('dd/MM/yyyy').format(pickedDate!);
                     }
                   },
                 ),
@@ -169,7 +165,7 @@ class _ScreenAddTransactionState extends State<ScreenAddTransaction> {
                             Transaction transaction = Transaction(
                                 description: descriptionController.text,
                                 amount: int.parse(amountController.text),
-                                date: DateTime.parse(dateController.text),
+                                date: pickedDate!,
                                 mode: selectedPaymentMode!,
                                 type: selectedCatagory);
                             controller.createTransaction(

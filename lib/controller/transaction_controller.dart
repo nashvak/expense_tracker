@@ -4,6 +4,8 @@ import 'package:get/get.dart';
 
 class TransactionController extends GetxController {
   final Box transactionBox = Hive.box<Transaction>('transactionBox');
+  List<Transaction> incomeBox = [];
+  List<Transaction> expenseBox = [];
 
   int get transactionCount => transactionBox.length;
   createTransaction({required Transaction transaction}) async {

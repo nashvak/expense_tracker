@@ -194,7 +194,7 @@ class ScreenHistory extends StatelessWidget {
                                     arguments: index);
                               },
                               amount: tr.amount.toDouble(),
-                              date: DateFormat('yyyy-MM-dd').format(tr.date),
+                              date: DateFormat('dd/MM/yyyy').format(tr.date),
                               title: tr.description),
                         );
                       },
