@@ -26,7 +26,7 @@ class _ScreenViewTransactionState extends State<ScreenViewTransaction> {
   TextEditingController amountController = TextEditingController();
   TextEditingController dateController = TextEditingController();
   TextEditingController descriptionController = TextEditingController();
-  DateTime? pickedDate;
+  DateTime? date;
   late PaymentMode selectedPaymentMode;
   late CatagoryType selectedCatagory;
 
@@ -35,8 +35,9 @@ class _ScreenViewTransactionState extends State<ScreenViewTransaction> {
     Transaction tr = transactionController.sortedList[index];
     amountController = TextEditingController(text: tr.amount.toString());
     descriptionController = TextEditingController(text: tr.description);
+    date = tr.date;
     dateController =
-        TextEditingController(text: DateFormat('dd/MM/yyyy').format(tr.date));
+        TextEditingController(text: DateFormat('dd/MM/yyyy').format(date!));
     selectedCatagory = tr.type;
     selectedPaymentMode = tr.mode;
     super.initState();
@@ -68,7 +69,7 @@ class _ScreenViewTransactionState extends State<ScreenViewTransaction> {
                     Transaction transaction = Transaction(
                         description: descriptionController.text,
                         amount: int.parse(amountController.text),
-                        date: pickedDate!,
+                        date: date!,
                         mode: selectedPaymentMode,
                         type: selectedCatagory);
                     transactionController.updateTransaction(
@@ -179,17 +180,17 @@ class _ScreenViewTransactionState extends State<ScreenViewTransaction> {
                                     border: InputBorder.none,
                                   ),
                                   onTap: () async {
-                                    pickedDate = await showDatePicker(
+                                    date = await showDatePicker(
                                         context: context,
                                         initialDate: DateTime.now(),
                                         firstDate: DateTime(2023),
                                         lastDate: DateTime(2024));
 
-                                    if (pickedDate != null) {
+                                    if (date != null) {
                                       setState(() {});
                                       dateController.text =
                                           DateFormat('dd/MM/yyyy')
-                                              .format(pickedDate!);
+                                              .format(date!);
                                     }
                                   },
                                 ),
