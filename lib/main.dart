@@ -54,7 +54,9 @@ class MyApp extends StatelessWidget {
         GetPage(name: '/signup', page: () => const ScreenSignup()),
         GetPage(name: '/home', page: () => const ScreenHome()),
         GetPage(name: '/bottom', page: () => const BottomNav()),
-        GetPage(name: '/viewtransaction', page: () => ScreenViewTransaction()),
+        GetPage(
+            name: '/viewtransaction',
+            page: () => const ScreenViewTransaction()),
         GetPage(
             name: '/addtransaction', page: () => const ScreenAddTransaction()),
         GetPage(name: '/addremainder', page: () => const ScreenAddRemainder()),

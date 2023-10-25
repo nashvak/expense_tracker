@@ -3,11 +3,21 @@ import 'package:hive/hive.dart';
 import 'package:get/get.dart';
 
 class TransactionController extends GetxController {
-  final Box transactionBox = Hive.box<Transaction>('transactionBox');
-  List<Transaction> incomeBox = [];
-  List<Transaction> expenseBox = [];
+  final transactionBox = Hive.box<Transaction>('transactionBox');
 
-  int get transactionCount => transactionBox.length;
+  List<Transaction> get sortedList {
+    List<Transaction> dd = transactionBox.values.toList();
+    dd.sort((a, b) => b.date.compareTo(a.date));
+    return dd;
+
+//
+  }
+//
+
+//
+
+  int get transactionCount => sortedList.length;
+  //create transaction
   createTransaction({required Transaction transaction}) async {
     await transactionBox.add(transaction);
     update();

@@ -35,7 +35,7 @@ class _ScreenAddRemainderState extends State<ScreenAddRemainder> {
 
   @override
   Widget build(BuildContext context) {
-    print(remainderController.remainderCount);
+    // print(remainderController.remainderCount);
     return Scaffold(
       appBar: AppBar(
         title: const Text(
@@ -83,7 +83,7 @@ class _ScreenAddRemainderState extends State<ScreenAddRemainder> {
                     setState(() {});
                     dateController.text =
                         DateFormat('yyyy-MM-dd').format(pickedDate);
-                    print(dateController.text);
+                    // print(dateController.text);
                     // DateFormat('dd/MM/yyyy').format(pickedDate);
                   }
                 },
@@ -124,8 +124,8 @@ class _ScreenAddRemainderState extends State<ScreenAddRemainder> {
                 hint: const Text('Payment mode '),
                 decoration: InputDecoration(
                   enabledBorder: OutlineInputBorder(
-                    borderSide:
-                        BorderSide(color: Appcolor.tertiaryColor, width: 1),
+                    borderSide: const BorderSide(
+                        color: Appcolor.tertiaryColor, width: 1),
                     borderRadius: BorderRadius.circular(50),
                   ),
                   focusedBorder: OutlineInputBorder(
@@ -144,7 +144,7 @@ class _ScreenAddRemainderState extends State<ScreenAddRemainder> {
                   setState(() {
                     selectedCatagoryType = newValue!;
 
-                    print(selectedCatagoryType);
+                    // print(selectedCatagoryType);
                   });
                 },
                 items: CatagoryType.values.map((CatagoryType mode) {
@@ -169,7 +169,7 @@ class _ScreenAddRemainderState extends State<ScreenAddRemainder> {
                           time: selectedTime,
                           type: selectedCatagoryType!);
                       remainderController.createRemainder(rem: rem);
-                      print("remainder created");
+                      // print("remainder created");
                       Get.back();
                     }
                   })

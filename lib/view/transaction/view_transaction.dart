@@ -27,12 +27,12 @@ class _ScreenViewTransactionState extends State<ScreenViewTransaction> {
   TextEditingController dateController = TextEditingController();
   TextEditingController descriptionController = TextEditingController();
   DateTime? pickedDate;
-  PaymentMode? selectedPaymentMode;
-  CatagoryType? selectedCatagory;
+  late PaymentMode selectedPaymentMode;
+  late CatagoryType selectedCatagory;
 
   @override
   void initState() {
-    Transaction tr = transactionController.transactionBox.getAt(index);
+    Transaction tr = transactionController.sortedList[index];
     amountController = TextEditingController(text: tr.amount.toString());
     descriptionController = TextEditingController(text: tr.description);
     dateController =
@@ -44,7 +44,7 @@ class _ScreenViewTransactionState extends State<ScreenViewTransaction> {
 
   @override
   Widget build(BuildContext context) {
-    Transaction tr = transactionController.transactionBox.getAt(index);
+    Transaction tr = transactionController.sortedList[index];
     //print(tr.description);
 
     return Scaffold(
@@ -62,15 +62,19 @@ class _ScreenViewTransactionState extends State<ScreenViewTransaction> {
             padding: const EdgeInsets.only(right: 15),
             child: TextButton(
                 onPressed: () {
+                  // print('dsads');
                   if (updateFormkey.currentState!.validate()) {
+                    // print(pickedDate);
                     Transaction transaction = Transaction(
                         description: descriptionController.text,
                         amount: int.parse(amountController.text),
                         date: pickedDate!,
-                        mode: selectedPaymentMode!,
-                        type: selectedCatagory!);
+                        mode: selectedPaymentMode,
+                        type: selectedCatagory);
                     transactionController.updateTransaction(
                         index: index, transaction: transaction);
+                    // print('updated');
+                    Get.back();
                   }
                 },
                 child: const Text(
@@ -106,7 +110,7 @@ class _ScreenViewTransactionState extends State<ScreenViewTransaction> {
                       DropdownButton<PaymentMode>(
                           onChanged: (PaymentMode? newValue) {
                             setState(() {
-                              selectedPaymentMode = newValue;
+                              selectedPaymentMode = newValue!;
                             });
                           },
                           items: PaymentMode.values.map((PaymentMode mode) {
@@ -171,11 +175,8 @@ class _ScreenViewTransactionState extends State<ScreenViewTransaction> {
                                 ),
                                 TextFormField(
                                   controller: dateController,
-                                  decoration: InputDecoration(
+                                  decoration: const InputDecoration(
                                     border: InputBorder.none,
-                                    // hintText:
-                                    //     DateFormat('dd/MM/yyyy').format(tr.date),
-                                    // hintStyle: TextStyle(fontSize: 14),
                                   ),
                                   onTap: () async {
                                     pickedDate = await showDatePicker(
@@ -219,7 +220,7 @@ class _ScreenViewTransactionState extends State<ScreenViewTransaction> {
                       ),
                       TextFormField(
                         controller: amountController,
-                        decoration: InputDecoration(
+                        decoration: const InputDecoration(
                           border: InputBorder.none,
                         ),
                       ),
@@ -229,13 +230,13 @@ class _ScreenViewTransactionState extends State<ScreenViewTransaction> {
                 DropdownButton<CatagoryType>(
                     onChanged: (CatagoryType? newValue) {
                       setState(() {
-                        selectedCatagory = newValue;
+                        selectedCatagory = newValue!;
                       });
                     },
-                    items: CatagoryType.values.map((CatagoryType mode) {
+                    items: CatagoryType.values.map((CatagoryType type) {
                       return DropdownMenuItem<CatagoryType>(
-                        value: mode,
-                        child: Text(mode
+                        value: type,
+                        child: Text(type
                             .toString()
                             .split('.')
                             .last), // To display the enum value as a string

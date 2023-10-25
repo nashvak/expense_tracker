@@ -1,7 +1,10 @@
 import 'package:expense_tracker/constatnts/custom_widgets/common/sizedbox.dart';
-
+import 'package:expense_tracker/constatnts/custom_widgets/home_screen/button.dart';
+import 'package:expense_tracker/controller/transaction_controller.dart';
+import 'package:expense_tracker/models/transaction_model/transaction_model.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:intl/intl.dart';
 import '../../constatnts/colors.dart';
 import '../../constatnts/custom_widgets/common/decoration.dart';
 import '../../constatnts/custom_widgets/home_screen/appbar.dart';
@@ -49,133 +52,34 @@ class ScreenHome extends StatelessWidget {
                           style: TextStyle(
                               fontSize: 20, fontWeight: FontWeight.bold),
                         ),
-                        //height20,
-                        // Row(
-                        //   children: [
-                        //     GestureDetector(
-                        //       onTap: () {
-                        //         Get.bottomSheet(
-                        //           Container(
-                        //             decoration: const ShapeDecoration(
-                        //               color: Colors.white,
-                        //               shape: RoundedRectangleBorder(
-                        //                 borderRadius: BorderRadius.only(
-                        //                     topLeft: Radius.circular(25),
-                        //                     topRight: Radius.circular(25)),
-                        //               ),
-                        //             ),
-                        //             child: Wrap(
-                        //               children: [
-                        //                 ListTile(
-                        //                   title: const Text('All'),
-                        //                   onTap: () {
-                        //                     Get.back();
-                        //                   },
-                        //                 ),
-                        //                 ListTile(
-                        //                   title: const Text('Income'),
-                        //                   onTap: () {
-                        //                     Get.back();
-                        //                   },
-                        //                 ),
-                        //                 ListTile(
-                        //                   title: const Text('Expense'),
-                        //                   onTap: () {
-                        //                     Get.back();
-                        //                   },
-                        //                 ),
-                        //               ],
-                        //             ),
-                        //           ),
-                        //         );
-                        //       },
-                        //       child: Container(
-                        //         //height: 35,
-                        //         decoration:
-                        //             cardDecoration(color: Appcolor.white),
-                        //         child: const Padding(
-                        //           padding: EdgeInsets.symmetric(
-                        //               horizontal: 10, vertical: 10),
-                        //           child: Text(
-                        //             "All",
-                        //             style: TextStyle(
-                        //                 fontSize: 16,
-                        //                 fontWeight: FontWeight.w500),
-                        //           ),
-                        //         ),
-                        //       ),
-                        //     ),
-                        //     const BlankSpace(
-                        //       width: 10,
-                        //     ),
-                        //     SortButton(
-                        //       ontap: () {},
-                        //       title: 'Income',
-                        //       icon: const Icon(Icons.arrow_upward),
-                        //     ),
-                        //     const SizedBox(
-                        //       width: 10,
-                        //     ),
-                        //     SortButton(
-                        //       ontap: () {},
-                        //       title: 'Expense',
-                        //       icon: const Icon(Icons.arrow_downward),
-                        //     )
-                        //   ],
-                        // ),
-                        //height10,
                         Expanded(
                           child: SizedBox(
-                            //color: Colors.red,
-                            //height: MediaQuery.of(context).size.height,
                             height: 50,
                             width: MediaQuery.of(context).size.width,
-                            // color: Colors.red,
-                            child: SingleChildScrollView(
-                              child: Column(
-                                children: [
-                                  height20,
-                                  // Listtile(
-                                  //     ontap: () {
-                                  //       Get.to(
-                                  //         () => ScreenViewTransaction(),
-                                  //         fullscreenDialog: true,
-                                  //         // duration: Duration(milliseconds: 500),
-                                  //         transition: Transition.downToUp,
-                                  //       );
-                                  //     },
-                                  //     amount: 250,
-                                  //     date: '1/10/23 ',
-                                  //     icon: const Icon(
-                                  //       Icons.phone_android,
-                                  //     ),
-                                  //     title: 'Electricity bill'),
-                                  // Listtile(
-                                  //     ontap: () {},
-                                  //     amount: 499,
-                                  //     date: '21/09/23 ',
-                                  //     icon: const Icon(Icons.phone_android),
-                                  //     title: 'Mobile recharge'),
-                                  // Listtile(
-                                  //     ontap: () {},
-                                  //     amount: 6000,
-                                  //     date: '11/09/23 ',
-                                  //     icon: const Icon(Icons.phone_android),
-                                  //     title: 'Car EMI'),
-                                  // Listtile(
-                                  //     ontap: () {},
-                                  //     amount: 250,
-                                  //     date: '1/10/23',
-                                  //     icon: const Icon(Icons.phone_android),
-                                  //     title: 'Electricity bill'),
-                                  // Listtile(
-                                  //     ontap: () {},
-                                  //     amount: 499,
-                                  //     date: '21/09/23 ',
-                                  //     icon: const Icon(Icons.phone_android),
-                                  //     title: 'Mobile recharge'),
-                                ],
-                              ),
+                            child: GetBuilder<TransactionController>(
+                              builder: (controller) {
+                                return ListView.separated(
+                                    itemBuilder: (context, index) {
+                                      Transaction tr =
+                                          controller.sortedList[index];
+
+                                      return Listtile(
+                                          ontap: () {},
+                                          amount: tr.amount.toDouble(),
+                                          date: DateFormat('dd/MM/yyyy')
+                                              .format(tr.date),
+                                          title: tr.description,
+                                          type: tr.type);
+                                    },
+                                    separatorBuilder: (context, index) {
+                                      return const SizedBox(
+                                        height: 20,
+                                      );
+                                    },
+                                    itemCount: controller.transactionCount < 4
+                                        ? controller.transactionCount
+                                        : 4);
+                              },
                             ),
                           ),
                         )

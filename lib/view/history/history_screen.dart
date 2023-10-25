@@ -3,7 +3,7 @@ import 'package:expense_tracker/constatnts/custom_widgets/common/sizedbox.dart';
 import 'package:expense_tracker/constatnts/custom_widgets/home_screen/button.dart';
 import 'package:expense_tracker/constatnts/custom_widgets/common/textstyle.dart';
 import 'package:expense_tracker/controller/transaction_controller.dart';
-import 'package:expense_tracker/models/transaction_model/transaction_model.dart';
+
 import 'package:expense_tracker/view/transaction/view_transaction.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
@@ -166,7 +166,7 @@ class ScreenHistory extends StatelessWidget {
                 builder: (controller) {
                   return ListView.separated(
                       itemBuilder: (context, index) {
-                        Transaction tr = controller.transactionBox.getAt(index);
+                        final tr = controller.sortedList[index];
                         return Slidable(
                           key: UniqueKey(),
                           endActionPane: ActionPane(
@@ -190,7 +190,7 @@ class ScreenHistory extends StatelessWidget {
                           child: Listtile(
                               type: tr.type,
                               ontap: () {
-                                Get.to(() => ScreenViewTransaction(),
+                                Get.to(() => const ScreenViewTransaction(),
                                     arguments: index);
                               },
                               amount: tr.amount.toDouble(),

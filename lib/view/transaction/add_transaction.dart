@@ -56,7 +56,7 @@ class _ScreenAddTransactionState extends State<ScreenAddTransaction> {
                       selectedCatagory = (index == 0)
                           ? CatagoryType.income
                           : CatagoryType.expense;
-                      print(selectedCatagory);
+                      // print(selectedCatagory);
                     });
                   },
                 ),
@@ -127,7 +127,7 @@ class _ScreenAddTransactionState extends State<ScreenAddTransaction> {
                     setState(() {
                       selectedPaymentMode = newValue!;
 
-                      print(selectedPaymentMode);
+                      // print(selectedPaymentMode);
                     });
                   },
                   items: PaymentMode.values.map((PaymentMode mode) {
@@ -161,7 +161,9 @@ class _ScreenAddTransactionState extends State<ScreenAddTransaction> {
                       child: CustomButton(
                         title: 'Add',
                         onTap: () {
+                          // print('vv');
                           if (addFormkey.currentState!.validate()) {
+                            // print('hello');
                             Transaction transaction = Transaction(
                                 description: descriptionController.text,
                                 amount: int.parse(amountController.text),
@@ -170,6 +172,7 @@ class _ScreenAddTransactionState extends State<ScreenAddTransaction> {
                                 type: selectedCatagory);
                             controller.createTransaction(
                                 transaction: transaction);
+
                             Get.back();
                           }
                         },
