@@ -99,84 +99,17 @@ class ScreenHome extends StatelessWidget {
               child: Container(
                 decoration: cardDecoration(
                     color: const Color.fromARGB(255, 92, 209, 230)),
-                child: Stack(
+                child: const Stack(
                   children: [
                     Column(
                       mainAxisAlignment: MainAxisAlignment.spaceAround,
                       children: [
-                        Column(
-                          children: [
-                            const Align(
-                              alignment: Alignment.center,
-                              child: Text(
-                                "BALANCE",
-                                style: TextStyle(
-                                    color: Colors.white, fontSize: 16),
-                              ),
-                            ),
-                            height10,
-                            const Align(
-                              alignment: Alignment.center,
-                              child: Text(
-                                "₹ 10000",
-                                style: TextStyle(
-                                    color: Colors.white,
-                                    fontSize: 32,
-                                    fontWeight: FontWeight.bold),
-                              ),
-                            ),
-                          ],
-                        ),
-                        const Row(
+                        BalanceCard(),
+                        Row(
                           mainAxisAlignment: MainAxisAlignment.spaceAround,
                           children: [
-                            Row(
-                              children: [
-                                Icon(
-                                  Icons.arrow_circle_up,
-                                  size: 24,
-                                  color: Colors.green,
-                                ),
-                                SizedBox(
-                                  width: 10,
-                                ),
-                                Column(
-                                  children: [
-                                    Text(
-                                      "Income",
-                                      style: TextStyle(
-                                          color: Colors.black, fontSize: 15),
-                                    ),
-                                    Text(
-                                      "₹ 1000",
-                                      style: TextStyle(
-                                          color: Colors.black, fontSize: 15),
-                                    ),
-                                  ],
-                                )
-                              ],
-                            ),
-                            Row(
-                              children: [
-                                Icon(
-                                  Icons.arrow_circle_up,
-                                  color: Colors.red,
-                                ),
-                                SizedBox(
-                                  width: 10,
-                                ),
-                                Column(
-                                  children: [
-                                    Text("Income",
-                                        style: TextStyle(
-                                            color: Colors.black, fontSize: 15)),
-                                    Text("₹ 1000",
-                                        style: TextStyle(
-                                            color: Colors.black, fontSize: 15)),
-                                  ],
-                                )
-                              ],
-                            ),
+                            IncomeCard(),
+                            ExpenseCard(),
                           ],
                         ),
                       ],
@@ -188,6 +121,109 @@ class ScreenHome extends StatelessWidget {
           ],
         ),
       ),
+    );
+  }
+}
+
+class BalanceCard extends StatelessWidget {
+  const BalanceCard({
+    super.key,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      children: [
+        Align(
+          alignment: Alignment.center,
+          child: Text(
+            "BALANCE",
+            style: TextStyle(color: Colors.white, fontSize: 16),
+          ),
+        ),
+        Align(
+          alignment: Alignment.center,
+          child: Text(
+            "₹ 10000",
+            style: TextStyle(
+                color: Colors.white, fontSize: 32, fontWeight: FontWeight.bold),
+          ),
+        ),
+      ],
+    );
+  }
+}
+
+class IncomeCard extends StatelessWidget {
+  const IncomeCard({
+    super.key,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return const Row(
+      children: [
+        CircleAvatar(
+          backgroundColor: Appcolor.white,
+          child: Icon(
+            Icons.arrow_downward,
+            color: Colors.green,
+          ),
+        ),
+        SizedBox(
+          width: 10,
+        ),
+        Column(
+          children: [
+            Text(
+              "Income",
+              style: TextStyle(color: Colors.white, fontSize: 15),
+            ),
+            Text(
+              "₹ 1000",
+              style: TextStyle(color: Colors.white, fontSize: 20),
+            ),
+          ],
+        )
+      ],
+    );
+  }
+}
+
+class ExpenseCard extends StatelessWidget {
+  const ExpenseCard({
+    super.key,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return const Row(
+      children: [
+        CircleAvatar(
+          backgroundColor: Appcolor.white,
+          child: Icon(
+            Icons.arrow_upward,
+            color: Colors.red,
+          ),
+        ),
+        SizedBox(
+          width: 10,
+        ),
+        Column(
+          children: [
+            Text("Expense",
+                style: TextStyle(
+                  color: Colors.white,
+                  fontSize: 15,
+                )),
+            Text("₹ 1000",
+                style: TextStyle(
+                    color: Colors.white,
+                    fontSize: 20,
+                    fontWeight: FontWeight.bold)),
+          ],
+        )
+      ],
     );
   }
 }

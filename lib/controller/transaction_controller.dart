@@ -4,13 +4,12 @@ import 'package:get/get.dart';
 
 class TransactionController extends GetxController {
   final transactionBox = Hive.box<Transaction>('transactionBox');
-
+  List<Transaction> incomeBox = [];
+  List<Transaction> expenseBox = [];
   List<Transaction> get sortedList {
-    List<Transaction> dd = transactionBox.values.toList();
-    dd.sort((a, b) => b.date.compareTo(a.date));
-    return dd;
-
-//
+    List<Transaction> boxList = transactionBox.values.toList();
+    boxList.sort((a, b) => b.date.compareTo(a.date));
+    return boxList;
   }
 //
 

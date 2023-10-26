@@ -26,6 +26,21 @@ class ScreenHistory extends StatelessWidget {
         ),
         elevation: 0,
         backgroundColor: Colors.transparent,
+        actions: [
+          GestureDetector(
+            onTap: () {
+              Get.toNamed('/addtransaction');
+            },
+            child: const Padding(
+              padding: EdgeInsets.all(8.0),
+              child: Icon(
+                Icons.add,
+                color: Colors.black,
+                size: 40,
+              ),
+            ),
+          )
+        ],
       ),
       body: Padding(
         padding: const EdgeInsets.only(left: 20, right: 20, top: 30),

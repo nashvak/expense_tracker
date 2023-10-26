@@ -1,5 +1,6 @@
 import 'package:expense_tracker/constatnts/colors.dart';
 import 'package:expense_tracker/constatnts/custom_widgets/common/button.dart';
+import 'package:expense_tracker/controller/password_controller.dart';
 import 'package:expense_tracker/controller/transaction_controller.dart';
 import 'package:expense_tracker/models/transaction_model/transaction_model.dart';
 
@@ -22,10 +23,25 @@ class _ScreenAddTransactionState extends State<ScreenAddTransaction> {
   final amountController = TextEditingController();
   final dateController = TextEditingController();
   final descriptionController = TextEditingController();
-  PaymentMode? selectedPaymentMode;
+
   CatagoryType selectedCatagory = CatagoryType.income;
   DateTime? pickedDate;
   final TransactionController controller = Get.put(TransactionController());
+  final UiController ui = Get.put(UiController());
+  addTransaction() {
+    if (addFormkey.currentState!.validate()) {
+      // print('hello');
+      Transaction transaction = Transaction(
+          description: descriptionController.text,
+          amount: int.parse(amountController.text),
+          date: pickedDate!,
+          mode: ui.selectedPaymentMode!,
+          type: selectedCatagory);
+      controller.createTransaction(transaction: transaction);
+
+      Get.back();
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -67,79 +83,91 @@ class _ScreenAddTransactionState extends State<ScreenAddTransaction> {
                   validator: (value) {
                     return null;
                   },
-                  controller: amountController,
-                  title: 'Amount',
-                ),
-                height30,
-                CustomTextField(
-                  readonly: true,
-                  obscure: false,
-                  validator: (value) {
-                    return null;
-                  },
-                  controller: dateController,
-                  title: 'Date',
-                  ontap: () async {
-                    pickedDate = await showDatePicker(
-                        context: context,
-                        initialDate: DateTime.now(),
-                        firstDate: DateTime(2023),
-                        lastDate: DateTime(2024));
-
-                    if (pickedDate != null) {
-                      setState(() {});
-                      dateController.text =
-                          DateFormat('dd/MM/yyyy').format(pickedDate!);
-                    }
-                  },
-                ),
-                height30,
-                CustomTextField(
-                  obscure: false,
-                  validator: (value) {
-                    return null;
-                  },
                   controller: descriptionController,
                   title: 'Description',
                 ),
                 height30,
-                DropdownButtonFormField<PaymentMode>(
-                  hint: const Text('Payment mode '),
-                  decoration: InputDecoration(
-                    enabledBorder: OutlineInputBorder(
-                      borderSide: const BorderSide(
-                          color: Appcolor.tertiaryColor, width: 1),
-                      borderRadius: BorderRadius.circular(50),
-                    ),
-                    focusedBorder: OutlineInputBorder(
-                      borderSide: const BorderSide(
-                          color: Appcolor.tertiaryColor, width: 1),
-                      borderRadius: BorderRadius.circular(50),
-                    ),
-                    filled: true,
-                    fillColor: Appcolor.tertiaryColor,
-                  ),
-                  validator: (value) =>
-                      value == null ? "Select Payment mode" : null,
-                  dropdownColor: Appcolor.tertiaryColor,
-                  value: selectedPaymentMode,
-                  onChanged: (PaymentMode? newValue) {
-                    setState(() {
-                      selectedPaymentMode = newValue!;
-
-                      // print(selectedPaymentMode);
-                    });
+                CustomTextField(
+                  obscure: false,
+                  validator: (value) {
+                    return null;
                   },
-                  items: PaymentMode.values.map((PaymentMode mode) {
-                    return DropdownMenuItem<PaymentMode>(
-                      value: mode,
-                      child: Text(mode
-                          .toString()
-                          .split('.')
-                          .last), // To display the enum value as a string
-                    );
-                  }).toList(),
+                  controller: amountController,
+                  title: 'Amount',
                 ),
+                height30,
+                GetBuilder<UiController>(
+                  builder: (controller) {
+                    return CustomTextField(
+                      readonly: true,
+                      obscure: false,
+                      validator: (value) {
+                        return null;
+                      },
+                      controller: dateController,
+                      title: 'Date',
+                      ontap: () async {
+                        pickedDate = await showDatePicker(
+                            context: context,
+                            initialDate: controller.selectedDate,
+                            firstDate: DateTime(2023),
+                            lastDate: DateTime(2024));
+
+                        if (pickedDate != null) {
+                          controller.updateDate(pickedDate!);
+
+                          dateController.text = DateFormat('dd/MM/yyyy')
+                              .format(controller.selectedDate);
+
+                          // setState(() {});
+                          // dateController.text =
+                          //     DateFormat('dd/MM/yyyy').format(pickedDate!);
+                        }
+                      },
+                    );
+                  },
+                ),
+                height30,
+                GetBuilder<UiController>(builder: (controller) {
+                  return DropdownButtonFormField<PaymentMode>(
+                    hint: const Text('Payment mode '),
+                    decoration: InputDecoration(
+                      enabledBorder: OutlineInputBorder(
+                        borderSide: const BorderSide(
+                            color: Appcolor.tertiaryColor, width: 1),
+                        borderRadius: BorderRadius.circular(50),
+                      ),
+                      focusedBorder: OutlineInputBorder(
+                        borderSide: const BorderSide(
+                            color: Appcolor.tertiaryColor, width: 1),
+                        borderRadius: BorderRadius.circular(50),
+                      ),
+                      filled: true,
+                      fillColor: Appcolor.tertiaryColor,
+                    ),
+                    validator: (value) =>
+                        value == null ? "Select Payment mode" : null,
+                    dropdownColor: Appcolor.tertiaryColor,
+                    value: controller.selectedPaymentMode,
+                    onChanged: (PaymentMode? newValue) {
+                      // setState(() {
+                      //   selectedPaymentMode = newValue!;
+
+                      //   // print(selectedPaymentMode);
+                      // });
+                      controller.changePaymentMode(newValue!);
+                    },
+                    items: PaymentMode.values.map((PaymentMode mode) {
+                      return DropdownMenuItem<PaymentMode>(
+                        value: mode,
+                        child: Text(mode
+                            .toString()
+                            .split('.')
+                            .last), // To display the enum value as a string
+                      );
+                    }).toList(),
+                  );
+                }),
                 height30,
                 height20,
                 Row(
@@ -154,32 +182,17 @@ class _ScreenAddTransactionState extends State<ScreenAddTransaction> {
                         },
                       ),
                     ),
-
-                    //CustomButton(title: 'Add', onTap: () {}),
                     SizedBox(
                       width: Get.width / 2.5,
                       child: CustomButton(
                         title: 'Add',
                         onTap: () {
-                          // print('vv');
-                          if (addFormkey.currentState!.validate()) {
-                            // print('hello');
-                            Transaction transaction = Transaction(
-                                description: descriptionController.text,
-                                amount: int.parse(amountController.text),
-                                date: pickedDate!,
-                                mode: selectedPaymentMode!,
-                                type: selectedCatagory);
-                            controller.createTransaction(
-                                transaction: transaction);
-
-                            Get.back();
-                          }
+                          addTransaction();
                         },
                       ),
                     ),
                   ],
-                )
+                ),
               ],
             ),
           ),

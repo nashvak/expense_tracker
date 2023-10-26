@@ -4,7 +4,6 @@ import 'package:expense_tracker/models/reminder_model/reminder_model.dart';
 import 'package:expense_tracker/models/transaction_model/transaction_model.dart';
 
 import 'package:expense_tracker/view/authentication/get_started.dart';
-
 import 'package:expense_tracker/view/authentication/signup.dart';
 import 'package:expense_tracker/view/authentication/splash_screen.dart';
 import 'package:expense_tracker/view/remainder/add_remainder.dart';
@@ -16,7 +15,6 @@ import 'package:expense_tracker/view/transaction/home_screen.dart';
 import 'package:expense_tracker/view/transaction/view_transaction.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:path_provider/path_provider.dart';
 

@@ -5,7 +5,6 @@ import 'package:expense_tracker/controller/auth_controller.dart';
 import 'package:expense_tracker/models/auth_model/auth_model.dart';
 import 'package:expense_tracker/view/authentication/get_started.dart';
 import 'package:expense_tracker/view/authentication/login.dart';
-
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -112,7 +111,7 @@ class ScreenProfile extends StatelessWidget {
                       color: Appcolor.secondaryColor,
                     );
                   },
-                  itemCount: 3),
+                  itemCount: icons.length),
             ),
           ],
         ),
