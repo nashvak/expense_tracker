@@ -24,7 +24,6 @@ class _ScreenAddTransactionState extends State<ScreenAddTransaction> {
   final dateController = TextEditingController();
   final descriptionController = TextEditingController();
 
-  CatagoryType selectedCatagory = CatagoryType.income;
   DateTime? pickedDate;
   final TransactionController controller = Get.put(TransactionController());
   final UiController ui = Get.put(UiController());
@@ -36,7 +35,7 @@ class _ScreenAddTransactionState extends State<ScreenAddTransaction> {
           amount: int.parse(amountController.text),
           date: pickedDate!,
           mode: ui.selectedPaymentMode!,
-          type: selectedCatagory);
+          type: ui.selectedCatagory);
       controller.createTransaction(transaction: transaction);
 
       Get.back();
@@ -53,27 +52,34 @@ class _ScreenAddTransactionState extends State<ScreenAddTransaction> {
             key: addFormkey,
             child: Column(
               children: [
-                ToggleSwitch(
-                  initialLabelIndex:
-                      selectedCatagory == CatagoryType.income ? 0 : 1,
-                  minWidth: 120,
-                  minHeight: 50,
-                  cornerRadius: 10,
-                  fontSize: 20,
-                  activeBgColor: const [
-                    Appcolor.primaryColor,
-                  ],
-                  activeFgColor: Colors.white,
-                  inactiveBgColor: const Color.fromARGB(255, 191, 224, 230),
-                  totalSwitches: 2,
-                  labels: const ['Income', 'Expense'],
-                  onToggle: (index) {
-                    setState(() {
-                      selectedCatagory = (index == 0)
-                          ? CatagoryType.income
-                          : CatagoryType.expense;
-                      // print(selectedCatagory);
-                    });
+                GetBuilder<UiController>(
+                  builder: (controller) {
+                    return ToggleSwitch(
+                      initialLabelIndex:
+                          controller.selectedCatagory == CatagoryType.income
+                              ? 0
+                              : 1,
+                      minWidth: 120,
+                      minHeight: 50,
+                      cornerRadius: 10,
+                      fontSize: 20,
+                      activeBgColor: const [
+                        Appcolor.primaryColor,
+                      ],
+                      activeFgColor: Colors.white,
+                      inactiveBgColor: const Color.fromARGB(255, 191, 224, 230),
+                      totalSwitches: 2,
+                      labels: const ['Income', 'Expense'],
+                      onToggle: (index) {
+                        controller.changeToggle(index);
+                        // setState(() {
+                        //   selectedCatagory = (index == 0)
+                        //       ? CatagoryType.income
+                        //       : CatagoryType.expense;
+                        //   // print(selectedCatagory);
+                        // });
+                      },
+                    );
                   },
                 ),
                 height30,

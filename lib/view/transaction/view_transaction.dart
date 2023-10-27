@@ -2,6 +2,7 @@ import 'package:expense_tracker/constatnts/colors.dart';
 import 'package:expense_tracker/constatnts/custom_widgets/common/button.dart';
 import 'package:expense_tracker/constatnts/custom_widgets/common/decoration.dart';
 import 'package:expense_tracker/constatnts/custom_widgets/common/sizedbox.dart';
+import 'package:expense_tracker/controller/password_controller.dart';
 import 'package:expense_tracker/controller/transaction_controller.dart';
 import 'package:expense_tracker/models/transaction_model/transaction_model.dart';
 import 'package:flutter/material.dart';
@@ -21,33 +22,54 @@ class _ScreenViewTransactionState extends State<ScreenViewTransaction> {
   final TransactionController transactionController = Get.put(
     TransactionController(),
   );
+  final UpdateController ui = Get.put(
+    UpdateController(),
+  );
   final updateFormkey = GlobalKey<FormState>();
 
   TextEditingController amountController = TextEditingController();
   TextEditingController dateController = TextEditingController();
   TextEditingController descriptionController = TextEditingController();
-  DateTime? date;
-  late PaymentMode selectedPaymentMode;
-  late CatagoryType selectedCatagory;
+  // DateTime? date;
+
+  // late CatagoryType selectedCatagory;
 
   @override
   void initState() {
     Transaction tr = transactionController.sortedList[index];
-    amountController = TextEditingController(text: tr.amount.toString());
+    amountController = TextEditingController(
+      text: tr.amount.toString(),
+    );
     descriptionController = TextEditingController(text: tr.description);
-    date = tr.date;
-    dateController =
-        TextEditingController(text: DateFormat('dd/MM/yyyy').format(date!));
-    selectedCatagory = tr.type;
-    selectedPaymentMode = tr.mode;
+    ui.date = tr.date;
+    dateController = TextEditingController(
+      text: DateFormat('dd/MM/yyyy').format(ui.date),
+    );
+    ui.catagory = tr.type;
+    ui.mode = tr.mode;
     super.initState();
+  }
+
+  updateTransaction() {
+    if (updateFormkey.currentState!.validate()) {
+      Transaction transaction = Transaction(
+          description: descriptionController.text,
+          amount: int.parse(amountController.text),
+          date: ui.date,
+          mode: ui.mode,
+          type: ui.catagory);
+      print(ui.mode);
+      transactionController.updateTransaction(
+          index: index, transaction: transaction);
+      print(index);
+
+      Get.back();
+    }
   }
 
   @override
   Widget build(BuildContext context) {
     Transaction tr = transactionController.sortedList[index];
-    //print(tr.description);
-
     return Scaffold(
       backgroundColor: Appcolor.tertiaryColor,
       appBar: AppBar(
@@ -62,22 +84,7 @@ class _ScreenViewTransactionState extends State<ScreenViewTransaction> {
           Padding(
             padding: const EdgeInsets.only(right: 15),
             child: TextButton(
-                onPressed: () {
-                  // print('dsads');
-                  if (updateFormkey.currentState!.validate()) {
-                    // print(pickedDate);
-                    Transaction transaction = Transaction(
-                        description: descriptionController.text,
-                        amount: int.parse(amountController.text),
-                        date: date!,
-                        mode: selectedPaymentMode,
-                        type: selectedCatagory);
-                    transactionController.updateTransaction(
-                        index: index, transaction: transaction);
-                    // print('updated');
-                    Get.back();
-                  }
-                },
+                onPressed: updateTransaction,
                 child: const Text(
                   "Save",
                   style: TextStyle(color: Appcolor.primaryColor, fontSize: 17),
@@ -108,22 +115,24 @@ class _ScreenViewTransactionState extends State<ScreenViewTransaction> {
                         'Transaction type',
                         style: TextStyle(color: Appcolor.primaryColor),
                       ),
-                      DropdownButton<PaymentMode>(
-                          onChanged: (PaymentMode? newValue) {
-                            setState(() {
-                              selectedPaymentMode = newValue!;
-                            });
-                          },
-                          items: PaymentMode.values.map((PaymentMode mode) {
-                            return DropdownMenuItem<PaymentMode>(
-                              value: mode,
-                              child: Text(mode
-                                  .toString()
-                                  .split('.')
-                                  .last), // To display the enum value as a string
-                            );
-                          }).toList(),
-                          value: selectedPaymentMode),
+                      GetBuilder<UpdateController>(
+                        builder: (controller) {
+                          return DropdownButton<PaymentMode>(
+                              onChanged: (PaymentMode? newValue) {
+                                // setState(() {
+                                //   selectedPaymentMode = newValue!;
+                                // });
+                                controller.changePaymentMode(newValue!);
+                              },
+                              items: PaymentMode.values.map((PaymentMode mode) {
+                                return DropdownMenuItem<PaymentMode>(
+                                  value: mode,
+                                  child: Text(mode.toString().split('.').last),
+                                );
+                              }).toList(),
+                              value: controller.mode);
+                        },
+                      ),
                     ],
                   ),
                 ),
@@ -168,32 +177,31 @@ class _ScreenViewTransactionState extends State<ScreenViewTransaction> {
                                   decoration: InputDecoration(
                                     border: InputBorder.none,
                                     hintText: tr.description,
-                                    // hintStyle: TextStyle(
-                                    //     fontSize: 18,
-                                    //     color: Colors.black,
-                                    //     fontWeight: FontWeight.w500),
                                   ),
                                 ),
-                                TextFormField(
-                                  controller: dateController,
-                                  decoration: const InputDecoration(
-                                    border: InputBorder.none,
-                                  ),
-                                  onTap: () async {
-                                    date = await showDatePicker(
-                                        context: context,
-                                        initialDate: DateTime.now(),
-                                        firstDate: DateTime(2023),
-                                        lastDate: DateTime(2024));
+                                GetBuilder<UpdateController>(builder: (cont) {
+                                  return TextFormField(
+                                    controller: dateController,
+                                    decoration: const InputDecoration(
+                                      border: InputBorder.none,
+                                    ),
+                                    onTap: () async {
+                                      DateTime? dates = await showDatePicker(
+                                          context: context,
+                                          initialDate: DateTime.now(),
+                                          firstDate: DateTime(2023),
+                                          lastDate: DateTime(2024));
 
-                                    if (date != null) {
-                                      setState(() {});
-                                      dateController.text =
-                                          DateFormat('dd/MM/yyyy')
-                                              .format(date!);
-                                    }
-                                  },
-                                ),
+                                      if (dates != null) {
+                                        cont.updateDate(dates);
+                                        // setState(() {});
+                                        dateController.text =
+                                            DateFormat('dd/MM/yyyy')
+                                                .format(dates);
+                                      }
+                                    },
+                                  );
+                                })
                               ],
                             ),
                           )
@@ -228,22 +236,25 @@ class _ScreenViewTransactionState extends State<ScreenViewTransaction> {
                     ],
                   ),
                 ),
-                DropdownButton<CatagoryType>(
-                    onChanged: (CatagoryType? newValue) {
-                      setState(() {
-                        selectedCatagory = newValue!;
-                      });
-                    },
-                    items: CatagoryType.values.map((CatagoryType type) {
-                      return DropdownMenuItem<CatagoryType>(
-                        value: type,
-                        child: Text(type
-                            .toString()
-                            .split('.')
-                            .last), // To display the enum value as a string
-                      );
-                    }).toList(),
-                    value: selectedCatagory),
+                GetBuilder<UpdateController>(builder: (controller) {
+                  return DropdownButton<CatagoryType>(
+                      onChanged: (CatagoryType? newValue) {
+                        // setState(() {
+                        //   selectedCatagory = newValue!;
+                        // });
+                        controller.changeCatagory(newValue);
+                      },
+                      items: CatagoryType.values.map((CatagoryType type) {
+                        return DropdownMenuItem<CatagoryType>(
+                          value: type,
+                          child: Text(type
+                              .toString()
+                              .split('.')
+                              .last), // To display the enum value as a string
+                        );
+                      }).toList(),
+                      value: controller.catagory);
+                }),
                 const BlankSpace(
                   height: 30,
                 ),

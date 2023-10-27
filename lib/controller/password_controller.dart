@@ -12,7 +12,9 @@ class PasswordController extends GetxController {
 
 class UiController extends GetxController {
   PaymentMode? selectedPaymentMode;
+  CatagoryType selectedCatagory = CatagoryType.income;
   var selectedDate = DateTime.now();
+
   updateDate(DateTime newDate) {
     selectedDate = newDate;
     update();
@@ -20,5 +22,37 @@ class UiController extends GetxController {
 
   changePaymentMode(PaymentMode newValue) {
     selectedPaymentMode = newValue;
+    update();
+  }
+
+  changeToggle(index) {
+    selectedCatagory =
+        (index == 0) ? CatagoryType.income : CatagoryType.expense;
+    update();
+  }
+
+  changeCatagory(newValue) {
+    selectedCatagory = newValue;
+    update();
+  }
+}
+
+class UpdateController extends GetxController {
+  late CatagoryType catagory;
+  late PaymentMode mode;
+  late DateTime date;
+  updateDate(DateTime newDate) {
+    date = newDate;
+    update();
+  }
+
+  changePaymentMode(PaymentMode newValue) {
+    mode = newValue;
+    update();
+  }
+
+  changeCatagory(newValue) {
+    catagory = newValue;
+    update();
   }
 }

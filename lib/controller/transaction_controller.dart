@@ -6,9 +6,12 @@ class TransactionController extends GetxController {
   final transactionBox = Hive.box<Transaction>('transactionBox');
   List<Transaction> incomeBox = [];
   List<Transaction> expenseBox = [];
+
+  //sort according to date
   List<Transaction> get sortedList {
     List<Transaction> boxList = transactionBox.values.toList();
     boxList.sort((a, b) => b.date.compareTo(a.date));
+
     return boxList;
   }
 //
@@ -24,6 +27,7 @@ class TransactionController extends GetxController {
 
   updateTransaction({required int index, required Transaction transaction}) {
     transactionBox.putAt(index, transaction);
+
     update();
   }
 
