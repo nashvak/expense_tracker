@@ -23,7 +23,7 @@ class _BottomNavState extends State<BottomNav> {
     const Icon(Icons.person, size: 30),
   ];
   List<Widget> screens = [
-    const ScreenHome(),
+    ScreenHome(),
     //ScreenAddTransaction(),
     ScreenHistory(),
     ScreenRemainder(),

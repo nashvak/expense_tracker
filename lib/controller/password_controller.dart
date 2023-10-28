@@ -35,8 +35,17 @@ class UiController extends GetxController {
     selectedCatagory = newValue;
     update();
   }
+
+  resetValues() {
+    selectedCatagory;
+  }
 }
 
+//
+
+//
+
+//
 class UpdateController extends GetxController {
   late CatagoryType catagory;
   late PaymentMode mode;

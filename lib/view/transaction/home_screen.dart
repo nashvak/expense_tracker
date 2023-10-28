@@ -1,4 +1,3 @@
-import 'package:expense_tracker/constatnts/custom_widgets/common/sizedbox.dart';
 import 'package:expense_tracker/constatnts/custom_widgets/home_screen/button.dart';
 import 'package:expense_tracker/controller/transaction_controller.dart';
 import 'package:expense_tracker/models/transaction_model/transaction_model.dart';
@@ -10,8 +9,10 @@ import '../../constatnts/custom_widgets/common/decoration.dart';
 import '../../constatnts/custom_widgets/home_screen/appbar.dart';
 
 class ScreenHome extends StatelessWidget {
-  const ScreenHome({super.key});
+  ScreenHome({super.key});
 
+  final TransactionController transactionController =
+      Get.put(TransactionController());
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -99,17 +100,17 @@ class ScreenHome extends StatelessWidget {
               child: Container(
                 decoration: cardDecoration(
                     color: const Color.fromARGB(255, 92, 209, 230)),
-                child: const Stack(
+                child: Stack(
                   children: [
                     Column(
                       mainAxisAlignment: MainAxisAlignment.spaceAround,
                       children: [
-                        BalanceCard(),
+                        const BalanceCard(),
                         Row(
                           mainAxisAlignment: MainAxisAlignment.spaceAround,
                           children: [
                             IncomeCard(),
-                            ExpenseCard(),
+                            const ExpenseCard(),
                           ],
                         ),
                       ],
@@ -125,6 +126,8 @@ class ScreenHome extends StatelessWidget {
   }
 }
 
+//   B A L A N C E   C A R D
+
 class BalanceCard extends StatelessWidget {
   const BalanceCard({
     super.key,
@@ -132,9 +135,9 @@ class BalanceCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const Column(
+    return Column(
       children: [
-        Align(
+        const Align(
           alignment: Alignment.center,
           child: Text(
             "BALANCE",
@@ -142,46 +145,56 @@ class BalanceCard extends StatelessWidget {
           ),
         ),
         Align(
-          alignment: Alignment.center,
-          child: Text(
-            "₹ 10000",
-            style: TextStyle(
-                color: Colors.white, fontSize: 32, fontWeight: FontWeight.bold),
-          ),
-        ),
+            alignment: Alignment.center,
+            child: GetBuilder<TransactionController>(builder: (controller) {
+              return Text(
+                "₹ ${controller.totalBalance}",
+                style: const TextStyle(
+                    color: Colors.white,
+                    fontSize: 32,
+                    fontWeight: FontWeight.bold),
+              );
+            })),
       ],
     );
   }
 }
 
+//   I N C O M E    C A R D
 class IncomeCard extends StatelessWidget {
-  const IncomeCard({
+  IncomeCard({
     super.key,
   });
+  final TransactionController transactionController =
+      Get.put(TransactionController());
 
   @override
   Widget build(BuildContext context) {
-    return const Row(
+    return Row(
       children: [
-        CircleAvatar(
+        const CircleAvatar(
           backgroundColor: Appcolor.white,
           child: Icon(
             Icons.arrow_downward,
             color: Colors.green,
           ),
         ),
-        SizedBox(
+        const SizedBox(
           width: 10,
         ),
         Column(
           children: [
-            Text(
+            const Text(
               "Income",
               style: TextStyle(color: Colors.white, fontSize: 15),
             ),
-            Text(
-              "₹ 1000",
-              style: TextStyle(color: Colors.white, fontSize: 20),
+            GetBuilder<TransactionController>(
+              builder: (controller) {
+                return Text(
+                  "₹ ${controller.totalIncome}",
+                  style: const TextStyle(color: Colors.white, fontSize: 20),
+                );
+              },
             ),
           ],
         )
@@ -190,6 +203,7 @@ class IncomeCard extends StatelessWidget {
   }
 }
 
+//    E X P E N S E    C A R D
 class ExpenseCard extends StatelessWidget {
   const ExpenseCard({
     super.key,
@@ -197,30 +211,33 @@ class ExpenseCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const Row(
+    return Row(
       children: [
-        CircleAvatar(
+        const CircleAvatar(
           backgroundColor: Appcolor.white,
           child: Icon(
             Icons.arrow_upward,
             color: Colors.red,
           ),
         ),
-        SizedBox(
+        const SizedBox(
           width: 10,
         ),
         Column(
           children: [
-            Text("Expense",
+            const Text("Expense",
                 style: TextStyle(
                   color: Colors.white,
                   fontSize: 15,
                 )),
-            Text("₹ 1000",
-                style: TextStyle(
-                    color: Colors.white,
-                    fontSize: 20,
-                    fontWeight: FontWeight.bold)),
+            GetBuilder<TransactionController>(
+              builder: (controller) {
+                return Text(
+                  "₹ ${controller.totalExpense}",
+                  style: const TextStyle(color: Colors.white, fontSize: 20),
+                );
+              },
+            ),
           ],
         )
       ],

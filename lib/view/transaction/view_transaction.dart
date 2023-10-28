@@ -37,6 +37,7 @@ class _ScreenViewTransactionState extends State<ScreenViewTransaction> {
   @override
   void initState() {
     Transaction tr = transactionController.sortedList[index];
+
     amountController = TextEditingController(
       text: tr.amount.toString(),
     );
@@ -52,15 +53,14 @@ class _ScreenViewTransactionState extends State<ScreenViewTransaction> {
 
   updateTransaction() {
     if (updateFormkey.currentState!.validate()) {
-      Transaction transaction = Transaction(
+      Transaction tr = Transaction(
           description: descriptionController.text,
           amount: int.parse(amountController.text),
           date: ui.date,
           mode: ui.mode,
           type: ui.catagory);
-      print(ui.mode);
-      transactionController.updateTransaction(
-          index: index, transaction: transaction);
+
+      transactionController.updateTransaction(index: index, transaction: tr);
       print(index);
 
       Get.back();

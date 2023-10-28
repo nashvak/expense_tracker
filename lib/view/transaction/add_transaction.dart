@@ -77,6 +77,7 @@ class _ScreenAddTransactionState extends State<ScreenAddTransaction> {
                         //       ? CatagoryType.income
                         //       : CatagoryType.expense;
                         //   // print(selectedCatagory);
+
                         // });
                       },
                     );

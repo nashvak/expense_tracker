@@ -17,6 +17,19 @@ class TransactionController extends GetxController {
 //
 
 //
+  double get totalIncome {
+    return sortedList
+        .where((transaction) => transaction.type == CatagoryType.income)
+        .fold(0.0, (sum, item) => sum + item.amount);
+  }
+
+  double get totalExpense {
+    return sortedList
+        .where((transaction) => transaction.type == CatagoryType.expense)
+        .fold(0.0, (sum, item) => sum + item.amount);
+  }
+
+  double get totalBalance => totalIncome - totalExpense;
 
   int get transactionCount => sortedList.length;
   //create transaction
@@ -25,8 +38,9 @@ class TransactionController extends GetxController {
     update();
   }
 
-  updateTransaction({required int index, required Transaction transaction}) {
-    transactionBox.putAt(index, transaction);
+  updateTransaction(
+      {required int index, required Transaction transaction}) async {
+    await transactionBox.putAt(index, transaction);
 
     update();
   }
