@@ -183,6 +183,7 @@ class IncomeCard extends StatelessWidget {
           width: 10,
         ),
         Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             const Text(
               "Income",
@@ -192,7 +193,10 @@ class IncomeCard extends StatelessWidget {
               builder: (controller) {
                 return Text(
                   "₹ ${controller.totalIncome}",
-                  style: const TextStyle(color: Colors.white, fontSize: 20),
+                  style: const TextStyle(
+                      color: Colors.white,
+                      fontSize: 20,
+                      fontWeight: FontWeight.bold),
                 );
               },
             ),
@@ -224,6 +228,7 @@ class ExpenseCard extends StatelessWidget {
           width: 10,
         ),
         Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             const Text("Expense",
                 style: TextStyle(
@@ -234,7 +239,10 @@ class ExpenseCard extends StatelessWidget {
               builder: (controller) {
                 return Text(
                   "₹ ${controller.totalExpense}",
-                  style: const TextStyle(color: Colors.white, fontSize: 20),
+                  style: const TextStyle(
+                      color: Colors.white,
+                      fontSize: 20,
+                      fontWeight: FontWeight.bold),
                 );
               },
             ),

@@ -129,38 +129,35 @@
 //     );
 //   }
 // }
-import 'package:expense_tracker/controller/auth_controller.dart';
-import 'package:expense_tracker/models/auth_model/auth_model.dart';
-import 'package:flutter/material.dart';
-import 'package:get/get.dart';
 
-class Users extends StatelessWidget {
-  Users({super.key});
-  final AuthController cont = Get.put(AuthController());
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(),
-      body: GetBuilder<AuthController>(
-        builder: (controller) {
-          return ListView.builder(
-            itemBuilder: (context, index) {
-              AuthModel user = controller.authBox.getAt(index);
-              return ListTile(
-                title: Text(user.name),
-                subtitle: Text(user.email),
-                trailing: IconButton(
-                  icon: const Icon(Icons.delete),
-                  onPressed: () {
-                    controller.deleteUser(index: index);
-                  },
-                ),
-              );
-            },
-            itemCount: controller.authBox.length,
-          );
-        },
-      ),
-    );
-  }
-}
+
+///  S H O W I N G   T H E  U S E R    D A T A
+// import 'package:expense_tracker/controller/auth_controller.dart';
+// import 'package:expense_tracker/models/auth_model/auth_model.dart';
+// import 'package:flutter/material.dart';
+// import 'package:get/get.dart';
+
+// class Users extends StatelessWidget {
+//   Users({super.key});
+//   final AuthController cont = Get.put(AuthController());
+//   @override
+//   Widget build(BuildContext context) {
+//     return Scaffold(
+//       appBar: AppBar(),
+//       body: GetBuilder<AuthController>(
+//         builder: (controller) {
+//           return ListView.builder(
+//             itemBuilder: (context, index) {
+//               AuthModel user = controller.authBox.getAt(index);
+//               return ListTile(
+//                 title: Text(user.name),
+//                 subtitle: Text(user.email),
+//               );
+//             },
+//             itemCount: controller.authBox.length,
+//           );
+//         },
+//       ),
+//     );
+//   }
+// }

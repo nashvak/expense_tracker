@@ -114,18 +114,18 @@ class _ScreenSignupState extends State<ScreenSignup> {
                           ),
                         ),
                         const BlankSpace(height: 40),
-                        CustomTextField(
-                          obscure: true,
-                          controller: confimPassController,
-                          validator: (value) {
-                            if (passController.text !=
-                                confimPassController.text) {
-                              return 'password not correct';
-                            }
-                            return null;
-                          },
-                          title: 'Confirm password',
-                        ),
+                        // CustomTextField(
+                        //   obscure: true,
+                        //   controller: confimPassController,
+                        //   validator: (value) {
+                        //     if (passController.text !=
+                        //         confimPassController.text) {
+                        //       return 'password not correct';
+                        //     }
+                        //     return null;
+                        //   },
+                        //   title: 'Confirm password',
+                        // ),
                         const BlankSpace(height: 50),
                         CustomButton(
                           title: 'Register',

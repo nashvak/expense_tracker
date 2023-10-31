@@ -1,119 +1,222 @@
 import 'package:expense_tracker/constatnts/colors.dart';
 import 'package:expense_tracker/constatnts/custom_widgets/common/sizedbox.dart';
-import 'package:expense_tracker/constatnts/custom_widgets/common/textstyle.dart';
+
 import 'package:expense_tracker/controller/auth_controller.dart';
+import 'package:expense_tracker/controller/transaction_controller.dart';
 import 'package:expense_tracker/models/auth_model/auth_model.dart';
 import 'package:expense_tracker/view/authentication/get_started.dart';
-import 'package:expense_tracker/view/authentication/login.dart';
+import 'package:expense_tracker/view/profile/edit_profile.dart';
+import 'package:expense_tracker/view/profile/notification.dart';
+
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class ScreenProfile extends StatelessWidget {
   ScreenProfile({super.key});
-  final AuthController authController = Get.put(AuthController());
+  final AuthController authController = Get.put(
+    AuthController(),
+  );
+  final TransactionController transactionController = Get.put(
+    TransactionController(),
+  );
 
-  final List<IconButton> icons = [
-    IconButton(
-      onPressed: () {},
-      icon: const Icon(Icons.person),
-    ),
-    IconButton(
-      onPressed: () {},
-      icon: const Icon(Icons.email),
-    ),
-    IconButton(
-      onPressed: () {},
-      icon: const Icon(Icons.logout),
-    )
-  ];
+  logoutProfile(context) async {
+    var pref = await SharedPreferences.getInstance();
+
+    await pref.clear();
+
+    // ignore: use_build_context_synchronously
+    Navigator.pushReplacement(
+      context,
+      MaterialPageRoute(
+        builder: (context) => const GetStartedScreen(),
+      ),
+    );
+    authController.authBox.clear();
+  }
 
   @override
   Widget build(BuildContext context) {
+    AuthModel user = authController.authBox.getAt(0);
     return Scaffold(
-      backgroundColor: Appcolor.tertiaryColor,
+      backgroundColor: Appcolor.primaryColor,
       appBar: AppBar(
-        title: Text(
+        title: const Text(
           'Profile ',
-          style: screenTitleText(),
+          style: TextStyle(
+            fontWeight: FontWeight.bold,
+            color: Colors.white,
+            fontSize: 25,
+          ),
         ),
-        iconTheme: const IconThemeData(color: Colors.black),
+        iconTheme: const IconThemeData(color: Colors.white),
         backgroundColor: Colors.transparent,
         elevation: 0,
-        actions: [
-          IconButton(
-            onPressed: () {
-              Get.to(Users());
-            },
-            icon: const Icon(Icons.settings),
-          ),
-          IconButton(
-            onPressed: () async {
-              var pref = await SharedPreferences.getInstance();
+        // actions: [
 
-              await pref.clear();
+        //   IconButton(
+        //     onPressed: () async {
+        //       var pref = await SharedPreferences.getInstance();
 
-              // ignore: use_build_context_synchronously
-              Navigator.pushReplacement(
-                context,
-                MaterialPageRoute(
-                  builder: (context) => const GetStartedScreen(),
-                ),
-              );
-              authController.authBox.clear();
-            },
-            icon: const Icon(
-              Icons.logout,
-            ),
-          ),
-        ],
+        //       await pref.clear();
+
+        //       // ignore: use_build_context_synchronously
+        //       Navigator.pushReplacement(
+        //         context,
+        //         MaterialPageRoute(
+        //           builder: (context) => const GetStartedScreen(),
+        //         ),
+        //       );
+        //       authController.authBox.clear();
+        //     },
+        //     icon: const Icon(
+        //       Icons.logout,
+        //     ),
+        //   ),
+        // ],
       ),
-      body: Padding(
-        padding: const EdgeInsets.only(left: 20, right: 20, top: 50, bottom: 0),
-        child: Column(
-          children: [
-            Container(
-              decoration: BoxDecoration(
-                  border: Border.all(color: Appcolor.primaryColor),
-                  borderRadius: BorderRadius.circular(60)),
-              child: const CircleAvatar(
-                radius: 60,
-                backgroundColor: Appcolor.tertiaryColor,
-                //child: Image.asset('images/expense-logo.png'),
-                child: Text('Add photo'),
-              ),
-            ),
-            height40,
-            Container(
+      body: Column(
+        children: [
+          CircleAvatar(
+            radius: 50,
+            backgroundColor: Appcolor.tertiaryColor,
+            child: Image.asset('images/user-logo.png'),
+          ),
+          height10,
+          Text(
+            user.name,
+            style: const TextStyle(color: Colors.white, fontSize: 20),
+          ),
+          Text(
+            user.email,
+            style: const TextStyle(color: Colors.white, fontSize: 15),
+          ),
+          height20,
+          Expanded(
+            child: Container(
               height: MediaQuery.of(context).size.height / 4,
               width: MediaQuery.of(context).size.width,
               decoration: ShapeDecoration(
-                color: Colors.white,
+                color: Appcolor.tertiaryColor,
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(15),
                 ),
               ),
-              child: ListView.separated(
-                  itemBuilder: (context, index) {
-                    AuthModel user = authController.authBox.getAt(0);
-                    final List<String> title = [
-                      user.name,
-                      user.email,
-                      'Delete all data'
-                    ];
-                    return ListTile(
-                      leading: icons[index],
-                      title: Text(title[index]),
-                    );
-                  },
-                  separatorBuilder: (context, index) {
-                    return const Divider(
-                      color: Appcolor.secondaryColor,
-                    );
-                  },
-                  itemCount: icons.length),
+              child: Padding(
+                padding: const EdgeInsets.only(
+                    top: 20, left: 15, right: 15, bottom: 0),
+                child: Column(
+                  children: [
+                    height30,
+                    ProfileCard(
+                      title: 'Edit Profile',
+                      icon: Icons.person,
+                      backgroundColor: const Color.fromARGB(255, 251, 231, 171),
+                      iconColor: const Color.fromARGB(255, 223, 168, 4),
+                      ontap: () {
+                        Get.to(EditProfile());
+                      },
+                    ),
+                    height20,
+                    ProfileCard(
+                      title: 'Notifications',
+                      icon: Icons.notifications,
+                      backgroundColor: const Color.fromARGB(255, 184, 207, 238),
+                      iconColor: const Color.fromARGB(255, 37, 121, 231),
+                      ontap: () {
+                        Get.to(const NotificationPage());
+                      },
+                    ),
+                    height20,
+                    ProfileCard(
+                      title: 'Erase all data',
+                      icon: Icons.delete,
+                      backgroundColor: const Color.fromARGB(255, 247, 196, 228),
+                      iconColor: const Color.fromARGB(255, 243, 63, 177),
+                      ontap: () {
+                        Get.defaultDialog(
+                          title: 'Erase data',
+                          middleText:
+                              'This will remove all your data.Are you sure to delete all data.',
+                          backgroundColor: Appcolor.white,
+                          radius: 20,
+                          contentPadding: const EdgeInsets.all(10),
+                          titlePadding: const EdgeInsets.all(20),
+                          confirm: TextButton(
+                              onPressed: () {
+                                transactionController.logoutProfile();
+                                Get.back();
+                              },
+                              child: const Text('Erase')),
+                          cancel: TextButton(
+                              onPressed: () {
+                                Get.back();
+                              },
+                              child: const Text('Cancel')),
+                        );
+                      },
+                    ),
+                    height20,
+                    ProfileCard(
+                      title: 'Logout',
+                      icon: Icons.logout,
+                      backgroundColor: const Color.fromARGB(255, 188, 244, 201),
+                      iconColor: const Color.fromARGB(255, 30, 213, 73),
+                      ontap: () {
+                        logoutProfile(context);
+                      },
+                    ),
+                  ],
+                ),
+              ),
             ),
-          ],
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+class ProfileCard extends StatelessWidget {
+  const ProfileCard(
+      {required this.title,
+      required this.icon,
+      required this.backgroundColor,
+      required this.iconColor,
+      required this.ontap,
+      super.key});
+  final String title;
+  final IconData icon;
+  final Color backgroundColor;
+  final Color iconColor;
+  final Function() ontap;
+
+  @override
+  Widget build(BuildContext context) {
+    bool notiSwitch = true;
+    return GestureDetector(
+      onTap: ontap,
+      child: Card(
+        color: Appcolor.white,
+        child: ListTile(
+          leading: Container(
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(10),
+                color: backgroundColor,
+              ),
+              child: Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: Icon(
+                  icon,
+                  color: iconColor,
+                ),
+              )),
+          title: Text(
+            title,
+            style: GoogleFonts.lato(fontSize: 20, fontWeight: FontWeight.w600),
+          ),
         ),
       ),
     );

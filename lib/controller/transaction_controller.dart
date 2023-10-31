@@ -47,6 +47,12 @@ class TransactionController extends GetxController {
 
   deleteTransaction({required int index}) {
     transactionBox.deleteAt(index);
+
     update();
+  }
+
+  logoutProfile() {
+    transactionBox.clear();
+    sortedList.clear();
   }
 }
