@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:expense_tracker/constatnts/colors.dart';
 import 'package:expense_tracker/constatnts/custom_widgets/common/sizedbox.dart';
 
@@ -11,13 +13,21 @@ import 'package:expense_tracker/view/profile/notification.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
+
 import 'package:shared_preferences/shared_preferences.dart';
 
-class ScreenProfile extends StatelessWidget {
-  ScreenProfile({super.key});
+class ScreenProfile extends StatefulWidget {
+  const ScreenProfile({super.key});
+
+  @override
+  State<ScreenProfile> createState() => _ScreenProfileState();
+}
+
+class _ScreenProfileState extends State<ScreenProfile> {
   final AuthController authController = Get.put(
     AuthController(),
   );
+
   final TransactionController transactionController = Get.put(
     TransactionController(),
   );
@@ -37,6 +47,31 @@ class ScreenProfile extends StatelessWidget {
     authController.authBox.clear();
   }
 
+  dialogBox() {
+    Get.defaultDialog(
+      title: 'Erase data',
+      middleText:
+          'This will remove all your data.Are you sure to delete all data.',
+      backgroundColor: Appcolor.white,
+      radius: 20,
+      contentPadding: const EdgeInsets.all(10),
+      titlePadding: const EdgeInsets.all(20),
+      confirm: TextButton(
+        onPressed: () {
+          transactionController.logoutProfile();
+          Get.back();
+        },
+        child: const Text('Erase'),
+      ),
+      cancel: TextButton(
+        onPressed: () {
+          Get.back();
+        },
+        child: const Text('Cancel'),
+      ),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     AuthModel user = authController.authBox.getAt(0);
@@ -54,35 +89,15 @@ class ScreenProfile extends StatelessWidget {
         iconTheme: const IconThemeData(color: Colors.white),
         backgroundColor: Colors.transparent,
         elevation: 0,
-        // actions: [
-
-        //   IconButton(
-        //     onPressed: () async {
-        //       var pref = await SharedPreferences.getInstance();
-
-        //       await pref.clear();
-
-        //       // ignore: use_build_context_synchronously
-        //       Navigator.pushReplacement(
-        //         context,
-        //         MaterialPageRoute(
-        //           builder: (context) => const GetStartedScreen(),
-        //         ),
-        //       );
-        //       authController.authBox.clear();
-        //     },
-        //     icon: const Icon(
-        //       Icons.logout,
-        //     ),
-        //   ),
-        // ],
       ),
       body: Column(
         children: [
           CircleAvatar(
             radius: 50,
             backgroundColor: Appcolor.tertiaryColor,
-            child: Image.asset('images/user-logo.png'),
+            backgroundImage: FileImage(
+              File(user.image.toString()),
+            ),
           ),
           height10,
           Text(
@@ -116,7 +131,7 @@ class ScreenProfile extends StatelessWidget {
                       backgroundColor: const Color.fromARGB(255, 251, 231, 171),
                       iconColor: const Color.fromARGB(255, 223, 168, 4),
                       ontap: () {
-                        Get.to(EditProfile());
+                        Get.to(const EditProfile());
                       },
                     ),
                     height20,
@@ -136,26 +151,7 @@ class ScreenProfile extends StatelessWidget {
                       backgroundColor: const Color.fromARGB(255, 247, 196, 228),
                       iconColor: const Color.fromARGB(255, 243, 63, 177),
                       ontap: () {
-                        Get.defaultDialog(
-                          title: 'Erase data',
-                          middleText:
-                              'This will remove all your data.Are you sure to delete all data.',
-                          backgroundColor: Appcolor.white,
-                          radius: 20,
-                          contentPadding: const EdgeInsets.all(10),
-                          titlePadding: const EdgeInsets.all(20),
-                          confirm: TextButton(
-                              onPressed: () {
-                                transactionController.logoutProfile();
-                                Get.back();
-                              },
-                              child: const Text('Erase')),
-                          cancel: TextButton(
-                              onPressed: () {
-                                Get.back();
-                              },
-                              child: const Text('Cancel')),
-                        );
+                        dialogBox();
                       },
                     ),
                     height20,
@@ -195,7 +191,6 @@ class ProfileCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    bool notiSwitch = true;
     return GestureDetector(
       onTap: ontap,
       child: Card(

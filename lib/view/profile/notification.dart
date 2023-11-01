@@ -10,19 +10,19 @@ class NotificationPage extends StatelessWidget {
       backgroundColor: Appcolor.tertiaryColor,
       appBar: AppBar(
         centerTitle: true,
-        title: Text(
+        title: const Text(
           'Notifications',
           style: TextStyle(color: Colors.black),
         ),
         backgroundColor: Colors.transparent,
         elevation: 0,
-        iconTheme: IconThemeData(color: Colors.black),
+        iconTheme: const IconThemeData(color: Colors.black),
       ),
       body: Column(
         children: [
           ListTile(
             trailing: Switch.adaptive(value: true, onChanged: (value) {}),
-            title: Text('Show notifications'),
+            title: const Text('Show notifications'),
           )
         ],
       ),

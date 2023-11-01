@@ -27,7 +27,7 @@ class _BottomNavState extends State<BottomNav> {
     //ScreenAddTransaction(),
     ScreenHistory(),
     ScreenRemainder(),
-    ScreenProfile(),
+    const ScreenProfile(),
   ];
 
   @override

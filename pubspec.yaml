@@ -47,6 +47,7 @@ dependencies:
   shared_preferences:
   intl: ^0.18.1
   flutter_slidable: ^3.0.0
+  image_picker: ^1.0.4
   
 
 
