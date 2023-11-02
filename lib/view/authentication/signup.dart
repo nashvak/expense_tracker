@@ -12,8 +12,10 @@ import 'package:expense_tracker/models/auth_model/auth_model.dart';
 import 'package:expense_tracker/view/authentication/splash_screen.dart';
 
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:path_provider/path_provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import '../../constatnts/custom_widgets/common/button.dart';
@@ -41,7 +43,7 @@ class _ScreenSignupState extends State<ScreenSignup> {
   final PasswordController pass = Get.put(PasswordController());
 
   final AuthController authController = Get.put(AuthController());
-  final defautlImagePath = 'images/user-logo.png';
+  final assetImageUrl = 'images/user-logo.png';
 
   @override
   void dispose() {
@@ -53,6 +55,49 @@ class _ScreenSignupState extends State<ScreenSignup> {
   }
 
   XFile? image;
+
+  ///
+  ///
+  ///
+  Future<String> copyAssetImageToLocalFile(String assetImagePath) async {
+    final ByteData assetImageByteData = await rootBundle.load(assetImagePath);
+    final Uint8List assetImageBytes = assetImageByteData.buffer.asUint8List();
+
+    final appDir = await getTemporaryDirectory();
+    final localImagePath = '${appDir.path}/${assetImagePath.split('/').last}';
+
+    final imageFile = File(localImagePath);
+    await imageFile.writeAsBytes(assetImageBytes);
+
+    return localImagePath;
+  }
+
+  addProfile() async {
+    if (formkey.currentState!.validate()) {
+      var pref = await SharedPreferences.getInstance();
+      pref.setBool(ScreenSplashState.keyToLogin, true);
+      // String imageUrl = (image != null)
+      //     ? image!.path
+      //     : await copyAssetImageToLocalFile(assetImageUrl);
+
+      String imageUrl = (image == null)
+          ? await copyAssetImageToLocalFile(assetImageUrl)
+          : image!.path;
+
+      authController.createUser(
+        auth: AuthModel(
+          name: nameController.text,
+          email: emailController.text,
+          password: passController.text,
+          image: imageUrl,
+        ),
+      );
+      print(imageUrl);
+      Get.offNamed('/bottom');
+    } else {
+      Get.snackbar('Error', 'Error occured while creating user');
+    }
+  }
 
 // function to bottom sheet
   cameraOrGallery() {
@@ -154,20 +199,20 @@ class _ScreenSignupState extends State<ScreenSignup> {
                             child: GetBuilder<AuthController>(
                               builder: (controller) {
                                 return (image == null)
-                                    ? Stack(
+                                    ? const Stack(
                                         alignment: Alignment.bottomCenter,
                                         children: [
                                           Padding(
-                                            padding: const EdgeInsets.all(10.0),
+                                            padding: EdgeInsets.all(10.0),
                                             child: CircleAvatar(
                                               radius: 50,
                                               backgroundColor:
                                                   Appcolor.tertiaryColor,
-                                              backgroundImage:
-                                                  AssetImage(defautlImagePath),
+                                              backgroundImage: AssetImage(
+                                                  'images/user-logo.png'),
                                             ),
                                           ),
-                                          const CircleAvatar(
+                                          CircleAvatar(
                                             radius: 15,
                                             backgroundColor: Colors.white,
                                             child: Icon(
@@ -221,27 +266,7 @@ class _ScreenSignupState extends State<ScreenSignup> {
                           CustomButton(
                             title: 'Register',
                             onTap: () async {
-                              if (formkey.currentState!.validate()) {
-                                var pref =
-                                    await SharedPreferences.getInstance();
-                                pref.setBool(
-                                    ScreenSplashState.keyToLogin, true);
-                                String? imageUrl = (image != null)
-                                    ? image!.path
-                                    : defautlImagePath;
-                                authController.createUser(
-                                  auth: AuthModel(
-                                    name: nameController.text,
-                                    email: emailController.text,
-                                    password: passController.text,
-                                    image: imageUrl,
-                                  ),
-                                );
-                                Get.offNamed('/bottom');
-                              } else {
-                                Get.snackbar('Error',
-                                    'Error occured while creating user');
-                              }
+                              addProfile();
                             },
                           ),
                         ],

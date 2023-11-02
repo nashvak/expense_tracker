@@ -1,5 +1,4 @@
 import 'dart:io';
-
 import 'package:expense_tracker/constatnts/colors.dart';
 import 'package:expense_tracker/constatnts/custom_widgets/common/sizedbox.dart';
 import 'package:expense_tracker/constatnts/custom_widgets/common/textstyle.dart';
@@ -93,11 +92,7 @@ class _EditProfileState extends State<EditProfile> {
   editProfile() {
     if (editformkey.currentState!.validate()) {
       AuthModel user = authController.authBox.getAt(0);
-      String? imageUrl = (user.image == null && image == null)
-          ? null
-          : (image == null && user.image != null)
-              ? user.image
-              : image!.path;
+      String? imageUrl = (image == null) ? user.image : image!.path;
       authController.updateUser(
         index: 0,
         auth: AuthModel(
@@ -107,6 +102,7 @@ class _EditProfileState extends State<EditProfile> {
           image: imageUrl,
         ),
       );
+      Get.back();
     } else {
       Get.snackbar('Error', 'Error occured while creating user');
     }
@@ -147,20 +143,20 @@ class _EditProfileState extends State<EditProfile> {
                     },
                     child: GetBuilder<AuthController>(
                       builder: (controller) {
-                        return (user.image == null && image == null)
-                            ? const Stack(
+                        return (image == null)
+                            ? Stack(
                                 alignment: Alignment.bottomCenter,
                                 children: [
                                   Padding(
-                                    padding: EdgeInsets.all(10.0),
+                                    padding: const EdgeInsets.all(10.0),
                                     child: CircleAvatar(
                                       radius: 50,
                                       backgroundColor: Appcolor.tertiaryColor,
                                       backgroundImage:
-                                          AssetImage('images/user-logo.png'),
+                                          FileImage(File(user.image!)),
                                     ),
                                   ),
-                                  CircleAvatar(
+                                  const CircleAvatar(
                                     radius: 15,
                                     backgroundColor: Colors.white,
                                     child: Icon(
@@ -179,10 +175,7 @@ class _EditProfileState extends State<EditProfile> {
                                       radius: 50,
                                       backgroundColor: Appcolor.tertiaryColor,
                                       backgroundImage: FileImage(
-                                        File((image == null &&
-                                                user.image != null)
-                                            ? user.image.toString()
-                                            : image!.path),
+                                        File(image!.path),
                                       ),
                                     ),
                                   ),

@@ -93,17 +93,15 @@ class _ScreenProfileState extends State<ScreenProfile> {
       ),
       body: Column(
         children: [
-          (user.image != null)
-              ? CircleAvatar(
-                  radius: 50,
-                  backgroundColor: Appcolor.tertiaryColor,
-                  backgroundImage: FileImage(File(user.image!)),
-                )
-              : CircleAvatar(
-                  radius: 50,
-                  backgroundColor: Appcolor.tertiaryColor,
-                  backgroundImage: AssetImage('images/user-logo.png'),
-                ),
+          GetBuilder<AuthController>(
+            builder: (controller) {
+              return CircleAvatar(
+                radius: 50,
+                backgroundColor: Appcolor.tertiaryColor,
+                backgroundImage: FileImage(File(user.image!)),
+              );
+            },
+          ),
           height10,
           Text(
             user.name,
