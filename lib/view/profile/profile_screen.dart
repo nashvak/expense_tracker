@@ -75,6 +75,7 @@ class _ScreenProfileState extends State<ScreenProfile> {
   @override
   Widget build(BuildContext context) {
     AuthModel user = authController.authBox.getAt(0);
+    print(user.image);
     return Scaffold(
       backgroundColor: Appcolor.primaryColor,
       appBar: AppBar(
@@ -92,13 +93,17 @@ class _ScreenProfileState extends State<ScreenProfile> {
       ),
       body: Column(
         children: [
-          CircleAvatar(
-            radius: 50,
-            backgroundColor: Appcolor.tertiaryColor,
-            backgroundImage: FileImage(
-              File(user.image.toString()),
-            ),
-          ),
+          (user.image != null)
+              ? CircleAvatar(
+                  radius: 50,
+                  backgroundColor: Appcolor.tertiaryColor,
+                  backgroundImage: FileImage(File(user.image!)),
+                )
+              : CircleAvatar(
+                  radius: 50,
+                  backgroundColor: Appcolor.tertiaryColor,
+                  backgroundImage: AssetImage('images/user-logo.png'),
+                ),
           height10,
           Text(
             user.name,

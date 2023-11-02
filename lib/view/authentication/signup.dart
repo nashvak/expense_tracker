@@ -13,6 +13,7 @@ import 'package:expense_tracker/view/authentication/splash_screen.dart';
 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import '../../constatnts/custom_widgets/common/button.dart';
@@ -50,7 +51,7 @@ class _ScreenSignupState extends State<ScreenSignup> {
     super.dispose();
   }
 
-  File? image;
+  XFile? image;
 
 // function to bottom sheet
   cameraOrGallery() {
@@ -178,7 +179,8 @@ class _ScreenSignupState extends State<ScreenSignup> {
                                     : CircleAvatar(
                                         radius: 50,
                                         backgroundColor: Appcolor.tertiaryColor,
-                                        backgroundImage: FileImage(image!),
+                                        backgroundImage:
+                                            FileImage(File(image!.path)),
                                       );
                               },
                             ),
@@ -224,14 +226,18 @@ class _ScreenSignupState extends State<ScreenSignup> {
                                     await SharedPreferences.getInstance();
                                 pref.setBool(
                                     ScreenSplashState.keyToLogin, true);
-
+                                String? imageUrl =
+                                    (image != null) ? image!.path : null;
                                 authController.createUser(
-                                    auth: AuthModel(
-                                        name: nameController.text,
-                                        email: emailController.text,
-                                        password: passController.text,
-                                        image: image.toString()));
+                                  auth: AuthModel(
+                                    name: nameController.text,
+                                    email: emailController.text,
+                                    password: passController.text,
+                                    image: imageUrl,
+                                  ),
+                                );
                                 Get.offNamed('/bottom');
+                                print(imageUrl);
                               } else {
                                 Get.snackbar('Error',
                                     'Error occured while creating user');

@@ -6,7 +6,6 @@ import '../models/auth_model/auth_model.dart';
 import 'package:image_picker/image_picker.dart';
 
 class AuthController extends GetxController {
-  File? file;
   XFile? pickedFile;
   String? imageURL;
   final Box _authBox = Hive.box<AuthModel>('AuthBox');
@@ -17,16 +16,22 @@ class AuthController extends GetxController {
   }
 
   // A C C E S S    I M A G E
-  Future<File> getImag(bool isCamera) async {
+  Future<XFile> getImag(bool isCamera) async {
     final picker = ImagePicker();
     if (isCamera) {
       pickedFile = await picker.pickImage(source: ImageSource.camera);
     } else {
       pickedFile = await picker.pickImage(source: ImageSource.gallery);
     }
-    file = File(pickedFile!.path);
+    // if (pickedFile != null) {
+    //   file = File(pickedFile!.path);
+    //   update();
+    // }
     update();
-    return file!;
+    return pickedFile!;
+    // file = File(pickedFile!.path);
+    //   update();
+    //   return file!;
   }
 
   updateUser({required int index, required AuthModel auth}) {

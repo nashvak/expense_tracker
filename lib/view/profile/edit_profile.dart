@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:expense_tracker/constatnts/colors.dart';
 import 'package:expense_tracker/constatnts/custom_widgets/common/sizedbox.dart';
 import 'package:expense_tracker/constatnts/custom_widgets/common/textstyle.dart';
@@ -31,6 +33,16 @@ class _EditProfileState extends State<EditProfile> {
     super.initState();
   }
 
+  XFile? image;
+  saveButton() {
+    AuthModel user = authController.authBox.getAt(0);
+    AuthModel userProfile = AuthModel(
+        name: nameController.text,
+        email: emailController.text,
+        password: user.password,
+        image: image!.path);
+  }
+
   cameraOrGallery() {
     Get.bottomSheet(
         backgroundColor: Appcolor.tertiaryColor,
@@ -49,7 +61,9 @@ class _EditProfileState extends State<EditProfile> {
                   CircleAvatar(
                     backgroundColor: Appcolor.white,
                     child: IconButton(
-                      onPressed: () {},
+                      onPressed: () {
+                        saveButton();
+                      },
                       icon: const Icon(Icons.close),
                     ),
                   ),
@@ -61,15 +75,15 @@ class _EditProfileState extends State<EditProfile> {
                 child: Wrap(
                   children: [
                     ListTile(
-                      onTap: () {
-                        authController.getImag(true);
+                      onTap: () async {
+                        image = await authController.getImag(true);
                       },
                       leading: const Icon(Icons.camera),
                       title: const Text('Camera'),
                     ),
                     ListTile(
-                      onTap: () {
-                        authController.getImag(false);
+                      onTap: () async {
+                        image = await authController.getImag(false);
                       },
                       leading: const Icon(Icons.photo),
                       title: const Text('Gallery'),
@@ -84,7 +98,7 @@ class _EditProfileState extends State<EditProfile> {
 
   @override
   Widget build(BuildContext context) {
-    //AuthModel user = authController.authBox.getAt(0);
+    AuthModel user = authController.authBox.getAt(0);
     return Scaffold(
       backgroundColor: Appcolor.tertiaryColor,
       appBar: AppBar(
@@ -111,26 +125,54 @@ class _EditProfileState extends State<EditProfile> {
                     onTap: () {
                       cameraOrGallery();
                     },
-                    child: Stack(
-                      alignment: Alignment.bottomCenter,
-                      children: [
-                        Padding(
-                          padding: const EdgeInsets.all(10.0),
-                          child: CircleAvatar(
-                            radius: 50,
-                            backgroundColor: Appcolor.tertiaryColor,
-                            child: Image.asset('images/user-logo.png'),
-                          ),
-                        ),
-                        const CircleAvatar(
-                          radius: 15,
-                          backgroundColor: Colors.white,
-                          child: Icon(
-                            Icons.add,
-                            color: Appcolor.secondaryColor,
-                          ),
-                        ),
-                      ],
+                    child: GetBuilder<AuthController>(
+                      builder: (controller) {
+                        return (user.image == null)
+                            ? Stack(
+                                alignment: Alignment.bottomCenter,
+                                children: [
+                                  Padding(
+                                    padding: const EdgeInsets.all(10.0),
+                                    child: CircleAvatar(
+                                      radius: 50,
+                                      backgroundColor: Appcolor.tertiaryColor,
+                                      child:
+                                          Image.asset('images/user-logo.png'),
+                                    ),
+                                  ),
+                                  const CircleAvatar(
+                                    radius: 15,
+                                    backgroundColor: Colors.white,
+                                    child: Icon(
+                                      Icons.add,
+                                      color: Appcolor.secondaryColor,
+                                    ),
+                                  ),
+                                ],
+                              )
+                            : Stack(
+                                alignment: Alignment.bottomCenter,
+                                children: [
+                                  Padding(
+                                    padding: const EdgeInsets.all(10.0),
+                                    child: CircleAvatar(
+                                      radius: 50,
+                                      backgroundColor: Appcolor.tertiaryColor,
+                                      backgroundImage: FileImage(
+                                          File(user.image.toString())),
+                                    ),
+                                  ),
+                                  const CircleAvatar(
+                                    radius: 15,
+                                    backgroundColor: Colors.white,
+                                    child: Icon(
+                                      Icons.edit,
+                                      color: Appcolor.secondaryColor,
+                                    ),
+                                  ),
+                                ],
+                              );
+                      },
                     ),
                   ),
                   height30,
