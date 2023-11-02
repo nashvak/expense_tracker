@@ -126,13 +126,16 @@ class _EditProfileState extends State<EditProfile> {
             builder: (controller) {
               return IconButton(
                   onPressed: () {
-                    authController.isButtonEnabled ? editProfile() : null;
+                    authController.nameButton && authController.emailButton
+                        ? editProfile()
+                        : null;
                   },
                   icon: Icon(
                     Icons.check,
-                    color: authController.isButtonEnabled
-                        ? Colors.blue
-                        : Colors.grey,
+                    color:
+                        authController.nameButton && authController.emailButton
+                            ? Colors.blue
+                            : Colors.grey,
                   ));
             },
           )
@@ -236,7 +239,7 @@ class _EditProfileState extends State<EditProfile> {
                       prefixIcon: Icon(Icons.person),
                     ),
                     onChanged: (value) {
-                      authController.updateButtonState(value);
+                      authController.nameButtonStatus(value);
                     },
                   ),
                   height30,
@@ -247,6 +250,9 @@ class _EditProfileState extends State<EditProfile> {
                       focusedBorder: UnderlineInputBorder(),
                       prefixIcon: Icon(Icons.email),
                     ),
+                    onChanged: (value) {
+                      authController.emailButtonStatus(value);
+                    },
                   ),
                 ],
               ),

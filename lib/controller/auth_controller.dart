@@ -43,11 +43,18 @@ class AuthController extends GetxController {
   }
 
 //enable or disable save button
-  var isButtonEnabled = true;
+  var nameButton = true;
+  var emailButton = true;
 
-  void updateButtonState(String text) {
-    isButtonEnabled = text.isNotEmpty;
-    print(isButtonEnabled);
+  void nameButtonStatus(String text) {
+    nameButton = text.isNotEmpty;
+    print(nameButton);
+    update();
+  }
+
+  void emailButtonStatus(String text) {
+    emailButton = text.isNotEmpty;
+    print(nameButton);
     update();
   }
 }
