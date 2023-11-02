@@ -41,6 +41,7 @@ class _ScreenSignupState extends State<ScreenSignup> {
   final PasswordController pass = Get.put(PasswordController());
 
   final AuthController authController = Get.put(AuthController());
+  final defautlImagePath = 'images/user-logo.png';
 
   @override
   void dispose() {
@@ -56,57 +57,57 @@ class _ScreenSignupState extends State<ScreenSignup> {
 // function to bottom sheet
   cameraOrGallery() {
     Get.bottomSheet(
-        backgroundColor: Appcolor.tertiaryColor,
-        Padding(
-          padding:
-              const EdgeInsets.only(top: 20, left: 20, right: 20, bottom: 0),
-          child: Column(
-            children: [
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      backgroundColor: Appcolor.tertiaryColor,
+      Padding(
+        padding: const EdgeInsets.only(top: 20, left: 20, right: 20, bottom: 0),
+        child: Column(
+          children: [
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                const Text(
+                  'Edit Profile',
+                  style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                ),
+                CircleAvatar(
+                  backgroundColor: Appcolor.white,
+                  child: IconButton(
+                    onPressed: () {
+                      Get.back();
+                    },
+                    icon: const Icon(Icons.close),
+                  ),
+                ),
+              ],
+            ),
+            height20,
+            Container(
+              color: Appcolor.white,
+              child: Wrap(
                 children: [
-                  const Text(
-                    'Edit Profile',
-                    style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                  ListTile(
+                    onTap: () async {
+                      image = await authController.getImag(true);
+                      Get.back();
+                    },
+                    leading: const Icon(Icons.camera_alt),
+                    title: const Text('Camera'),
                   ),
-                  CircleAvatar(
-                    backgroundColor: Appcolor.white,
-                    child: IconButton(
-                      onPressed: () {
-                        Get.back();
-                      },
-                      icon: const Icon(Icons.close),
-                    ),
-                  ),
+                  ListTile(
+                    onTap: () async {
+                      image = await authController.getImag(false);
+                      Get.back();
+                    },
+                    leading: const Icon(Icons.photo),
+                    title: const Text('Gallery'),
+                  )
                 ],
               ),
-              height20,
-              Container(
-                color: Appcolor.white,
-                child: Wrap(
-                  children: [
-                    ListTile(
-                      onTap: () async {
-                        image = await authController.getImag(true);
-                        Get.back();
-                      },
-                      leading: const Icon(Icons.camera_alt),
-                      title: const Text('Camera'),
-                    ),
-                    ListTile(
-                      onTap: () async {
-                        image = await authController.getImag(false);
-                        Get.back();
-                      },
-                      leading: const Icon(Icons.photo),
-                      title: const Text('Gallery'),
-                    )
-                  ],
-                ),
-              ),
-            ],
-          ),
-        ));
+            ),
+          ],
+        ),
+      ),
+    );
   }
 
   @override
@@ -153,20 +154,20 @@ class _ScreenSignupState extends State<ScreenSignup> {
                             child: GetBuilder<AuthController>(
                               builder: (controller) {
                                 return (image == null)
-                                    ? const Stack(
+                                    ? Stack(
                                         alignment: Alignment.bottomCenter,
                                         children: [
                                           Padding(
-                                            padding: EdgeInsets.all(10.0),
+                                            padding: const EdgeInsets.all(10.0),
                                             child: CircleAvatar(
                                               radius: 50,
                                               backgroundColor:
                                                   Appcolor.tertiaryColor,
-                                              backgroundImage: AssetImage(
-                                                  'images/user-logo.png'),
+                                              backgroundImage:
+                                                  AssetImage(defautlImagePath),
                                             ),
                                           ),
-                                          CircleAvatar(
+                                          const CircleAvatar(
                                             radius: 15,
                                             backgroundColor: Colors.white,
                                             child: Icon(
@@ -217,7 +218,6 @@ class _ScreenSignupState extends State<ScreenSignup> {
                             ),
                           ),
                           const BlankSpace(height: 30),
-
                           CustomButton(
                             title: 'Register',
                             onTap: () async {
@@ -226,8 +226,9 @@ class _ScreenSignupState extends State<ScreenSignup> {
                                     await SharedPreferences.getInstance();
                                 pref.setBool(
                                     ScreenSplashState.keyToLogin, true);
-                                String? imageUrl =
-                                    (image != null) ? image!.path : null;
+                                String? imageUrl = (image != null)
+                                    ? image!.path
+                                    : defautlImagePath;
                                 authController.createUser(
                                   auth: AuthModel(
                                     name: nameController.text,
@@ -237,21 +238,12 @@ class _ScreenSignupState extends State<ScreenSignup> {
                                   ),
                                 );
                                 Get.offNamed('/bottom');
-                                print(imageUrl);
                               } else {
                                 Get.snackbar('Error',
                                     'Error occured while creating user');
                               }
                             },
                           ),
-                          // const BlankSpace(height: 20),
-                          // BottomText(
-                          //     title: "already have an account? ",
-                          //     title2: "Log in",
-                          //     ontap: () {
-                          //       // Get.offNamed('/login');
-                          //       Get.to(Users());
-                          //     })
                         ],
                       ),
                     ),

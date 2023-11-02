@@ -1,5 +1,3 @@
-import 'dart:io';
-
 import 'package:hive/hive.dart';
 import 'package:get/get.dart';
 import '../models/auth_model/auth_model.dart';

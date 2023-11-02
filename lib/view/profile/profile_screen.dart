@@ -127,49 +127,55 @@ class _ScreenProfileState extends State<ScreenProfile> {
               child: Padding(
                 padding: const EdgeInsets.only(
                     top: 20, left: 15, right: 15, bottom: 0),
-                child: Column(
-                  children: [
-                    height30,
-                    ProfileCard(
-                      title: 'Edit Profile',
-                      icon: Icons.person,
-                      backgroundColor: const Color.fromARGB(255, 251, 231, 171),
-                      iconColor: const Color.fromARGB(255, 223, 168, 4),
-                      ontap: () {
-                        Get.to(const EditProfile());
-                      },
-                    ),
-                    height20,
-                    ProfileCard(
-                      title: 'Notifications',
-                      icon: Icons.notifications,
-                      backgroundColor: const Color.fromARGB(255, 184, 207, 238),
-                      iconColor: const Color.fromARGB(255, 37, 121, 231),
-                      ontap: () {
-                        Get.to(const NotificationPage());
-                      },
-                    ),
-                    height20,
-                    ProfileCard(
-                      title: 'Erase all data',
-                      icon: Icons.delete,
-                      backgroundColor: const Color.fromARGB(255, 247, 196, 228),
-                      iconColor: const Color.fromARGB(255, 243, 63, 177),
-                      ontap: () {
-                        dialogBox();
-                      },
-                    ),
-                    height20,
-                    ProfileCard(
-                      title: 'Logout',
-                      icon: Icons.logout,
-                      backgroundColor: const Color.fromARGB(255, 188, 244, 201),
-                      iconColor: const Color.fromARGB(255, 30, 213, 73),
-                      ontap: () {
-                        logoutProfile(context);
-                      },
-                    ),
-                  ],
+                child: SingleChildScrollView(
+                  child: Column(
+                    children: [
+                      height30,
+                      ProfileCard(
+                        title: 'Edit Profile',
+                        icon: Icons.person,
+                        backgroundColor:
+                            const Color.fromARGB(255, 251, 231, 171),
+                        iconColor: const Color.fromARGB(255, 223, 168, 4),
+                        ontap: () {
+                          Get.to(const EditProfile());
+                        },
+                      ),
+                      height20,
+                      ProfileCard(
+                        title: 'Notifications',
+                        icon: Icons.notifications,
+                        backgroundColor:
+                            const Color.fromARGB(255, 184, 207, 238),
+                        iconColor: const Color.fromARGB(255, 37, 121, 231),
+                        ontap: () {
+                          Get.to(const NotificationPage());
+                        },
+                      ),
+                      height20,
+                      ProfileCard(
+                        title: 'Erase all data',
+                        icon: Icons.delete,
+                        backgroundColor:
+                            const Color.fromARGB(255, 247, 196, 228),
+                        iconColor: const Color.fromARGB(255, 243, 63, 177),
+                        ontap: () {
+                          dialogBox();
+                        },
+                      ),
+                      height20,
+                      ProfileCard(
+                        title: 'Logout',
+                        icon: Icons.logout,
+                        backgroundColor:
+                            const Color.fromARGB(255, 188, 244, 201),
+                        iconColor: const Color.fromARGB(255, 30, 213, 73),
+                        ontap: () {
+                          logoutProfile(context);
+                        },
+                      ),
+                    ],
+                  ),
                 ),
               ),
             ),

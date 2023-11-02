@@ -34,14 +34,6 @@ class _EditProfileState extends State<EditProfile> {
   }
 
   XFile? image;
-  saveButton() {
-    AuthModel user = authController.authBox.getAt(0);
-    AuthModel userProfile = AuthModel(
-        name: nameController.text,
-        email: emailController.text,
-        password: user.password,
-        image: image!.path);
-  }
 
   cameraOrGallery() {
     Get.bottomSheet(
@@ -62,7 +54,7 @@ class _EditProfileState extends State<EditProfile> {
                     backgroundColor: Appcolor.white,
                     child: IconButton(
                       onPressed: () {
-                        saveButton();
+                        Get.back();
                       },
                       icon: const Icon(Icons.close),
                     ),
@@ -77,6 +69,7 @@ class _EditProfileState extends State<EditProfile> {
                     ListTile(
                       onTap: () async {
                         image = await authController.getImag(true);
+                        Get.back();
                       },
                       leading: const Icon(Icons.camera),
                       title: const Text('Camera'),
@@ -84,6 +77,7 @@ class _EditProfileState extends State<EditProfile> {
                     ListTile(
                       onTap: () async {
                         image = await authController.getImag(false);
+                        Get.back();
                       },
                       leading: const Icon(Icons.photo),
                       title: const Text('Gallery'),
@@ -94,6 +88,28 @@ class _EditProfileState extends State<EditProfile> {
             ],
           ),
         ));
+  }
+
+  editProfile() {
+    if (editformkey.currentState!.validate()) {
+      AuthModel user = authController.authBox.getAt(0);
+      String? imageUrl = (user.image == null && image == null)
+          ? null
+          : (image == null && user.image != null)
+              ? user.image
+              : image!.path;
+      authController.updateUser(
+        index: 0,
+        auth: AuthModel(
+          name: nameController.text,
+          email: emailController.text,
+          password: user.password,
+          image: imageUrl,
+        ),
+      );
+    } else {
+      Get.snackbar('Error', 'Error occured while creating user');
+    }
   }
 
   @override
@@ -109,7 +125,13 @@ class _EditProfileState extends State<EditProfile> {
           style: screenTitleText(),
         ),
         elevation: 0,
-        actions: [IconButton(onPressed: () {}, icon: const Icon(Icons.check))],
+        actions: [
+          IconButton(
+              onPressed: () {
+                editProfile();
+              },
+              icon: const Icon(Icons.check))
+        ],
       ),
       body: Padding(
         padding: const EdgeInsets.all(20),
@@ -118,8 +140,6 @@ class _EditProfileState extends State<EditProfile> {
             child: Form(
               key: editformkey,
               child: Column(
-                //mainAxisAlignment: MainAxisAlignment.start,
-                //crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
                   GestureDetector(
                     onTap: () {
@@ -127,20 +147,20 @@ class _EditProfileState extends State<EditProfile> {
                     },
                     child: GetBuilder<AuthController>(
                       builder: (controller) {
-                        return (user.image == null)
-                            ? Stack(
+                        return (user.image == null && image == null)
+                            ? const Stack(
                                 alignment: Alignment.bottomCenter,
                                 children: [
                                   Padding(
-                                    padding: const EdgeInsets.all(10.0),
+                                    padding: EdgeInsets.all(10.0),
                                     child: CircleAvatar(
                                       radius: 50,
                                       backgroundColor: Appcolor.tertiaryColor,
-                                      child:
-                                          Image.asset('images/user-logo.png'),
+                                      backgroundImage:
+                                          AssetImage('images/user-logo.png'),
                                     ),
                                   ),
-                                  const CircleAvatar(
+                                  CircleAvatar(
                                     radius: 15,
                                     backgroundColor: Colors.white,
                                     child: Icon(
@@ -159,7 +179,11 @@ class _EditProfileState extends State<EditProfile> {
                                       radius: 50,
                                       backgroundColor: Appcolor.tertiaryColor,
                                       backgroundImage: FileImage(
-                                          File(user.image.toString())),
+                                        File((image == null &&
+                                                user.image != null)
+                                            ? user.image.toString()
+                                            : image!.path),
+                                      ),
                                     ),
                                   ),
                                   const CircleAvatar(
@@ -172,6 +196,32 @@ class _EditProfileState extends State<EditProfile> {
                                   ),
                                 ],
                               );
+                        // : Stack(
+                        //     alignment: Alignment.bottomCenter,
+                        //     children: [
+                        //       Padding(
+                        //         padding: const EdgeInsets.all(10.0),
+                        //         child: CircleAvatar(
+                        //           radius: 50,
+                        //           backgroundColor:
+                        //               Appcolor.tertiaryColor,
+                        //           backgroundImage: FileImage(
+                        //             File(
+                        //               image!.path,
+                        //             ),
+                        //           ),
+                        //         ),
+                        //       ),
+                        //       const CircleAvatar(
+                        //         radius: 15,
+                        //         backgroundColor: Colors.white,
+                        //         child: Icon(
+                        //           Icons.edit,
+                        //           color: Appcolor.secondaryColor,
+                        //         ),
+                        //       ),
+                        //     ],
+                        //   );
                       },
                     ),
                   ),
