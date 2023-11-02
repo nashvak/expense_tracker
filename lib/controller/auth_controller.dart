@@ -41,4 +41,13 @@ class AuthController extends GetxController {
     _authBox.deleteAt(index);
     update();
   }
+
+//enable or disable save button
+  var isButtonEnabled = true;
+
+  void updateButtonState(String text) {
+    isButtonEnabled = text.isNotEmpty;
+    print(isButtonEnabled);
+    update();
+  }
 }

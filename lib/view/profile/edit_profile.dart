@@ -33,7 +33,7 @@ class _EditProfileState extends State<EditProfile> {
   }
 
   XFile? image;
-
+  bool isButtonEnabled = false;
   cameraOrGallery() {
     Get.bottomSheet(
         backgroundColor: Appcolor.tertiaryColor,
@@ -122,11 +122,20 @@ class _EditProfileState extends State<EditProfile> {
         ),
         elevation: 0,
         actions: [
-          IconButton(
-              onPressed: () {
-                editProfile();
-              },
-              icon: const Icon(Icons.check))
+          GetBuilder<AuthController>(
+            builder: (controller) {
+              return IconButton(
+                  onPressed: () {
+                    authController.isButtonEnabled ? editProfile() : null;
+                  },
+                  icon: Icon(
+                    Icons.check,
+                    color: authController.isButtonEnabled
+                        ? Colors.blue
+                        : Colors.grey,
+                  ));
+            },
+          )
         ],
       ),
       body: Padding(
@@ -226,6 +235,9 @@ class _EditProfileState extends State<EditProfile> {
                       focusedBorder: UnderlineInputBorder(),
                       prefixIcon: Icon(Icons.person),
                     ),
+                    onChanged: (value) {
+                      authController.updateButtonState(value);
+                    },
                   ),
                   height30,
                   TextField(
