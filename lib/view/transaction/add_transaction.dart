@@ -161,10 +161,7 @@ class _ScreenAddTransactionState extends State<ScreenAddTransaction> {
                       items: PaymentMode.values.map((PaymentMode mode) {
                         return DropdownMenuItem<PaymentMode>(
                           value: mode,
-                          child: Text(mode
-                              .toString()
-                              .split('.')
-                              .last), // To display the enum value as a string
+                          child: Text(mode.toString().split('.').last),
                         );
                       }).toList(),
                     );
@@ -199,10 +196,7 @@ class _ScreenAddTransactionState extends State<ScreenAddTransaction> {
                       items: CatagoryType.values.map((CatagoryType mode) {
                         return DropdownMenuItem<CatagoryType>(
                           value: mode,
-                          child: Text(mode
-                              .toString()
-                              .split('.')
-                              .last), // To display the enum value as a string
+                          child: Text(mode.toString().split('.').last),
                         );
                       }).toList(),
                     );

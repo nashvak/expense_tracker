@@ -104,7 +104,7 @@ class _ScreenViewTransactionState extends State<ScreenViewTransaction> {
                 onTap: () {
                   deleteDialog();
                 },
-                child: Icon(
+                child: const Icon(
                   Icons.delete,
                   color: Appcolor.primaryColor,
                 ),
@@ -255,7 +255,7 @@ class _ScreenViewTransactionState extends State<ScreenViewTransaction> {
                     ],
                   ),
                 ),
-                BlankSpace(
+                const BlankSpace(
                   height: 30,
                 ),
                 Container(
@@ -294,7 +294,7 @@ class _ScreenViewTransactionState extends State<ScreenViewTransaction> {
                     ],
                   ),
                 ),
-                BlankSpace(
+                const BlankSpace(
                   height: 30,
                 ),
                 Container(
