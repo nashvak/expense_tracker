@@ -203,7 +203,7 @@ class ScreenHistory extends StatelessWidget {
                                 ),
                               ]),
                           child: Listtile(
-                              type: tr.type,
+                              type: tr.transactionType,
                               ontap: () {
                                 Get.to(() => const ScreenViewTransaction(),
                                     arguments: index);

@@ -19,13 +19,15 @@ class TransactionController extends GetxController {
 //
   double get totalIncome {
     return sortedList
-        .where((transaction) => transaction.type == CatagoryType.income)
+        .where((transaction) =>
+            transaction.transactionType == TransactionType.income)
         .fold(0.0, (sum, item) => sum + item.amount);
   }
 
   double get totalExpense {
     return sortedList
-        .where((transaction) => transaction.type == CatagoryType.expense)
+        .where((transaction) =>
+            transaction.transactionType == TransactionType.expense)
         .fold(0.0, (sum, item) => sum + item.amount);
   }
 

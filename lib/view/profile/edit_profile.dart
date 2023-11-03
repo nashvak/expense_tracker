@@ -234,9 +234,15 @@ class _EditProfileState extends State<EditProfile> {
                   TextField(
                     controller: nameController,
                     decoration: const InputDecoration(
-                      enabledBorder: UnderlineInputBorder(),
-                      focusedBorder: UnderlineInputBorder(),
-                      prefixIcon: Icon(Icons.person),
+                      enabledBorder: UnderlineInputBorder(
+                        borderSide: BorderSide(color: Colors.grey),
+                      ),
+                      focusedBorder: UnderlineInputBorder(
+                        borderSide: BorderSide(color: Colors.grey),
+                      ),
+                      prefixIcon: Icon(
+                        Icons.person,
+                      ),
                     ),
                     onChanged: (value) {
                       authController.nameButtonStatus(value);
@@ -247,7 +253,9 @@ class _EditProfileState extends State<EditProfile> {
                     controller: emailController,
                     decoration: const InputDecoration(
                       border: UnderlineInputBorder(),
-                      focusedBorder: UnderlineInputBorder(),
+                      focusedBorder: UnderlineInputBorder(
+                        borderSide: BorderSide(color: Colors.grey),
+                      ),
                       prefixIcon: Icon(Icons.email),
                     ),
                     onChanged: (value) {

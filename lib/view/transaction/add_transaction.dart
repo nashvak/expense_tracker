@@ -31,11 +31,13 @@ class _ScreenAddTransactionState extends State<ScreenAddTransaction> {
     if (addFormkey.currentState!.validate()) {
       // print('hello');
       Transaction transaction = Transaction(
-          description: descriptionController.text,
-          amount: int.parse(amountController.text),
-          date: pickedDate!,
-          mode: ui.selectedPaymentMode!,
-          type: ui.selectedCatagory);
+        description: descriptionController.text,
+        amount: int.parse(amountController.text),
+        date: pickedDate!,
+        paymentMode: ui.selectedPaymentMode!,
+        transactionType: ui.selectedTransactionType,
+        catagoryType: ui.selectedCategory!,
+      );
       controller.createTransaction(transaction: transaction);
 
       Get.back();
@@ -55,10 +57,10 @@ class _ScreenAddTransactionState extends State<ScreenAddTransaction> {
                 GetBuilder<UiController>(
                   builder: (controller) {
                     return ToggleSwitch(
-                      initialLabelIndex:
-                          controller.selectedCatagory == CatagoryType.income
-                              ? 0
-                              : 1,
+                      initialLabelIndex: controller.selectedTransactionType ==
+                              TransactionType.income
+                          ? 0
+                          : 1,
                       minWidth: 120,
                       minHeight: 50,
                       cornerRadius: 10,
@@ -125,57 +127,87 @@ class _ScreenAddTransactionState extends State<ScreenAddTransaction> {
 
                           dateController.text = DateFormat('dd/MM/yyyy')
                               .format(controller.selectedDate);
-
-                          // setState(() {});
-                          // dateController.text =
-                          //     DateFormat('dd/MM/yyyy').format(pickedDate!);
                         }
                       },
                     );
                   },
                 ),
                 height30,
-                GetBuilder<UiController>(builder: (controller) {
-                  return DropdownButtonFormField<PaymentMode>(
-                    hint: const Text('Payment mode '),
-                    decoration: InputDecoration(
-                      enabledBorder: OutlineInputBorder(
-                        borderSide: const BorderSide(
-                            color: Appcolor.tertiaryColor, width: 1),
-                        borderRadius: BorderRadius.circular(50),
+                GetBuilder<UiController>(
+                  builder: (controller) {
+                    return DropdownButtonFormField<PaymentMode>(
+                      hint: const Text('Payment mode '),
+                      decoration: InputDecoration(
+                        enabledBorder: OutlineInputBorder(
+                          borderSide: const BorderSide(
+                              color: Appcolor.tertiaryColor, width: 1),
+                          borderRadius: BorderRadius.circular(50),
+                        ),
+                        focusedBorder: OutlineInputBorder(
+                          borderSide: const BorderSide(
+                              color: Appcolor.tertiaryColor, width: 1),
+                          borderRadius: BorderRadius.circular(50),
+                        ),
+                        filled: true,
+                        fillColor: Appcolor.tertiaryColor,
                       ),
-                      focusedBorder: OutlineInputBorder(
-                        borderSide: const BorderSide(
-                            color: Appcolor.tertiaryColor, width: 1),
-                        borderRadius: BorderRadius.circular(50),
-                      ),
-                      filled: true,
-                      fillColor: Appcolor.tertiaryColor,
-                    ),
-                    validator: (value) =>
-                        value == null ? "Select Payment mode" : null,
-                    dropdownColor: Appcolor.tertiaryColor,
-                    value: controller.selectedPaymentMode,
-                    onChanged: (PaymentMode? newValue) {
-                      // setState(() {
-                      //   selectedPaymentMode = newValue!;
-
-                      //   // print(selectedPaymentMode);
-                      // });
-                      controller.changePaymentMode(newValue!);
-                    },
-                    items: PaymentMode.values.map((PaymentMode mode) {
-                      return DropdownMenuItem<PaymentMode>(
-                        value: mode,
-                        child: Text(mode
-                            .toString()
-                            .split('.')
-                            .last), // To display the enum value as a string
-                      );
-                    }).toList(),
-                  );
-                }),
+                      validator: (value) =>
+                          value == null ? "Select Payment mode" : null,
+                      dropdownColor: Appcolor.tertiaryColor,
+                      value: controller.selectedPaymentMode,
+                      onChanged: (PaymentMode? newValue) {
+                        controller.changePaymentMode(newValue!);
+                      },
+                      items: PaymentMode.values.map((PaymentMode mode) {
+                        return DropdownMenuItem<PaymentMode>(
+                          value: mode,
+                          child: Text(mode
+                              .toString()
+                              .split('.')
+                              .last), // To display the enum value as a string
+                        );
+                      }).toList(),
+                    );
+                  },
+                ),
                 height30,
+                GetBuilder<UiController>(
+                  builder: (controller) {
+                    return DropdownButtonFormField<CatagoryType>(
+                      hint: const Text('Catagory '),
+                      decoration: InputDecoration(
+                        enabledBorder: OutlineInputBorder(
+                          borderSide: const BorderSide(
+                              color: Appcolor.tertiaryColor, width: 1),
+                          borderRadius: BorderRadius.circular(50),
+                        ),
+                        focusedBorder: OutlineInputBorder(
+                          borderSide: const BorderSide(
+                              color: Appcolor.tertiaryColor, width: 1),
+                          borderRadius: BorderRadius.circular(50),
+                        ),
+                        filled: true,
+                        fillColor: Appcolor.tertiaryColor,
+                      ),
+                      validator: (value) =>
+                          value == null ? "Select Category" : null,
+                      dropdownColor: Appcolor.tertiaryColor,
+                      value: controller.selectedCategory,
+                      onChanged: (CatagoryType? newValue) {
+                        controller.changeCatagory(newValue!);
+                      },
+                      items: CatagoryType.values.map((CatagoryType mode) {
+                        return DropdownMenuItem<CatagoryType>(
+                          value: mode,
+                          child: Text(mode
+                              .toString()
+                              .split('.')
+                              .last), // To display the enum value as a string
+                        );
+                      }).toList(),
+                    );
+                  },
+                ),
                 height20,
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,

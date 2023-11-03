@@ -20,15 +20,16 @@ class TransactionAdapter extends TypeAdapter<Transaction> {
       description: fields[0] as String,
       amount: fields[1] as int,
       date: fields[2] as DateTime,
-      mode: fields[4] as PaymentMode,
-      type: fields[3] as CatagoryType,
+      paymentMode: fields[4] as PaymentMode,
+      catagoryType: fields[3] as CatagoryType,
+      transactionType: fields[5] as TransactionType,
     );
   }
 
   @override
   void write(BinaryWriter writer, Transaction obj) {
     writer
-      ..writeByte(5)
+      ..writeByte(6)
       ..writeByte(0)
       ..write(obj.description)
       ..writeByte(1)
@@ -36,9 +37,11 @@ class TransactionAdapter extends TypeAdapter<Transaction> {
       ..writeByte(2)
       ..write(obj.date)
       ..writeByte(3)
-      ..write(obj.type)
+      ..write(obj.catagoryType)
       ..writeByte(4)
-      ..write(obj.mode);
+      ..write(obj.paymentMode)
+      ..writeByte(5)
+      ..write(obj.transactionType);
   }
 
   @override
@@ -60,22 +63,52 @@ class CatagoryTypeAdapter extends TypeAdapter<CatagoryType> {
   CatagoryType read(BinaryReader reader) {
     switch (reader.readByte()) {
       case 0:
-        return CatagoryType.income;
+        return CatagoryType.savings;
       case 1:
-        return CatagoryType.expense;
+        return CatagoryType.bills;
+      case 2:
+        return CatagoryType.food;
+      case 3:
+        return CatagoryType.entertainment;
+      case 4:
+        return CatagoryType.transportation;
+      case 5:
+        return CatagoryType.shopping;
+      case 6:
+        return CatagoryType.insurance;
+      case 7:
+        return CatagoryType.others;
       default:
-        return CatagoryType.income;
+        return CatagoryType.savings;
     }
   }
 
   @override
   void write(BinaryWriter writer, CatagoryType obj) {
     switch (obj) {
-      case CatagoryType.income:
+      case CatagoryType.savings:
         writer.writeByte(0);
         break;
-      case CatagoryType.expense:
+      case CatagoryType.bills:
         writer.writeByte(1);
+        break;
+      case CatagoryType.food:
+        writer.writeByte(2);
+        break;
+      case CatagoryType.entertainment:
+        writer.writeByte(3);
+        break;
+      case CatagoryType.transportation:
+        writer.writeByte(4);
+        break;
+      case CatagoryType.shopping:
+        writer.writeByte(5);
+        break;
+      case CatagoryType.insurance:
+        writer.writeByte(6);
+        break;
+      case CatagoryType.others:
+        writer.writeByte(7);
         break;
     }
   }
@@ -126,6 +159,45 @@ class PaymentModeAdapter extends TypeAdapter<PaymentMode> {
   bool operator ==(Object other) =>
       identical(this, other) ||
       other is PaymentModeAdapter &&
+          runtimeType == other.runtimeType &&
+          typeId == other.typeId;
+}
+
+class TransactionTypeAdapter extends TypeAdapter<TransactionType> {
+  @override
+  final int typeId = 4;
+
+  @override
+  TransactionType read(BinaryReader reader) {
+    switch (reader.readByte()) {
+      case 0:
+        return TransactionType.income;
+      case 1:
+        return TransactionType.expense;
+      default:
+        return TransactionType.income;
+    }
+  }
+
+  @override
+  void write(BinaryWriter writer, TransactionType obj) {
+    switch (obj) {
+      case TransactionType.income:
+        writer.writeByte(0);
+        break;
+      case TransactionType.expense:
+        writer.writeByte(1);
+        break;
+    }
+  }
+
+  @override
+  int get hashCode => typeId.hashCode;
+
+  @override
+  bool operator ==(Object other) =>
+      identical(this, other) ||
+      other is TransactionTypeAdapter &&
           runtimeType == other.runtimeType &&
           typeId == other.typeId;
 }

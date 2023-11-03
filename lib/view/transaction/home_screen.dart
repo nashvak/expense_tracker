@@ -70,7 +70,7 @@ class ScreenHome extends StatelessWidget {
                                           date: DateFormat('dd/MM/yyyy')
                                               .format(tr.date),
                                           title: tr.description,
-                                          type: tr.type);
+                                          type: tr.transactionType);
                                     },
                                     separatorBuilder: (context, index) {
                                       return const SizedBox(

@@ -50,7 +50,7 @@ class Listtile extends StatelessWidget {
   final String title;
   final String date;
   final double amount;
-  final CatagoryType type;
+  final TransactionType type;
 
   final void Function() ontap;
   @override
@@ -66,7 +66,7 @@ class Listtile extends StatelessWidget {
             ),
             child: Padding(
               padding: const EdgeInsets.all(10),
-              child: type == CatagoryType.income
+              child: type == TransactionType.income
                   ? const Icon(
                       Icons.arrow_upward,
                       color: Colors.green,
@@ -89,11 +89,12 @@ class Listtile extends StatelessWidget {
           style: const TextStyle(fontSize: 14, fontWeight: FontWeight.w400),
         ),
         trailing: Text(
-          type == CatagoryType.expense ? "- $amount" : "+ $amount",
+          type == TransactionType.expense ? "- $amount" : "+ $amount",
           style: TextStyle(
               fontSize: 18,
               fontWeight: FontWeight.bold,
-              color: type == CatagoryType.expense ? Colors.red : Colors.green),
+              color:
+                  type == TransactionType.expense ? Colors.red : Colors.green),
         ),
       ),
     );
