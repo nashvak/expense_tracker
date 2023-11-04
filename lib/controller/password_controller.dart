@@ -15,6 +15,7 @@ class UiController extends GetxController {
   TransactionType selectedTransactionType = TransactionType.income;
   CatagoryType? selectedCategory;
   var selectedDate = DateTime.now();
+  bool isDropdownVisible = false;
 
   updateDate(DateTime newDate) {
     selectedDate = newDate;
@@ -34,6 +35,7 @@ class UiController extends GetxController {
   changeToggle(index) {
     selectedTransactionType =
         (index == 0) ? TransactionType.income : TransactionType.expense;
+    isDropdownVisible = index == 1;
     update();
   }
 
@@ -50,8 +52,9 @@ class UiController extends GetxController {
 class UpdateController extends GetxController {
   late TransactionType transaction;
   late PaymentMode mode;
-  late CatagoryType catagory;
+  late CatagoryType? catagory;
   late DateTime date;
+  bool iscatagoryVisible = false;
   updateDate(DateTime newDate) {
     date = newDate;
     update();
@@ -69,6 +72,11 @@ class UpdateController extends GetxController {
 
   changeCategoryType(newValue) {
     catagory = newValue;
+    update();
+  }
+
+  isContainervisible() {
+    iscatagoryVisible = transaction == TransactionType.income ? false : true;
     update();
   }
 }

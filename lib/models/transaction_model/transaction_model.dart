@@ -1,5 +1,4 @@
 import 'dart:core';
-
 import 'package:hive/hive.dart';
 part 'transaction_model.g.dart';
 
@@ -51,7 +50,7 @@ class Transaction extends HiveObject {
   DateTime date;
 
   @HiveField(3)
-  final CatagoryType catagoryType;
+  final CatagoryType? catagoryType;
 
   @HiveField(4)
   final PaymentMode paymentMode;
@@ -64,6 +63,6 @@ class Transaction extends HiveObject {
       required this.amount,
       required this.date,
       required this.paymentMode,
-      required this.catagoryType,
+      this.catagoryType,
       required this.transactionType});
 }

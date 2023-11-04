@@ -36,7 +36,9 @@ class _ScreenAddTransactionState extends State<ScreenAddTransaction> {
         date: pickedDate!,
         paymentMode: ui.selectedPaymentMode!,
         transactionType: ui.selectedTransactionType,
-        catagoryType: ui.selectedCategory!,
+        catagoryType: ui.selectedTransactionType == TransactionType.income
+            ? null
+            : ui.selectedCategory,
       );
       controller.createTransaction(transaction: transaction);
 
@@ -74,13 +76,6 @@ class _ScreenAddTransactionState extends State<ScreenAddTransaction> {
                       labels: const ['Income', 'Expense'],
                       onToggle: (index) {
                         controller.changeToggle(index);
-                        // setState(() {
-                        //   selectedCatagory = (index == 0)
-                        //       ? CatagoryType.income
-                        //       : CatagoryType.expense;
-                        //   // print(selectedCatagory);
-
-                        // });
                       },
                     );
                   },
@@ -170,38 +165,42 @@ class _ScreenAddTransactionState extends State<ScreenAddTransaction> {
                 height30,
                 GetBuilder<UiController>(
                   builder: (controller) {
-                    return DropdownButtonFormField<CatagoryType>(
-                      hint: const Text('Catagory '),
-                      decoration: InputDecoration(
-                        enabledBorder: OutlineInputBorder(
-                          borderSide: const BorderSide(
-                              color: Appcolor.tertiaryColor, width: 1),
-                          borderRadius: BorderRadius.circular(50),
+                    return Visibility(
+                      visible: controller.isDropdownVisible,
+                      child: DropdownButtonFormField<CatagoryType>(
+                        hint: const Text('Catagory '),
+                        decoration: InputDecoration(
+                          enabledBorder: OutlineInputBorder(
+                            borderSide: const BorderSide(
+                                color: Appcolor.tertiaryColor, width: 1),
+                            borderRadius: BorderRadius.circular(50),
+                          ),
+                          focusedBorder: OutlineInputBorder(
+                            borderSide: const BorderSide(
+                                color: Appcolor.tertiaryColor, width: 1),
+                            borderRadius: BorderRadius.circular(50),
+                          ),
+                          filled: true,
+                          fillColor: Appcolor.tertiaryColor,
                         ),
-                        focusedBorder: OutlineInputBorder(
-                          borderSide: const BorderSide(
-                              color: Appcolor.tertiaryColor, width: 1),
-                          borderRadius: BorderRadius.circular(50),
-                        ),
-                        filled: true,
-                        fillColor: Appcolor.tertiaryColor,
+                        validator: (value) =>
+                            value == null ? "Select Category" : null,
+                        dropdownColor: Appcolor.tertiaryColor,
+                        value: controller.selectedCategory,
+                        onChanged: (CatagoryType? newValue) {
+                          controller.changeCatagory(newValue!);
+                        },
+                        items: CatagoryType.values.map((CatagoryType mode) {
+                          return DropdownMenuItem<CatagoryType>(
+                            value: mode,
+                            child: Text(mode.toString().split('.').last),
+                          );
+                        }).toList(),
                       ),
-                      validator: (value) =>
-                          value == null ? "Select Category" : null,
-                      dropdownColor: Appcolor.tertiaryColor,
-                      value: controller.selectedCategory,
-                      onChanged: (CatagoryType? newValue) {
-                        controller.changeCatagory(newValue!);
-                      },
-                      items: CatagoryType.values.map((CatagoryType mode) {
-                        return DropdownMenuItem<CatagoryType>(
-                          value: mode,
-                          child: Text(mode.toString().split('.').last),
-                        );
-                      }).toList(),
                     );
                   },
                 ),
+                height20,
                 height20,
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,

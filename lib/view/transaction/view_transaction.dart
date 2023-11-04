@@ -30,7 +30,7 @@ class _ScreenViewTransactionState extends State<ScreenViewTransaction> {
   TextEditingController amountController = TextEditingController();
   TextEditingController dateController = TextEditingController();
   TextEditingController descriptionController = TextEditingController();
-
+  bool iscatagoryVisible = false;
   @override
   void initState() {
     Transaction tr = transactionController.sortedList[index];
@@ -46,6 +46,7 @@ class _ScreenViewTransactionState extends State<ScreenViewTransaction> {
     ui.transaction = tr.transactionType;
     ui.mode = tr.paymentMode;
     ui.catagory = tr.catagoryType;
+    ui.isContainervisible();
     super.initState();
   }
 
@@ -258,41 +259,45 @@ class _ScreenViewTransactionState extends State<ScreenViewTransaction> {
                 const BlankSpace(
                   height: 30,
                 ),
-                Container(
-                  decoration: cardDecoration(color: Colors.white),
-                  height: MediaQuery.of(context).size.height / 9,
-                  width: MediaQuery.of(context).size.width / 1,
-                  padding: const EdgeInsets.only(left: 20),
-                  //color: Colors.red,
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      const Text(
-                        'Catagory type',
-                        style: TextStyle(color: Appcolor.primaryColor),
+                GetBuilder<UpdateController>(
+                  builder: (controller) {
+                    return Visibility(
+                      visible: controller.iscatagoryVisible,
+                      child: Container(
+                        decoration: cardDecoration(color: Colors.white),
+                        height: MediaQuery.of(context).size.height / 9,
+                        width: MediaQuery.of(context).size.width / 1,
+                        padding: const EdgeInsets.only(left: 20),
+                        //color: Colors.red,
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            const Text(
+                              'Catagory type',
+                              style: TextStyle(color: Appcolor.primaryColor),
+                            ),
+                            DropdownButton<CatagoryType>(
+                                onChanged: (CatagoryType? newValue) {
+                                  // setState(() {
+                                  //   selectedPaymentMode = newValue!;
+                                  // });
+                                  controller.changeCategoryType(newValue);
+                                },
+                                items: CatagoryType.values
+                                    .map((CatagoryType mode) {
+                                  return DropdownMenuItem<CatagoryType>(
+                                    value: mode,
+                                    child:
+                                        Text(mode.toString().split('.').last),
+                                  );
+                                }).toList(),
+                                value: controller.catagory),
+                          ],
+                        ),
                       ),
-                      GetBuilder<UpdateController>(
-                        builder: (controller) {
-                          return DropdownButton<CatagoryType>(
-                              onChanged: (CatagoryType? newValue) {
-                                // setState(() {
-                                //   selectedPaymentMode = newValue!;
-                                // });
-                                controller.changeCategoryType(newValue);
-                              },
-                              items:
-                                  CatagoryType.values.map((CatagoryType mode) {
-                                return DropdownMenuItem<CatagoryType>(
-                                  value: mode,
-                                  child: Text(mode.toString().split('.').last),
-                                );
-                              }).toList(),
-                              value: controller.catagory);
-                        },
-                      ),
-                    ],
-                  ),
+                    );
+                  },
                 ),
                 const BlankSpace(
                   height: 30,
@@ -333,28 +338,6 @@ class _ScreenViewTransactionState extends State<ScreenViewTransaction> {
                     ],
                   ),
                 ),
-                // BlankSpace(
-                //   height: 30,
-                // ),
-                // GetBuilder<UpdateController>(builder: (controller) {
-                //   return DropdownButton<TransactionType>(
-                //       onChanged: (TransactionType? newValue) {
-                //         // setState(() {
-                //         //   selectedCatagory = newValue!;
-                //         // });
-                //         controller.changeTransactionType(newValue);
-                //       },
-                //       items: TransactionType.values.map((TransactionType type) {
-                //         return DropdownMenuItem<TransactionType>(
-                //           value: type,
-                //           child: Text(type
-                //               .toString()
-                //               .split('.')
-                //               .last), // To display the enum value as a string
-                //         );
-                //       }).toList(),
-                //       value: controller.transaction);
-                // }),
                 const BlankSpace(
                   height: 30,
                 ),

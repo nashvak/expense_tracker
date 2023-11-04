@@ -21,7 +21,7 @@ class TransactionAdapter extends TypeAdapter<Transaction> {
       amount: fields[1] as int,
       date: fields[2] as DateTime,
       paymentMode: fields[4] as PaymentMode,
-      catagoryType: fields[3] as CatagoryType,
+      catagoryType: fields[3] as CatagoryType?,
       transactionType: fields[5] as TransactionType,
     );
   }
