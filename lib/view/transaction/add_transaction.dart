@@ -43,6 +43,7 @@ class _ScreenAddTransactionState extends State<ScreenAddTransaction> {
       controller.createTransaction(transaction: transaction);
 
       Get.back();
+      ui.resetValues();
     }
   }
 

@@ -39,9 +39,13 @@ class UiController extends GetxController {
     update();
   }
 
-  // resetValues() {
-  //   selectedTransactionType;
-  // }
+  resetValues() {
+    selectedTransactionType = TransactionType.income;
+    selectedCategory = null;
+    selectedDate = DateTime.now();
+    selectedPaymentMode = null;
+    update();
+  }
 }
 
 //
@@ -67,6 +71,9 @@ class UpdateController extends GetxController {
 
   changeTransactionType(newValue) {
     transaction = newValue;
+    iscatagoryVisible = transaction == TransactionType.income ? false : true;
+    // catagory = null;
+
     update();
   }
 

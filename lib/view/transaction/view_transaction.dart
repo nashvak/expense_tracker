@@ -62,6 +62,7 @@ class _ScreenViewTransactionState extends State<ScreenViewTransaction> {
       );
 
       transactionController.updateTransaction(index: index, transaction: tr);
+      print(ui.catagory);
       // print(index);
 
       Get.back();
@@ -320,9 +321,6 @@ class _ScreenViewTransactionState extends State<ScreenViewTransaction> {
                         builder: (controller) {
                           return DropdownButton<TransactionType>(
                               onChanged: (TransactionType? newValue) {
-                                // setState(() {
-                                //   selectedPaymentMode = newValue!;
-                                // });
                                 controller.changeTransactionType(newValue);
                               },
                               items: TransactionType.values

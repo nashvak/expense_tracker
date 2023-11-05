@@ -1,6 +1,7 @@
 import 'package:expense_tracker/constatnts/custom_widgets/home_screen/button.dart';
 import 'package:expense_tracker/controller/transaction_controller.dart';
 import 'package:expense_tracker/models/transaction_model/transaction_model.dart';
+import 'package:expense_tracker/view/transaction/view_transaction.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
@@ -65,7 +66,12 @@ class ScreenHome extends StatelessWidget {
                                           controller.sortedList[index];
 
                                       return Listtile(
-                                          ontap: () {},
+                                          ontap: () {
+                                            Get.to(
+                                                () =>
+                                                    const ScreenViewTransaction(),
+                                                arguments: index);
+                                          },
                                           amount: tr.amount.toDouble(),
                                           date: DateFormat('dd/MM/yyyy')
                                               .format(tr.date),

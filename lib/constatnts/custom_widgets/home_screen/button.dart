@@ -1,3 +1,4 @@
+import 'package:expense_tracker/constatnts/custom_widgets/common/sizedbox.dart';
 import 'package:expense_tracker/models/transaction_model/transaction_model.dart';
 import 'package:flutter/material.dart';
 
@@ -27,9 +28,14 @@ class SortButton extends StatelessWidget {
           padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
           child: Row(
             children: [
-              Text(title,
-                  style: const TextStyle(
-                      fontSize: 16, fontWeight: FontWeight.w500)),
+              Text(
+                title,
+                style:
+                    const TextStyle(fontSize: 16, fontWeight: FontWeight.w500),
+              ),
+              BlankSpace(
+                width: 5,
+              ),
               icon,
             ],
           ),

@@ -45,6 +45,8 @@ class ScreenHistory extends StatelessWidget {
       body: Padding(
         padding: const EdgeInsets.only(left: 20, right: 20, top: 30),
         child: Column(
+          mainAxisAlignment: MainAxisAlignment.start,
+          crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Row(
               children: [
@@ -52,41 +54,61 @@ class ScreenHistory extends StatelessWidget {
                   ontap: () {
                     Get.bottomSheet(
                       Container(
-                        decoration: const ShapeDecoration(
-                          color: Colors.white,
-                          shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.only(
-                                topLeft: Radius.circular(25),
-                                topRight: Radius.circular(25)),
-                          ),
-                        ),
+                        // decoration:  ShapeDecoration(
+                        color: Colors.white,
+                        // shape: RoundedRectangleBorder(
+                        //   borderRadius: BorderRadius.only(
+                        //       topLeft: Radius.circular(25),
+                        //       topRight: Radius.circular(25)),
+                        // ),
+                        // ),
+
                         child: Wrap(
                           children: [
-                            ListTile(
-                              title: const Text('All'),
-                              onTap: () {
-                                Get.back();
-                              },
+                            const ListTile(
+                              title: Text(
+                                'Sort By',
+                                style: TextStyle(fontSize: 20),
+                              ),
                             ),
-                            ListTile(
-                              title: const Text('Income'),
-                              onTap: () {
-                                Get.back();
-                              },
-                            ),
-                            ListTile(
-                              title: const Text('Expense'),
-                              onTap: () {
-                                Get.back();
-                              },
-                            ),
+                            const Divider(color: Colors.grey, height: 5),
+                            SortingBottomSheet(
+                                ontap: () {
+                                  transactionController.changeOption('All');
+                                  Get.back();
+                                },
+                                title: 'All'),
+                            SortingBottomSheet(
+                                ontap: () {
+                                  transactionController.changeOption('Income');
+                                  Get.back();
+                                },
+                                title: 'Income'),
+                            SortingBottomSheet(
+                                ontap: () {
+                                  transactionController.changeOption('Expense');
+                                  Get.back();
+                                },
+                                title: 'Expense'),
+                            SortingBottomSheet(
+                                ontap: () {
+                                  transactionController.changeOption('Cash');
+                                  Get.back();
+                                },
+                                title: 'Cash'),
+                            SortingBottomSheet(
+                                ontap: () {
+                                  transactionController.changeOption('Bank');
+                                  Get.back();
+                                },
+                                title: 'Bank'),
                           ],
                         ),
                       ),
                     );
                   },
-                  title: "All",
-                  icon: const Icon(Icons.arrow_drop_down),
+                  title: "Filter By",
+                  icon: const Icon(Icons.sort),
                 ),
                 const BlankSpace(
                   width: 20,
@@ -147,24 +169,11 @@ class ScreenHistory extends StatelessWidget {
                         ),
                         child: Wrap(
                           children: [
-                            ListTile(
-                              title: const Text('All'),
-                              onTap: () {
-                                Get.back();
-                              },
-                            ),
-                            ListTile(
-                              title: const Text('Income'),
-                              onTap: () {
-                                Get.back();
-                              },
-                            ),
-                            ListTile(
-                              title: const Text('Expense'),
-                              onTap: () {
-                                Get.back();
-                              },
-                            ),
+                            SortingBottomSheet(ontap: () {}, title: 'All'),
+                            SortingBottomSheet(ontap: () {}, title: 'Income'),
+                            SortingBottomSheet(ontap: () {}, title: 'Expense'),
+                            SortingBottomSheet(ontap: () {}, title: 'Cash'),
+                            SortingBottomSheet(ontap: () {}, title: 'Bank'),
                           ],
                         ),
                       ),
@@ -175,13 +184,24 @@ class ScreenHistory extends StatelessWidget {
                 ),
               ],
             ),
-            height40,
+            BlankSpace(
+              height: 30,
+            ),
+            GetBuilder<TransactionController>(builder: ((controller) {
+              return Text(
+                transactionController.selectedOption + ' Transactions',
+                style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+              );
+            })),
+            BlankSpace(
+              height: 10,
+            ),
             Expanded(
               child: GetBuilder<TransactionController>(
                 builder: (controller) {
                   return ListView.separated(
                       itemBuilder: (context, index) {
-                        final tr = controller.sortedList[index];
+                        final tr = controller.sortByFunction[index];
                         return Slidable(
                           key: UniqueKey(),
                           endActionPane: ActionPane(
@@ -218,7 +238,7 @@ class ScreenHistory extends StatelessWidget {
                           height: 10,
                         );
                       },
-                      itemCount: controller.transactionCount);
+                      itemCount: controller.sortByFunction.length);
                 },
               ),
               //
@@ -226,6 +246,20 @@ class ScreenHistory extends StatelessWidget {
           ],
         ),
       ),
+    );
+  }
+}
+
+class SortingBottomSheet extends StatelessWidget {
+  const SortingBottomSheet(
+      {required this.ontap, required this.title, super.key});
+  final Function() ontap;
+  final String title;
+  @override
+  Widget build(BuildContext context) {
+    return ListTile(
+      title: Text(title),
+      onTap: ontap,
     );
   }
 }

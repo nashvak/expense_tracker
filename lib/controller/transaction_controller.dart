@@ -4,8 +4,6 @@ import 'package:get/get.dart';
 
 class TransactionController extends GetxController {
   final transactionBox = Hive.box<Transaction>('transactionBox');
-  List<Transaction> incomeBox = [];
-  List<Transaction> expenseBox = [];
 
   //sort according to date
   List<Transaction> get sortedList {
@@ -14,7 +12,37 @@ class TransactionController extends GetxController {
 
     return boxList;
   }
+
 //
+  var selectedOption = 'All';
+  changeOption(String value) {
+    selectedOption = value;
+    update();
+  }
+
+  List<Transaction> get sortByFunction {
+    if (selectedOption == 'Income') {
+      return sortedList
+          .where((transaction) =>
+              transaction.transactionType == TransactionType.income)
+          .toList();
+    } else if (selectedOption == 'Expense') {
+      return sortedList
+          .where((transaction) =>
+              transaction.transactionType == TransactionType.expense)
+          .toList();
+    } else if (selectedOption == 'Cash') {
+      return sortedList
+          .where((transaction) => transaction.paymentMode == PaymentMode.cash)
+          .toList();
+    } else if (selectedOption == 'Bank') {
+      return sortedList
+          .where((transaction) => transaction.paymentMode == PaymentMode.bank)
+          .toList();
+    }
+
+    return sortedList;
+  }
 
 //
   double get totalIncome {
