@@ -115,36 +115,32 @@ class ScreenHistory extends StatelessWidget {
                 ),
                 SortButton(
                     ontap: () {
+                      List currentCatagory =
+                          transactionController.isCatagoryIncluded();
+                      print(currentCatagory);
                       Get.bottomSheet(
                         Container(
-                          decoration: const ShapeDecoration(
-                            color: Colors.white,
-                            shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.only(
-                                  topLeft: Radius.circular(25),
-                                  topRight: Radius.circular(25)),
-                            ),
-                          ),
+                          color: Colors.white,
                           child: Wrap(
                             children: [
-                              ListTile(
-                                title: const Text('Electricity bill'),
-                                onTap: () {
-                                  Get.back();
-                                },
+                              const ListTile(
+                                title: Text(
+                                  'Catagory',
+                                  style: TextStyle(fontSize: 20),
+                                ),
                               ),
-                              ListTile(
-                                title: const Text('Car service'),
-                                onTap: () {
-                                  Get.back();
-                                },
-                              ),
-                              ListTile(
-                                title: const Text('Mobile Recharge'),
-                                onTap: () {
-                                  Get.back();
-                                },
-                              ),
+                              const Divider(color: Colors.grey, height: 5),
+                              SortingBottomSheet(ontap: () {}, title: 'Bills'),
+                              SortingBottomSheet(ontap: () {}, title: 'Food'),
+                              SortingBottomSheet(
+                                  ontap: () {}, title: 'Entertainment'),
+                              SortingBottomSheet(
+                                  ontap: () {}, title: 'Transportation'),
+                              SortingBottomSheet(
+                                  ontap: () {}, title: 'Shopping'),
+                              SortingBottomSheet(
+                                  ontap: () {}, title: 'Insurance'),
+                              SortingBottomSheet(ontap: () {}, title: 'Others'),
                             ],
                           ),
                         ),

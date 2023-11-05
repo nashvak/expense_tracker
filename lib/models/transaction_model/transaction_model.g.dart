@@ -63,52 +63,47 @@ class CatagoryTypeAdapter extends TypeAdapter<CatagoryType> {
   CatagoryType read(BinaryReader reader) {
     switch (reader.readByte()) {
       case 0:
-        return CatagoryType.savings;
-      case 1:
         return CatagoryType.bills;
-      case 2:
+      case 1:
         return CatagoryType.food;
-      case 3:
+      case 2:
         return CatagoryType.entertainment;
-      case 4:
+      case 3:
         return CatagoryType.transportation;
-      case 5:
+      case 4:
         return CatagoryType.shopping;
-      case 6:
+      case 5:
         return CatagoryType.insurance;
-      case 7:
+      case 6:
         return CatagoryType.others;
       default:
-        return CatagoryType.savings;
+        return CatagoryType.bills;
     }
   }
 
   @override
   void write(BinaryWriter writer, CatagoryType obj) {
     switch (obj) {
-      case CatagoryType.savings:
+      case CatagoryType.bills:
         writer.writeByte(0);
         break;
-      case CatagoryType.bills:
+      case CatagoryType.food:
         writer.writeByte(1);
         break;
-      case CatagoryType.food:
+      case CatagoryType.entertainment:
         writer.writeByte(2);
         break;
-      case CatagoryType.entertainment:
+      case CatagoryType.transportation:
         writer.writeByte(3);
         break;
-      case CatagoryType.transportation:
+      case CatagoryType.shopping:
         writer.writeByte(4);
         break;
-      case CatagoryType.shopping:
+      case CatagoryType.insurance:
         writer.writeByte(5);
         break;
-      case CatagoryType.insurance:
-        writer.writeByte(6);
-        break;
       case CatagoryType.others:
-        writer.writeByte(7);
+        writer.writeByte(6);
         break;
     }
   }

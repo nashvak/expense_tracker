@@ -5,20 +5,18 @@ part 'transaction_model.g.dart';
 @HiveType(typeId: 2)
 enum CatagoryType {
   @HiveField(0)
-  savings,
-  @HiveField(1)
   bills,
-  @HiveField(2)
+  @HiveField(1)
   food,
-  @HiveField(3)
+  @HiveField(2)
   entertainment,
-  @HiveField(4)
+  @HiveField(3)
   transportation,
-  @HiveField(5)
+  @HiveField(4)
   shopping,
-  @HiveField(6)
+  @HiveField(5)
   insurance,
-  @HiveField(7)
+  @HiveField(6)
   others,
 }
 
