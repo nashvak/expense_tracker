@@ -117,11 +117,51 @@ class ScreenHistory extends StatelessWidget {
                     ontap: () {
                       List currentCatagory =
                           transactionController.isCatagoryIncluded();
-                      print(currentCatagory);
+
                       Get.bottomSheet(
                         Container(
                           color: Colors.white,
-                          child: Wrap(
+                          // child: Wrap(
+                          //   children: [
+                          //     const ListTile(
+                          //       title: Text(
+                          //         'Catagory',
+                          //         style: TextStyle(fontSize: 20),
+                          //       ),
+                          //     ),
+                          //     const Divider(color: Colors.grey, height: 5),
+                          // SortingBottomSheet(
+                          //     ontap: () {},
+                          //     title:
+                          //         transactionController.catagoryTitles[0]),
+                          // SortingBottomSheet(
+                          //     ontap: () {},
+                          //     title:
+                          //         transactionController.catagoryTitles[1]),
+                          // SortingBottomSheet(
+                          //     ontap: () {},
+                          //     title:
+                          //         transactionController.catagoryTitles[2]),
+                          // SortingBottomSheet(
+                          //     ontap: () {},
+                          //     title:
+                          //         transactionController.catagoryTitles[3]),
+                          // SortingBottomSheet(
+                          //     ontap: () {},
+                          //     title:
+                          //         transactionController.catagoryTitles[4]),
+                          // SortingBottomSheet(
+                          //     ontap: () {},
+                          //     title:
+                          //         transactionController.catagoryTitles[5]),
+                          // SortingBottomSheet(
+                          //     ontap: () {},
+                          //     title:
+                          //         transactionController.catagoryTitles[6]),
+
+                          //   ],
+                          // ),
+                          child: Column(
                             children: [
                               const ListTile(
                                 title: Text(
@@ -130,17 +170,21 @@ class ScreenHistory extends StatelessWidget {
                                 ),
                               ),
                               const Divider(color: Colors.grey, height: 5),
-                              SortingBottomSheet(ontap: () {}, title: 'Bills'),
-                              SortingBottomSheet(ontap: () {}, title: 'Food'),
-                              SortingBottomSheet(
-                                  ontap: () {}, title: 'Entertainment'),
-                              SortingBottomSheet(
-                                  ontap: () {}, title: 'Transportation'),
-                              SortingBottomSheet(
-                                  ontap: () {}, title: 'Shopping'),
-                              SortingBottomSheet(
-                                  ontap: () {}, title: 'Insurance'),
-                              SortingBottomSheet(ontap: () {}, title: 'Others'),
+                              Expanded(
+                                child: ListView.builder(
+                                  itemBuilder: (context, index) {
+                                    return SortingBottomSheet(
+                                      ontap: () {
+                                        transactionController.changeOption(
+                                            currentCatagory[index]);
+                                        Get.back();
+                                      },
+                                      title: currentCatagory[index],
+                                    );
+                                  },
+                                  itemCount: currentCatagory.length,
+                                ),
+                              ),
                             ],
                           ),
                         ),

@@ -15,23 +15,32 @@ class TransactionController extends GetxController {
 
 //  C A T E G O R Y   F I L T E R I N G
 
-  Set<CatagoryType?> currentCatagory = {};
-
-  List<CatagoryType?> isCatagoryIncluded() {
+  List<String> isCatagoryIncluded() {
     Set<CatagoryType?> currentCatagory = {};
+    List<String> catagoryTitles = [];
     for (var transaction in sortedList) {
       currentCatagory.add(transaction.catagoryType);
       currentCatagory.removeWhere((value) => value == null);
+      catagoryTitles = currentCatagory
+          .map((category) => category.toString().split('.').last)
+          .toList();
     }
-
-    return currentCatagory.toList();
+    print(catagoryTitles);
+    return catagoryTitles;
   }
 
   //
 
   //   E N A B L E     O R    D I S A B L E   A   L I S T  T I L E
-  List<bool> isCatogoryVisible = List.generate(7, (index) => true);
 
+  List<bool> isCatogoryVisible = List.generate(7, (index) => true);
+//
+
+  // List<String>  catagoryTitles = CatagoryType.values
+  //     .map((category) => category.toString().split('.').last)
+  //     .toList();
+
+  //
   catogoryVisible(CatagoryType type) {}
 
   // F I L T E R I N G
@@ -60,36 +69,36 @@ class TransactionController extends GetxController {
       return sortedList
           .where((transaction) => transaction.paymentMode == PaymentMode.bank)
           .toList();
-    } else if (selectedOption == 'Food') {
+    } else if (selectedOption == 'food') {
       return sortedList
           .where((transaction) => transaction.catagoryType == CatagoryType.food)
           .toList();
-    } else if (selectedOption == 'Bills') {
+    } else if (selectedOption == 'bills') {
       return sortedList
           .where(
               (transaction) => transaction.catagoryType == CatagoryType.bills)
           .toList();
-    } else if (selectedOption == 'Entertainment') {
+    } else if (selectedOption == 'entertainment') {
       return sortedList
           .where((transaction) =>
               transaction.catagoryType == CatagoryType.entertainment)
           .toList();
-    } else if (selectedOption == 'Insurance') {
+    } else if (selectedOption == 'insurance') {
       return sortedList
           .where((transaction) =>
               transaction.catagoryType == CatagoryType.insurance)
           .toList();
-    } else if (selectedOption == 'Shopping') {
+    } else if (selectedOption == 'shopping') {
       return sortedList
           .where((transaction) =>
               transaction.catagoryType == CatagoryType.shopping)
           .toList();
-    } else if (selectedOption == 'Others') {
+    } else if (selectedOption == 'others') {
       return sortedList
           .where(
               (transaction) => transaction.catagoryType == CatagoryType.others)
           .toList();
-    } else if (selectedOption == 'Transportation') {
+    } else if (selectedOption == 'transportation') {
       return sortedList
           .where((transaction) =>
               transaction.catagoryType == CatagoryType.transportation)
