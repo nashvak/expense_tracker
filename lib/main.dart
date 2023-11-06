@@ -45,7 +45,10 @@ class MyApp extends StatelessWidget {
       title: 'Expense tracker',
       initialRoute: '/',
       getPages: [
-        GetPage(name: '/', page: () => const ScreenSplash()),
+        GetPage(
+          name: '/',
+          page: () => const ScreenSplash(),
+        ),
         GetPage(name: '/getstarted', page: () => const GetStartedScreen()),
         //GetPage(name: '/login', page: () => LoginScreen()),
         GetPage(name: '/signup', page: () => const ScreenSignup()),

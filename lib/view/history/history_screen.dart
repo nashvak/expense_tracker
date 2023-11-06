@@ -3,7 +3,6 @@ import 'package:expense_tracker/constatnts/custom_widgets/common/sizedbox.dart';
 import 'package:expense_tracker/constatnts/custom_widgets/home_screen/button.dart';
 import 'package:expense_tracker/constatnts/custom_widgets/common/textstyle.dart';
 import 'package:expense_tracker/controller/transaction_controller.dart';
-
 import 'package:expense_tracker/view/transaction/view_transaction.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
@@ -17,6 +16,7 @@ class ScreenHistory extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    transactionController.selectedOption = 'All';
     return Scaffold(
       backgroundColor: Appcolor.tertiaryColor,
       appBar: AppBar(
@@ -56,12 +56,6 @@ class ScreenHistory extends StatelessWidget {
                       Container(
                         // decoration:  ShapeDecoration(
                         color: Colors.white,
-                        // shape: RoundedRectangleBorder(
-                        //   borderRadius: BorderRadius.only(
-                        //       topLeft: Radius.circular(25),
-                        //       topRight: Radius.circular(25)),
-                        // ),
-                        // ),
 
                         child: Wrap(
                           children: [
@@ -114,110 +108,74 @@ class ScreenHistory extends StatelessWidget {
                   width: 20,
                 ),
                 SortButton(
-                    ontap: () {
-                      List currentCatagory =
-                          transactionController.isCatagoryIncluded();
+                  ontap: () {
+                    List currentCatagory =
+                        transactionController.isCatagoryIncluded();
 
-                      Get.bottomSheet(
-                        Container(
-                          color: Colors.white,
-                          // child: Wrap(
-                          //   children: [
-                          //     const ListTile(
-                          //       title: Text(
-                          //         'Catagory',
-                          //         style: TextStyle(fontSize: 20),
-                          //       ),
-                          //     ),
-                          //     const Divider(color: Colors.grey, height: 5),
-                          // SortingBottomSheet(
-                          //     ontap: () {},
-                          //     title:
-                          //         transactionController.catagoryTitles[0]),
-                          // SortingBottomSheet(
-                          //     ontap: () {},
-                          //     title:
-                          //         transactionController.catagoryTitles[1]),
-                          // SortingBottomSheet(
-                          //     ontap: () {},
-                          //     title:
-                          //         transactionController.catagoryTitles[2]),
-                          // SortingBottomSheet(
-                          //     ontap: () {},
-                          //     title:
-                          //         transactionController.catagoryTitles[3]),
-                          // SortingBottomSheet(
-                          //     ontap: () {},
-                          //     title:
-                          //         transactionController.catagoryTitles[4]),
-                          // SortingBottomSheet(
-                          //     ontap: () {},
-                          //     title:
-                          //         transactionController.catagoryTitles[5]),
-                          // SortingBottomSheet(
-                          //     ontap: () {},
-                          //     title:
-                          //         transactionController.catagoryTitles[6]),
-
-                          //   ],
-                          // ),
-                          child: Column(
-                            children: [
-                              const ListTile(
-                                title: Text(
-                                  'Catagory',
-                                  style: TextStyle(fontSize: 20),
-                                ),
+                    Get.bottomSheet(
+                      Container(
+                        color: Colors.white,
+                        child: Column(
+                          children: [
+                            const ListTile(
+                              title: Text(
+                                'Catagory',
+                                style: TextStyle(fontSize: 20),
                               ),
-                              const Divider(color: Colors.grey, height: 5),
-                              Expanded(
-                                child: ListView.builder(
-                                  itemBuilder: (context, index) {
-                                    return SortingBottomSheet(
-                                      ontap: () {
-                                        transactionController.changeOption(
-                                            currentCatagory[index]);
-                                        Get.back();
-                                      },
-                                      title: currentCatagory[index],
-                                    );
-                                  },
-                                  itemCount: currentCatagory.length,
-                                ),
+                            ),
+                            const Divider(color: Colors.grey, height: 5),
+                            Expanded(
+                              child: ListView.builder(
+                                itemBuilder: (context, index) {
+                                  return SortingBottomSheet(
+                                    ontap: () {
+                                      transactionController
+                                          .changeOption(currentCatagory[index]);
+                                      Get.back();
+                                    },
+                                    title: currentCatagory[index],
+                                  );
+                                },
+                                itemCount: currentCatagory.length,
                               ),
-                            ],
-                          ),
+                            ),
+                          ],
                         ),
-                      );
-                    },
-                    title: 'Catagory',
-                    icon: const Icon(Icons.arrow_drop_down)),
+                      ),
+                    );
+                  },
+                  title: 'Catagory',
+                  icon: const Icon(Icons.arrow_drop_down),
+                ),
                 const BlankSpace(
                   width: 20,
                 ),
                 SortButton(
                   ontap: () {
-                    Get.bottomSheet(
-                      Container(
-                        decoration: const ShapeDecoration(
-                          color: Colors.white,
-                          shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.only(
-                                topLeft: Radius.circular(25),
-                                topRight: Radius.circular(25)),
-                          ),
-                        ),
-                        child: Wrap(
-                          children: [
-                            SortingBottomSheet(ontap: () {}, title: 'All'),
-                            SortingBottomSheet(ontap: () {}, title: 'Income'),
-                            SortingBottomSheet(ontap: () {}, title: 'Expense'),
-                            SortingBottomSheet(ontap: () {}, title: 'Cash'),
-                            SortingBottomSheet(ontap: () {}, title: 'Bank'),
-                          ],
-                        ),
-                      ),
-                    );
+                    transactionController.selectDateRange();
+                    transactionController.changeOption('Date');
+
+                    // Get.bottomSheet(
+                    //   Container(
+                    //     decoration: const ShapeDecoration(
+                    //       color: Colors.white,
+                    //       shape: RoundedRectangleBorder(
+                    //         borderRadius: BorderRadius.only(
+                    //             topLeft: Radius.circular(25),
+                    //             topRight: Radius.circular(25)),
+                    //       ),
+                    //     ),
+                    //     child: Wrap(
+                    //       children: [
+                    //         SortingBottomSheet(ontap: () {}, title: 'All'),
+                    //         SortingBottomSheet(ontap: () {}, title: 'Income'),
+                    //         SortingBottomSheet(ontap: () {}, title: 'Expense'),
+                    //         SortingBottomSheet(ontap: () {}, title: 'Cash'),
+                    //         SortingBottomSheet(ontap: () {}, title: 'Bank'),
+                    //       ],
+                    //     ),
+                    //   ),
+                    // );
                   },
                   title: 'Date',
                   icon: const Icon(Icons.arrow_drop_down),
@@ -229,7 +187,7 @@ class ScreenHistory extends StatelessWidget {
             ),
             GetBuilder<TransactionController>(builder: ((controller) {
               return Text(
-                transactionController.selectedOption + ' Transactions',
+                transactionController.selectedOption,
                 style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
               );
             })),

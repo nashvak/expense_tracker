@@ -1,4 +1,5 @@
 import 'package:expense_tracker/models/transaction_model/transaction_model.dart';
+import 'package:flutter/material.dart';
 import 'package:hive/hive.dart';
 import 'package:get/get.dart';
 
@@ -103,6 +104,14 @@ class TransactionController extends GetxController {
           .where((transaction) =>
               transaction.catagoryType == CatagoryType.transportation)
           .toList();
+    } else if (selectedOption == 'Date') {
+      return sortedList
+          .where((transaction) =>
+              transaction.date.isAfter(startDate!) &&
+                  transaction.date.isBefore(endDate!) ||
+              transaction.date.isAtSameMomentAs(startDate!) ||
+              transaction.date.isAtSameMomentAs(endDate!))
+          .toList();
     }
 
     return sortedList;
@@ -151,5 +160,27 @@ class TransactionController extends GetxController {
   logoutProfile() {
     transactionBox.clear();
     sortedList.clear();
+  }
+
+  //   D A T E    R A N G E
+
+  DateTime? startDate;
+  DateTime? endDate;
+  void selectDateRange() async {
+    final DateTimeRange? picked = await showDateRangePicker(
+      context: Get.context!,
+      initialDateRange: DateTimeRange(
+        start: startDate ?? DateTime.now(),
+        end: endDate ?? DateTime.now(),
+      ),
+      firstDate: DateTime(2023),
+      lastDate: DateTime(2024),
+    );
+
+    if (picked != null) {
+      startDate = picked.start;
+      endDate = picked.end;
+      update();
+    }
   }
 }
