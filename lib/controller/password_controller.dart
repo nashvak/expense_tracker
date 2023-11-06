@@ -1,8 +1,6 @@
 import 'package:expense_tracker/models/transaction_model/transaction_model.dart';
-import 'package:flutter/material.dart';
+
 import 'package:get/get.dart';
-import 'package:intl/intl.dart';
-import 'package:syncfusion_flutter_datepicker/datepicker.dart';
 
 class PasswordController extends GetxController {
   RxBool visibility = true.obs;

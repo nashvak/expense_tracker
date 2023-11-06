@@ -89,11 +89,11 @@ class _EditProfileState extends State<EditProfile> {
         ));
   }
 
-  editProfile() {
+  editProfile() async {
     if (editformkey.currentState!.validate()) {
       AuthModel user = authController.authBox.getAt(0);
       String? imageUrl = (image == null) ? user.image : image!.path;
-      authController.updateUser(
+      await authController.updateUser(
         index: 0,
         auth: AuthModel(
           name: nameController.text,
@@ -104,7 +104,7 @@ class _EditProfileState extends State<EditProfile> {
       );
       Get.back();
     } else {
-      Get.snackbar('Error', 'Error occured while creating user');
+      Get.snackbar('Error', 'Error occured while updating user');
     }
   }
 
@@ -172,7 +172,7 @@ class _EditProfileState extends State<EditProfile> {
                                     radius: 15,
                                     backgroundColor: Colors.white,
                                     child: Icon(
-                                      Icons.add,
+                                      Icons.edit,
                                       color: Appcolor.secondaryColor,
                                     ),
                                   ),
@@ -195,38 +195,12 @@ class _EditProfileState extends State<EditProfile> {
                                     radius: 15,
                                     backgroundColor: Colors.white,
                                     child: Icon(
-                                      Icons.edit,
+                                      Icons.add,
                                       color: Appcolor.secondaryColor,
                                     ),
                                   ),
                                 ],
                               );
-                        // : Stack(
-                        //     alignment: Alignment.bottomCenter,
-                        //     children: [
-                        //       Padding(
-                        //         padding: const EdgeInsets.all(10.0),
-                        //         child: CircleAvatar(
-                        //           radius: 50,
-                        //           backgroundColor:
-                        //               Appcolor.tertiaryColor,
-                        //           backgroundImage: FileImage(
-                        //             File(
-                        //               image!.path,
-                        //             ),
-                        //           ),
-                        //         ),
-                        //       ),
-                        //       const CircleAvatar(
-                        //         radius: 15,
-                        //         backgroundColor: Colors.white,
-                        //         child: Icon(
-                        //           Icons.edit,
-                        //           color: Appcolor.secondaryColor,
-                        //         ),
-                        //       ),
-                        //     ],
-                        //   );
                       },
                     ),
                   ),

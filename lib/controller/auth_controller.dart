@@ -21,15 +21,9 @@ class AuthController extends GetxController {
     } else {
       pickedFile = await picker.pickImage(source: ImageSource.gallery);
     }
-    // if (pickedFile != null) {
-    //   file = File(pickedFile!.path);
-    //   update();
-    // }
+
     update();
     return pickedFile!;
-    // file = File(pickedFile!.path);
-    //   update();
-    //   return file!;
   }
 
   updateUser({required int index, required AuthModel auth}) {

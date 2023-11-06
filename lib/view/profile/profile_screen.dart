@@ -74,8 +74,7 @@ class _ScreenProfileState extends State<ScreenProfile> {
 
   @override
   Widget build(BuildContext context) {
-    AuthModel user = authController.authBox.getAt(0);
-    print(user.image);
+    print('build');
     return Scaffold(
       backgroundColor: Appcolor.primaryColor,
       appBar: AppBar(
@@ -93,23 +92,32 @@ class _ScreenProfileState extends State<ScreenProfile> {
       ),
       body: Column(
         children: [
-          GetBuilder<AuthController>(
-            builder: (controller) {
-              return CircleAvatar(
-                radius: 50,
-                backgroundColor: Appcolor.tertiaryColor,
-                backgroundImage: FileImage(File(user.image!)),
-              );
-            },
-          ),
-          height10,
-          Text(
-            user.name,
-            style: const TextStyle(color: Colors.white, fontSize: 20),
-          ),
-          Text(
-            user.email,
-            style: const TextStyle(color: Colors.white, fontSize: 15),
+          Column(
+            children: [
+              GetBuilder<AuthController>(builder: (controller) {
+                AuthModel user = controller.authBox.getAt(0);
+                return Column(
+                  children: [
+                    CircleAvatar(
+                      radius: 50,
+                      backgroundColor: Appcolor.tertiaryColor,
+                      backgroundImage: FileImage(
+                        File(user.image!),
+                      ),
+                    ),
+                    height10,
+                    Text(
+                      user.name,
+                      style: const TextStyle(color: Colors.white, fontSize: 20),
+                    ),
+                    Text(
+                      user.email,
+                      style: const TextStyle(color: Colors.white, fontSize: 15),
+                    ),
+                  ],
+                );
+              }),
+            ],
           ),
           height20,
           Expanded(
@@ -136,7 +144,7 @@ class _ScreenProfileState extends State<ScreenProfile> {
                             const Color.fromARGB(255, 251, 231, 171),
                         iconColor: const Color.fromARGB(255, 223, 168, 4),
                         ontap: () {
-                          Get.to(const EditProfile());
+                          Get.to(() => const EditProfile());
                         },
                       ),
                       height20,
@@ -147,7 +155,7 @@ class _ScreenProfileState extends State<ScreenProfile> {
                             const Color.fromARGB(255, 184, 207, 238),
                         iconColor: const Color.fromARGB(255, 37, 121, 231),
                         ontap: () {
-                          Get.to(const NotificationPage());
+                          Get.to(() => const NotificationPage());
                         },
                       ),
                       height20,
