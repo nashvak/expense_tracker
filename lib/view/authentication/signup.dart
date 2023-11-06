@@ -10,6 +10,7 @@ import 'package:expense_tracker/constatnts/custom_widgets/login&signup/validator
 import 'package:expense_tracker/models/auth_model/auth_model.dart';
 
 import 'package:expense_tracker/view/authentication/splash_screen.dart';
+import 'package:expense_tracker/view/transaction/bottom_nav.dart';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -86,14 +87,14 @@ class _ScreenSignupState extends State<ScreenSignup> {
 
       authController.createUser(
         auth: AuthModel(
-          name: nameController.text,
-          email: emailController.text,
-          password: passController.text,
+          name: nameController.text.trim(),
+          email: emailController.text.trim(),
+          password: passController.text.trim(),
           image: imageUrl,
         ),
       );
-      print(imageUrl);
-      Get.offNamed('/bottom');
+      // print(imageUrl);
+      Get.off(() => BottomNav());
     } else {
       Get.snackbar('Error', 'Error occured while creating user');
     }

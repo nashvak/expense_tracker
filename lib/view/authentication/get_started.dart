@@ -1,3 +1,4 @@
+import 'package:expense_tracker/view/authentication/signup.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -38,7 +39,7 @@ class GetStartedScreen extends StatelessWidget {
                 child: CustomButton(
                   title: "Get Started",
                   onTap: () {
-                    Get.offNamed('/signup');
+                    Get.off(() => ScreenSignup());
                   },
                 ),
               ),

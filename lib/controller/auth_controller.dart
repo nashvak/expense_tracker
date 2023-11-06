@@ -42,13 +42,13 @@ class AuthController extends GetxController {
 
   void nameButtonStatus(String text) {
     nameButton = text.isNotEmpty;
-    print(nameButton);
+    // print(nameButton);
     update();
   }
 
   void emailButtonStatus(String text) {
     emailButton = text.isNotEmpty;
-    print(nameButton);
+    // print(nameButton);
     update();
   }
 }

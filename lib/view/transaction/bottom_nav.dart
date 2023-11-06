@@ -1,9 +1,11 @@
 import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 import 'package:expense_tracker/constatnts/colors.dart';
 import 'package:expense_tracker/view/history/history_screen.dart';
+
+import 'package:expense_tracker/view/transaction/add_transaction.dart';
 import 'package:expense_tracker/view/transaction/home_screen.dart';
 import 'package:expense_tracker/view/profile/profile_screen.dart';
-import 'package:expense_tracker/view/remainder/remainder_screen.dart';
+
 import 'package:flutter/material.dart';
 
 class BottomNav extends StatefulWidget {
@@ -17,16 +19,14 @@ class _BottomNavState extends State<BottomNav> {
   int myIndex = 0;
   List<Widget> icons = [
     const Icon(Icons.home, size: 30),
-    //const Icon(Icons.add, size: 30),
+    const Icon(Icons.add, size: 30),
     const Icon(Icons.history, size: 30),
-    const Icon(Icons.alarm, size: 30),
     const Icon(Icons.person, size: 30),
   ];
   List<Widget> screens = [
     ScreenHome(),
-    //ScreenAddTransaction(),
+    ScreenAddTransaction(),
     ScreenHistory(),
-    ScreenRemainder(),
     const ScreenProfile(),
   ];
 

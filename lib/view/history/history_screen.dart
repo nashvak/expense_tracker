@@ -3,6 +3,7 @@ import 'package:expense_tracker/constatnts/custom_widgets/common/sizedbox.dart';
 import 'package:expense_tracker/constatnts/custom_widgets/home_screen/button.dart';
 import 'package:expense_tracker/constatnts/custom_widgets/common/textstyle.dart';
 import 'package:expense_tracker/controller/transaction_controller.dart';
+import 'package:expense_tracker/view/transaction/add_transaction.dart';
 import 'package:expense_tracker/view/transaction/view_transaction.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
@@ -26,21 +27,22 @@ class ScreenHistory extends StatelessWidget {
         ),
         elevation: 0,
         backgroundColor: Colors.transparent,
-        actions: [
-          GestureDetector(
-            onTap: () {
-              Get.toNamed('/addtransaction');
-            },
-            child: const Padding(
-              padding: EdgeInsets.all(8.0),
-              child: Icon(
-                Icons.add,
-                color: Colors.black,
-                size: 40,
-              ),
-            ),
-          )
-        ],
+        iconTheme: IconThemeData(color: Colors.black),
+        // actions: [
+        //   GestureDetector(
+        //     onTap: () {
+        //       Get.to(() => ScreenAddTransaction());
+        //     },
+        //     child: const Padding(
+        //       padding: EdgeInsets.all(8.0),
+        //       child: Icon(
+        //         Icons.add,
+        //         color: Colors.black,
+        //         size: 40,
+        //       ),
+        //     ),
+        //   )
+        // ],
       ),
       body: Padding(
         padding: const EdgeInsets.only(left: 20, right: 20, top: 30),
@@ -182,16 +184,17 @@ class ScreenHistory extends StatelessWidget {
                 ),
               ],
             ),
-            BlankSpace(
+            const BlankSpace(
               height: 30,
             ),
             GetBuilder<TransactionController>(builder: ((controller) {
               return Text(
                 transactionController.selectedOption,
-                style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+                style:
+                    const TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
               );
             })),
-            BlankSpace(
+            const BlankSpace(
               height: 10,
             ),
             Expanded(

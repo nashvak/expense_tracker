@@ -96,8 +96,8 @@ class _EditProfileState extends State<EditProfile> {
       await authController.updateUser(
         index: 0,
         auth: AuthModel(
-          name: nameController.text,
-          email: emailController.text,
+          name: nameController.text.trim(),
+          email: emailController.text.trim(),
           password: user.password,
           image: imageUrl,
         ),

@@ -62,7 +62,7 @@ class _ScreenViewTransactionState extends State<ScreenViewTransaction> {
       );
 
       transactionController.updateTransaction(index: index, transaction: tr);
-      print(ui.catagory);
+      // print(ui.catagory);
       // print(index);
 
       Get.back();

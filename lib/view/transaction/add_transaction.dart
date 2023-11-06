@@ -44,6 +44,9 @@ class _ScreenAddTransactionState extends State<ScreenAddTransaction> {
 
       Get.back();
       ui.resetValues();
+      descriptionController.clear();
+      amountController.clear();
+      dateController.clear();
     }
   }
 
@@ -203,29 +206,34 @@ class _ScreenAddTransactionState extends State<ScreenAddTransaction> {
                 ),
                 height20,
                 height20,
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    SizedBox(
-                      width: Get.width / 2.5,
-                      child: Cancelbutton(
-                        title: 'Cancel',
-                        onTap: () {
-                          Get.back();
-                        },
-                      ),
-                    ),
-                    SizedBox(
-                      width: Get.width / 2.5,
-                      child: CustomButton(
-                        title: 'Add',
-                        onTap: () {
-                          addTransaction();
-                        },
-                      ),
-                    ),
-                  ],
-                ),
+                // Row(
+                //   mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                //   children: [
+                //     SizedBox(
+                //       width: Get.width / 2.5,
+                //       child: Cancelbutton(
+                //         title: 'Cancel',
+                //         onTap: () {
+                //           Get.back();
+                //         },
+                //       ),
+                //     ),
+                //     SizedBox(
+                //       width: Get.width / 2.5,
+                //       child: CustomButton(
+                //         title: 'Add',
+                //         onTap: () {
+                //           addTransaction();
+                //         },
+                //       ),
+                //     ),
+                //   ],
+                // ),
+                CustomButton(
+                    title: "Add Transaction",
+                    onTap: () {
+                      addTransaction();
+                    })
               ],
             ),
           ),

@@ -1,3 +1,5 @@
+import 'package:expense_tracker/controller/auth_controller.dart';
+import 'package:expense_tracker/models/auth_model/auth_model.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -8,35 +10,36 @@ class HomescreenAppbar extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    AuthModel user = AuthController().authBox.get(0);
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
-        const Column(
+        Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Text(
+            const Text(
               'Hello,',
               style: TextStyle(fontSize: 25, color: Colors.white),
             ),
             Text(
-              'Nashva',
-              style: TextStyle(
+              user.name,
+              style: const TextStyle(
                 fontSize: 30,
                 color: Colors.white,
               ),
             ),
           ],
         ),
-        GestureDetector(
-          onTap: () {
-            Get.toNamed('/addtransaction');
-          },
-          child: const Icon(
-            Icons.add,
-            color: Colors.white,
-            size: 40,
-          ),
-        )
+        // GestureDetector(
+        //   onTap: () {
+        //     Get.toNamed('/addtransaction');
+        //   },
+        //   child: const Icon(
+        //     Icons.add,
+        //     color: Colors.white,
+        //     size: 40,
+        //   ),
+        // )
       ],
     );
   }

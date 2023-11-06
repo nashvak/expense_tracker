@@ -26,7 +26,7 @@ class TransactionController extends GetxController {
           .map((category) => category.toString().split('.').last)
           .toList();
     }
-    print(catagoryTitles);
+    // print(catagoryTitles);
     return catagoryTitles;
   }
 

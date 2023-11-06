@@ -74,7 +74,6 @@ class _ScreenProfileState extends State<ScreenProfile> {
 
   @override
   Widget build(BuildContext context) {
-    print('build');
     return Scaffold(
       backgroundColor: Appcolor.primaryColor,
       appBar: AppBar(
@@ -155,7 +154,7 @@ class _ScreenProfileState extends State<ScreenProfile> {
                             const Color.fromARGB(255, 184, 207, 238),
                         iconColor: const Color.fromARGB(255, 37, 121, 231),
                         ontap: () {
-                          Get.to(() => const NotificationPage());
+                          Get.to(() => NotificationPage());
                         },
                       ),
                       height20,
