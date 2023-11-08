@@ -24,15 +24,6 @@ class ScreenSplashState extends State<ScreenSplash> {
     super.initState();
   }
 
-  // void navigation() {
-  //   _timer = Timer(const Duration(seconds: 3), () {
-  //     if (mounted) {
-  //       // Check if the widget is still in the tree
-  //       Get.offNamed('/getstarted');
-  //     }
-  //   });
-  // }
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(

@@ -1,7 +1,6 @@
 import 'package:expense_tracker/controller/auth_controller.dart';
 import 'package:expense_tracker/models/auth_model/auth_model.dart';
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
 
 class HomescreenAppbar extends StatelessWidget {
   const HomescreenAppbar({

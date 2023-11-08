@@ -1,12 +1,21 @@
 import 'package:expense_tracker/constatnts/colors.dart';
 import 'package:expense_tracker/constatnts/custom_widgets/common/sizedbox.dart';
 import 'package:expense_tracker/controller/time_picker.dart';
+import 'package:expense_tracker/view/profile/notification/notification_settings.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-class NotificationPage extends StatelessWidget {
-  NotificationPage({super.key});
+class NotificationPage extends StatefulWidget {
+  const NotificationPage({super.key});
+
+  @override
+  State<NotificationPage> createState() => _NotificationPageState();
+}
+
+class _NotificationPageState extends State<NotificationPage> {
   final TimePicker time = Get.put(TimePicker());
+  NotificationServices notificationServices = NotificationServices();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -51,14 +60,14 @@ class NotificationPage extends StatelessWidget {
               height: 20,
             ),
             ListTile(
-              contentPadding: EdgeInsets.all(0),
+              contentPadding: const EdgeInsets.all(0),
               trailing: Switch.adaptive(value: true, onChanged: (value) {}),
               title: const Text('Show notifications'),
             ),
             const BlankSpace(
               height: 20,
             ),
-            Text(
+            const Text(
               "Alarm",
               style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
             ),
@@ -66,15 +75,23 @@ class NotificationPage extends StatelessWidget {
             GetBuilder<TimePicker>(
               builder: ((controller) {
                 return ListTile(
-                  contentPadding: EdgeInsets.all(0),
+                  contentPadding: const EdgeInsets.all(0),
                   title: Text(controller.selectedTime.format(context)),
                   trailing: GestureDetector(
-                      onTap: () {
-                        controller.pickTime();
-                      },
-                      child: Icon(Icons.alarm)),
+                    onTap: () {
+                      controller.pickTime();
+                    },
+                    child: const Icon(Icons.alarm),
+                  ),
                 );
               }),
+            ),
+            ElevatedButton(
+              onPressed: () {
+                notificationServices.scheduledNotification(
+                    'Notification', 'Did you record?');
+              },
+              child: const Text('send notification'),
             ),
           ],
         ),
