@@ -1,12 +1,8 @@
 import 'dart:async';
-
-import 'package:expense_tracker/view/authentication/get_started.dart';
-import 'package:expense_tracker/view/transaction/bottom_nav.dart';
-
+import 'package:expense_tracker/controller/authentication_section/splashscreen_contoller.dart';
 import 'package:flutter/material.dart';
-
 import 'package:google_fonts/google_fonts.dart';
-import 'package:shared_preferences/shared_preferences.dart';
+import 'package:get/get.dart';
 
 class ScreenSplash extends StatefulWidget {
   const ScreenSplash({super.key});
@@ -16,11 +12,12 @@ class ScreenSplash extends StatefulWidget {
 }
 
 class ScreenSplashState extends State<ScreenSplash> {
-  static const String keyToLogin = "";
+  SplashScreenContoller splash = Get.put(SplashScreenContoller());
+
   Timer? _timer;
   @override
   void initState() {
-    checkScreen(context);
+    splash.checkScreen(context);
     super.initState();
   }
 
@@ -46,30 +43,6 @@ class ScreenSplashState extends State<ScreenSplash> {
         ),
       ),
     );
-  }
-
-  void checkScreen(BuildContext ctx) async {
-    var pref = await SharedPreferences.getInstance();
-    var isLoggedIn = pref.getBool(keyToLogin);
-
-    Timer(const Duration(seconds: 1), () {
-      if (isLoggedIn != null) {
-        if (isLoggedIn) {
-          Navigator.pushAndRemoveUntil(
-              context,
-              MaterialPageRoute(builder: (ctx) => const BottomNav()),
-              (route) => false);
-        } else {
-          Navigator.pushReplacement(
-              context,
-              MaterialPageRoute(
-                  builder: (context) => const GetStartedScreen()));
-        }
-      } else {
-        Navigator.pushReplacement(context,
-            MaterialPageRoute(builder: (context) => const GetStartedScreen()));
-      }
-    });
   }
 
   @override

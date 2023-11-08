@@ -1,13 +1,14 @@
 import 'package:expense_tracker/constatnts/custom_widgets/home_screen/button.dart';
 import 'package:expense_tracker/controller/transaction_controller.dart';
 import 'package:expense_tracker/models/transaction_model/transaction_model.dart';
+import 'package:expense_tracker/view/transaction/home_screen/expense_card.dart';
 import 'package:expense_tracker/view/transaction/view_transaction.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
-import '../../constatnts/colors.dart';
-import '../../constatnts/custom_widgets/common/decoration.dart';
-import '../../constatnts/custom_widgets/home_screen/appbar.dart';
+import '../../../constatnts/colors.dart';
+import '../../../constatnts/custom_widgets/common/decoration.dart';
+import '../../../constatnts/custom_widgets/home_screen/appbar.dart';
 
 class ScreenHome extends StatelessWidget {
   ScreenHome({super.key});
@@ -199,52 +200,6 @@ class IncomeCard extends StatelessWidget {
               builder: (controller) {
                 return Text(
                   "₹ ${controller.totalIncome}",
-                  style: const TextStyle(
-                      color: Colors.white,
-                      fontSize: 20,
-                      fontWeight: FontWeight.bold),
-                );
-              },
-            ),
-          ],
-        )
-      ],
-    );
-  }
-}
-
-//    E X P E N S E    C A R D
-class ExpenseCard extends StatelessWidget {
-  const ExpenseCard({
-    super.key,
-  });
-
-  @override
-  Widget build(BuildContext context) {
-    return Row(
-      children: [
-        const CircleAvatar(
-          backgroundColor: Appcolor.white,
-          child: Icon(
-            Icons.arrow_upward,
-            color: Colors.red,
-          ),
-        ),
-        const SizedBox(
-          width: 10,
-        ),
-        Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            const Text("Expense",
-                style: TextStyle(
-                  color: Colors.white,
-                  fontSize: 15,
-                )),
-            GetBuilder<TransactionController>(
-              builder: (controller) {
-                return Text(
-                  "₹ ${controller.totalExpense}",
                   style: const TextStyle(
                       color: Colors.white,
                       fontSize: 20,

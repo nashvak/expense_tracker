@@ -1,26 +1,19 @@
 import 'dart:io';
-
 import 'package:expense_tracker/constatnts/colors.dart';
-import 'package:expense_tracker/controller/auth_controller.dart';
+import 'package:expense_tracker/controller/authentication_section/auth_controller.dart';
+import 'package:expense_tracker/controller/authentication_section/signup_controller.dart';
+import 'package:expense_tracker/controller/authentication_section/splashscreen_contoller.dart';
 import 'package:expense_tracker/controller/password_controller.dart';
 import 'package:expense_tracker/constatnts/custom_widgets/common/decoration.dart';
-
 import 'package:expense_tracker/constatnts/custom_widgets/common/sizedbox.dart';
 import 'package:expense_tracker/constatnts/custom_widgets/login&signup/validators.dart';
 import 'package:expense_tracker/models/auth_model/auth_model.dart';
-
-import 'package:expense_tracker/view/authentication/splash_screen.dart';
+import 'package:expense_tracker/view/authentication/bottomsheets.dart';
 import 'package:expense_tracker/view/transaction/bottom_nav.dart';
-
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:get/get.dart';
-import 'package:image_picker/image_picker.dart';
-import 'package:path_provider/path_provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-
 import '../../constatnts/custom_widgets/common/button.dart';
-
 import '../../constatnts/custom_widgets/login&signup/textfield.dart';
 
 class ScreenSignup extends StatefulWidget {
@@ -32,57 +25,30 @@ class ScreenSignup extends StatefulWidget {
 
 class _ScreenSignupState extends State<ScreenSignup> {
   final formkey = GlobalKey<FormState>();
-
   final nameController = TextEditingController();
-
   final emailController = TextEditingController();
-
   final passController = TextEditingController();
 
-  final confimPassController = TextEditingController();
-
   final PasswordController pass = Get.put(PasswordController());
-
   final AuthController authController = Get.put(AuthController());
-  final assetImageUrl = 'images/user-logo.png';
+  final SplashScreenContoller splash = Get.put(SplashScreenContoller());
+  final SignupController signupController = Get.put(SignupController());
 
   @override
   void dispose() {
     nameController.dispose();
     emailController.dispose();
     passController.dispose();
-    confimPassController.dispose();
     super.dispose();
-  }
-
-  XFile? image;
-
-  ///
-  ///
-  ///
-  Future<String> copyAssetImageToLocalFile(String assetImagePath) async {
-    final ByteData assetImageByteData = await rootBundle.load(assetImagePath);
-    final Uint8List assetImageBytes = assetImageByteData.buffer.asUint8List();
-
-    final appDir = await getTemporaryDirectory();
-    final localImagePath = '${appDir.path}/${assetImagePath.split('/').last}';
-
-    final imageFile = File(localImagePath);
-    await imageFile.writeAsBytes(assetImageBytes);
-
-    return localImagePath;
   }
 
   addProfile() async {
     if (formkey.currentState!.validate()) {
       var pref = await SharedPreferences.getInstance();
-      pref.setBool(ScreenSplashState.keyToLogin, true);
-      // String imageUrl = (image != null)
-      //     ? image!.path
-      //     : await copyAssetImageToLocalFile(assetImageUrl);
+      pref.setBool(splash.keyToLogin, true);
 
       String imageUrl = (image == null)
-          ? await copyAssetImageToLocalFile(assetImageUrl)
+          ? await signupController.copyAssetImageToLocalFile()
           : image!.path;
 
       authController.createUser(
@@ -93,67 +59,10 @@ class _ScreenSignupState extends State<ScreenSignup> {
           image: imageUrl,
         ),
       );
-      // print(imageUrl);
-      Get.off(() => BottomNav());
+      Get.offAll(() => const BottomNav());
     } else {
-      Get.snackbar('Error', 'Error occured while creating user');
+      Get.snackbar('Error', 'Cannot create user');
     }
-  }
-
-// function to bottom sheet
-  cameraOrGallery() {
-    Get.bottomSheet(
-      backgroundColor: Appcolor.tertiaryColor,
-      Padding(
-        padding: const EdgeInsets.only(top: 20, left: 20, right: 20, bottom: 0),
-        child: Column(
-          children: [
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                const Text(
-                  'Edit Profile',
-                  style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
-                ),
-                CircleAvatar(
-                  backgroundColor: Appcolor.white,
-                  child: IconButton(
-                    onPressed: () {
-                      Get.back();
-                    },
-                    icon: const Icon(Icons.close),
-                  ),
-                ),
-              ],
-            ),
-            height20,
-            Container(
-              color: Appcolor.white,
-              child: Wrap(
-                children: [
-                  ListTile(
-                    onTap: () async {
-                      image = await authController.getImag(true);
-                      Get.back();
-                    },
-                    leading: const Icon(Icons.camera_alt),
-                    title: const Text('Camera'),
-                  ),
-                  ListTile(
-                    onTap: () async {
-                      image = await authController.getImag(false);
-                      Get.back();
-                    },
-                    leading: const Icon(Icons.photo),
-                    title: const Text('Gallery'),
-                  )
-                ],
-              ),
-            ),
-          ],
-        ),
-      ),
-    );
   }
 
   @override

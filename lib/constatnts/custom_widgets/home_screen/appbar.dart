@@ -1,4 +1,4 @@
-import 'package:expense_tracker/controller/auth_controller.dart';
+import 'package:expense_tracker/controller/authentication_section/auth_controller.dart';
 import 'package:expense_tracker/models/auth_model/auth_model.dart';
 import 'package:flutter/material.dart';
 

@@ -1,6 +1,7 @@
 import 'package:hive/hive.dart';
 import 'package:get/get.dart';
-import '../models/auth_model/auth_model.dart';
+
+import '../../models/auth_model/auth_model.dart';
 import 'package:image_picker/image_picker.dart';
 
 class AuthController extends GetxController {

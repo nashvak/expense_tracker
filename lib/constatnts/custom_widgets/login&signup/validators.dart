@@ -1,17 +1,27 @@
+import 'package:get/get.dart';
+
 String? nameValidator(String? value) {
-  if (value == null || value.isEmpty) {
-    return 'Please Enter a valid name';
+  bool nameRegex = RegExp(r"^[a-zA-Z]+$").hasMatch(value!);
+  if (value.isEmpty) {
+    Get.snackbar('oops.!', 'Enter a name');
+    return '';
+  } else if (!nameRegex) {
+    Get.snackbar('oops.!', 'Name should only contains alphabet');
+    return '';
   }
   return null;
 }
 
 String? passwordValidator(String? value) {
   if (value == null || value.isEmpty) {
-    return 'Please enter a password';
+    Get.snackbar('oops.!', 'Please enter a password');
+    return '';
   }
 
   if (value.length < 8) {
-    return 'Password must be at least 8 characters long';
+    // return 'Password must be at least 8 characters long';
+    Get.snackbar('oops.!', 'Password must be at least 8 characters long');
+    return '';
   }
   return null;
 }
@@ -22,11 +32,19 @@ String? emailValidator(String? value) {
       .hasMatch(value!);
 
   if (value.isEmpty) {
-    return "Enter email";
+    // return "Enter email";
+    Get.snackbar(
+      'oops.!',
+      'Enter email',
+    );
+    // Get.snackbar('oops.!', 'Please enter a password');
+    return '';
   }
 
   if (!emailRegx) {
-    return "Enter valid Email";
+    // return "Enter valid Email";
+    Get.snackbar('oops.!', 'Enter valid Email');
+    return '';
   }
   return null;
 }
