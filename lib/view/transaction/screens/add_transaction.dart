@@ -50,6 +50,12 @@ class _ScreenAddTransactionState extends State<ScreenAddTransaction> {
   }
 
   @override
+  void initState() {
+    dateController.text = DateFormat('dd/MM/yyyy').format(ui.selectedDate);
+    super.initState();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: Padding(
@@ -60,58 +66,67 @@ class _ScreenAddTransactionState extends State<ScreenAddTransaction> {
             child: Column(
               children: [
                 const CustomToggleSwitch(),
-                const BlankSpace(
-                  height: 50,
-                ),
-
-                CustomTextField(
-                  validator: amountValidator,
+                const BlankSpace(height: 50),
+                AddTransactionTextField(
+                  type: TextInputType.number,
+                  validator: (value) {
+                    if (value == null) {
+                      return "Null value";
+                    }
+                    return null;
+                  },
                   controller: amountController,
                   title: 'Amount',
                 ),
-                const BlankSpace(
-                  height: 30,
-                ),
-                GetBuilder<UiController>(
-                  builder: (controller) {
-                    return DropdownButtonFormField<String>(
-                      hint: const Text('Catagory '),
-                      decoration: InputDecoration(
-                        enabledBorder: OutlineInputBorder(
-                          borderSide: const BorderSide(
-                              color: Appcolor.tertiaryColor, width: 1),
-                          borderRadius: BorderRadius.circular(50),
-                        ),
-                        focusedBorder: OutlineInputBorder(
-                          borderSide: const BorderSide(
-                              color: Appcolor.tertiaryColor, width: 1),
-                          borderRadius: BorderRadius.circular(50),
-                        ),
-                        filled: true,
-                        fillColor: Appcolor.tertiaryColor,
+                const BlankSpace(height: 30),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    const Text(
+                      'Category',
+                      style: TextStyle(fontSize: 17),
+                    ),
+                    SizedBox(
+                      width: Get.width * 0.6,
+                      child: GetBuilder<UiController>(
+                        builder: (controller) {
+                          return DropdownButtonFormField<String>(
+                            //hint: const Text('Catagory '),
+                            decoration: const InputDecoration(
+                              enabledBorder: UnderlineInputBorder(
+                                borderSide: BorderSide(
+                                    color: Appcolor.secondaryColor, width: 1),
+                              ),
+                              focusedBorder: UnderlineInputBorder(
+                                borderSide: BorderSide(
+                                    color: Appcolor.primaryColor, width: 1),
+                              ),
+                            ),
+                            validator: (value) =>
+                                value == null ? "Select Category" : null,
+                            dropdownColor: Appcolor.tertiaryColor,
+                            value: controller.selectedCategory,
+                            onChanged: (String? newValue) {
+                              controller.changeCatagory(newValue!);
+                            },
+                            items: controller.catagoryTypes.map((String mode) {
+                              return DropdownMenuItem<String>(
+                                value: mode,
+                                child: Text(mode.toString().split('.').last),
+                              );
+                            }).toList(),
+                          );
+                        },
                       ),
-                      validator: (value) =>
-                          value == null ? "Select Category" : null,
-                      dropdownColor: Appcolor.tertiaryColor,
-                      value: controller.selectedCategory,
-                      onChanged: (String? newValue) {
-                        controller.changeCatagory(newValue!);
-                      },
-                      items: controller.catagoryTypes.map((String mode) {
-                        return DropdownMenuItem<String>(
-                          value: mode,
-                          child: Text(mode.toString().split('.').last),
-                        );
-                      }).toList(),
-                    );
-                  },
+                    ),
+                  ],
                 ),
                 const BlankSpace(
                   height: 30,
                 ),
                 GetBuilder<UiController>(
                   builder: (controller) {
-                    return CustomTextField(
+                    return AddTransactionTextField(
                       readonly: true,
                       validator: (value) {
                         return null;
@@ -131,7 +146,7 @@ class _ScreenAddTransactionState extends State<ScreenAddTransaction> {
                 const BlankSpace(
                   height: 30,
                 ),
-                CustomTextField(
+                AddTransactionTextField(
                   validator: (value) {
                     return null;
                   },
@@ -141,67 +156,53 @@ class _ScreenAddTransactionState extends State<ScreenAddTransaction> {
                 const BlankSpace(
                   height: 30,
                 ),
-                GetBuilder<UiController>(
-                  builder: (controller) {
-                    return DropdownButtonFormField<PaymentMode>(
-                      hint: const Text('Payment mode '),
-                      decoration: InputDecoration(
-                        enabledBorder: OutlineInputBorder(
-                          borderSide: const BorderSide(
-                              color: Appcolor.tertiaryColor, width: 1),
-                          borderRadius: BorderRadius.circular(50),
-                        ),
-                        focusedBorder: OutlineInputBorder(
-                          borderSide: const BorderSide(
-                              color: Appcolor.tertiaryColor, width: 1),
-                          borderRadius: BorderRadius.circular(50),
-                        ),
-                        filled: true,
-                        fillColor: Appcolor.tertiaryColor,
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    const Text(
+                      'Account',
+                      style: TextStyle(fontSize: 17),
+                    ),
+                    SizedBox(
+                      width: Get.width * 0.6,
+                      child: GetBuilder<UiController>(
+                        builder: (controller) {
+                          return DropdownButtonFormField<PaymentMode>(
+                            hint: const Text('Payment mode '),
+                            autovalidateMode:
+                                AutovalidateMode.onUserInteraction,
+                            decoration: const InputDecoration(
+                              enabledBorder: UnderlineInputBorder(
+                                borderSide: BorderSide(
+                                    color: Appcolor.secondaryColor, width: 1),
+                              ),
+                              focusedBorder: UnderlineInputBorder(
+                                borderSide: BorderSide(
+                                    color: Appcolor.primaryColor, width: 1),
+                              ),
+                            ),
+                            validator: (value) =>
+                                value == null ? "Select Payment mode" : null,
+                            dropdownColor: Appcolor.tertiaryColor,
+                            value: controller.selectedPaymentMode,
+                            onChanged: (PaymentMode? newValue) {
+                              controller.changePaymentMode(newValue!);
+                            },
+                            items: PaymentMode.values.map((PaymentMode mode) {
+                              return DropdownMenuItem<PaymentMode>(
+                                value: mode,
+                                child: Text(mode.toString().split('.').last),
+                              );
+                            }).toList(),
+                          );
+                        },
                       ),
-                      validator: (value) =>
-                          value == null ? "Select Payment mode" : null,
-                      dropdownColor: Appcolor.tertiaryColor,
-                      value: controller.selectedPaymentMode,
-                      onChanged: (PaymentMode? newValue) {
-                        controller.changePaymentMode(newValue!);
-                      },
-                      items: PaymentMode.values.map((PaymentMode mode) {
-                        return DropdownMenuItem<PaymentMode>(
-                          value: mode,
-                          child: Text(mode.toString().split('.').last),
-                        );
-                      }).toList(),
-                    );
-                  },
+                    ),
+                  ],
                 ),
-
                 const BlankSpace(
                   height: 40,
                 ),
-                // Row(
-                //   mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                //   children: [
-                //     SizedBox(
-                //       width: Get.width / 2.5,
-                //       child: Cancelbutton(
-                //         title: 'Cancel',
-                //         onTap: () {
-                //           Get.back();
-                //         },
-                //       ),
-                //     ),
-                //     SizedBox(
-                //       width: Get.width / 2.5,
-                //       child: CustomButton(
-                //         title: 'Add',
-                //         onTap: () {
-                //           addTransaction();
-                //         },
-                //       ),
-                //     ),
-                //   ],
-                // ),
                 CustomButton(
                     title: "Add Transaction",
                     onTap: () {
