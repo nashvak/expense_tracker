@@ -1,9 +1,11 @@
 import 'package:expense_tracker/constatnts/colors.dart';
 import 'package:expense_tracker/constatnts/custom_widgets/common/button.dart';
-import 'package:expense_tracker/controller/transaction_contollers/add_transaction_ui_controller.dart';
+import 'package:expense_tracker/controller/transaction_contollers/transaction_ui_controller.dart';
 import 'package:expense_tracker/controller/transaction_contollers/transaction_controller.dart';
+
 import 'package:expense_tracker/models/transaction_model/transaction_model.dart';
 import 'package:expense_tracker/view/transaction/screens/toggle_switch.dart';
+import 'package:expense_tracker/view/transaction/validators/validators.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
@@ -35,9 +37,7 @@ class _ScreenAddTransactionState extends State<ScreenAddTransaction> {
         date: ui.selectedDate,
         paymentMode: ui.selectedPaymentMode!,
         transactionType: ui.selectedTransactionType,
-        catagoryType: ui.selectedTransactionType == TransactionType.income
-            ? null
-            : ui.selectedCategory,
+        catagoryType: ui.selectedCategory!,
       );
       controller.createTransaction(transaction: transaction, context: context);
 
@@ -65,53 +65,48 @@ class _ScreenAddTransactionState extends State<ScreenAddTransaction> {
                 ),
 
                 CustomTextField(
-                  validator: (value) {
-                    return null;
-                  },
+                  validator: amountValidator,
                   controller: amountController,
                   title: 'Amount',
                 ),
-                BlankSpace(
+                const BlankSpace(
                   height: 30,
                 ),
                 GetBuilder<UiController>(
                   builder: (controller) {
-                    return Visibility(
-                      visible: controller.isDropdownVisible,
-                      child: DropdownButtonFormField<String>(
-                        hint: const Text('Catagory '),
-                        decoration: InputDecoration(
-                          enabledBorder: OutlineInputBorder(
-                            borderSide: const BorderSide(
-                                color: Appcolor.tertiaryColor, width: 1),
-                            borderRadius: BorderRadius.circular(50),
-                          ),
-                          focusedBorder: OutlineInputBorder(
-                            borderSide: const BorderSide(
-                                color: Appcolor.tertiaryColor, width: 1),
-                            borderRadius: BorderRadius.circular(50),
-                          ),
-                          filled: true,
-                          fillColor: Appcolor.tertiaryColor,
+                    return DropdownButtonFormField<String>(
+                      hint: const Text('Catagory '),
+                      decoration: InputDecoration(
+                        enabledBorder: OutlineInputBorder(
+                          borderSide: const BorderSide(
+                              color: Appcolor.tertiaryColor, width: 1),
+                          borderRadius: BorderRadius.circular(50),
                         ),
-                        validator: (value) =>
-                            value == null ? "Select Category" : null,
-                        dropdownColor: Appcolor.tertiaryColor,
-                        value: controller.selectedCategory,
-                        onChanged: (String? newValue) {
-                          controller.changeCatagory(newValue!);
-                        },
-                        items: controller.catagoryTypes.map((String mode) {
-                          return DropdownMenuItem<String>(
-                            value: mode,
-                            child: Text(mode.toString().split('.').last),
-                          );
-                        }).toList(),
+                        focusedBorder: OutlineInputBorder(
+                          borderSide: const BorderSide(
+                              color: Appcolor.tertiaryColor, width: 1),
+                          borderRadius: BorderRadius.circular(50),
+                        ),
+                        filled: true,
+                        fillColor: Appcolor.tertiaryColor,
                       ),
+                      validator: (value) =>
+                          value == null ? "Select Category" : null,
+                      dropdownColor: Appcolor.tertiaryColor,
+                      value: controller.selectedCategory,
+                      onChanged: (String? newValue) {
+                        controller.changeCatagory(newValue!);
+                      },
+                      items: controller.catagoryTypes.map((String mode) {
+                        return DropdownMenuItem<String>(
+                          value: mode,
+                          child: Text(mode.toString().split('.').last),
+                        );
+                      }).toList(),
                     );
                   },
                 ),
-                BlankSpace(
+                const BlankSpace(
                   height: 30,
                 ),
                 GetBuilder<UiController>(
@@ -133,7 +128,7 @@ class _ScreenAddTransactionState extends State<ScreenAddTransaction> {
                     );
                   },
                 ),
-                BlankSpace(
+                const BlankSpace(
                   height: 30,
                 ),
                 CustomTextField(
@@ -143,7 +138,7 @@ class _ScreenAddTransactionState extends State<ScreenAddTransaction> {
                   controller: descriptionController,
                   title: 'Description',
                 ),
-                BlankSpace(
+                const BlankSpace(
                   height: 30,
                 ),
                 GetBuilder<UiController>(

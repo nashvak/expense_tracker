@@ -3,8 +3,9 @@ import 'package:expense_tracker/constatnts/custom_widgets/common/button.dart';
 import 'package:expense_tracker/constatnts/custom_widgets/common/decoration.dart';
 import 'package:expense_tracker/constatnts/custom_widgets/common/sizedbox.dart';
 import 'package:expense_tracker/controller/authentication_section/password_controller.dart';
-import 'package:expense_tracker/controller/transaction_contollers/add_transaction_ui_controller.dart';
+import 'package:expense_tracker/controller/transaction_contollers/transaction_ui_controller.dart';
 import 'package:expense_tracker/controller/transaction_contollers/transaction_controller.dart';
+
 import 'package:expense_tracker/models/transaction_model/transaction_model.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';

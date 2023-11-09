@@ -18,11 +18,9 @@ Future<void> main() async {
   Hive.init(directory.path);
   Hive.initFlutter();
   Hive.registerAdapter<AuthModel>(AuthModelAdapter());
-  Hive.registerAdapter<Transaction>(TransactionAdapter());
-  Hive.registerAdapter<PaymentMode>(PaymentModeAdapter());
   Hive.registerAdapter<TransactionType>(TransactionTypeAdapter());
-  // Hive.registerAdapter<CatagoryType>(CatagoryTypeAdapter());
-  // Hive.registerAdapter<Remainder>(RemainderAdapter());
+  Hive.registerAdapter<PaymentMode>(PaymentModeAdapter());
+  Hive.registerAdapter<Transaction>(TransactionAdapter());
   await Hive.openBox<AuthModel>('AuthBox');
   await Hive.openBox<Transaction>('transactionBox');
   // await Hive.openBox<Remainder>('remainderBox');

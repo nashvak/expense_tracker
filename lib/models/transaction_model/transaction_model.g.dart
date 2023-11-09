@@ -21,7 +21,7 @@ class TransactionAdapter extends TypeAdapter<Transaction> {
       amount: fields[1] as int,
       date: fields[2] as DateTime,
       paymentMode: fields[4] as PaymentMode,
-      catagoryType: fields[3] as CatagoryType?,
+      catagoryType: fields[3] as String,
       transactionType: fields[5] as TransactionType,
     );
   }
@@ -55,73 +55,9 @@ class TransactionAdapter extends TypeAdapter<Transaction> {
           typeId == other.typeId;
 }
 
-class CatagoryTypeAdapter extends TypeAdapter<CatagoryType> {
-  @override
-  final int typeId = 2;
-
-  @override
-  CatagoryType read(BinaryReader reader) {
-    switch (reader.readByte()) {
-      case 0:
-        return CatagoryType.bills;
-      case 1:
-        return CatagoryType.food;
-      case 2:
-        return CatagoryType.entertainment;
-      case 3:
-        return CatagoryType.transportation;
-      case 4:
-        return CatagoryType.shopping;
-      case 5:
-        return CatagoryType.insurance;
-      case 6:
-        return CatagoryType.others;
-      default:
-        return CatagoryType.bills;
-    }
-  }
-
-  @override
-  void write(BinaryWriter writer, CatagoryType obj) {
-    switch (obj) {
-      case CatagoryType.bills:
-        writer.writeByte(0);
-        break;
-      case CatagoryType.food:
-        writer.writeByte(1);
-        break;
-      case CatagoryType.entertainment:
-        writer.writeByte(2);
-        break;
-      case CatagoryType.transportation:
-        writer.writeByte(3);
-        break;
-      case CatagoryType.shopping:
-        writer.writeByte(4);
-        break;
-      case CatagoryType.insurance:
-        writer.writeByte(5);
-        break;
-      case CatagoryType.others:
-        writer.writeByte(6);
-        break;
-    }
-  }
-
-  @override
-  int get hashCode => typeId.hashCode;
-
-  @override
-  bool operator ==(Object other) =>
-      identical(this, other) ||
-      other is CatagoryTypeAdapter &&
-          runtimeType == other.runtimeType &&
-          typeId == other.typeId;
-}
-
 class PaymentModeAdapter extends TypeAdapter<PaymentMode> {
   @override
-  final int typeId = 3;
+  final int typeId = 2;
 
   @override
   PaymentMode read(BinaryReader reader) {
@@ -160,7 +96,7 @@ class PaymentModeAdapter extends TypeAdapter<PaymentMode> {
 
 class TransactionTypeAdapter extends TypeAdapter<TransactionType> {
   @override
-  final int typeId = 4;
+  final int typeId = 3;
 
   @override
   TransactionType read(BinaryReader reader) {
@@ -169,6 +105,8 @@ class TransactionTypeAdapter extends TypeAdapter<TransactionType> {
         return TransactionType.income;
       case 1:
         return TransactionType.expense;
+      case 2:
+        return TransactionType.transfer;
       default:
         return TransactionType.income;
     }
@@ -182,6 +120,9 @@ class TransactionTypeAdapter extends TypeAdapter<TransactionType> {
         break;
       case TransactionType.expense:
         writer.writeByte(1);
+        break;
+      case TransactionType.transfer:
+        writer.writeByte(2);
         break;
     }
   }

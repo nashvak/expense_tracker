@@ -1,26 +1,7 @@
-import 'dart:core';
 import 'package:hive/hive.dart';
 part 'transaction_model.g.dart';
 
 @HiveType(typeId: 2)
-// enum CatagoryType {
-//   @HiveField(0)
-//   bills,
-//   @HiveField(1)
-//   food,
-//   @HiveField(2)
-//   entertainment,
-//   @HiveField(3)
-//   transportation,
-//   @HiveField(4)
-//   shopping,
-//   @HiveField(5)
-//   insurance,
-//   @HiveField(6)
-//   others,
-// }
-
-@HiveType(typeId: 3)
 enum PaymentMode {
   @HiveField(0)
   cash,
@@ -28,12 +9,14 @@ enum PaymentMode {
   bank,
 }
 
-@HiveType(typeId: 4)
+@HiveType(typeId: 3)
 enum TransactionType {
   @HiveField(0)
   income,
   @HiveField(1)
   expense,
+  @HiveField(2)
+  transfer,
 }
 
 @HiveType(typeId: 1)
@@ -48,7 +31,7 @@ class Transaction extends HiveObject {
   DateTime date;
 
   @HiveField(3)
-  final String? catagoryType;
+  final String catagoryType;
 
   @HiveField(4)
   final PaymentMode paymentMode;

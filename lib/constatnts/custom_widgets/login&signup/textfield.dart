@@ -2,7 +2,7 @@ import 'package:expense_tracker/constatnts/colors.dart';
 import 'package:flutter/material.dart';
 
 class CustomTextField extends StatelessWidget {
-  CustomTextField(
+  const CustomTextField(
       {this.icon,
       this.ontap,
       this.type,
@@ -14,10 +14,10 @@ class CustomTextField extends StatelessWidget {
   final Icon? icon;
   final String title;
 
-  final String? Function(String?)? validator;
+  final String? Function(String?) validator;
   final TextEditingController controller;
   final void Function()? ontap;
-  TextInputType? type;
+  final TextInputType? type;
   final bool readonly;
   @override
   Widget build(BuildContext context) {

@@ -10,7 +10,7 @@ class AuthModel extends HiveObject {
   String email;
 
   @HiveField(2)
-  int phone;
+  String phone;
 
   @HiveField(3)
   String? image;

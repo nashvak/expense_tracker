@@ -53,7 +53,7 @@ class _ScreenSignupState extends State<ScreenSignup> {
         auth: AuthModel(
           name: nameController.text.trim(),
           email: emailController.text.trim(),
-          phone: int.parse(phoneController.text.trim()),
+          phone: phoneController.text.trim(),
           image: imageUrl,
         ),
       );

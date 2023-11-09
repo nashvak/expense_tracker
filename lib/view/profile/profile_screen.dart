@@ -154,7 +154,7 @@ class _ScreenProfileState extends State<ScreenProfile> {
                             const Color.fromARGB(255, 184, 207, 238),
                         iconColor: const Color.fromARGB(255, 37, 121, 231),
                         ontap: () {
-                          Get.to(() => NotificationPage());
+                          Get.to(() => const NotificationPage());
                         },
                       ),
                       height20,

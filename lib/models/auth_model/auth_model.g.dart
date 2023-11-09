@@ -19,7 +19,7 @@ class AuthModelAdapter extends TypeAdapter<AuthModel> {
     return AuthModel(
       name: fields[0] as String,
       email: fields[1] as String,
-      password: fields[2] as String,
+      phone: fields[2] as String,
       image: fields[3] as String?,
     );
   }
@@ -33,7 +33,7 @@ class AuthModelAdapter extends TypeAdapter<AuthModel> {
       ..writeByte(1)
       ..write(obj.email)
       ..writeByte(2)
-      ..write(obj.password)
+      ..write(obj.phone)
       ..writeByte(3)
       ..write(obj.image);
   }

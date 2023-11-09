@@ -1,4 +1,5 @@
 import 'package:expense_tracker/models/transaction_model/transaction_model.dart';
+
 import 'package:flutter/material.dart';
 import 'package:get/get_state_manager/src/simple/get_controllers.dart';
 
@@ -7,7 +8,7 @@ class UiController extends GetxController {
   TransactionType selectedTransactionType = TransactionType.income;
   String? selectedCategory;
   var selectedDate = DateTime.now();
-  bool isDropdownVisible = false;
+  // bool isDropdownVisible = false;
   List<String> catagoryTypes = ['Food', 'Entertainment', 'Loan'];
 //  F U N C T I O N    T O   P I C K    D A TE
   getDate(context) async {
@@ -37,9 +38,13 @@ class UiController extends GetxController {
   }
 
   changeToggle(index) {
-    selectedTransactionType =
-        (index == 0) ? TransactionType.income : TransactionType.expense;
-    isDropdownVisible = index == 1;
+    selectedTransactionType = (index == 0)
+        ? TransactionType.income
+        : index == 1
+            ? TransactionType.expense
+            : TransactionType.transfer;
+    print(selectedTransactionType);
+    //isDropdownVisible = index == 1;
     update();
   }
 
