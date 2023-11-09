@@ -2,8 +2,9 @@ import 'package:expense_tracker/constatnts/colors.dart';
 import 'package:expense_tracker/constatnts/custom_widgets/common/button.dart';
 import 'package:expense_tracker/constatnts/custom_widgets/common/decoration.dart';
 import 'package:expense_tracker/constatnts/custom_widgets/common/sizedbox.dart';
-import 'package:expense_tracker/controller/password_controller.dart';
-import 'package:expense_tracker/controller/transaction_controller.dart';
+import 'package:expense_tracker/controller/authentication_section/password_controller.dart';
+import 'package:expense_tracker/controller/transaction_contollers/add_transaction_ui_controller.dart';
+import 'package:expense_tracker/controller/transaction_contollers/transaction_controller.dart';
 import 'package:expense_tracker/models/transaction_model/transaction_model.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -22,9 +23,13 @@ class _ScreenViewTransactionState extends State<ScreenViewTransaction> {
   final TransactionController transactionController = Get.put(
     TransactionController(),
   );
-  final UpdateController ui = Get.put(
+  final UpdateController updateController = Get.put(
     UpdateController(),
   );
+  final UiController ui = Get.put(
+    UiController(),
+  );
+
   final updateFormkey = GlobalKey<FormState>();
 
   TextEditingController amountController = TextEditingController();
@@ -39,14 +44,14 @@ class _ScreenViewTransactionState extends State<ScreenViewTransaction> {
       text: tr.amount.toString(),
     );
     descriptionController = TextEditingController(text: tr.description);
-    ui.date = tr.date;
+    updateController.date = tr.date;
     dateController = TextEditingController(
-      text: DateFormat('dd/MM/yyyy').format(ui.date),
+      text: DateFormat('dd/MM/yyyy').format(updateController.date),
     );
-    ui.transaction = tr.transactionType;
-    ui.mode = tr.paymentMode;
-    ui.catagory = tr.catagoryType;
-    ui.isContainervisible();
+    updateController.transaction = tr.transactionType;
+    updateController.mode = tr.paymentMode;
+    updateController.catagory = tr.catagoryType;
+    updateController.isContainervisible();
     super.initState();
   }
 
@@ -55,12 +60,13 @@ class _ScreenViewTransactionState extends State<ScreenViewTransaction> {
       Transaction tr = Transaction(
         description: descriptionController.text,
         amount: int.parse(amountController.text),
-        date: ui.date,
-        paymentMode: ui.mode,
-        transactionType: ui.transaction,
-        catagoryType: ui.catagory,
+        date: updateController.date,
+        paymentMode: updateController.mode,
+        transactionType: updateController.transaction,
+        catagoryType: updateController.catagory,
       );
-      transactionController.updateTransaction(index: index, transaction: tr);
+      transactionController.updateTransaction(
+          index: index, transaction: tr, context: context);
 
       Get.back();
     }
@@ -275,16 +281,15 @@ class _ScreenViewTransactionState extends State<ScreenViewTransaction> {
                               'Catagory type',
                               style: TextStyle(color: Appcolor.primaryColor),
                             ),
-                            DropdownButton<CatagoryType>(
-                                onChanged: (CatagoryType? newValue) {
+                            DropdownButton<String>(
+                                onChanged: (String? newValue) {
                                   // setState(() {
                                   //   selectedPaymentMode = newValue!;
                                   // });
                                   controller.changeCategoryType(newValue);
                                 },
-                                items: CatagoryType.values
-                                    .map((CatagoryType mode) {
-                                  return DropdownMenuItem<CatagoryType>(
+                                items: ui.catagoryTypes.map((String mode) {
+                                  return DropdownMenuItem<String>(
                                     value: mode,
                                     child:
                                         Text(mode.toString().split('.').last),

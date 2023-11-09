@@ -1,7 +1,7 @@
 import 'package:get/get.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:expense_tracker/view/authentication/get_started.dart';
-import 'package:expense_tracker/view/transaction/bottom_nav.dart';
+import 'package:expense_tracker/view/home_screen/bottom_nav.dart';
 import 'dart:async';
 
 class SplashScreenContoller extends GetxController {

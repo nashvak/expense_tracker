@@ -98,7 +98,7 @@ class _EditProfileState extends State<EditProfile> {
         auth: AuthModel(
           name: nameController.text.trim(),
           email: emailController.text.trim(),
-          password: user.password,
+          phone: user.phone,
           image: imageUrl,
         ),
       );

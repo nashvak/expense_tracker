@@ -1,6 +1,6 @@
 import 'package:expense_tracker/constatnts/colors.dart';
 import 'package:expense_tracker/constatnts/custom_widgets/common/sizedbox.dart';
-import 'package:expense_tracker/controller/time_picker.dart';
+import 'package:expense_tracker/controller/transaction_contollers/time_picker.dart';
 import 'package:expense_tracker/view/profile/notification/notification_settings.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';

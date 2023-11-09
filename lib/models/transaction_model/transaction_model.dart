@@ -3,22 +3,22 @@ import 'package:hive/hive.dart';
 part 'transaction_model.g.dart';
 
 @HiveType(typeId: 2)
-enum CatagoryType {
-  @HiveField(0)
-  bills,
-  @HiveField(1)
-  food,
-  @HiveField(2)
-  entertainment,
-  @HiveField(3)
-  transportation,
-  @HiveField(4)
-  shopping,
-  @HiveField(5)
-  insurance,
-  @HiveField(6)
-  others,
-}
+// enum CatagoryType {
+//   @HiveField(0)
+//   bills,
+//   @HiveField(1)
+//   food,
+//   @HiveField(2)
+//   entertainment,
+//   @HiveField(3)
+//   transportation,
+//   @HiveField(4)
+//   shopping,
+//   @HiveField(5)
+//   insurance,
+//   @HiveField(6)
+//   others,
+// }
 
 @HiveType(typeId: 3)
 enum PaymentMode {
@@ -48,7 +48,7 @@ class Transaction extends HiveObject {
   DateTime date;
 
   @HiveField(3)
-  final CatagoryType? catagoryType;
+  final String? catagoryType;
 
   @HiveField(4)
   final PaymentMode paymentMode;
@@ -61,6 +61,6 @@ class Transaction extends HiveObject {
       required this.amount,
       required this.date,
       required this.paymentMode,
-      this.catagoryType,
+      required this.catagoryType,
       required this.transactionType});
 }

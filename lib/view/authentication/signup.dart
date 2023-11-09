@@ -3,13 +3,12 @@ import 'package:expense_tracker/constatnts/colors.dart';
 import 'package:expense_tracker/controller/authentication_section/auth_controller.dart';
 import 'package:expense_tracker/controller/authentication_section/signup_controller.dart';
 import 'package:expense_tracker/controller/authentication_section/splashscreen_contoller.dart';
-import 'package:expense_tracker/controller/password_controller.dart';
 import 'package:expense_tracker/constatnts/custom_widgets/common/decoration.dart';
 import 'package:expense_tracker/constatnts/custom_widgets/common/sizedbox.dart';
-import 'package:expense_tracker/constatnts/custom_widgets/login&signup/validators.dart';
+import 'package:expense_tracker/view/authentication/validators.dart';
 import 'package:expense_tracker/models/auth_model/auth_model.dart';
 import 'package:expense_tracker/view/authentication/bottomsheets.dart';
-import 'package:expense_tracker/view/transaction/bottom_nav.dart';
+import 'package:expense_tracker/view/home_screen/bottom_nav.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -27,9 +26,8 @@ class _ScreenSignupState extends State<ScreenSignup> {
   final formkey = GlobalKey<FormState>();
   final nameController = TextEditingController();
   final emailController = TextEditingController();
-  final passController = TextEditingController();
+  final phoneController = TextEditingController();
 
-  final PasswordController pass = Get.put(PasswordController());
   final AuthController authController = Get.put(AuthController());
   final SplashScreenContoller splash = Get.put(SplashScreenContoller());
   final SignupController signupController = Get.put(SignupController());
@@ -38,7 +36,7 @@ class _ScreenSignupState extends State<ScreenSignup> {
   void dispose() {
     nameController.dispose();
     emailController.dispose();
-    passController.dispose();
+    phoneController.dispose();
     super.dispose();
   }
 
@@ -55,7 +53,7 @@ class _ScreenSignupState extends State<ScreenSignup> {
         auth: AuthModel(
           name: nameController.text.trim(),
           email: emailController.text.trim(),
-          password: passController.text.trim(),
+          phone: int.parse(phoneController.text.trim()),
           image: imageUrl,
         ),
       );
@@ -143,34 +141,36 @@ class _ScreenSignupState extends State<ScreenSignup> {
                           ),
                           const BlankSpace(height: 20),
                           CustomTextField(
-                            obscure: false,
                             controller: nameController,
                             validator: nameValidator,
                             title: 'Name',
+                            icon: const Icon(Icons.person),
+                            type: TextInputType.text,
                           ),
                           const BlankSpace(height: 20),
                           CustomTextField(
-                            obscure: false,
                             controller: emailController,
                             validator: emailValidator,
+                            type: TextInputType.emailAddress,
                             title: 'Email',
+                            icon: const Icon(Icons.email),
                           ),
                           const BlankSpace(height: 20),
-                          Obx(
-                            () => CustomTextField(
-                              obscure: pass.visibility.value,
-                              controller: passController,
-                              validator: passwordValidator,
-                              title: 'Password',
-                              icon: IconButton(
-                                onPressed: () {
-                                  pass.changeVisibility(pass.visibility.value);
-                                },
-                                icon: Icon(pass.visibility.value
-                                    ? Icons.visibility
-                                    : Icons.visibility_off),
-                              ),
-                            ),
+                          CustomTextField(
+                            controller: phoneController,
+                            validator: passwordValidator,
+                            type: TextInputType.number,
+                            title: 'Phone number',
+                            icon: const Icon(Icons.phone_android),
+
+                            // icon: IconButton(
+                            //   onPressed: () {
+                            //     pass.changeVisibility(pass.visibility.value);
+                            //   },
+                            //   icon: Icon(pass.visibility.value
+                            //       ? Icons.visibility
+                            //       : Icons.visibility_off),
+                            // ),
                           ),
                           const BlankSpace(height: 30),
                           CustomButton(

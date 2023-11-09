@@ -1,6 +1,6 @@
 //    E X P E N S E    C A R D
 import 'package:expense_tracker/constatnts/colors.dart';
-import 'package:expense_tracker/controller/transaction_controller.dart';
+import 'package:expense_tracker/controller/transaction_contollers/transaction_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 

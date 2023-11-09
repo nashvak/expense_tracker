@@ -1,4 +1,5 @@
 import 'package:expense_tracker/models/transaction_model/transaction_model.dart';
+import 'package:expense_tracker/view/transaction/snackbars/snackbar.dart';
 import 'package:flutter/material.dart';
 import 'package:hive/hive.dart';
 import 'package:get/get.dart';
@@ -17,7 +18,7 @@ class TransactionController extends GetxController {
 //  C A T E G O R Y   F I L T E R I N G
 
   List<String> isCatagoryIncluded() {
-    Set<CatagoryType?> currentCatagory = {};
+    Set<String?> currentCatagory = {};
     List<String> catagoryTitles = [];
     for (var transaction in sortedList) {
       currentCatagory.add(transaction.catagoryType);
@@ -42,7 +43,7 @@ class TransactionController extends GetxController {
   //     .toList();
 
   //
-  catogoryVisible(CatagoryType type) {}
+  catogoryVisible(String type) {}
 
   // F I L T E R I N G
   var selectedOption = 'All';
@@ -70,41 +71,43 @@ class TransactionController extends GetxController {
       return sortedList
           .where((transaction) => transaction.paymentMode == PaymentMode.bank)
           .toList();
-    } else if (selectedOption == 'food') {
-      return sortedList
-          .where((transaction) => transaction.catagoryType == CatagoryType.food)
-          .toList();
-    } else if (selectedOption == 'bills') {
-      return sortedList
-          .where(
-              (transaction) => transaction.catagoryType == CatagoryType.bills)
-          .toList();
-    } else if (selectedOption == 'entertainment') {
-      return sortedList
-          .where((transaction) =>
-              transaction.catagoryType == CatagoryType.entertainment)
-          .toList();
-    } else if (selectedOption == 'insurance') {
-      return sortedList
-          .where((transaction) =>
-              transaction.catagoryType == CatagoryType.insurance)
-          .toList();
-    } else if (selectedOption == 'shopping') {
-      return sortedList
-          .where((transaction) =>
-              transaction.catagoryType == CatagoryType.shopping)
-          .toList();
-    } else if (selectedOption == 'others') {
-      return sortedList
-          .where(
-              (transaction) => transaction.catagoryType == CatagoryType.others)
-          .toList();
-    } else if (selectedOption == 'transportation') {
-      return sortedList
-          .where((transaction) =>
-              transaction.catagoryType == CatagoryType.transportation)
-          .toList();
-    } else if (selectedOption == 'Date') {
+    }
+    // else if (selectedOption == 'food') {
+    //   return sortedList
+    //       .where((transaction) => transaction.catagoryType == CatagoryType.food)
+    //       .toList();
+    // } else if (selectedOption == 'bills') {
+    //   return sortedList
+    //       .where(
+    //           (transaction) => transaction.catagoryType == CatagoryType.bills)
+    //       .toList();
+    // } else if (selectedOption == 'entertainment') {
+    //   return sortedList
+    //       .where((transaction) =>
+    //           transaction.catagoryType == CatagoryType.entertainment)
+    //       .toList();
+    // } else if (selectedOption == 'insurance') {
+    //   return sortedList
+    //       .where((transaction) =>
+    //           transaction.catagoryType == CatagoryType.insurance)
+    //       .toList();
+    // } else if (selectedOption == 'shopping') {
+    //   return sortedList
+    //       .where((transaction) =>
+    //           transaction.catagoryType == CatagoryType.shopping)
+    //       .toList();
+    // } else if (selectedOption == 'others') {
+    //   return sortedList
+    //       .where(
+    //           (transaction) => transaction.catagoryType == CatagoryType.others)
+    //       .toList();
+    // } else if (selectedOption == 'transportation') {
+    //   return sortedList
+    //       .where((transaction) =>
+    //           transaction.catagoryType == CatagoryType.transportation)
+    //       .toList();
+    // }
+    else if (selectedOption == 'Date') {
       return sortedList
           .where((transaction) =>
               transaction.date.isAfter(startDate!) &&
@@ -137,22 +140,25 @@ class TransactionController extends GetxController {
 
   int get transactionCount => sortedList.length;
   //// F U N C T I O N   T O   A D D   T R A N S A C T I O N
-  createTransaction({required Transaction transaction}) async {
-    await transactionBox.add(transaction);
+  createTransaction({required Transaction transaction, context}) async {
+    await transactionBox.add(transaction).then(
+        (value) => ScaffoldMessenger.of(context).showSnackBar(successSnackbar));
     update();
   }
 
 // F U N C T I O N   T O   U P D A T E   T R A N S A C T I O N
   updateTransaction(
-      {required int index, required Transaction transaction}) async {
-    await transactionBox.putAt(index, transaction);
+      {required int index, required Transaction transaction, context}) async {
+    await transactionBox.putAt(index, transaction).then(
+        (value) => ScaffoldMessenger.of(context).showSnackBar(editSnackbar));
 
     update();
   }
 
 // F U N C T I O N   T O   D E L E T E   T R A N S A C T I O N
-  deleteTransaction({required int index}) {
-    transactionBox.deleteAt(index);
+  deleteTransaction({required int index, required context}) {
+    transactionBox.deleteAt(index).then((value) =>
+        ScaffoldMessenger.of(context).showSnackBar(deleteTransactionSnackbar));
     update();
   }
 

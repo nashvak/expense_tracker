@@ -2,21 +2,22 @@ import 'package:expense_tracker/constatnts/colors.dart';
 import 'package:flutter/material.dart';
 
 class CustomTextField extends StatelessWidget {
-  const CustomTextField(
+  CustomTextField(
       {this.icon,
       this.ontap,
+      this.type,
       this.readonly = false,
-      required this.obscure,
       required this.validator,
       required this.controller,
       required this.title,
       super.key});
-  final IconButton? icon;
+  final Icon? icon;
   final String title;
-  final bool obscure;
+
   final String? Function(String?)? validator;
   final TextEditingController controller;
   final void Function()? ontap;
+  TextInputType? type;
   final bool readonly;
   @override
   Widget build(BuildContext context) {
@@ -24,12 +25,12 @@ class CustomTextField extends StatelessWidget {
       onTap: ontap,
       readOnly: readonly,
       controller: controller,
-      obscureText: obscure,
       validator: validator,
+      keyboardType: type,
       cursorColor: const Color.fromARGB(255, 120, 120, 120),
       decoration: InputDecoration(
         hintText: title,
-        suffixIcon: icon,
+        prefixIcon: icon,
         fillColor: Appcolor.tertiaryColor,
         filled: true,
         enabledBorder: OutlineInputBorder(

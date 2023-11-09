@@ -11,44 +11,6 @@ class PasswordController extends GetxController {
 
 ///date picker
 
-class UiController extends GetxController {
-  PaymentMode? selectedPaymentMode;
-  TransactionType selectedTransactionType = TransactionType.income;
-  CatagoryType? selectedCategory;
-  var selectedDate = DateTime.now();
-  bool isDropdownVisible = false;
-
-  updateDate(DateTime newDate) {
-    selectedDate = newDate;
-    update();
-  }
-
-  changePaymentMode(PaymentMode newValue) {
-    selectedPaymentMode = newValue;
-    update();
-  }
-
-  changeCatagory(CatagoryType newValue) {
-    selectedCategory = newValue;
-    update();
-  }
-
-  changeToggle(index) {
-    selectedTransactionType =
-        (index == 0) ? TransactionType.income : TransactionType.expense;
-    isDropdownVisible = index == 1;
-    update();
-  }
-
-  resetValues() {
-    selectedTransactionType = TransactionType.income;
-    selectedCategory = null;
-    selectedDate = DateTime.now();
-    selectedPaymentMode = null;
-    update();
-  }
-}
-
 //
 
 //
@@ -57,7 +19,7 @@ class UiController extends GetxController {
 class UpdateController extends GetxController {
   late TransactionType transaction;
   late PaymentMode mode;
-  late CatagoryType? catagory;
+  late String? catagory;
   late DateTime date;
   bool iscatagoryVisible = false;
   updateDate(DateTime newDate) {

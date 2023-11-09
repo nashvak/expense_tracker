@@ -10,13 +10,13 @@ class AuthModel extends HiveObject {
   String email;
 
   @HiveField(2)
-  String password;
+  int phone;
 
   @HiveField(3)
   String? image;
   AuthModel(
       {required this.name,
       required this.email,
-      required this.password,
+      required this.phone,
       this.image});
 }
