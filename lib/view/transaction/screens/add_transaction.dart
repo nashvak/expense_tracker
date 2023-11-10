@@ -69,12 +69,7 @@ class _ScreenAddTransactionState extends State<ScreenAddTransaction> {
                 const BlankSpace(height: 50),
                 AddTransactionTextField(
                   type: TextInputType.number,
-                  validator: (value) {
-                    if (value == null) {
-                      return "Null value";
-                    }
-                    return null;
-                  },
+                  validator: amountValidator,
                   controller: amountController,
                   title: 'Amount',
                 ),
@@ -109,7 +104,9 @@ class _ScreenAddTransactionState extends State<ScreenAddTransaction> {
                             onChanged: (String? newValue) {
                               controller.changeCatagory(newValue!);
                             },
-                            items: controller.catagoryTypes.map((String mode) {
+                            items: controller
+                                .showCategoryDropdown()
+                                .map((String mode) {
                               return DropdownMenuItem<String>(
                                 value: mode,
                                 child: Text(mode.toString().split('.').last),
@@ -169,8 +166,8 @@ class _ScreenAddTransactionState extends State<ScreenAddTransaction> {
                         builder: (controller) {
                           return DropdownButtonFormField<PaymentMode>(
                             hint: const Text('Payment mode '),
-                            autovalidateMode:
-                                AutovalidateMode.onUserInteraction,
+                            // autovalidateMode:
+                            //     AutovalidateMode.onUserInteraction,
                             decoration: const InputDecoration(
                               enabledBorder: UnderlineInputBorder(
                                 borderSide: BorderSide(

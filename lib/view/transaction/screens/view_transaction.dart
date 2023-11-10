@@ -183,13 +183,18 @@ class _ScreenViewTransactionState extends State<ScreenViewTransaction> {
                               color: Appcolor.primaryColor,
                               shape: BoxShape.circle,
                             ),
-                            child: const Padding(
-                              padding: EdgeInsets.all(10),
-                              child: Icon(
-                                Icons.phone,
-                                color: Colors.white,
-                              ),
-                            ),
+                            child: Padding(
+                                padding: const EdgeInsets.all(10),
+                                child:
+                                    tr.transactionType == TransactionType.income
+                                        ? const Icon(
+                                            Icons.arrow_upward,
+                                            color: Colors.white,
+                                          )
+                                        : const Icon(
+                                            Icons.arrow_downward,
+                                            color: Colors.white,
+                                          )),
                           ),
                           const BlankSpace(
                             width: 15,
@@ -199,34 +204,36 @@ class _ScreenViewTransactionState extends State<ScreenViewTransaction> {
                               children: [
                                 TextFormField(
                                   controller: descriptionController,
-                                  decoration: InputDecoration(
+                                  decoration: const InputDecoration(
                                     border: InputBorder.none,
-                                    hintText: tr.description,
+                                    // hintText: tr.description,
                                   ),
                                 ),
-                                GetBuilder<UpdateController>(builder: (cont) {
-                                  return TextFormField(
-                                    controller: dateController,
-                                    decoration: const InputDecoration(
-                                      border: InputBorder.none,
-                                    ),
-                                    onTap: () async {
-                                      DateTime? dates = await showDatePicker(
-                                          context: context,
-                                          initialDate: DateTime.now(),
-                                          firstDate: DateTime(2023),
-                                          lastDate: DateTime(2024));
+                                GetBuilder<UpdateController>(
+                                  builder: (cont) {
+                                    return TextFormField(
+                                      controller: dateController,
+                                      decoration: const InputDecoration(
+                                        border: InputBorder.none,
+                                      ),
+                                      onTap: () async {
+                                        DateTime? dates = await showDatePicker(
+                                            context: context,
+                                            initialDate: DateTime.now(),
+                                            firstDate: DateTime(2023),
+                                            lastDate: DateTime(2024));
 
-                                      if (dates != null) {
-                                        cont.updateDate(dates);
-                                        // setState(() {});
-                                        dateController.text =
-                                            DateFormat('dd/MM/yyyy')
-                                                .format(dates);
-                                      }
-                                    },
-                                  );
-                                })
+                                        if (dates != null) {
+                                          cont.updateDate(dates);
+                                          // setState(() {});
+                                          dateController.text =
+                                              DateFormat('dd/MM/yyyy')
+                                                  .format(dates);
+                                        }
+                                      },
+                                    );
+                                  },
+                                ),
                               ],
                             ),
                           )
@@ -289,7 +296,8 @@ class _ScreenViewTransactionState extends State<ScreenViewTransaction> {
                                   // });
                                   controller.changeCategoryType(newValue);
                                 },
-                                items: ui.catagoryTypes.map((String mode) {
+                                items:
+                                    ui.incomeCatagoryTypes.map((String mode) {
                                   return DropdownMenuItem<String>(
                                     value: mode,
                                     child:

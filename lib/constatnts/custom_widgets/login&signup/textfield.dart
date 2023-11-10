@@ -28,6 +28,7 @@ class CustomTextField extends StatelessWidget {
       validator: validator,
       keyboardType: type,
       cursorColor: const Color.fromARGB(255, 120, 120, 120),
+      autovalidateMode: AutovalidateMode.onUserInteraction,
       decoration: InputDecoration(
         hintText: title,
         prefixIcon: icon,

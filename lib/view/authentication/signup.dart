@@ -158,7 +158,7 @@ class _ScreenSignupState extends State<ScreenSignup> {
                           const BlankSpace(height: 20),
                           CustomTextField(
                             controller: phoneController,
-                            validator: passwordValidator,
+                            validator: numberValidator,
                             type: TextInputType.number,
                             title: 'Phone number',
                             icon: const Icon(Icons.phone_android),

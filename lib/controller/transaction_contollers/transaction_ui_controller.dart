@@ -8,8 +8,25 @@ class UiController extends GetxController {
   TransactionType selectedTransactionType = TransactionType.income;
   String? selectedCategory;
   var selectedDate = DateTime.now();
-  // bool isDropdownVisible = false;
-  List<String> catagoryTypes = ['Food', 'Entertainment', 'Loan'];
+  bool? isDropdownIncome = true;
+  List<String> incomeCatagoryTypes = ['Salary', 'Allowance', 'Bonus'];
+
+  List<String> expenseCatagoryTypes = ['Food', 'Entertainment', 'Loan'];
+
+  List<String> transferCatagoryTypes = ['bank charges', 'profit', 'lend'];
+  late List<String> categoryItem;
+//  S H O W I N G   T H E   C A T E G O R Y   I F   I N C O M E   O R    E X P E N S E
+  List<String> showCategoryDropdown() {
+    if (isDropdownIncome == true) {
+      categoryItem = incomeCatagoryTypes;
+    } else if (isDropdownIncome == false) {
+      categoryItem = expenseCatagoryTypes;
+    } else {
+      categoryItem = transferCatagoryTypes;
+    }
+    return categoryItem;
+  }
+
 //  F U N C T I O N    T O   P I C K    D A TE
   getDate(context) async {
     DateTime? pickedDate = await showDatePicker(
@@ -37,7 +54,7 @@ class UiController extends GetxController {
     update();
   }
 
-  changeToggle(index) {
+  changeToggle(index) async {
     selectedTransactionType = (index == 0)
         ? TransactionType.income
         : index == 1
@@ -45,6 +62,14 @@ class UiController extends GetxController {
             : TransactionType.transfer;
     print(selectedTransactionType);
     //isDropdownVisible = index == 1;
+    if (selectedTransactionType == TransactionType.income) {
+      isDropdownIncome = true;
+    } else if (selectedTransactionType == TransactionType.expense) {
+      isDropdownIncome = false;
+    } else {
+      isDropdownIncome = null;
+    }
+    selectedCategory = null;
     update();
   }
 
