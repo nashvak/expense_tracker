@@ -5,11 +5,27 @@ import 'package:flutter/material.dart';
 import 'package:expense_tracker/constatnts/custom_widgets/common/button.dart';
 import 'package:get/get.dart';
 
-class EditCategory extends StatelessWidget {
+class EditCategory extends StatefulWidget {
   EditCategory({super.key});
+
+  @override
+  State<EditCategory> createState() => _EditCategoryState();
+}
+
+class _EditCategoryState extends State<EditCategory> {
   final TextEditingController categoryController = TextEditingController();
+
   final formKey = GlobalKey<FormState>();
+
   final UiController uiController = Get.put(UiController());
+  final index = Get.arguments;
+
+  @override
+  void initState() {
+    categoryController.text = uiController.editCategory()[index];
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -38,12 +54,13 @@ class EditCategory extends StatelessWidget {
                   height: 30,
                 ),
                 SignupButton(
-                    title: 'Add Category',
+                    title: 'Update Category',
                     onTap: () {
                       if (formKey.currentState!.validate()) {
-                        uiController.addCategory(categoryController.text);
+                        uiController.updateCategory(
+                            index, categoryController.text);
+                        Get.back();
                       }
-                      Get.back();
                     })
               ],
             ),

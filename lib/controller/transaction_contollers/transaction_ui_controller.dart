@@ -27,6 +27,17 @@ class UiController extends GetxController {
     update();
   }
 
+  editCategory() {
+    return selectedTransactionType == TransactionType.income
+        ? incomeCatagoryTypes
+        : expenseCatagoryTypes;
+  }
+
+  updateCategory(index, newValue) {
+    editCategory()[index] = newValue;
+    update();
+  }
+
 //  S H O W I N G   T H E   C A T E G O R Y   I F   I N C O M E   O R    E X P E N S E
   List<String> showCategoryDropdown() {
     if (isDropdownIncome == true) {

@@ -2,6 +2,7 @@ import 'package:expense_tracker/constatnts/colors.dart';
 import 'package:expense_tracker/constatnts/custom_widgets/common/button.dart';
 import 'package:expense_tracker/constatnts/custom_widgets/common/sizedbox.dart';
 import 'package:expense_tracker/controller/transaction_contollers/transaction_ui_controller.dart';
+import 'package:expense_tracker/models/transaction_model/transaction_model.dart';
 import 'package:expense_tracker/view/transaction/screens/edit_category.dart';
 
 import 'package:flutter/material.dart';
@@ -17,17 +18,98 @@ class AddCategory extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Appcolor.primaryColor,
-        title: Text('Add Category'),
+        title: const Text('Add Category'),
         elevation: 0,
         actions: [
           IconButton(
               onPressed: () {
                 Get.to(() => EditCategory());
               },
-              icon: Icon(Icons.edit))
+              icon: const Icon(Icons.edit))
         ],
       ),
-      body: 
+      body: Column(
+        children: [
+          Padding(
+            padding: const EdgeInsets.all(20),
+            child: Form(
+              key: formKey,
+              child: Column(
+                children: [
+                  TextFormField(
+                    controller: categoryController,
+                    validator: (value) {
+                      if (value!.isEmpty) {
+                        return 'Add any category';
+                      }
+                      return null;
+                    },
+                  ),
+                  const BlankSpace(
+                    height: 30,
+                  ),
+                  SignupButton(
+                      title: 'Add Category',
+                      onTap: () {
+                        if (formKey.currentState!.validate()) {
+                          uiController.addCategory(categoryController.text);
+                          categoryController.clear();
+                        }
+                      }),
+                  const BlankSpace(
+                    height: 50,
+                  ),
+                  Align(
+                    alignment: Alignment.topLeft,
+                    child: Text(
+                      uiController.selectedTransactionType ==
+                              TransactionType.income
+                          ? 'Income'
+                          : 'Expense',
+                      style:
+                          TextStyle(fontSize: 19, fontWeight: FontWeight.bold),
+                    ),
+                  ),
+                ],
+              ),
+            ),
+          ),
+          Expanded(
+              child: Container(
+            // color: Colors.red,
+            width: double.infinity,
+            child: Padding(
+              padding: EdgeInsets.only(left: 20, right: 20, top: 0, bottom: 0),
+              child: GetBuilder<UiController>(
+                builder: (controller) {
+                  return ListView.builder(
+                    itemBuilder: (context, index) {
+                      return ListTile(
+                        onTap: () {
+                          Get.to(
+                            () => EditCategory(),
+                            arguments: index,
+                          );
+                        },
+                        horizontalTitleGap: 0,
+                        contentPadding: EdgeInsets.all(0),
+                        title: Text(
+                          controller.editCategory()[index],
+                        ),
+                        trailing: IconButton(
+                          onPressed: () {},
+                          icon: Icon(Icons.edit),
+                        ),
+                      );
+                    },
+                    itemCount: controller.editCategory().length,
+                  );
+                },
+              ),
+            ),
+          ))
+        ],
+      ),
     );
   }
 }
