@@ -15,6 +15,18 @@ class UiController extends GetxController {
 
   List<String> transferCatagoryTypes = ['bank charges', 'profit', 'lend'];
   late List<String> categoryItem;
+
+//   A D D   C A T E G O R Y   F U N C T I O N
+
+  addCategory(value) {
+    if (selectedTransactionType == TransactionType.income) {
+      incomeCatagoryTypes.add(value);
+    } else if (selectedTransactionType == TransactionType.expense) {
+      expenseCatagoryTypes.add(value);
+    }
+    update();
+  }
+
 //  S H O W I N G   T H E   C A T E G O R Y   I F   I N C O M E   O R    E X P E N S E
   List<String> showCategoryDropdown() {
     if (isDropdownIncome == true) {

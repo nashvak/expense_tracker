@@ -146,7 +146,7 @@ class _ScreenAddTransactionState extends State<ScreenAddTransaction> {
                     ),
                     GestureDetector(
                         onTap: () {
-                          Get.to(() => const AddCategory());
+                          Get.to(() => AddCategory());
                         },
                         child: const Icon(Icons.add)),
                   ],
