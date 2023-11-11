@@ -36,7 +36,7 @@ class GetStartedScreen extends StatelessWidget {
             Expanded(
               child: Align(
                 alignment: FractionalOffset.bottomCenter,
-                child: CustomButton(
+                child: SignupButton(
                   title: "Get Started",
                   onTap: () {
                     Get.off(() => const ScreenSignup());

@@ -173,7 +173,7 @@ class _ScreenSignupState extends State<ScreenSignup> {
                             // ),
                           ),
                           const BlankSpace(height: 30),
-                          CustomButton(
+                          SignupButton(
                             title: 'Register',
                             onTap: () async {
                               addProfile();

@@ -7,7 +7,7 @@ import 'package:expense_tracker/view/transaction/screens/add_category.dart';
 import 'package:expense_tracker/view/transaction/screens/toggle_switch.dart';
 import 'package:expense_tracker/view/transaction/validators/validators.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
+//import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
 import '../../../constatnts/custom_widgets/common/sizedbox.dart';
@@ -45,7 +45,7 @@ class _ScreenAddTransactionState extends State<ScreenAddTransaction> {
       ui.resetValues();
       descriptionController.clear();
       amountController.clear();
-      dateController.clear();
+      dateController.text = DateFormat('dd/MM/yyyy').format(ui.selectedDate);
     }
   }
 
@@ -67,8 +67,30 @@ class _ScreenAddTransactionState extends State<ScreenAddTransaction> {
               children: [
                 const CustomToggleSwitch(),
                 const BlankSpace(height: 50),
+                GetBuilder<UiController>(
+                  builder: (controller) {
+                    return AddTransactionTextField(
+                      readonly: true,
+                      validator: (value) {
+                        return null;
+                      },
+                      controller: dateController,
+                      title: 'Date',
+                      ontap: () async {
+                        await controller.getDate(context);
+
+                        dateController.text = DateFormat('dd/MM/yyyy')
+                            .format(controller.selectedDate);
+                        //   }
+                      },
+                    );
+                  },
+                ),
+                const BlankSpace(
+                  height: 30,
+                ),
                 AddTransactionTextField(
-                  type: TextInputType.numberWithOptions(decimal: true),
+                  type: const TextInputType.numberWithOptions(decimal: true),
                   validator: amountValidator,
                   controller: amountController,
                   title: 'Amount',
@@ -79,12 +101,12 @@ class _ScreenAddTransactionState extends State<ScreenAddTransaction> {
                   children: [
                     const Text(
                       'Category',
-                      style: TextStyle(fontSize: 17),
+                      style: TextStyle(fontSize: 15),
                     ),
                     const BlankSpace(
                       width: 30,
                     ),
-                    Container(
+                    SizedBox(
                       width: Get.width * 0.5,
                       child: GetBuilder<UiController>(
                         builder: (controller) {
@@ -101,8 +123,8 @@ class _ScreenAddTransactionState extends State<ScreenAddTransaction> {
                               ),
                             ),
                             iconSize: 0,
-                            autovalidateMode:
-                                AutovalidateMode.onUserInteraction,
+                            // autovalidateMode:
+                            //     AutovalidateMode.onUserInteraction,
                             validator: (value) =>
                                 value == null ? "Select Category" : null,
                             // dropdownColor: Appcolor.tertiaryColor,
@@ -132,28 +154,6 @@ class _ScreenAddTransactionState extends State<ScreenAddTransaction> {
                 const BlankSpace(
                   height: 30,
                 ),
-                GetBuilder<UiController>(
-                  builder: (controller) {
-                    return AddTransactionTextField(
-                      readonly: true,
-                      validator: (value) {
-                        return null;
-                      },
-                      controller: dateController,
-                      title: 'Date',
-                      ontap: () async {
-                        await controller.getDate(context);
-
-                        dateController.text = DateFormat('dd/MM/yyyy')
-                            .format(controller.selectedDate);
-                        //   }
-                      },
-                    );
-                  },
-                ),
-                const BlankSpace(
-                  height: 30,
-                ),
                 AddTransactionTextField(
                   validator: descriptionValidator,
                   controller: descriptionController,
@@ -167,7 +167,7 @@ class _ScreenAddTransactionState extends State<ScreenAddTransaction> {
                   children: [
                     const Text(
                       'Account',
-                      style: TextStyle(fontSize: 17),
+                      style: TextStyle(fontSize: 15),
                     ),
                     SizedBox(
                       width: Get.width * 0.6,
@@ -175,8 +175,6 @@ class _ScreenAddTransactionState extends State<ScreenAddTransaction> {
                         builder: (controller) {
                           return DropdownButtonFormField<PaymentMode>(
                             hint: const Text('Payment mode '),
-                            // autovalidateMode:
-                            //     AutovalidateMode.onUserInteraction,
                             decoration: const InputDecoration(
                               enabledBorder: UnderlineInputBorder(
                                 borderSide: BorderSide(
@@ -190,8 +188,6 @@ class _ScreenAddTransactionState extends State<ScreenAddTransaction> {
                             validator: (value) =>
                                 value == null ? "Select Payment mode" : null,
                             dropdownColor: Appcolor.tertiaryColor,
-                            autovalidateMode:
-                                AutovalidateMode.onUserInteraction,
                             value: controller.selectedPaymentMode,
                             onChanged: (PaymentMode? newValue) {
                               controller.changePaymentMode(newValue!);
@@ -211,11 +207,11 @@ class _ScreenAddTransactionState extends State<ScreenAddTransaction> {
                 const BlankSpace(
                   height: 40,
                 ),
-                CustomButton(
-                    title: "Add Transaction",
+                SignupButton(
+                    title: "Add ",
                     onTap: () {
                       addTransaction();
-                    })
+                    }),
               ],
             ),
           ),

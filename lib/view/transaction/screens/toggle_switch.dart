@@ -26,9 +26,7 @@ class CustomToggleSwitch extends StatelessWidget {
           minHeight: 50,
           cornerRadius: 10,
           fontSize: 17,
-          activeBgColor: const [
-            Appcolor.primaryColor,
-          ],
+          activeBgColor: const [Appcolor.primaryColor],
           activeFgColor: Colors.white,
           inactiveBgColor: const Color.fromARGB(255, 191, 224, 230),
           totalSwitches: 3,

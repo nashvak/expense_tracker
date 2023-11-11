@@ -1,12 +1,13 @@
 import 'package:flutter/material.dart';
+
 import 'package:google_fonts/google_fonts.dart';
 
 import '../../colors.dart';
 
-class CustomButton extends StatelessWidget {
+class SignupButton extends StatelessWidget {
   final String title;
   final void Function() onTap;
-  const CustomButton({
+  const SignupButton({
     required this.title,
     required this.onTap,
     super.key,
@@ -18,16 +19,16 @@ class CustomButton extends StatelessWidget {
       onTap: onTap,
       child: Container(
         width: double.infinity,
-        height: 60,
+        height: 50,
         decoration: BoxDecoration(
           color: Appcolor.primaryColor,
-          borderRadius: BorderRadius.circular(40),
+          borderRadius: BorderRadius.circular(10),
         ),
         child: Center(
           child: Text(
             title,
             style: GoogleFonts.lato(
-                fontSize: 25, fontWeight: FontWeight.w700, color: Colors.white),
+                fontSize: 20, fontWeight: FontWeight.w700, color: Colors.white),
           ),
         ),
       ),
@@ -35,12 +36,14 @@ class CustomButton extends StatelessWidget {
   }
 }
 
-class Cancelbutton extends StatelessWidget {
+class CustomButton extends StatelessWidget {
   final String title;
   final void Function() onTap;
-  const Cancelbutton({
+  // final double width;
+  const CustomButton({
     required this.title,
     required this.onTap,
+    // required this.width,
     super.key,
   });
 
@@ -50,18 +53,20 @@ class Cancelbutton extends StatelessWidget {
       onTap: onTap,
       child: Container(
         width: double.infinity,
-        height: 60,
         decoration: BoxDecoration(
-          color: Appcolor.white,
-          borderRadius: BorderRadius.circular(40),
+          borderRadius: BorderRadius.circular(10),
+          border: Border.all(color: Appcolor.primaryColor),
         ),
-        child: Center(
-          child: Text(
-            title,
-            style: GoogleFonts.lato(
-                fontSize: 25,
-                fontWeight: FontWeight.w700,
-                color: Appcolor.primaryColor),
+        child: Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+          child: Center(
+            child: Text(
+              title,
+              style: GoogleFonts.lato(
+                  fontSize: 17,
+                  fontWeight: FontWeight.w500,
+                  color: Appcolor.primaryColor),
+            ),
           ),
         ),
       ),

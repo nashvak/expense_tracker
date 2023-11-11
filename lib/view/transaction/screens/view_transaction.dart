@@ -348,7 +348,7 @@ class _ScreenViewTransactionState extends State<ScreenViewTransaction> {
                 const BlankSpace(
                   height: 30,
                 ),
-                CustomButton(
+                SignupButton(
                     title: 'Update Transaction',
                     onTap: () {
                       updateTransaction();

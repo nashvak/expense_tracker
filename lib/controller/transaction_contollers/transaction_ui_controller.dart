@@ -79,6 +79,7 @@ class UiController extends GetxController {
     selectedCategory = null;
     selectedDate = DateTime.now();
     selectedPaymentMode = null;
+    selectedDate = DateTime.now();
     update();
   }
 }
