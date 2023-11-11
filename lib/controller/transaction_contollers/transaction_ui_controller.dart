@@ -70,6 +70,7 @@ class UiController extends GetxController {
       isDropdownIncome = null;
     }
     selectedCategory = null;
+
     update();
   }
 

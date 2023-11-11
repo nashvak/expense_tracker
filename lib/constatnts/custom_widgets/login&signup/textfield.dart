@@ -1,6 +1,7 @@
 import 'package:expense_tracker/constatnts/colors.dart';
 import 'package:expense_tracker/constatnts/custom_widgets/common/sizedbox.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 
 class CustomTextField extends StatelessWidget {
@@ -63,6 +64,7 @@ class AddTransactionTextField extends StatelessWidget {
       required this.validator,
       required this.controller,
       required this.title,
+      this.numberonly,
       super.key});
 
   final String title;
@@ -72,6 +74,7 @@ class AddTransactionTextField extends StatelessWidget {
   final void Function()? ontap;
   final TextInputType? type;
   final bool readonly;
+  final List<TextInputFormatter>? numberonly;
   @override
   Widget build(BuildContext context) {
     return Row(
@@ -92,6 +95,12 @@ class AddTransactionTextField extends StatelessWidget {
             controller: controller,
             validator: validator,
             keyboardType: type,
+            // inputFormatters: <TextInputFormatter>[
+            //   FilteringTextInputFormatter.allow(filterPattern)
+            // ],
+            //  [+-]?\\d*\\.?\\d+
+            inputFormatters: numberonly,
+            //  autovalidateMode: AutovalidateMode.onUserInteraction,
             cursorColor: const Color.fromARGB(255, 120, 120, 120),
             decoration: const InputDecoration(
               enabledBorder: UnderlineInputBorder(

@@ -3,9 +3,11 @@ import 'package:expense_tracker/constatnts/custom_widgets/common/button.dart';
 import 'package:expense_tracker/controller/transaction_contollers/transaction_ui_controller.dart';
 import 'package:expense_tracker/controller/transaction_contollers/transaction_controller.dart';
 import 'package:expense_tracker/models/transaction_model/transaction_model.dart';
+import 'package:expense_tracker/view/transaction/screens/add_category.dart';
 import 'package:expense_tracker/view/transaction/screens/toggle_switch.dart';
 import 'package:expense_tracker/view/transaction/validators/validators.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
 import '../../../constatnts/custom_widgets/common/sizedbox.dart';
@@ -66,7 +68,7 @@ class _ScreenAddTransactionState extends State<ScreenAddTransaction> {
                 const CustomToggleSwitch(),
                 const BlankSpace(height: 50),
                 AddTransactionTextField(
-                  type: TextInputType.number,
+                  type: TextInputType.numberWithOptions(decimal: true),
                   validator: amountValidator,
                   controller: amountController,
                   title: 'Amount',
@@ -79,8 +81,11 @@ class _ScreenAddTransactionState extends State<ScreenAddTransaction> {
                       'Category',
                       style: TextStyle(fontSize: 17),
                     ),
-                    SizedBox(
-                      width: Get.width * 0.6,
+                    const BlankSpace(
+                      width: 30,
+                    ),
+                    Container(
+                      width: Get.width * 0.5,
                       child: GetBuilder<UiController>(
                         builder: (controller) {
                           return DropdownButtonFormField<String>(
@@ -95,6 +100,9 @@ class _ScreenAddTransactionState extends State<ScreenAddTransaction> {
                                     color: Appcolor.primaryColor, width: 1),
                               ),
                             ),
+                            iconSize: 0,
+                            autovalidateMode:
+                                AutovalidateMode.onUserInteraction,
                             validator: (value) =>
                                 value == null ? "Select Category" : null,
                             // dropdownColor: Appcolor.tertiaryColor,
@@ -114,6 +122,11 @@ class _ScreenAddTransactionState extends State<ScreenAddTransaction> {
                         },
                       ),
                     ),
+                    GestureDetector(
+                        onTap: () {
+                          Get.to(() => const AddCategory());
+                        },
+                        child: const Icon(Icons.add)),
                   ],
                 ),
                 const BlankSpace(
@@ -142,9 +155,7 @@ class _ScreenAddTransactionState extends State<ScreenAddTransaction> {
                   height: 30,
                 ),
                 AddTransactionTextField(
-                  validator: (value) {
-                    return null;
-                  },
+                  validator: descriptionValidator,
                   controller: descriptionController,
                   title: 'Description',
                 ),
@@ -179,6 +190,8 @@ class _ScreenAddTransactionState extends State<ScreenAddTransaction> {
                             validator: (value) =>
                                 value == null ? "Select Payment mode" : null,
                             dropdownColor: Appcolor.tertiaryColor,
+                            autovalidateMode:
+                                AutovalidateMode.onUserInteraction,
                             value: controller.selectedPaymentMode,
                             onChanged: (PaymentMode? newValue) {
                               controller.changePaymentMode(newValue!);

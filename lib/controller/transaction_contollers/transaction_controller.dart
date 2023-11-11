@@ -150,8 +150,9 @@ class TransactionController extends GetxController {
 // F U N C T I O N   T O   U P D A T E   T R A N S A C T I O N
   updateTransaction(
       {required int index, required Transaction transaction, context}) async {
-    await transactionBox.putAt(index, transaction).then(
-        (value) => snackbarKey.currentState?.showSnackBar(successSnackbar));
+    await transactionBox
+        .putAt(index, transaction)
+        .then((value) => snackbarKey.currentState?.showSnackBar(editSnackbar));
 
     update();
   }
@@ -159,7 +160,7 @@ class TransactionController extends GetxController {
 // F U N C T I O N   T O   D E L E T E   T R A N S A C T I O N
   deleteTransaction({required int index}) {
     transactionBox.deleteAt(index).then(
-        (value) => snackbarKey.currentState?.showSnackBar(successSnackbar));
+        (value) => snackbarKey.currentState?.showSnackBar(deleteSnackbar));
     //     ScaffoldMessenger.of(context).showSnackBar(deleteTransactionSnackbar));
     update();
   }
