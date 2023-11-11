@@ -208,16 +208,14 @@ class ScreenHistory extends StatelessWidget {
                           endActionPane: ActionPane(
                               dismissible: DismissiblePane(
                                 onDismissed: () {
-                                  controller.deleteTransaction(
-                                      index: index, context: context);
+                                  controller.deleteTransaction(index: index);
                                 },
                               ),
                               motion: const DrawerMotion(),
                               children: [
                                 SlidableAction(
                                   onPressed: (context) {
-                                    controller.deleteTransaction(
-                                        index: index, context: context);
+                                    controller.deleteTransaction(index: index);
                                   },
                                   backgroundColor: const Color(0xFFFE4A49),
                                   foregroundColor: Colors.white,

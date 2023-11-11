@@ -7,6 +7,8 @@ enum PaymentMode {
   cash,
   @HiveField(1)
   bank,
+  @HiveField(2)
+  card,
 }
 
 @HiveType(typeId: 3)
@@ -22,28 +24,30 @@ enum TransactionType {
 @HiveType(typeId: 1)
 class Transaction extends HiveObject {
   @HiveField(0)
-  String description;
+  String id;
 
   @HiveField(1)
-  int amount;
-
+  String description;
   @HiveField(2)
-  DateTime date;
-
-  @HiveField(3)
   final String catagoryType;
+  @HiveField(3)
+  double amount;
 
   @HiveField(4)
-  final PaymentMode paymentMode;
+  DateTime date;
 
   @HiveField(5)
+  final PaymentMode paymentMode;
+
+  @HiveField(6)
   final TransactionType transactionType;
 
   Transaction(
-      {required this.description,
+      {required this.id,
+      required this.description,
+      required this.catagoryType,
       required this.amount,
       required this.date,
       required this.paymentMode,
-      required this.catagoryType,
       required this.transactionType});
 }

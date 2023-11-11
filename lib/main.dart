@@ -12,18 +12,21 @@ import 'package:path_provider/path_provider.dart';
 import 'models/auth_model/auth_model.dart';
 // import 'package:timezone/timezone.dart' as tz;
 
-Future<void> main() async {
+final GlobalKey<ScaffoldMessengerState> snackbarKey =
+    GlobalKey<ScaffoldMessengerState>();
+void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   Directory directory = await getApplicationDocumentsDirectory();
   Hive.init(directory.path);
   Hive.initFlutter();
   Hive.registerAdapter<AuthModel>(AuthModelAdapter());
-  Hive.registerAdapter<TransactionType>(TransactionTypeAdapter());
-  Hive.registerAdapter<PaymentMode>(PaymentModeAdapter());
   Hive.registerAdapter<Transaction>(TransactionAdapter());
+  Hive.registerAdapter<PaymentMode>(PaymentModeAdapter());
+  Hive.registerAdapter<TransactionType>(TransactionTypeAdapter());
+
   await Hive.openBox<AuthModel>('AuthBox');
   await Hive.openBox<Transaction>('transactionBox');
-  // await Hive.openBox<Remainder>('remainderBox');
+
   NotificationServices().initializeNotifications();
   // tz.initializeTimeZones();
   runApp(const MyApp());
@@ -39,10 +42,11 @@ class MyApp extends StatefulWidget {
 class _MyAppState extends State<MyApp> {
   @override
   Widget build(BuildContext context) {
-    return const GetMaterialApp(
+    return GetMaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'Expense tracker',
-      home: ScreenSplash(),
+      scaffoldMessengerKey: snackbarKey,
+      home: const ScreenSplash(),
     );
   }
 }

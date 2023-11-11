@@ -17,30 +17,33 @@ class TransactionAdapter extends TypeAdapter<Transaction> {
       for (int i = 0; i < numOfFields; i++) reader.readByte(): reader.read(),
     };
     return Transaction(
-      description: fields[0] as String,
-      amount: fields[1] as int,
-      date: fields[2] as DateTime,
-      paymentMode: fields[4] as PaymentMode,
-      catagoryType: fields[3] as String,
-      transactionType: fields[5] as TransactionType,
+      id: fields[0] as String,
+      description: fields[1] as String,
+      catagoryType: fields[2] as String,
+      amount: fields[3] as double,
+      date: fields[4] as DateTime,
+      paymentMode: fields[5] as PaymentMode,
+      transactionType: fields[6] as TransactionType,
     );
   }
 
   @override
   void write(BinaryWriter writer, Transaction obj) {
     writer
-      ..writeByte(6)
+      ..writeByte(7)
       ..writeByte(0)
-      ..write(obj.description)
+      ..write(obj.id)
       ..writeByte(1)
-      ..write(obj.amount)
+      ..write(obj.description)
       ..writeByte(2)
-      ..write(obj.date)
-      ..writeByte(3)
       ..write(obj.catagoryType)
+      ..writeByte(3)
+      ..write(obj.amount)
       ..writeByte(4)
-      ..write(obj.paymentMode)
+      ..write(obj.date)
       ..writeByte(5)
+      ..write(obj.paymentMode)
+      ..writeByte(6)
       ..write(obj.transactionType);
   }
 
@@ -66,6 +69,8 @@ class PaymentModeAdapter extends TypeAdapter<PaymentMode> {
         return PaymentMode.cash;
       case 1:
         return PaymentMode.bank;
+      case 2:
+        return PaymentMode.card;
       default:
         return PaymentMode.cash;
     }
@@ -79,6 +84,9 @@ class PaymentModeAdapter extends TypeAdapter<PaymentMode> {
         break;
       case PaymentMode.bank:
         writer.writeByte(1);
+        break;
+      case PaymentMode.card:
+        writer.writeByte(2);
         break;
     }
   }

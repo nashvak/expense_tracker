@@ -2,7 +2,7 @@ import 'package:expense_tracker/constatnts/colors.dart';
 import 'package:expense_tracker/constatnts/custom_widgets/common/button.dart';
 import 'package:expense_tracker/constatnts/custom_widgets/common/decoration.dart';
 import 'package:expense_tracker/constatnts/custom_widgets/common/sizedbox.dart';
-import 'package:expense_tracker/controller/authentication_section/password_controller.dart';
+import 'package:expense_tracker/controller/transaction_contollers/update_ui_controller.dart';
 import 'package:expense_tracker/controller/transaction_contollers/transaction_ui_controller.dart';
 import 'package:expense_tracker/controller/transaction_contollers/transaction_controller.dart';
 
@@ -52,15 +52,16 @@ class _ScreenViewTransactionState extends State<ScreenViewTransaction> {
     updateController.transaction = tr.transactionType;
     updateController.mode = tr.paymentMode;
     updateController.catagory = tr.catagoryType;
-    updateController.isContainervisible();
+    // updateController.isContainervisible();
     super.initState();
   }
 
   updateTransaction() {
     if (updateFormkey.currentState!.validate()) {
       Transaction tr = Transaction(
+        id: DateTime.now().microsecondsSinceEpoch.toString(),
         description: descriptionController.text,
-        amount: int.parse(amountController.text),
+        amount: double.parse(amountController.text),
         date: updateController.date,
         paymentMode: updateController.mode,
         transactionType: updateController.transaction,
@@ -73,22 +74,27 @@ class _ScreenViewTransactionState extends State<ScreenViewTransaction> {
     }
   }
 
-  deleteDialog() {
-    Get.defaultDialog(
-      title: 'Delete record',
-      middleText: 'Do you want to delete this record',
-      backgroundColor: Appcolor.primaryColor,
-      radius: 40,
-      contentPadding: const EdgeInsets.all(10),
-      titlePadding: const EdgeInsets.all(20),
-      textCancel: 'Cancel', //default style
-      textConfirm: 'Ok',
-      cancelTextColor: Colors.white,
-      onCancel: () {},
-      onConfirm: () {},
-      buttonColor: Colors.white,
-    );
-  }
+  // deleteDialog(int index) {
+  //   Get.defaultDialog(
+  //     title: 'Delete record',
+  //     middleText: 'Do you want to delete this record',
+  //     backgroundColor: Appcolor.white,
+  //     radius: 20,
+  //     contentPadding: const EdgeInsets.all(10),
+  //     titlePadding: const EdgeInsets.all(20),
+  //     textCancel: 'Cancel', //default style
+  //     textConfirm: 'Ok',
+  //     cancelTextColor: Appcolor.primaryColor,
+  //     onCancel: () {
+  //       Get.back();
+  //     },
+  //     onConfirm: () {
+  //       transactionController.deleteTransaction(index: index, context: context);
+  //       Get.back();
+  //     },
+  //     buttonColor: Colors.white,
+  //   );
+  // }
 
   @override
   Widget build(BuildContext context) {
@@ -108,7 +114,7 @@ class _ScreenViewTransactionState extends State<ScreenViewTransaction> {
               padding: const EdgeInsets.only(right: 15),
               child: GestureDetector(
                 onTap: () {
-                  deleteDialog();
+                  updateController.deleteDialog(index);
                 },
                 child: const Icon(
                   Icons.delete,
@@ -219,7 +225,7 @@ class _ScreenViewTransactionState extends State<ScreenViewTransaction> {
                                       onTap: () async {
                                         DateTime? dates = await showDatePicker(
                                             context: context,
-                                            initialDate: DateTime.now(),
+                                            initialDate: tr.date,
                                             firstDate: DateTime(2023),
                                             lastDate: DateTime(2024));
 
@@ -273,40 +279,32 @@ class _ScreenViewTransactionState extends State<ScreenViewTransaction> {
                 ),
                 GetBuilder<UpdateController>(
                   builder: (controller) {
-                    return Visibility(
-                      visible: controller.iscatagoryVisible,
-                      child: Container(
-                        decoration: cardDecoration(color: Colors.white),
-                        height: MediaQuery.of(context).size.height / 9,
-                        width: MediaQuery.of(context).size.width / 1,
-                        padding: const EdgeInsets.only(left: 20),
-                        //color: Colors.red,
-                        child: Column(
-                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            const Text(
-                              'Catagory type',
-                              style: TextStyle(color: Appcolor.primaryColor),
-                            ),
-                            DropdownButton<String>(
-                                onChanged: (String? newValue) {
-                                  // setState(() {
-                                  //   selectedPaymentMode = newValue!;
-                                  // });
-                                  controller.changeCategoryType(newValue);
-                                },
-                                items:
-                                    ui.incomeCatagoryTypes.map((String mode) {
-                                  return DropdownMenuItem<String>(
-                                    value: mode,
-                                    child:
-                                        Text(mode.toString().split('.').last),
-                                  );
-                                }).toList(),
-                                value: controller.catagory),
-                          ],
-                        ),
+                    return Container(
+                      decoration: cardDecoration(color: Colors.white),
+                      height: MediaQuery.of(context).size.height / 9,
+                      width: MediaQuery.of(context).size.width / 1,
+                      padding: const EdgeInsets.only(left: 20),
+                      //color: Colors.red,
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          const Text(
+                            'Catagory type',
+                            style: TextStyle(color: Appcolor.primaryColor),
+                          ),
+                          DropdownButton<String>(
+                              onChanged: (String? newValue) {
+                                controller.changeCategoryType(newValue);
+                              },
+                              items: ui.incomeCatagoryTypes.map((String mode) {
+                                return DropdownMenuItem<String>(
+                                  value: mode,
+                                  child: Text(mode.toString().split('.').last),
+                                );
+                              }).toList(),
+                              value: controller.catagory),
+                        ],
                       ),
                     );
                   },

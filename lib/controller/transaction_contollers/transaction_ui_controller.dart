@@ -60,7 +60,7 @@ class UiController extends GetxController {
         : index == 1
             ? TransactionType.expense
             : TransactionType.transfer;
-    print(selectedTransactionType);
+    // print(selectedTransactionType);
     //isDropdownVisible = index == 1;
     if (selectedTransactionType == TransactionType.income) {
       isDropdownIncome = true;

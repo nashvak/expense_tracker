@@ -13,7 +13,7 @@ class SplashScreenContoller extends GetxController {
     Timer(const Duration(seconds: 1), () {
       if (isLoggedIn != null) {
         if (isLoggedIn) {
-          Get.offAll(() => const BottomNav());
+          // Get.offAll(() => const BottomNav());
         } else {
           Get.off(() => const GetStartedScreen());
         }

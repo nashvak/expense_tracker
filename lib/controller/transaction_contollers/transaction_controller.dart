@@ -1,3 +1,4 @@
+import 'package:expense_tracker/main.dart';
 import 'package:expense_tracker/models/transaction_model/transaction_model.dart';
 import 'package:expense_tracker/view/transaction/snackbars/snackbar.dart';
 import 'package:flutter/material.dart';
@@ -142,7 +143,7 @@ class TransactionController extends GetxController {
   //// F U N C T I O N   T O   A D D   T R A N S A C T I O N
   createTransaction({required Transaction transaction, context}) async {
     await transactionBox.add(transaction).then(
-        (value) => ScaffoldMessenger.of(context).showSnackBar(successSnackbar));
+        (value) => snackbarKey.currentState?.showSnackBar(successSnackbar));
     update();
   }
 
@@ -150,15 +151,16 @@ class TransactionController extends GetxController {
   updateTransaction(
       {required int index, required Transaction transaction, context}) async {
     await transactionBox.putAt(index, transaction).then(
-        (value) => ScaffoldMessenger.of(context).showSnackBar(editSnackbar));
+        (value) => snackbarKey.currentState?.showSnackBar(successSnackbar));
 
     update();
   }
 
 // F U N C T I O N   T O   D E L E T E   T R A N S A C T I O N
-  deleteTransaction({required int index, required context}) {
-    transactionBox.deleteAt(index).then((value) =>
-        ScaffoldMessenger.of(context).showSnackBar(deleteTransactionSnackbar));
+  deleteTransaction({required int index}) {
+    transactionBox.deleteAt(index).then(
+        (value) => snackbarKey.currentState?.showSnackBar(successSnackbar));
+    //     ScaffoldMessenger.of(context).showSnackBar(deleteTransactionSnackbar));
     update();
   }
 

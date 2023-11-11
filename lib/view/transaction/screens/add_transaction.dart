@@ -2,14 +2,12 @@ import 'package:expense_tracker/constatnts/colors.dart';
 import 'package:expense_tracker/constatnts/custom_widgets/common/button.dart';
 import 'package:expense_tracker/controller/transaction_contollers/transaction_ui_controller.dart';
 import 'package:expense_tracker/controller/transaction_contollers/transaction_controller.dart';
-
 import 'package:expense_tracker/models/transaction_model/transaction_model.dart';
 import 'package:expense_tracker/view/transaction/screens/toggle_switch.dart';
 import 'package:expense_tracker/view/transaction/validators/validators.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
-
 import '../../../constatnts/custom_widgets/common/sizedbox.dart';
 import '../../../constatnts/custom_widgets/login&signup/textfield.dart';
 
@@ -26,14 +24,14 @@ class _ScreenAddTransactionState extends State<ScreenAddTransaction> {
   final dateController = TextEditingController();
   final descriptionController = TextEditingController();
 
-  // DateTime? pickedDate;
   final TransactionController controller = Get.put(TransactionController());
   final UiController ui = Get.put(UiController());
   addTransaction() {
     if (addFormkey.currentState!.validate()) {
       Transaction transaction = Transaction(
+        id: DateTime.now().microsecondsSinceEpoch.toString(),
         description: descriptionController.text,
-        amount: int.parse(amountController.text),
+        amount: double.parse(amountController.text),
         date: ui.selectedDate,
         paymentMode: ui.selectedPaymentMode!,
         transactionType: ui.selectedTransactionType,
@@ -99,7 +97,7 @@ class _ScreenAddTransactionState extends State<ScreenAddTransaction> {
                             ),
                             validator: (value) =>
                                 value == null ? "Select Category" : null,
-                            dropdownColor: Appcolor.tertiaryColor,
+                            // dropdownColor: Appcolor.tertiaryColor,
                             value: controller.selectedCategory,
                             onChanged: (String? newValue) {
                               controller.changeCatagory(newValue!);
@@ -109,7 +107,7 @@ class _ScreenAddTransactionState extends State<ScreenAddTransaction> {
                                 .map((String mode) {
                               return DropdownMenuItem<String>(
                                 value: mode,
-                                child: Text(mode.toString().split('.').last),
+                                child: Text(mode),
                               );
                             }).toList(),
                           );
