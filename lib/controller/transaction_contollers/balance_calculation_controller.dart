@@ -20,5 +20,6 @@ class BalanceController extends GetxController {
         .fold(0.0, (sum, item) => sum + item.amount);
   }
 
+//  D I S P L A Y   T H E   T O T A L   B A L A N C E
   double get totalBalance => totalIncome - totalExpense;
 }

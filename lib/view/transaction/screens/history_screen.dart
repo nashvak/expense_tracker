@@ -151,8 +151,8 @@ class ScreenHistory extends StatelessWidget {
                   icon: const Icon(Icons.arrow_drop_down),
                 ),
                 SortButton(
-                  ontap: () async {
-                    transactionController.selectDateRange;
+                  ontap: () {
+                    transactionController.selectDateRange();
                   },
                   title: 'Date',
                   icon: const Icon(Icons.arrow_drop_down),

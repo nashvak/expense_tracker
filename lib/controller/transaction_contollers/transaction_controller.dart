@@ -23,20 +23,6 @@ class TransactionController extends GetxController {
     return boxList;
   }
 
-  //
-
-  //   E N A B L E     O R    D I S A B L E   A   L I S T  T I L E
-
-  // List<bool> isCatogoryVisible = List.generate(7, (index) => true);
-//
-
-  // List<String>  catagoryTitles = CatagoryType.values
-  //     .map((category) => category.toString().split('.').last)
-  //     .toList();
-
-  //
-  catogoryVisible(String type) {}
-
   // F I L T E R I N G
   var selectedOption = 'All';
   changeOption(String value) {
@@ -44,7 +30,7 @@ class TransactionController extends GetxController {
     update();
   }
 
-  void get selectDateRange async {
+  void selectDateRange() async {
     final DateTimeRange? picked = await showDateRangePicker(
       context: Get.context!,
       initialDateRange: DateTimeRange(
@@ -59,10 +45,10 @@ class TransactionController extends GetxController {
       if (picked != null) {
         startDate = picked.start;
         endDate = picked.end;
+
         await changeOption(
             'Date'); // if date is picked,then only this function should work
-        startDate = DateTime.now(); //clear the picked date
-        endDate = DateTime.now();
+
         update();
       }
     } catch (e) {
@@ -71,8 +57,6 @@ class TransactionController extends GetxController {
   }
 
   List<Transaction> get sortByFunction {
-    print(startDate);
-    print(endDate);
     if (selectedOption == 'Income') {
       return sortedList
           .where((transaction) =>
