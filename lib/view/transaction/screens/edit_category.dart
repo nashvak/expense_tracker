@@ -6,7 +6,7 @@ import 'package:expense_tracker/constatnts/custom_widgets/common/button.dart';
 import 'package:get/get.dart';
 
 class EditCategory extends StatefulWidget {
-  EditCategory({super.key});
+  const EditCategory({super.key});
 
   @override
   State<EditCategory> createState() => _EditCategoryState();

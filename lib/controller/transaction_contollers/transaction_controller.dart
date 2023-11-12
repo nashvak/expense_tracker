@@ -4,9 +4,16 @@ import 'package:expense_tracker/view/transaction/snackbars/snackbar.dart';
 import 'package:flutter/material.dart';
 import 'package:hive/hive.dart';
 import 'package:get/get.dart';
+import 'package:syncfusion_flutter_datepicker/datepicker.dart';
 
 class TransactionController extends GetxController {
+  DateRangePickerController dateRangePickerController =
+      DateRangePickerController();
+
   final transactionBox = Hive.box<Transaction>('transactionBox');
+
+  DateTime startDate = DateTime.now();
+  DateTime endDate = DateTime.now();
 
   //sort according to date
   List<Transaction> get sortedList {
@@ -16,27 +23,11 @@ class TransactionController extends GetxController {
     return boxList;
   }
 
-//  C A T E G O R Y   F I L T E R I N G
-
-  List<String> isCatagoryIncluded() {
-    Set<String?> currentCatagory = {};
-    List<String> catagoryTitles = [];
-    for (var transaction in sortedList) {
-      currentCatagory.add(transaction.catagoryType);
-      currentCatagory.removeWhere((value) => value == null);
-      catagoryTitles = currentCatagory
-          .map((category) => category.toString().split('.').last)
-          .toList();
-    }
-    // print(catagoryTitles);
-    return catagoryTitles;
-  }
-
   //
 
   //   E N A B L E     O R    D I S A B L E   A   L I S T  T I L E
 
-  List<bool> isCatogoryVisible = List.generate(7, (index) => true);
+  // List<bool> isCatogoryVisible = List.generate(7, (index) => true);
 //
 
   // List<String>  catagoryTitles = CatagoryType.values
@@ -53,7 +44,35 @@ class TransactionController extends GetxController {
     update();
   }
 
+  void get selectDateRange async {
+    final DateTimeRange? picked = await showDateRangePicker(
+      context: Get.context!,
+      initialDateRange: DateTimeRange(
+        start: startDate,
+        end: endDate,
+      ),
+      firstDate: DateTime(2023),
+      lastDate: DateTime(2024),
+    );
+
+    try {
+      if (picked != null) {
+        startDate = picked.start;
+        endDate = picked.end;
+        await changeOption(
+            'Date'); // if date is picked,then only this function should work
+        startDate = DateTime.now(); //clear the picked date
+        endDate = DateTime.now();
+        update();
+      }
+    } catch (e) {
+      print('Not picked');
+    }
+  }
+
   List<Transaction> get sortByFunction {
+    print(startDate);
+    print(endDate);
     if (selectedOption == 'Income') {
       return sortedList
           .where((transaction) =>
@@ -169,27 +188,5 @@ class TransactionController extends GetxController {
   logoutProfile() {
     transactionBox.clear();
     sortedList.clear();
-  }
-
-  //   D A T E    R A N G E
-
-  DateTime? startDate;
-  DateTime? endDate;
-  void selectDateRange() async {
-    final DateTimeRange? picked = await showDateRangePicker(
-      context: Get.context!,
-      initialDateRange: DateTimeRange(
-        start: startDate ?? DateTime.now(),
-        end: endDate ?? DateTime.now(),
-      ),
-      firstDate: DateTime(2023),
-      lastDate: DateTime(2024),
-    );
-
-    if (picked != null) {
-      startDate = picked.start;
-      endDate = picked.end;
-      update();
-    }
   }
 }

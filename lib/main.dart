@@ -1,10 +1,7 @@
 import 'dart:io';
-
 import 'package:expense_tracker/models/transaction_model/transaction_model.dart';
-
 import 'package:expense_tracker/view/authentication/splash_screen.dart';
 import 'package:expense_tracker/view/profile/notification/notification_settings.dart';
-
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:hive_flutter/hive_flutter.dart';

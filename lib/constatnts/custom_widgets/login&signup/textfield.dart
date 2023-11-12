@@ -1,5 +1,5 @@
 import 'package:expense_tracker/constatnts/colors.dart';
-import 'package:expense_tracker/constatnts/custom_widgets/common/sizedbox.dart';
+
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
@@ -84,9 +84,6 @@ class AddTransactionTextField extends StatelessWidget {
           title,
           style: const TextStyle(fontSize: 15),
         ),
-        const BlankSpace(
-          width: 30,
-        ),
         SizedBox(
           width: Get.width * 0.6,
           child: TextFormField(
@@ -95,10 +92,7 @@ class AddTransactionTextField extends StatelessWidget {
             controller: controller,
             validator: validator,
             keyboardType: type,
-            // inputFormatters: <TextInputFormatter>[
-            //   FilteringTextInputFormatter.allow(filterPattern)
-            // ],
-            //  [+-]?\\d*\\.?\\d+
+
             inputFormatters: numberonly,
             //  autovalidateMode: AutovalidateMode.onUserInteraction,
             cursorColor: const Color.fromARGB(255, 120, 120, 120),

@@ -2,6 +2,8 @@ import 'package:expense_tracker/constatnts/colors.dart';
 import 'package:expense_tracker/constatnts/custom_widgets/common/sizedbox.dart';
 import 'package:expense_tracker/constatnts/custom_widgets/home_screen/button.dart';
 import 'package:expense_tracker/constatnts/custom_widgets/common/textstyle.dart';
+import 'package:expense_tracker/controller/filer_controller.dart';
+import 'package:expense_tracker/controller/transaction_contollers/date_range_picker.dart';
 import 'package:expense_tracker/controller/transaction_contollers/transaction_controller.dart';
 
 import 'package:expense_tracker/view/transaction/screens/view_transaction.dart';
@@ -14,6 +16,9 @@ class ScreenHistory extends StatelessWidget {
   ScreenHistory({super.key});
   final TransactionController transactionController =
       Get.put(TransactionController());
+  final FilterController filterController = Get.put(FilterController());
+  final DateRangePickerController dateRangePickerController =
+      Get.put(DateRangePickerController());
 
   @override
   Widget build(BuildContext context) {
@@ -51,6 +56,7 @@ class ScreenHistory extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 SortButton(
                   ontap: () {
@@ -106,13 +112,10 @@ class ScreenHistory extends StatelessWidget {
                   title: "Filter By",
                   icon: const Icon(Icons.sort),
                 ),
-                const BlankSpace(
-                  width: 20,
-                ),
                 SortButton(
                   ontap: () {
                     List currentCatagory =
-                        transactionController.isCatagoryIncluded();
+                        filterController.isCatagoryIncluded();
 
                     Get.bottomSheet(
                       Container(
@@ -149,35 +152,10 @@ class ScreenHistory extends StatelessWidget {
                   title: 'Catagory',
                   icon: const Icon(Icons.arrow_drop_down),
                 ),
-                const BlankSpace(
-                  width: 20,
-                ),
                 SortButton(
                   ontap: () async {
-                    transactionController.selectDateRange();
-                    transactionController.changeOption('Date');
-
-                    // Get.bottomSheet(
-                    //   Container(
-                    //     decoration: const ShapeDecoration(
-                    //       color: Colors.white,
-                    //       shape: RoundedRectangleBorder(
-                    //         borderRadius: BorderRadius.only(
-                    //             topLeft: Radius.circular(25),
-                    //             topRight: Radius.circular(25)),
-                    //       ),
-                    //     ),
-                    //     child: Wrap(
-                    //       children: [
-                    //         SortingBottomSheet(ontap: () {}, title: 'All'),
-                    //         SortingBottomSheet(ontap: () {}, title: 'Income'),
-                    //         SortingBottomSheet(ontap: () {}, title: 'Expense'),
-                    //         SortingBottomSheet(ontap: () {}, title: 'Cash'),
-                    //         SortingBottomSheet(ontap: () {}, title: 'Bank'),
-                    //       ],
-                    //     ),
-                    //   ),
-                    // );
+                    transactionController.selectDateRange;
+                    // await transactionController.changeOption('Date');
                   },
                   title: 'Date',
                   icon: const Icon(Icons.arrow_drop_down),

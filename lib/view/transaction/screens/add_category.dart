@@ -66,8 +66,8 @@ class AddCategory extends StatelessWidget {
                               TransactionType.income
                           ? 'Income'
                           : 'Expense',
-                      style:
-                          TextStyle(fontSize: 19, fontWeight: FontWeight.bold),
+                      style: const TextStyle(
+                          fontSize: 19, fontWeight: FontWeight.bold),
                     ),
                   ),
                 ],
@@ -79,7 +79,8 @@ class AddCategory extends StatelessWidget {
             // color: Colors.red,
             width: double.infinity,
             child: Padding(
-              padding: EdgeInsets.only(left: 20, right: 20, top: 0, bottom: 0),
+              padding:
+                  const EdgeInsets.only(left: 20, right: 20, top: 0, bottom: 0),
               child: GetBuilder<UiController>(
                 builder: (controller) {
                   return ListView.builder(
@@ -92,13 +93,13 @@ class AddCategory extends StatelessWidget {
                           );
                         },
                         horizontalTitleGap: 0,
-                        contentPadding: EdgeInsets.all(0),
+                        contentPadding: const EdgeInsets.all(0),
                         title: Text(
                           controller.editCategory()[index],
                         ),
                         trailing: IconButton(
                           onPressed: () {},
-                          icon: Icon(Icons.edit),
+                          icon: const Icon(Icons.edit),
                         ),
                       );
                     },

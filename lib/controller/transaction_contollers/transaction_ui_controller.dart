@@ -38,7 +38,9 @@ class UiController extends GetxController {
     update();
   }
 
-//  S H O W I N G   T H E   C A T E G O R Y   I F   I N C O M E   O R    E X P E N S E
+  deleteCategory(index) {}
+
+  //  S H O W I N G   T H E   C A T E G O R Y   I F   I N C O M E   O R    E X P E N S E
   List<String> showCategoryDropdown() {
     if (isDropdownIncome == true) {
       categoryItem = incomeCatagoryTypes;
