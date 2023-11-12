@@ -52,7 +52,7 @@ class TransactionController extends GetxController {
         end: endDate,
       ),
       firstDate: DateTime(2023),
-      lastDate: DateTime(2024),
+      lastDate: DateTime.now(),
     );
 
     try {
@@ -96,67 +96,19 @@ class TransactionController extends GetxController {
     //   return sortedList
     //       .where((transaction) => transaction.catagoryType == CatagoryType.food)
     //       .toList();
-    // } else if (selectedOption == 'bills') {
-    //   return sortedList
-    //       .where(
-    //           (transaction) => transaction.catagoryType == CatagoryType.bills)
-    //       .toList();
-    // } else if (selectedOption == 'entertainment') {
-    //   return sortedList
-    //       .where((transaction) =>
-    //           transaction.catagoryType == CatagoryType.entertainment)
-    //       .toList();
-    // } else if (selectedOption == 'insurance') {
-    //   return sortedList
-    //       .where((transaction) =>
-    //           transaction.catagoryType == CatagoryType.insurance)
-    //       .toList();
-    // } else if (selectedOption == 'shopping') {
-    //   return sortedList
-    //       .where((transaction) =>
-    //           transaction.catagoryType == CatagoryType.shopping)
-    //       .toList();
-    // } else if (selectedOption == 'others') {
-    //   return sortedList
-    //       .where(
-    //           (transaction) => transaction.catagoryType == CatagoryType.others)
-    //       .toList();
-    // } else if (selectedOption == 'transportation') {
-    //   return sortedList
-    //       .where((transaction) =>
-    //           transaction.catagoryType == CatagoryType.transportation)
-    //       .toList();
     // }
     else if (selectedOption == 'Date') {
       return sortedList
           .where((transaction) =>
-              transaction.date.isAfter(startDate!) &&
-                  transaction.date.isBefore(endDate!) ||
-              transaction.date.isAtSameMomentAs(startDate!) ||
-              transaction.date.isAtSameMomentAs(endDate!))
+              transaction.date.isAfter(startDate) &&
+                  transaction.date.isBefore(endDate) ||
+              transaction.date.isAtSameMomentAs(startDate) ||
+              transaction.date.isAtSameMomentAs(endDate))
           .toList();
     }
 
     return sortedList;
   }
-
-// F U N C T I O N   T O   D I S P L A Y   T H E   T O T A L   I N C O M E
-  double get totalIncome {
-    return sortedList
-        .where((transaction) =>
-            transaction.transactionType == TransactionType.income)
-        .fold(0.0, (sum, item) => sum + item.amount);
-  }
-
-// F U N C T I O N   T O   D I S P L A Y   T H E   T O T A L   E X P E N S E
-  double get totalExpense {
-    return sortedList
-        .where((transaction) =>
-            transaction.transactionType == TransactionType.expense)
-        .fold(0.0, (sum, item) => sum + item.amount);
-  }
-
-  double get totalBalance => totalIncome - totalExpense;
 
   int get transactionCount => sortedList.length;
   //// F U N C T I O N   T O   A D D   T R A N S A C T I O N

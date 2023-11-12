@@ -1,7 +1,9 @@
 import 'package:expense_tracker/constatnts/custom_widgets/home_screen/button.dart';
 import 'package:expense_tracker/controller/transaction_contollers/transaction_controller.dart';
 import 'package:expense_tracker/models/transaction_model/transaction_model.dart';
+import 'package:expense_tracker/view/home_screen/balance_card.dart';
 import 'package:expense_tracker/view/home_screen/expense_card.dart';
+import 'package:expense_tracker/view/home_screen/income_card.dart';
 import 'package:expense_tracker/view/transaction/screens/view_transaction.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -112,12 +114,12 @@ class ScreenHome extends StatelessWidget {
                     Column(
                       mainAxisAlignment: MainAxisAlignment.spaceAround,
                       children: [
-                        const BalanceCard(),
+                        BalanceCard(),
                         Row(
                           mainAxisAlignment: MainAxisAlignment.spaceAround,
                           children: [
                             IncomeCard(),
-                            const ExpenseCard(),
+                            ExpenseCard(),
                           ],
                         ),
                       ],
@@ -129,87 +131,6 @@ class ScreenHome extends StatelessWidget {
           ],
         ),
       ),
-    );
-  }
-}
-
-//   B A L A N C E   C A R D
-
-class BalanceCard extends StatelessWidget {
-  const BalanceCard({
-    super.key,
-  });
-
-  @override
-  Widget build(BuildContext context) {
-    return Column(
-      children: [
-        const Align(
-          alignment: Alignment.center,
-          child: Text(
-            "BALANCE",
-            style: TextStyle(color: Colors.white, fontSize: 16),
-          ),
-        ),
-        Align(
-            alignment: Alignment.center,
-            child: GetBuilder<TransactionController>(builder: (controller) {
-              return Text(
-                "₹ ${controller.totalBalance}",
-                style: const TextStyle(
-                    color: Colors.white,
-                    fontSize: 32,
-                    fontWeight: FontWeight.bold),
-              );
-            })),
-      ],
-    );
-  }
-}
-
-//   I N C O M E    C A R D
-class IncomeCard extends StatelessWidget {
-  IncomeCard({
-    super.key,
-  });
-  final TransactionController transactionController =
-      Get.put(TransactionController());
-
-  @override
-  Widget build(BuildContext context) {
-    return Row(
-      children: [
-        const CircleAvatar(
-          backgroundColor: Appcolor.white,
-          child: Icon(
-            Icons.arrow_downward,
-            color: Colors.green,
-          ),
-        ),
-        const SizedBox(
-          width: 10,
-        ),
-        Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            const Text(
-              "Income",
-              style: TextStyle(color: Colors.white, fontSize: 15),
-            ),
-            GetBuilder<TransactionController>(
-              builder: (controller) {
-                return Text(
-                  "₹ ${controller.totalIncome}",
-                  style: const TextStyle(
-                      color: Colors.white,
-                      fontSize: 20,
-                      fontWeight: FontWeight.bold),
-                );
-              },
-            ),
-          ],
-        )
-      ],
     );
   }
 }

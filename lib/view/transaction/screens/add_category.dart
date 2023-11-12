@@ -23,7 +23,7 @@ class AddCategory extends StatelessWidget {
         actions: [
           IconButton(
               onPressed: () {
-                Get.to(() => EditCategory());
+                Get.to(() => const EditCategory());
               },
               icon: const Icon(Icons.edit))
         ],
@@ -88,7 +88,7 @@ class AddCategory extends StatelessWidget {
                       return ListTile(
                         onTap: () {
                           Get.to(
-                            () => EditCategory(),
+                            () => const EditCategory(),
                             arguments: index,
                           );
                         },
@@ -98,7 +98,9 @@ class AddCategory extends StatelessWidget {
                           controller.editCategory()[index],
                         ),
                         trailing: IconButton(
-                          onPressed: () {},
+                          onPressed: () {
+                            controller.deleteCategory(index);
+                          },
                           icon: const Icon(Icons.edit),
                         ),
                       );

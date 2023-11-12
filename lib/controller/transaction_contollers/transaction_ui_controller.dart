@@ -38,7 +38,11 @@ class UiController extends GetxController {
     update();
   }
 
-  deleteCategory(index) {}
+  deleteCategory(index) {
+    List<String> categoryList = editCategory();
+    categoryList.removeAt(index);
+    update();
+  }
 
   //  S H O W I N G   T H E   C A T E G O R Y   I F   I N C O M E   O R    E X P E N S E
   List<String> showCategoryDropdown() {
@@ -58,7 +62,7 @@ class UiController extends GetxController {
         context: context,
         initialDate: selectedDate,
         firstDate: DateTime(2023),
-        lastDate: DateTime(2024));
+        lastDate: DateTime.now());
     await updateDate(pickedDate!);
     return selectedDate;
   }

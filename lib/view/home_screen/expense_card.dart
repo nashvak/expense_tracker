@@ -1,14 +1,15 @@
 //    E X P E N S E    C A R D
 import 'package:expense_tracker/constatnts/colors.dart';
-import 'package:expense_tracker/controller/transaction_contollers/transaction_controller.dart';
+import 'package:expense_tracker/controller/transaction_contollers/balance_calculation_controller.dart';
+
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 class ExpenseCard extends StatelessWidget {
-  const ExpenseCard({
+  ExpenseCard({
     super.key,
   });
-
+  final BalanceController balanceController = Get.put(BalanceController());
   @override
   Widget build(BuildContext context) {
     return Row(
@@ -31,7 +32,7 @@ class ExpenseCard extends StatelessWidget {
                   color: Colors.white,
                   fontSize: 15,
                 )),
-            GetBuilder<TransactionController>(
+            GetBuilder<BalanceController>(
               builder: (controller) {
                 return Text(
                   "₹ ${controller.totalExpense}",
