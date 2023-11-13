@@ -139,19 +139,23 @@ class ScreenHistory extends StatelessWidget {
                   title: 'Catagory',
                   icon: const Icon(Icons.arrow_drop_down),
                 ),
-                SortButton(
-                  ontap: () {
-                    filterController.selectDateRange();
+                GetBuilder<FilterController>(
+                  builder: (controller) {
+                    return SortButton(
+                      ontap: () {
+                        controller.selectDateRange();
+                      },
+                      title: 'Date',
+                      icon: const Icon(Icons.arrow_drop_down),
+                    );
                   },
-                  title: 'Date',
-                  icon: const Icon(Icons.arrow_drop_down),
                 ),
               ],
             ),
             const BlankSpace(
               height: 30,
             ),
-            GetBuilder<TransactionController>(builder: ((controller) {
+            GetBuilder<FilterController>(builder: ((controller) {
               return Text(
                 filterController.selectedOption,
                 style:
@@ -167,42 +171,38 @@ class ScreenHistory extends StatelessWidget {
                   return ListView.separated(
                       itemBuilder: (context, index) {
                         final tr = controller.sortByFunction[index];
-                        return GetBuilder<TransactionController>(
-                          builder: (controller) {
-                            return Slidable(
-                              key: UniqueKey(),
-                              endActionPane: ActionPane(
-                                  dismissible: DismissiblePane(
-                                    onDismissed: () {
-                                      controller.deleteTransaction(
-                                          index: index);
-                                    },
-                                  ),
-                                  motion: const DrawerMotion(),
-                                  children: [
-                                    SlidableAction(
-                                      onPressed: (context) {
-                                        controller.deleteTransaction(
-                                            index: index);
-                                      },
-                                      backgroundColor: const Color(0xFFFE4A49),
-                                      foregroundColor: Colors.white,
-                                      icon: Icons.delete,
-                                      //label: 'Delete',
-                                    ),
-                                  ]),
-                              child: Listtile(
-                                  type: tr.transactionType,
-                                  ontap: () {
-                                    Get.to(() => const ScreenViewTransaction(),
-                                        arguments: index);
+
+                        return Slidable(
+                          key: UniqueKey(),
+                          endActionPane: ActionPane(
+                              dismissible: DismissiblePane(
+                                onDismissed: () {
+                                  transactionController.deleteTransaction(
+                                      index: index);
+                                },
+                              ),
+                              motion: const DrawerMotion(),
+                              children: [
+                                SlidableAction(
+                                  onPressed: (context) {
+                                    transactionController.deleteTransaction(
+                                        index: index);
                                   },
-                                  amount: tr.amount.toDouble(),
-                                  date:
-                                      DateFormat('dd/MM/yyyy').format(tr.date),
-                                  title: tr.description),
-                            );
-                          },
+                                  backgroundColor: const Color(0xFFFE4A49),
+                                  foregroundColor: Colors.white,
+                                  icon: Icons.delete,
+                                  //label: 'Delete',
+                                ),
+                              ]),
+                          child: Listtile(
+                              type: tr.transactionType,
+                              ontap: () {
+                                Get.to(() => const ScreenViewTransaction(),
+                                    arguments: index);
+                              },
+                              amount: tr.amount.toDouble(),
+                              date: DateFormat('dd/MM/yyyy').format(tr.date),
+                              title: tr.description),
                         );
                       },
                       separatorBuilder: (context, index) {

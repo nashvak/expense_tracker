@@ -6,6 +6,9 @@ import 'package:get/get.dart';
 class FilterController extends GetxController {
   TransactionController transactionController = TransactionController();
 
+  DateTime startDate = DateTime.now();
+  DateTime endDate = DateTime.now();
+
   //  C A T E G O R Y   I S    D I S P L A Y I N G    I N    T H E   B O T T O M   S H E E T
 
   List<String> isCatagoryIncluded() {
@@ -71,12 +74,13 @@ class FilterController extends GetxController {
     //       .toList();
     // }
     else if (selectedOption == 'Date') {
+      print(endDate);
       return transactionController.sortedList
           .where((transaction) =>
-              transaction.date.isAfter(startDate) &&
-                  transaction.date.isBefore(endDate) ||
-              transaction.date.isAtSameMomentAs(startDate) ||
-              transaction.date.isAtSameMomentAs(endDate))
+              (transaction.date.isAfter(startDate) &&
+                  transaction.date.isBefore(endDate)) ||
+              transaction.date.isAtSameMomentAs(endDate) ||
+              transaction.date.isAtSameMomentAs(startDate))
           .toList();
     }
 
@@ -85,12 +89,7 @@ class FilterController extends GetxController {
 
   //   D A T E   R A N G E    P I C K E R
 
-  DateTime startDate = DateTime.now();
-  DateTime endDate = DateTime.now();
-
   void selectDateRange() async {
-    startDate = DateTime.now();
-    endDate = DateTime.now();
     final DateTimeRange? picked = await showDateRangePicker(
       context: Get.context!,
       initialDateRange: DateTimeRange(
@@ -108,8 +107,7 @@ class FilterController extends GetxController {
 
         await changeOption(
             'Date'); // if date is picked,then only this function should work
-
-        update();
+        print('dsafs');
       }
     } catch (e) {
       print('Not picked');
