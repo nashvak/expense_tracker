@@ -23,7 +23,7 @@ class ScreenHistory extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    transactionController.selectedOption = 'All';
+    filterController.selectedOption = 'All';
     return Scaffold(
       backgroundColor: Appcolor.tertiaryColor,
       appBar: AppBar(
@@ -61,12 +61,13 @@ class ScreenHistory extends StatelessWidget {
               children: [
                 SortButton(
                   ontap: () {
+                    List filterList = filterController.isFilterIncluded();
                     Get.bottomSheet(
                       Container(
                         // decoration:  ShapeDecoration(
                         color: Colors.white,
 
-                        child: Wrap(
+                        child: Column(
                           children: [
                             const ListTile(
                               title: Text(
@@ -75,36 +76,21 @@ class ScreenHistory extends StatelessWidget {
                               ),
                             ),
                             const Divider(color: Colors.grey, height: 5),
-                            SortingBottomSheet(
-                                ontap: () {
-                                  transactionController.changeOption('All');
-                                  Get.back();
+                            Expanded(
+                              child: ListView.builder(
+                                itemBuilder: (context, index) {
+                                  return SortingBottomSheet(
+                                    ontap: () {
+                                      filterController
+                                          .changeOption(filterList[index]);
+                                      Get.back();
+                                    },
+                                    title: filterList[index],
+                                  );
                                 },
-                                title: 'All'),
-                            SortingBottomSheet(
-                                ontap: () {
-                                  transactionController.changeOption('Income');
-                                  Get.back();
-                                },
-                                title: 'Income'),
-                            SortingBottomSheet(
-                                ontap: () {
-                                  transactionController.changeOption('Expense');
-                                  Get.back();
-                                },
-                                title: 'Expense'),
-                            SortingBottomSheet(
-                                ontap: () {
-                                  transactionController.changeOption('Cash');
-                                  Get.back();
-                                },
-                                title: 'Cash'),
-                            SortingBottomSheet(
-                                ontap: () {
-                                  transactionController.changeOption('Bank');
-                                  Get.back();
-                                },
-                                title: 'Bank'),
+                                itemCount: filterList.length,
+                              ),
+                            ),
                           ],
                         ),
                       ),
@@ -135,7 +121,7 @@ class ScreenHistory extends StatelessWidget {
                                 itemBuilder: (context, index) {
                                   return SortingBottomSheet(
                                     ontap: () {
-                                      transactionController
+                                      filterController
                                           .changeOption(currentCatagory[index]);
                                       Get.back();
                                     },
@@ -155,7 +141,7 @@ class ScreenHistory extends StatelessWidget {
                 ),
                 SortButton(
                   ontap: () {
-                    transactionController.selectDateRange();
+                    filterController.selectDateRange();
                   },
                   title: 'Date',
                   icon: const Icon(Icons.arrow_drop_down),
@@ -167,7 +153,7 @@ class ScreenHistory extends StatelessWidget {
             ),
             GetBuilder<TransactionController>(builder: ((controller) {
               return Text(
-                transactionController.selectedOption,
+                filterController.selectedOption,
                 style:
                     const TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
               );
@@ -176,40 +162,47 @@ class ScreenHistory extends StatelessWidget {
               height: 10,
             ),
             Expanded(
-              child: GetBuilder<TransactionController>(
+              child: GetBuilder<FilterController>(
                 builder: (controller) {
                   return ListView.separated(
                       itemBuilder: (context, index) {
                         final tr = controller.sortByFunction[index];
-                        return Slidable(
-                          key: UniqueKey(),
-                          endActionPane: ActionPane(
-                              dismissible: DismissiblePane(
-                                onDismissed: () {
-                                  controller.deleteTransaction(index: index);
-                                },
-                              ),
-                              motion: const DrawerMotion(),
-                              children: [
-                                SlidableAction(
-                                  onPressed: (context) {
-                                    controller.deleteTransaction(index: index);
+                        return GetBuilder<TransactionController>(
+                          builder: (controller) {
+                            return Slidable(
+                              key: UniqueKey(),
+                              endActionPane: ActionPane(
+                                  dismissible: DismissiblePane(
+                                    onDismissed: () {
+                                      controller.deleteTransaction(
+                                          index: index);
+                                    },
+                                  ),
+                                  motion: const DrawerMotion(),
+                                  children: [
+                                    SlidableAction(
+                                      onPressed: (context) {
+                                        controller.deleteTransaction(
+                                            index: index);
+                                      },
+                                      backgroundColor: const Color(0xFFFE4A49),
+                                      foregroundColor: Colors.white,
+                                      icon: Icons.delete,
+                                      //label: 'Delete',
+                                    ),
+                                  ]),
+                              child: Listtile(
+                                  type: tr.transactionType,
+                                  ontap: () {
+                                    Get.to(() => const ScreenViewTransaction(),
+                                        arguments: index);
                                   },
-                                  backgroundColor: const Color(0xFFFE4A49),
-                                  foregroundColor: Colors.white,
-                                  icon: Icons.delete,
-                                  //label: 'Delete',
-                                ),
-                              ]),
-                          child: Listtile(
-                              type: tr.transactionType,
-                              ontap: () {
-                                Get.to(() => const ScreenViewTransaction(),
-                                    arguments: index);
-                              },
-                              amount: tr.amount.toDouble(),
-                              date: DateFormat('dd/MM/yyyy').format(tr.date),
-                              title: tr.description),
+                                  amount: tr.amount.toDouble(),
+                                  date:
+                                      DateFormat('dd/MM/yyyy').format(tr.date),
+                                  title: tr.description),
+                            );
+                          },
                         );
                       },
                       separatorBuilder: (context, index) {

@@ -68,19 +68,14 @@ class UiController extends GetxController {
   }
 
   changeToggle(index) async {
-    selectedTransactionType = (index == 0)
-        ? TransactionType.income
-        : index == 1
-            ? TransactionType.expense
-            : TransactionType.transfer;
+    selectedTransactionType =
+        (index == 0) ? TransactionType.income : TransactionType.expense;
     // print(selectedTransactionType);
     //isDropdownVisible = index == 1;
     if (selectedTransactionType == TransactionType.income) {
       isTransactionIncome = true;
-    } else if (selectedTransactionType == TransactionType.expense) {
-      isTransactionIncome = false;
     } else {
-      isTransactionIncome = null;
+      isTransactionIncome = false;
     }
     selectedCategory = null;
 

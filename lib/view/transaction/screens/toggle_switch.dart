@@ -16,12 +16,10 @@ class CustomToggleSwitch extends StatelessWidget {
     return GetBuilder<UiController>(
       builder: (controller) {
         return ToggleSwitch(
-          initialLabelIndex: controller.selectedTransactionType ==
-                  TransactionType.income
-              ? 0
-              : controller.selectedTransactionType == TransactionType.expense
-                  ? 1
-                  : 2,
+          initialLabelIndex:
+              controller.selectedTransactionType == TransactionType.income
+                  ? 0
+                  : 1,
           minWidth: 100,
           minHeight: 50,
           cornerRadius: 10,
@@ -29,8 +27,8 @@ class CustomToggleSwitch extends StatelessWidget {
           activeBgColor: const [Appcolor.primaryColor],
           activeFgColor: Colors.white,
           inactiveBgColor: const Color.fromARGB(255, 191, 224, 230),
-          totalSwitches: 3,
-          labels: const ['Income', 'Expense', 'Transfer'],
+          totalSwitches: 2,
+          labels: const ['Income', 'Expense'],
           onToggle: (index) {
             controller.changeToggle(index);
           },

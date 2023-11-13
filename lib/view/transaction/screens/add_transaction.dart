@@ -1,6 +1,6 @@
 import 'package:expense_tracker/constatnts/colors.dart';
 import 'package:expense_tracker/constatnts/custom_widgets/common/button.dart';
-import 'package:expense_tracker/controller/transaction_contollers/date_picker_controller.dart';
+import 'package:expense_tracker/controller/date&time_controller/date_picker_controller.dart';
 import 'package:expense_tracker/controller/transaction_contollers/transaction_ui_controller.dart';
 import 'package:expense_tracker/controller/transaction_contollers/transaction_controller.dart';
 import 'package:expense_tracker/models/transaction_model/transaction_model.dart';
@@ -8,7 +8,7 @@ import 'package:expense_tracker/view/transaction/screens/add_category.dart';
 import 'package:expense_tracker/view/transaction/screens/toggle_switch.dart';
 import 'package:expense_tracker/view/transaction/validators/validators.dart';
 import 'package:flutter/material.dart';
-//import 'package:flutter/services.dart';
+
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
 import '../../../constatnts/custom_widgets/common/sizedbox.dart';
@@ -32,7 +32,7 @@ class _ScreenAddTransactionState extends State<ScreenAddTransaction> {
   final UiController ui = Get.put(UiController());
   final DatePickerController date = Get.put(DatePickerController());
 
-  addTransaction() {
+  addTransaction() async {
     if (addFormkey.currentState!.validate()) {
       Transaction transaction = Transaction(
         id: DateTime.now().microsecondsSinceEpoch.toString(),
@@ -47,16 +47,22 @@ class _ScreenAddTransactionState extends State<ScreenAddTransaction> {
           transaction: transaction, context: context);
 
       ui.resetValues();
+
       date.resetDate();
+
       descriptionController.clear();
       amountController.clear();
-      dateController.text = DateFormat('dd/MM/yyyy').format(date.selectedDate);
+      dateController.text = await date.dateFormat();
     }
+  }
+
+  Future<void> dateInitialization() async {
+    dateController.text = await date.dateFormat();
   }
 
   @override
   void initState() {
-    dateController.text = DateFormat('dd/MM/yyyy').format(date.selectedDate);
+    dateInitialization();
 
     super.initState();
   }

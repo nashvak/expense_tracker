@@ -12,90 +12,12 @@ class TransactionController extends GetxController {
 
   final transactionBox = Hive.box<Transaction>('transactionBox');
 
-  DateTime startDate = DateTime.now();
-  DateTime endDate = DateTime.now();
-
   //  S O R T  T H E  L I S T   A C C O R D I N G   T O   D A T E
   List<Transaction> get sortedList {
     List<Transaction> boxList = transactionBox.values.toList();
     boxList.sort((a, b) => b.date.compareTo(a.date));
 
     return boxList;
-  }
-
-//   D A T E   R A N G E    P I C K E R
-
-  void selectDateRange() async {
-    startDate = DateTime.now();
-    endDate = DateTime.now();
-    final DateTimeRange? picked = await showDateRangePicker(
-      context: Get.context!,
-      initialDateRange: DateTimeRange(
-        start: startDate,
-        end: endDate,
-      ),
-      firstDate: DateTime(2023),
-      lastDate: DateTime.now(),
-    );
-
-    try {
-      if (picked != null) {
-        startDate = picked.start;
-        endDate = picked.end;
-
-        await changeOption(
-            'Date'); // if date is picked,then only this function should work
-
-        update();
-      }
-    } catch (e) {
-      print('Not picked');
-    }
-  }
-
-  // F I L T E R I N G
-  var selectedOption = 'All';
-  changeOption(String value) {
-    selectedOption = value;
-    update();
-  }
-
-  List<Transaction> get sortByFunction {
-    if (selectedOption == 'Income') {
-      return sortedList
-          .where((transaction) =>
-              transaction.transactionType == TransactionType.income)
-          .toList();
-    } else if (selectedOption == 'Expense') {
-      return sortedList
-          .where((transaction) =>
-              transaction.transactionType == TransactionType.expense)
-          .toList();
-    } else if (selectedOption == 'Cash') {
-      return sortedList
-          .where((transaction) => transaction.paymentMode == PaymentMode.cash)
-          .toList();
-    } else if (selectedOption == 'Bank') {
-      return sortedList
-          .where((transaction) => transaction.paymentMode == PaymentMode.bank)
-          .toList();
-    }
-    // else if (selectedOption == 'food') {
-    //   return sortedList
-    //       .where((transaction) => transaction.catagoryType == CatagoryType.food)
-    //       .toList();
-    // }
-    else if (selectedOption == 'Date') {
-      return sortedList
-          .where((transaction) =>
-              transaction.date.isAfter(startDate) &&
-                  transaction.date.isBefore(endDate) ||
-              transaction.date.isAtSameMomentAs(startDate) ||
-              transaction.date.isAtSameMomentAs(endDate))
-          .toList();
-    }
-
-    return sortedList;
   }
 
   int get transactionCount => sortedList.length;
