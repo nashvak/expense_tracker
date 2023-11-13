@@ -4,7 +4,7 @@ import 'package:expense_tracker/models/transaction_model/transaction_model.dart'
 import 'package:expense_tracker/view/home_screen/balance_card.dart';
 import 'package:expense_tracker/view/home_screen/expense_card.dart';
 import 'package:expense_tracker/view/home_screen/income_card.dart';
-import 'package:expense_tracker/view/transaction/screens/view_transaction.dart';
+import 'package:expense_tracker/view/transaction/screens/view_transaction/view_transaction.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';

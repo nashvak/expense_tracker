@@ -41,7 +41,7 @@ class UpdateController extends GetxController {
   //   update();
   // }
   TransactionController transactionController = TransactionController();
-  deleteDialog(int index) {
+  deleteDialog(String index) {
     Get.defaultDialog(
       title: 'Delete record',
       middleText: 'Do you want to delete this record',
@@ -49,14 +49,14 @@ class UpdateController extends GetxController {
       radius: 20,
       contentPadding: const EdgeInsets.all(10),
       titlePadding: const EdgeInsets.all(20),
-      textCancel: 'Cancel', //default style
+      textCancel: 'Cancel',
       textConfirm: 'Ok',
       cancelTextColor: Appcolor.primaryColor,
       onCancel: () {
         Get.back();
       },
       onConfirm: () async {
-        transactionController.deleteTransaction(index: index);
+        transactionController.deleteTransaction(id: index);
         Get.back();
         Get.back();
       },

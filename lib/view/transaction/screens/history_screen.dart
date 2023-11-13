@@ -7,7 +7,7 @@ import 'package:expense_tracker/controller/filer_controller.dart';
 
 import 'package:expense_tracker/controller/transaction_contollers/transaction_controller.dart';
 
-import 'package:expense_tracker/view/transaction/screens/view_transaction.dart';
+import 'package:expense_tracker/view/transaction/screens/view_transaction/view_transaction.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:get/get.dart';
@@ -34,21 +34,6 @@ class ScreenHistory extends StatelessWidget {
         elevation: 0,
         backgroundColor: Colors.transparent,
         iconTheme: const IconThemeData(color: Colors.black),
-        // actions: [
-        //   GestureDetector(
-        //     onTap: () {
-        //       Get.to(() => ScreenAddTransaction());
-        //     },
-        //     child: const Padding(
-        //       padding: EdgeInsets.all(8.0),
-        //       child: Icon(
-        //         Icons.add,
-        //         color: Colors.black,
-        //         size: 40,
-        //       ),
-        //     ),
-        //   )
-        // ],
       ),
       body: Padding(
         padding: const EdgeInsets.only(left: 20, right: 20, top: 30),
@@ -64,9 +49,7 @@ class ScreenHistory extends StatelessWidget {
                     List filterList = filterController.isFilterIncluded();
                     Get.bottomSheet(
                       Container(
-                        // decoration:  ShapeDecoration(
                         color: Colors.white,
-
                         child: Column(
                           children: [
                             const ListTile(
@@ -171,6 +154,7 @@ class ScreenHistory extends StatelessWidget {
                   return ListView.separated(
                       itemBuilder: (context, index) {
                         final tr = controller.sortByFunction[index];
+                        print(tr.id);
 
                         return Slidable(
                           key: UniqueKey(),
@@ -178,7 +162,7 @@ class ScreenHistory extends StatelessWidget {
                               dismissible: DismissiblePane(
                                 onDismissed: () {
                                   transactionController.deleteTransaction(
-                                      index: index);
+                                      id: tr.id);
                                 },
                               ),
                               motion: const DrawerMotion(),
@@ -186,7 +170,7 @@ class ScreenHistory extends StatelessWidget {
                                 SlidableAction(
                                   onPressed: (context) {
                                     transactionController.deleteTransaction(
-                                        index: index);
+                                        id: tr.id);
                                   },
                                   backgroundColor: const Color(0xFFFE4A49),
                                   foregroundColor: Colors.white,
@@ -198,7 +182,7 @@ class ScreenHistory extends StatelessWidget {
                               type: tr.transactionType,
                               ontap: () {
                                 Get.to(() => const ScreenViewTransaction(),
-                                    arguments: index);
+                                    arguments: tr.id);
                               },
                               amount: tr.amount.toDouble(),
                               date: DateFormat('dd/MM/yyyy').format(tr.date),

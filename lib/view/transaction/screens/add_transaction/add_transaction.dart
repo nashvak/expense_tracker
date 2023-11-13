@@ -4,15 +4,15 @@ import 'package:expense_tracker/controller/date&time_controller/date_picker_cont
 import 'package:expense_tracker/controller/transaction_contollers/transaction_ui_controller.dart';
 import 'package:expense_tracker/controller/transaction_contollers/transaction_controller.dart';
 import 'package:expense_tracker/models/transaction_model/transaction_model.dart';
-import 'package:expense_tracker/view/transaction/screens/add_category.dart';
-import 'package:expense_tracker/view/transaction/screens/toggle_switch.dart';
+import 'package:expense_tracker/view/transaction/screens/add_transaction/widgets/add_category.dart';
+import 'package:expense_tracker/view/transaction/screens/add_transaction/widgets/toggle_switch.dart';
 import 'package:expense_tracker/view/transaction/validators/validators.dart';
 import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
-import 'package:intl/intl.dart';
-import '../../../constatnts/custom_widgets/common/sizedbox.dart';
-import '../../../constatnts/custom_widgets/login&signup/textfield.dart';
+
+import '../../../../constatnts/custom_widgets/common/sizedbox.dart';
+import '../../../../constatnts/custom_widgets/login&signup/textfield.dart';
 
 class ScreenAddTransaction extends StatefulWidget {
   const ScreenAddTransaction({super.key});

@@ -99,7 +99,7 @@ class AddTransactionTextField extends StatelessWidget {
             decoration: const InputDecoration(
               enabledBorder: UnderlineInputBorder(
                 borderSide:
-                    BorderSide(width: 2, color: Appcolor.secondaryColor),
+                    BorderSide(width: 1, color: Appcolor.secondaryColor),
               ),
               focusedBorder: UnderlineInputBorder(
                 borderSide: BorderSide(width: 1, color: Appcolor.primaryColor),

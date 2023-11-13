@@ -11,9 +11,11 @@ class DatePickerController extends GetxController {
         initialDate: selectedDate,
         firstDate: DateTime(2023),
         lastDate: DateTime.now());
+    // print(pickedDate);
     await updateDate(pickedDate!);
 
     update();
+    // print(selectedDate);
     return selectedDate;
   }
 

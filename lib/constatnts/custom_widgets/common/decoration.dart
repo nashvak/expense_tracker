@@ -16,7 +16,7 @@ ShapeDecoration cardDecoration({required Color color}) {
   return ShapeDecoration(
     color: color,
     shape: RoundedRectangleBorder(
-      borderRadius: BorderRadius.circular(26),
+      borderRadius: BorderRadius.circular(20),
     ),
   );
 }
