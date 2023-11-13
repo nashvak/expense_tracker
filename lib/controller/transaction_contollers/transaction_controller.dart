@@ -15,7 +15,7 @@ class TransactionController extends GetxController {
   DateTime startDate = DateTime.now();
   DateTime endDate = DateTime.now();
 
-  //sort according to date
+  //  S O R T  T H E  L I S T   A C C O R D I N G   T O   D A T E
   List<Transaction> get sortedList {
     List<Transaction> boxList = transactionBox.values.toList();
     boxList.sort((a, b) => b.date.compareTo(a.date));
@@ -23,14 +23,11 @@ class TransactionController extends GetxController {
     return boxList;
   }
 
-  // F I L T E R I N G
-  var selectedOption = 'All';
-  changeOption(String value) {
-    selectedOption = value;
-    update();
-  }
+//   D A T E   R A N G E    P I C K E R
 
   void selectDateRange() async {
+    startDate = DateTime.now();
+    endDate = DateTime.now();
     final DateTimeRange? picked = await showDateRangePicker(
       context: Get.context!,
       initialDateRange: DateTimeRange(
@@ -54,6 +51,13 @@ class TransactionController extends GetxController {
     } catch (e) {
       print('Not picked');
     }
+  }
+
+  // F I L T E R I N G
+  var selectedOption = 'All';
+  changeOption(String value) {
+    selectedOption = value;
+    update();
   }
 
   List<Transaction> get sortByFunction {
@@ -118,11 +122,5 @@ class TransactionController extends GetxController {
         (value) => snackbarKey.currentState?.showSnackBar(deleteSnackbar));
     //     ScaffoldMessenger.of(context).showSnackBar(deleteTransactionSnackbar));
     update();
-  }
-
-// F U N C T I O N   T O   L O G O U T
-  logoutProfile() {
-    transactionBox.clear();
-    sortedList.clear();
   }
 }

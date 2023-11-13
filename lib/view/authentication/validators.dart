@@ -19,7 +19,7 @@ String? numberValidator(String? value) {
     return 'Please enter phone number';
   }
 
-  if (value.length < 10) {
+  if (value.length < 10 || value.length > 10) {
     return 'Invalid number';
     //Get.snackbar('oops.!', 'Password must be at least 8 characters long');
     // return '';
@@ -34,17 +34,9 @@ String? emailValidator(String? value) {
 
   if (value.isEmpty) {
     return "Enter email";
-    // Get.snackbar(
-    //   'oops.!',
-    //   'Enter email',
-    // );
-
-    // return '';
   }
 
   if (!emailRegx) {
-    // return "Enter valid Email";
-    // Get.snackbar('oops.!', 'Enter valid Email');
     return 'invalid email';
   }
   return null;

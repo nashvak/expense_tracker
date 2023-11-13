@@ -75,7 +75,7 @@ class AddCategory extends StatelessWidget {
             ),
           ),
           Expanded(
-              child: Container(
+              child: SizedBox(
             // color: Colors.red,
             width: double.infinity,
             child: Padding(

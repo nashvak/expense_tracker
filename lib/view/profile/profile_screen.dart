@@ -58,7 +58,7 @@ class _ScreenProfileState extends State<ScreenProfile> {
       titlePadding: const EdgeInsets.all(20),
       confirm: TextButton(
         onPressed: () {
-          transactionController.logoutProfile();
+          authController.logoutProfile();
           Get.back();
         },
         child: const Text('Erase'),

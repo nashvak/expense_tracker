@@ -4,7 +4,6 @@ import 'package:expense_tracker/controller/transaction_contollers/balance_calcul
 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:get/get_state_manager/src/simple/get_state.dart';
 
 class BalanceCard extends StatelessWidget {
   BalanceCard({

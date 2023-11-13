@@ -1,3 +1,4 @@
+import 'package:expense_tracker/controller/transaction_contollers/transaction_controller.dart';
 import 'package:hive/hive.dart';
 import 'package:get/get.dart';
 
@@ -5,6 +6,7 @@ import '../../models/auth_model/auth_model.dart';
 import 'package:image_picker/image_picker.dart';
 
 class AuthController extends GetxController {
+  TransactionController transactionController = TransactionController();
   XFile? pickedFile;
   String? imageURL;
   final Box _authBox = Hive.box<AuthModel>('AuthBox');
@@ -51,5 +53,11 @@ class AuthController extends GetxController {
     emailButton = text.isNotEmpty;
     // print(nameButton);
     update();
+  }
+
+  // F U N C T I O N   T O   L O G O U T
+  logoutProfile() {
+    transactionController.transactionBox.clear();
+    transactionController.sortedList.clear();
   }
 }

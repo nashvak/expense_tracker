@@ -59,7 +59,7 @@ class _ScreenSignupState extends State<ScreenSignup> {
       );
       Get.offAll(() => const BottomNav());
     } else {
-      Get.snackbar('Error', 'Cannot create user');
+      //Get.snackbar('Error', 'Cannot create user');
     }
   }
 

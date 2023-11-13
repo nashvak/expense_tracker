@@ -1,5 +1,6 @@
 import 'package:expense_tracker/constatnts/colors.dart';
 import 'package:expense_tracker/constatnts/custom_widgets/common/button.dart';
+import 'package:expense_tracker/controller/transaction_contollers/date_picker_controller.dart';
 import 'package:expense_tracker/controller/transaction_contollers/transaction_ui_controller.dart';
 import 'package:expense_tracker/controller/transaction_contollers/transaction_controller.dart';
 import 'package:expense_tracker/models/transaction_model/transaction_model.dart';
@@ -26,32 +27,37 @@ class _ScreenAddTransactionState extends State<ScreenAddTransaction> {
   final dateController = TextEditingController();
   final descriptionController = TextEditingController();
 
-  final TransactionController controller = Get.put(TransactionController());
+  final TransactionController transactionController =
+      Get.put(TransactionController());
   final UiController ui = Get.put(UiController());
+  final DatePickerController date = Get.put(DatePickerController());
+
   addTransaction() {
     if (addFormkey.currentState!.validate()) {
       Transaction transaction = Transaction(
         id: DateTime.now().microsecondsSinceEpoch.toString(),
         description: descriptionController.text,
         amount: double.parse(amountController.text),
-        date: ui.selectedDate,
+        date: date.selectedDate,
         paymentMode: ui.selectedPaymentMode!,
         transactionType: ui.selectedTransactionType,
         catagoryType: ui.selectedCategory!,
       );
-      controller.createTransaction(transaction: transaction, context: context);
+      transactionController.createTransaction(
+          transaction: transaction, context: context);
 
-      Get.back();
       ui.resetValues();
+      date.resetDate();
       descriptionController.clear();
       amountController.clear();
-      dateController.text = DateFormat('dd/MM/yyyy').format(ui.selectedDate);
+      dateController.text = DateFormat('dd/MM/yyyy').format(date.selectedDate);
     }
   }
 
   @override
   void initState() {
-    dateController.text = DateFormat('dd/MM/yyyy').format(ui.selectedDate);
+    dateController.text = DateFormat('dd/MM/yyyy').format(date.selectedDate);
+
     super.initState();
   }
 
@@ -67,7 +73,7 @@ class _ScreenAddTransactionState extends State<ScreenAddTransaction> {
               children: [
                 const CustomToggleSwitch(),
                 const BlankSpace(height: 50),
-                GetBuilder<UiController>(
+                GetBuilder<DatePickerController>(
                   builder: (controller) {
                     return AddTransactionTextField(
                       readonly: true,
@@ -79,8 +85,8 @@ class _ScreenAddTransactionState extends State<ScreenAddTransaction> {
                       ontap: () async {
                         await controller.getDate(context);
 
-                        dateController.text = DateFormat('dd/MM/yyyy')
-                            .format(controller.selectedDate);
+                        dateController.text = await controller.dateFormat();
+
                         //   }
                       },
                     );
