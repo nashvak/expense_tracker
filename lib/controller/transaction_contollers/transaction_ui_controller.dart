@@ -1,6 +1,8 @@
+import 'package:expense_tracker/models/category_model/category_model.dart';
 import 'package:expense_tracker/models/transaction_model/transaction_model.dart';
 
 import 'package:get/get_state_manager/src/simple/get_controllers.dart';
+import 'package:hive/hive.dart';
 
 class UiController extends GetxController {
   // DatePickerController datePickerController = DatePickerController();
@@ -9,6 +11,8 @@ class UiController extends GetxController {
   String? selectedCategory;
 
   bool? isTransactionIncome = true;
+  final incomeCategorybox = Hive.box<IncomeCategory>('incomeCategoryBox');
+  final expenseCategorybox = Hive.box<ExpenseCategory>('expenseCategoryBox');
   List<String> incomeCatagoryTypes = ['Salary', 'Allowance', 'Bonus'];
 
   List<String> expenseCatagoryTypes = ['Food', 'Entertainment', 'Loan'];
