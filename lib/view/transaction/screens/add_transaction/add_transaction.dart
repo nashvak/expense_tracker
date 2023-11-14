@@ -8,9 +8,7 @@ import 'package:expense_tracker/view/transaction/screens/add_transaction/widgets
 import 'package:expense_tracker/view/transaction/screens/add_transaction/widgets/toggle_switch.dart';
 import 'package:expense_tracker/view/transaction/validators/validators.dart';
 import 'package:flutter/material.dart';
-
 import 'package:get/get.dart';
-
 import '../../../../constatnts/custom_widgets/common/sizedbox.dart';
 import '../../../../constatnts/custom_widgets/login&signup/textfield.dart';
 
@@ -26,7 +24,6 @@ class _ScreenAddTransactionState extends State<ScreenAddTransaction> {
   final amountController = TextEditingController();
   final dateController = TextEditingController();
   final descriptionController = TextEditingController();
-
   final TransactionController transactionController =
       Get.put(TransactionController());
   final UiController ui = Get.put(UiController());
@@ -45,11 +42,8 @@ class _ScreenAddTransactionState extends State<ScreenAddTransaction> {
       );
       transactionController.createTransaction(
           transaction: transaction, context: context);
-
       ui.resetValues();
-
       date.resetDate();
-
       descriptionController.clear();
       amountController.clear();
       dateController.text = await date.dateFormat();
@@ -63,7 +57,6 @@ class _ScreenAddTransactionState extends State<ScreenAddTransaction> {
   @override
   void initState() {
     dateInitialization();
-
     super.initState();
   }
 
@@ -122,8 +115,10 @@ class _ScreenAddTransactionState extends State<ScreenAddTransaction> {
                       width: Get.width * 0.5,
                       child: GetBuilder<UiController>(
                         builder: (controller) {
+                          List<String> categoryItems =
+                              controller.showCategoryDropdown();
                           return DropdownButtonFormField<String>(
-                            //hint: const Text('Catagory '),
+                            hint: const Text('Select Catagory '),
                             decoration: const InputDecoration(
                               enabledBorder: UnderlineInputBorder(
                                 borderSide: BorderSide(
@@ -144,9 +139,7 @@ class _ScreenAddTransactionState extends State<ScreenAddTransaction> {
                             onChanged: (String? newValue) {
                               controller.changeCatagory(newValue!);
                             },
-                            items: controller
-                                .showCategoryDropdown()
-                                .map((String mode) {
+                            items: categoryItems.map((String mode) {
                               return DropdownMenuItem<String>(
                                 value: mode,
                                 child: Text(mode),

@@ -1,63 +1,71 @@
-import 'package:expense_tracker/models/category_model/category_model.dart';
 import 'package:expense_tracker/models/transaction_model/transaction_model.dart';
-
 import 'package:get/get_state_manager/src/simple/get_controllers.dart';
 import 'package:hive/hive.dart';
 
 class UiController extends GetxController {
-  // DatePickerController datePickerController = DatePickerController();
   PaymentMode? selectedPaymentMode;
   TransactionType selectedTransactionType = TransactionType.income;
   String? selectedCategory;
 
   bool? isTransactionIncome = true;
-  final incomeCategorybox = Hive.box<IncomeCategory>('incomeCategoryBox');
-  final expenseCategorybox = Hive.box<ExpenseCategory>('expenseCategoryBox');
-  List<String> incomeCatagoryTypes = ['Salary', 'Allowance', 'Bonus'];
 
-  List<String> expenseCatagoryTypes = ['Food', 'Entertainment', 'Loan'];
-
-  List<String> transferCatagoryTypes = ['bank charges', 'profit', 'lend'];
-  late List<String> categoryItem;
+  @override
+  void onInit() {
+    initCategoryBox();
+    super.onInit();
+  }
 
 //   A D D   C A T E G O R Y   F U N C T I O N
 
+  Box<String> incomeCategorybox = Hive.box('incomeCategoryBox');
+  Box<String> expenseCategorybox = Hive.box('expenseCategoryBox');
+  void initCategoryBox() async {
+    if (incomeCategorybox.isEmpty) {
+      await incomeCategorybox.addAll(['Salary', 'Allowance', 'Bonus']);
+    }
+    if (expenseCategorybox.isEmpty) {
+      await expenseCategorybox
+          .addAll(['Food', 'Entertainment', 'Loan', 'Shopping']);
+    }
+  }
+
+//  S H O W I N G   T H E   C A T E G O R Y   I F   I N C O M E   O R    E X P E N S E
+  showCategoryDropdown() {
+    if (selectedTransactionType == TransactionType.income) {
+      return incomeCategorybox.values.toList();
+    } else {
+      return expenseCategorybox.values.toList();
+    }
+  }
+
+  //  A D D   A    C A T E G O R Y    T O   B O X
   addCategory(value) {
     if (selectedTransactionType == TransactionType.income) {
-      incomeCatagoryTypes.add(value);
+      incomeCategorybox.add(value);
     } else if (selectedTransactionType == TransactionType.expense) {
-      expenseCatagoryTypes.add(value);
+      expenseCategorybox.add(value);
     }
     update();
   }
 
-  editCategory() {
-    return selectedTransactionType == TransactionType.income
-        ? incomeCatagoryTypes
-        : expenseCatagoryTypes;
-  }
-
+//  U P D A T E   C A T E G O R Y
   updateCategory(index, newValue) {
-    editCategory()[index] = newValue;
-    update();
-  }
-
-  deleteCategory(index) {
-    List<String> categoryList = editCategory();
-    categoryList.removeAt(index);
-    update();
-  }
-
-  //  S H O W I N G   T H E   C A T E G O R Y   I F   I N C O M E   O R    E X P E N S E
-  List<String> showCategoryDropdown() {
-    if (isTransactionIncome == true) {
-      categoryItem = incomeCatagoryTypes;
-    } else if (isTransactionIncome == false) {
-      categoryItem = expenseCatagoryTypes;
+    if (selectedTransactionType == TransactionType.income) {
+      incomeCategorybox.putAt(index, newValue);
     } else {
-      categoryItem = transferCatagoryTypes;
+      expenseCategorybox.putAt(index, newValue);
     }
-    return categoryItem;
+    update();
+  }
+
+//   D E L E T E    C A T E G O R Y
+  deleteCategory(index) {
+    if (selectedTransactionType == TransactionType.income) {
+      incomeCategorybox.deleteAt(index);
+    } else {
+      expenseCategorybox.deleteAt(index);
+    }
+    update();
   }
 
 //
@@ -76,12 +84,12 @@ class UiController extends GetxController {
         (index == 0) ? TransactionType.income : TransactionType.expense;
     // print(selectedTransactionType);
     //isDropdownVisible = index == 1;
-    if (selectedTransactionType == TransactionType.income) {
-      isTransactionIncome = true;
-    } else {
-      isTransactionIncome = false;
-    }
-    selectedCategory = null;
+    // if (selectedTransactionType == TransactionType.income) {
+    //   isTransactionIncome = true;
+    // } else {
+    //   isTransactionIncome = false;
+    // }
+    selectedCategory = null; //reset the value
 
     update();
   }

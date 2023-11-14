@@ -185,10 +185,10 @@ class _ScreenViewTransactionState extends State<ScreenViewTransaction> {
                 ),
                 GetBuilder<UpdateController>(
                   builder: (controller) {
-                    List<String> category =
-                        tr.transactionType == TransactionType.income
-                            ? ui.incomeCatagoryTypes
-                            : ui.expenseCatagoryTypes;
+                    // List<String> category =
+                    //     tr.transactionType == TransactionType.income
+                    //         ? ui.incomeCatagoryTypes
+                    //         : ui.expenseCatagoryTypes;
                     return Container(
                       decoration: cardDecoration(color: Appcolor.white),
                       height: MediaQuery.of(context).size.height / 8,
@@ -210,7 +210,7 @@ class _ScreenViewTransactionState extends State<ScreenViewTransaction> {
                                   onChanged: (String? newValue) {
                                     controller.changeCategoryType(newValue);
                                   },
-                                  items: category.map((String mode) {
+                                  items: ['h', 'd', 'ds'].map((String mode) {
                                     return DropdownMenuItem<String>(
                                       value: mode,
                                       child:

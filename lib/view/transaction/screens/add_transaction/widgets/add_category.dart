@@ -12,7 +12,9 @@ class AddCategory extends StatelessWidget {
   AddCategory({super.key});
   final TextEditingController categoryController = TextEditingController();
   final formKey = GlobalKey<FormState>();
-  final UiController uiController = Get.put(UiController());
+  final UiController uiController = Get.put(
+    UiController(),
+  );
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -23,7 +25,9 @@ class AddCategory extends StatelessWidget {
         actions: [
           IconButton(
               onPressed: () {
-                Get.to(() => const EditCategory());
+                Get.to(
+                  () => const EditCategory(),
+                );
               },
               icon: const Icon(Icons.edit))
         ],
@@ -83,6 +87,8 @@ class AddCategory extends StatelessWidget {
                   const EdgeInsets.only(left: 20, right: 20, top: 0, bottom: 0),
               child: GetBuilder<UiController>(
                 builder: (controller) {
+                  List<String> categoryItems =
+                      controller.showCategoryDropdown();
                   return ListView.builder(
                     itemBuilder: (context, index) {
                       return ListTile(
@@ -95,17 +101,20 @@ class AddCategory extends StatelessWidget {
                         horizontalTitleGap: 0,
                         contentPadding: const EdgeInsets.all(0),
                         title: Text(
-                          controller.editCategory()[index],
+                          categoryItems[index],
                         ),
                         trailing: IconButton(
                           onPressed: () {
                             controller.deleteCategory(index);
                           },
-                          icon: const Icon(Icons.edit),
+                          icon: const Icon(
+                            Icons.delete,
+                            color: Colors.red,
+                          ),
                         ),
                       );
                     },
-                    itemCount: controller.editCategory().length,
+                    itemCount: categoryItems.length,
                   );
                 },
               ),

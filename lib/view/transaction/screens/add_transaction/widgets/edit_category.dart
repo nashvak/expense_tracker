@@ -22,7 +22,7 @@ class _EditCategoryState extends State<EditCategory> {
 
   @override
   void initState() {
-    categoryController.text = uiController.editCategory()[index];
+    categoryController.text = uiController.showCategoryDropdown()[index];
     super.initState();
   }
 

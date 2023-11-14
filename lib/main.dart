@@ -23,11 +23,10 @@ void main() async {
   Hive.registerAdapter<TransactionType>(TransactionTypeAdapter());
   Hive.registerAdapter<IncomeCategory>(IncomeCategoryAdapter());
   Hive.registerAdapter<ExpenseCategory>(ExpenseCategoryAdapter());
-
   await Hive.openBox<AuthModel>('AuthBox');
   await Hive.openBox<Transaction>('transactionBox');
-  await Hive.openBox<IncomeCategory>('incomeCategoryBox');
-  await Hive.openBox<ExpenseCategory>('expenseCategoryBox');
+  await Hive.openBox<String>('incomeCategoryBox');
+  await Hive.openBox<String>('expenseCategoryBox');
 
   NotificationServices().initializeNotifications();
   // tz.initializeTimeZones();
