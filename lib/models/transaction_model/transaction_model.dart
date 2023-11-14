@@ -17,8 +17,6 @@ enum TransactionType {
   income,
   @HiveField(1)
   expense,
-  @HiveField(2)
-  transfer,
 }
 
 @HiveType(typeId: 1)

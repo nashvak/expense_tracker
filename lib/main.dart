@@ -1,5 +1,4 @@
 import 'dart:io';
-import 'package:expense_tracker/models/category_model/category_model.dart';
 import 'package:expense_tracker/models/transaction_model/transaction_model.dart';
 import 'package:expense_tracker/view/authentication/splash_screen.dart';
 import 'package:expense_tracker/view/profile/notification/notification_settings.dart';
@@ -21,8 +20,7 @@ void main() async {
   Hive.registerAdapter<Transaction>(TransactionAdapter());
   Hive.registerAdapter<PaymentMode>(PaymentModeAdapter());
   Hive.registerAdapter<TransactionType>(TransactionTypeAdapter());
-  Hive.registerAdapter<IncomeCategory>(IncomeCategoryAdapter());
-  Hive.registerAdapter<ExpenseCategory>(ExpenseCategoryAdapter());
+
   await Hive.openBox<AuthModel>('AuthBox');
   await Hive.openBox<Transaction>('transactionBox');
   await Hive.openBox<String>('incomeCategoryBox');

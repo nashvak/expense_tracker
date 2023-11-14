@@ -10,16 +10,16 @@ class FilterController extends GetxController {
   DateTime endDate = DateTime.now();
 
   //  C A T E G O R Y   I S    D I S P L A Y I N G    I N    T H E   B O T T O M   S H E E T
-
+  List<String> catagoryTitles = [];
   List<String> isCatagoryIncluded() {
     Set<String> currentCatagory = {};
-    List<String> catagoryTitles = [];
+
     for (var transaction in transactionController.sortedList) {
       currentCatagory.add(transaction.catagoryType);
       // currentCatagory.removeWhere((value) => value == null);
-      print(currentCatagory);
+      // print(currentCatagory);
       catagoryTitles = currentCatagory
-          .map((category) => category.toString().split('.').last)
+          // .map((category) => category.toString().split('.').last)
           .toList();
     }
     // print(catagoryTitles);
@@ -35,7 +35,7 @@ class FilterController extends GetxController {
       filterTitles.add(transaction.transactionType.toString().split('.').last);
       filterTitles.add(transaction.paymentMode.toString().split('.').last);
       uniqueTitles = filterTitles.toSet().toList();
-      print(uniqueTitles);
+      // print(uniqueTitles);
     }
     // print(catagoryTitles);
     return uniqueTitles;
@@ -67,20 +67,23 @@ class FilterController extends GetxController {
       return transactionController.sortedList
           .where((transaction) => transaction.paymentMode == PaymentMode.bank)
           .toList();
-    }
-    // else if (selectedOption == 'food') {
-    //   return sortedList
-    //       .where((transaction) => transaction.catagoryType == CatagoryType.food)
-    //       .toList();
-    // }
-    else if (selectedOption == 'Date') {
-      print(endDate);
+    } else if (selectedOption == 'Bonus') {
+      return transactionController.sortedList
+          .where((transaction) => transaction.catagoryType == 'Bonus')
+          .toList();
+    } else if (selectedOption == 'Date') {
+      // print(endDate);
       return transactionController.sortedList
           .where((transaction) =>
               (transaction.date.isAfter(startDate) &&
                   transaction.date.isBefore(endDate)) ||
               transaction.date.isAtSameMomentAs(endDate) ||
               transaction.date.isAtSameMomentAs(startDate))
+          .toList();
+    } else if (selectedOption == 'category') {
+      return transactionController.sortedList
+          .where((transaction) =>
+              catagoryTitles.contains(transaction.catagoryType))
           .toList();
     }
 
@@ -107,10 +110,9 @@ class FilterController extends GetxController {
 
         await changeOption(
             'Date'); // if date is picked,then only this function should work
-        print('dsafs');
       }
     } catch (e) {
-      print('Not picked');
+      print(e);
     }
   }
 }

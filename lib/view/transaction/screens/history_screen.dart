@@ -104,8 +104,7 @@ class ScreenHistory extends StatelessWidget {
                                 itemBuilder: (context, index) {
                                   return SortingBottomSheet(
                                     ontap: () {
-                                      filterController
-                                          .changeOption(currentCatagory[index]);
+                                      filterController.changeOption('category');
                                       Get.back();
                                     },
                                     title: currentCatagory[index],
@@ -122,29 +121,13 @@ class ScreenHistory extends StatelessWidget {
                   title: 'Catagory',
                   icon: const Icon(Icons.arrow_drop_down),
                 ),
-                GetBuilder<FilterController>(
-                  builder: (controller) {
-                    return SortButton(
-                      ontap: () {
-                        controller.selectDateRange();
-                      },
-                      title: 'Date',
-                      icon: const Icon(Icons.arrow_drop_down),
-                    );
-                  },
-                ),
+                const DateRangeFiltering(),
               ],
             ),
             const BlankSpace(
               height: 30,
             ),
-            GetBuilder<FilterController>(builder: ((controller) {
-              return Text(
-                filterController.selectedOption,
-                style:
-                    const TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
-              );
-            })),
+            const FilteringName(),
             const BlankSpace(
               height: 10,
             ),
@@ -154,7 +137,7 @@ class ScreenHistory extends StatelessWidget {
                   return ListView.separated(
                       itemBuilder: (context, index) {
                         final tr = controller.sortByFunction[index];
-                        print(tr.id);
+                        // print(tr.id);
 
                         return Slidable(
                           key: UniqueKey(),
@@ -203,6 +186,46 @@ class ScreenHistory extends StatelessWidget {
         ),
       ),
     );
+  }
+}
+
+class DateRangeFiltering extends StatelessWidget {
+  const DateRangeFiltering({
+    super.key,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return GetBuilder<FilterController>(
+      builder: (controller) {
+        return SortButton(
+          ontap: () {
+            controller.selectDateRange();
+          },
+          title: 'Date',
+          icon: const Icon(Icons.arrow_drop_down),
+        );
+      },
+    );
+  }
+}
+
+class FilteringName extends StatelessWidget {
+  const FilteringName({
+    super.key,
+    // required this.filterController,
+  });
+
+  // final FilterController filterController;
+
+  @override
+  Widget build(BuildContext context) {
+    return GetBuilder<FilterController>(builder: ((controller) {
+      return Text(
+        controller.selectedOption,
+        style: const TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+      );
+    }));
   }
 }
 

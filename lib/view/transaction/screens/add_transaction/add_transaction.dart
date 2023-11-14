@@ -70,7 +70,6 @@ class _ScreenAddTransactionState extends State<ScreenAddTransaction> {
 
   @override
   Widget build(BuildContext context) {
-    print('build');
     resetWhenNavigation();
     return Scaffold(
       body: Padding(
