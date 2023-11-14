@@ -30,7 +30,7 @@ class _EditCategoryState extends State<EditCategory> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Edit category'),
+        title: const Text('Edit category'),
         elevation: 0,
         backgroundColor: Appcolor.primaryColor,
       ),
@@ -50,7 +50,7 @@ class _EditCategoryState extends State<EditCategory> {
                     return null;
                   },
                 ),
-                BlankSpace(
+                const BlankSpace(
                   height: 30,
                 ),
                 SignupButton(

@@ -1,7 +1,6 @@
 import 'package:expense_tracker/main.dart';
 import 'package:expense_tracker/models/transaction_model/transaction_model.dart';
 import 'package:expense_tracker/view/transaction/snackbars/snackbar.dart';
-
 import 'package:hive/hive.dart';
 import 'package:get/get.dart';
 import 'package:syncfusion_flutter_datepicker/datepicker.dart';
@@ -30,10 +29,14 @@ class TransactionController extends GetxController {
 // F U N C T I O N   T O   U P D A T E   T R A N S A C T I O N
   updateTransaction(
       {required String id, required Transaction transaction, context}) async {
-    await transactionBox
-        .put(transaction.id, transaction)
-        .then((value) => snackbarKey.currentState?.showSnackBar(editSnackbar));
+    var box = await Hive.openBox<Transaction>('transactionBox');
 
+    var tr = box.get(id);
+    if (tr != null) {
+      tr = transaction;
+      await tr.save().then(
+          (value) => snackbarKey.currentState?.showSnackBar(editSnackbar));
+    }
     update();
   }
 

@@ -2,8 +2,7 @@ import 'package:expense_tracker/constatnts/colors.dart';
 import 'package:expense_tracker/constatnts/custom_widgets/common/button.dart';
 import 'package:expense_tracker/constatnts/custom_widgets/common/decoration.dart';
 import 'package:expense_tracker/constatnts/custom_widgets/common/sizedbox.dart';
-import 'package:expense_tracker/constatnts/custom_widgets/login&signup/textfield.dart';
-import 'package:expense_tracker/controller/date&time_controller/date_picker_controller.dart';
+
 import 'package:expense_tracker/controller/transaction_contollers/update_ui_controller.dart';
 import 'package:expense_tracker/controller/transaction_contollers/transaction_ui_controller.dart';
 import 'package:expense_tracker/controller/transaction_contollers/transaction_controller.dart';
@@ -11,7 +10,7 @@ import 'package:expense_tracker/controller/transaction_contollers/transaction_co
 import 'package:expense_tracker/models/transaction_model/transaction_model.dart';
 import 'package:expense_tracker/view/transaction/screens/view_transaction/widgets/amount_details_section.dart';
 import 'package:expense_tracker/view/transaction/screens/view_transaction/widgets/transaction_details_section.dart';
-import 'package:expense_tracker/view/transaction/validators/validators.dart';
+
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
@@ -206,18 +205,23 @@ class _ScreenViewTransactionState extends State<ScreenViewTransaction> {
                                 'Catagory type',
                                 style: TextStyle(color: Appcolor.primaryColor),
                               ),
-                              DropdownButton<String>(
-                                  onChanged: (String? newValue) {
-                                    controller.changeCategoryType(newValue);
-                                  },
-                                  items: ['h', 'd', 'ds'].map((String mode) {
-                                    return DropdownMenuItem<String>(
-                                      value: mode,
-                                      child:
-                                          Text(mode.toString().split('.').last),
-                                    );
-                                  }).toList(),
-                                  value: controller.catagory),
+                              GetBuilder<UpdateController>(
+                                builder: (controller) {
+                                  List<String> a = ui.showCategoryDropdown();
+                                  return DropdownButton<String>(
+                                      onChanged: (String? newValue) {
+                                        controller.changeCategoryType(newValue);
+                                      },
+                                      items: a.map((String mode) {
+                                        return DropdownMenuItem<String>(
+                                          value: mode,
+                                          child: Text(
+                                              mode.toString().split('.').last),
+                                        );
+                                      }).toList(),
+                                      value: controller.catagory);
+                                },
+                              ),
                             ],
                           ),
                           Column(

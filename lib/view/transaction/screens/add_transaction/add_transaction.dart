@@ -60,8 +60,18 @@ class _ScreenAddTransactionState extends State<ScreenAddTransaction> {
     super.initState();
   }
 
+  resetWhenNavigation() async {
+    ui.selectedPaymentMode = null;
+    ui.selectedCategory = null;
+    date.selectedDate = DateTime.now();
+    await date.resetDate();
+    dateController.text = await date.dateFormat();
+  }
+
   @override
   Widget build(BuildContext context) {
+    print('build');
+    resetWhenNavigation();
     return Scaffold(
       body: Padding(
         padding: const EdgeInsets.only(top: 80, left: 20, right: 20),
@@ -151,7 +161,10 @@ class _ScreenAddTransactionState extends State<ScreenAddTransaction> {
                     ),
                     GestureDetector(
                         onTap: () {
-                          Get.to(() => AddCategory());
+                          ui.selectedCategory = null;
+                          Get.to(
+                            () => AddCategory(),
+                          );
                         },
                         child: const Icon(Icons.add)),
                   ],

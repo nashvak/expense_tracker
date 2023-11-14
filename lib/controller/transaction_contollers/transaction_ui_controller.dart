@@ -50,6 +50,7 @@ class UiController extends GetxController {
 
 //  U P D A T E   C A T E G O R Y
   updateCategory(index, newValue) {
+    selectedCategory = null;
     if (selectedTransactionType == TransactionType.income) {
       incomeCategorybox.putAt(index, newValue);
     } else {
@@ -60,6 +61,7 @@ class UiController extends GetxController {
 
 //   D E L E T E    C A T E G O R Y
   deleteCategory(index) {
+    selectedCategory = null;
     if (selectedTransactionType == TransactionType.income) {
       incomeCategorybox.deleteAt(index);
     } else {
@@ -68,7 +70,7 @@ class UiController extends GetxController {
     update();
   }
 
-//
+//  C H A N G E   T H E   V A L U E    O F    P A Y M O D E
   changePaymentMode(PaymentMode newValue) {
     selectedPaymentMode = newValue;
     update();
