@@ -1,5 +1,8 @@
+// ignore_for_file: prefer_interpolation_to_compose_strings
+
 import 'package:expense_tracker/controller/transaction_contollers/transaction_controller.dart';
 import 'package:expense_tracker/models/transaction_model/transaction_model.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -41,10 +44,18 @@ class FilterController extends GetxController {
     return uniqueTitles;
   }
 
+  String? k;
   // F I L T E R I N G
   var selectedOption = 'All';
   changeOption(String value) {
     selectedOption = value;
+
+    List<String> nn = catagoryTitles
+        .where((element) => element.contains(selectedOption))
+        .toList();
+    k = nn.join('');
+    print(k);
+
     update();
   }
 
@@ -67,10 +78,6 @@ class FilterController extends GetxController {
       return transactionController.sortedList
           .where((transaction) => transaction.paymentMode == PaymentMode.bank)
           .toList();
-    } else if (selectedOption == 'Bonus') {
-      return transactionController.sortedList
-          .where((transaction) => transaction.catagoryType == 'Bonus')
-          .toList();
     } else if (selectedOption == 'Date') {
       // print(endDate);
       return transactionController.sortedList
@@ -80,10 +87,12 @@ class FilterController extends GetxController {
               transaction.date.isAtSameMomentAs(endDate) ||
               transaction.date.isAtSameMomentAs(startDate))
           .toList();
-    } else if (selectedOption == 'category') {
+    } else if (selectedOption == k.toString()) {
+      int index = catagoryTitles.indexOf(selectedOption);
+      //print('index=' + index.toString());
       return transactionController.sortedList
           .where((transaction) =>
-              catagoryTitles.contains(transaction.catagoryType))
+              transaction.catagoryType == catagoryTitles[index])
           .toList();
     }
 

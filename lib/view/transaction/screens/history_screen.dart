@@ -104,7 +104,8 @@ class ScreenHistory extends StatelessWidget {
                                 itemBuilder: (context, index) {
                                   return SortingBottomSheet(
                                     ontap: () {
-                                      filterController.changeOption('category');
+                                      filterController
+                                          .changeOption(currentCatagory[index]);
                                       Get.back();
                                     },
                                     title: currentCatagory[index],
