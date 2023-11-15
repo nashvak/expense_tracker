@@ -3,11 +3,14 @@ import 'package:expense_tracker/constatnts/custom_widgets/common/button.dart';
 import 'package:expense_tracker/controller/date&time_controller/date_picker_controller.dart';
 import 'package:expense_tracker/controller/transaction_contollers/transaction_ui_controller.dart';
 import 'package:expense_tracker/controller/transaction_contollers/transaction_controller.dart';
+
 import 'package:expense_tracker/models/transaction_model/transaction_model.dart';
 import 'package:expense_tracker/view/transaction/screens/add_transaction/widgets/add_category.dart';
 import 'package:expense_tracker/view/transaction/screens/add_transaction/widgets/toggle_switch.dart';
+import 'package:expense_tracker/view/transaction/snackbars/snackbar.dart';
 import 'package:expense_tracker/view/transaction/validators/validators.dart';
 import 'package:flutter/material.dart';
+
 import 'package:get/get.dart';
 import '../../../../constatnts/custom_widgets/common/sizedbox.dart';
 import '../../../../constatnts/custom_widgets/login&signup/textfield.dart';
@@ -79,6 +82,11 @@ class _ScreenAddTransactionState extends State<ScreenAddTransaction> {
             key: addFormkey,
             child: Column(
               children: [
+                TextButton(
+                    onPressed: () async {
+                      ToastUtil.showToast("This is a global toast message");
+                    },
+                    child: Text('snackbar')),
                 const CustomToggleSwitch(),
                 const BlankSpace(height: 50),
                 GetBuilder<DatePickerController>(

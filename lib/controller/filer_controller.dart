@@ -135,7 +135,7 @@ class FilterController extends GetxController {
       (transaction) => transaction.id == id,
     );
     transaction.delete().then(
-        (value) => snackbarKey.currentState?.showSnackBar(deleteSnackbar));
+        (value) => ToastUtil.showToast('Transaction deleted succesfully'));
     update();
   }
 

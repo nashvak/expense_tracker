@@ -1,8 +1,7 @@
-import 'package:expense_tracker/constatnts/colors.dart';
 import 'package:expense_tracker/main.dart';
 import 'package:expense_tracker/models/transaction_model/transaction_model.dart';
 import 'package:expense_tracker/view/transaction/snackbars/snackbar.dart';
-import 'package:flutter/material.dart';
+
 import 'package:hive/hive.dart';
 import 'package:get/get.dart';
 import 'package:syncfusion_flutter_datepicker/datepicker.dart';
@@ -23,8 +22,9 @@ class TransactionController extends GetxController {
   int get transactionCount => sortedList.length;
   //// F U N C T I O N   T O   A D D   T R A N S A C T I O N
   createTransaction({required Transaction transaction, context}) async {
-    await transactionBox.add(transaction).then(
-        (value) => snackbarKey.currentState?.showSnackBar(successSnackbar));
+    await transactionBox
+        .add(transaction)
+        .then((value) => ToastUtil.showToast('Transaction added succesfully'));
     update();
   }
 
@@ -36,8 +36,9 @@ class TransactionController extends GetxController {
     var tr = box.get(id);
     if (tr != null) {
       tr = transaction;
-      await tr.save().then(
-          (value) => snackbarKey.currentState?.showSnackBar(editSnackbar));
+      await tr
+          .save()
+          .then((value) => ToastUtil.showToast('Transaction edit succesfully'));
     }
     update();
   }
