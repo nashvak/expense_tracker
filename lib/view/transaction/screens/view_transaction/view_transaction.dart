@@ -2,6 +2,7 @@ import 'package:expense_tracker/constatnts/colors.dart';
 import 'package:expense_tracker/constatnts/custom_widgets/common/button.dart';
 import 'package:expense_tracker/constatnts/custom_widgets/common/decoration.dart';
 import 'package:expense_tracker/constatnts/custom_widgets/common/sizedbox.dart';
+import 'package:expense_tracker/controller/filer_controller.dart';
 
 import 'package:expense_tracker/controller/transaction_contollers/update_ui_controller.dart';
 import 'package:expense_tracker/controller/transaction_contollers/transaction_ui_controller.dart';
@@ -34,7 +35,9 @@ class _ScreenViewTransactionState extends State<ScreenViewTransaction> {
   final UiController ui = Get.put(
     UiController(),
   );
-
+  final FilterController filterController = Get.put(
+    FilterController(),
+  );
   final updateFormkey = GlobalKey<FormState>();
 
   TextEditingController amountController = TextEditingController();
@@ -102,7 +105,7 @@ class _ScreenViewTransactionState extends State<ScreenViewTransaction> {
             padding: const EdgeInsets.only(right: 15),
             child: GestureDetector(
               onTap: () {
-                updateController.deleteDialog(editId);
+                filterController.deleteDialog(editId);
               },
               child: const Icon(
                 Icons.delete,

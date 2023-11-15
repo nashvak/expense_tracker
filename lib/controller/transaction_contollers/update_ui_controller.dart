@@ -1,8 +1,5 @@
-import 'package:expense_tracker/constatnts/colors.dart';
-import 'package:expense_tracker/controller/transaction_contollers/transaction_controller.dart';
 import 'package:expense_tracker/models/transaction_model/transaction_model.dart';
 
-import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 class UpdateController extends GetxController {
@@ -40,28 +37,4 @@ class UpdateController extends GetxController {
   //   iscatagoryVisible = transaction == TransactionType.income ? false : true;
   //   update();
   // }
-  TransactionController transactionController = TransactionController();
-  deleteDialog(String index) {
-    Get.defaultDialog(
-      title: 'Delete record',
-      middleText: 'Do you want to delete this record',
-      backgroundColor: Appcolor.white,
-      radius: 20,
-      contentPadding: const EdgeInsets.all(10),
-      titlePadding: const EdgeInsets.all(20),
-      textCancel: 'Cancel',
-      textConfirm: 'Ok',
-      cancelTextColor: Appcolor.primaryColor,
-      onCancel: () {
-        Get.back();
-      },
-      onConfirm: () async {
-        transactionController.deleteTransaction(id: index);
-        Get.back();
-        Get.back();
-      },
-      buttonColor: Colors.white,
-    );
-    update();
-  }
 }

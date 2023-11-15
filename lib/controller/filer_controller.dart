@@ -1,8 +1,11 @@
 // ignore_for_file: prefer_interpolation_to_compose_strings
 
+import 'package:expense_tracker/constatnts/colors.dart';
 import 'package:expense_tracker/controller/transaction_contollers/transaction_controller.dart';
+import 'package:expense_tracker/main.dart';
 import 'package:expense_tracker/models/transaction_model/transaction_model.dart';
-import 'package:flutter/foundation.dart';
+import 'package:expense_tracker/view/transaction/snackbars/snackbar.dart';
+
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -123,5 +126,38 @@ class FilterController extends GetxController {
     } catch (e) {
       print(e);
     }
+  }
+
+// F U N C T I O N   T O   D E L E T E   T R A N S A C T I O N
+  deleteTransaction({required String id}) {
+    Transaction transaction =
+        transactionController.transactionBox.values.firstWhere(
+      (transaction) => transaction.id == id,
+    );
+    transaction.delete().then(
+        (value) => snackbarKey.currentState?.showSnackBar(deleteSnackbar));
+    update();
+  }
+
+  deleteDialog(String id) {
+    Get.defaultDialog(
+      title: 'Delete record',
+      middleText: 'Do you want to delete this record',
+      backgroundColor: Appcolor.white,
+      radius: 20,
+      contentPadding: const EdgeInsets.all(10),
+      titlePadding: const EdgeInsets.all(20),
+      textCancel: 'Cancel',
+      textConfirm: 'Ok',
+      cancelTextColor: Appcolor.primaryColor,
+      onCancel: () {
+        Get.back();
+      },
+      onConfirm: () async {
+        await deleteTransaction(id: id);
+        Get.back();
+      },
+      buttonColor: Colors.white,
+    );
   }
 }

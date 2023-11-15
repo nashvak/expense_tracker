@@ -6,6 +6,7 @@ import 'package:expense_tracker/controller/filer_controller.dart';
 // import 'package:expense_tracker/controller/transaction_contollers/date_range_picker.dart';
 
 import 'package:expense_tracker/controller/transaction_contollers/transaction_controller.dart';
+import 'package:expense_tracker/controller/transaction_contollers/update_ui_controller.dart';
 
 import 'package:expense_tracker/view/transaction/screens/view_transaction/view_transaction.dart';
 import 'package:flutter/material.dart';
@@ -18,8 +19,10 @@ class ScreenHistory extends StatelessWidget {
   final TransactionController transactionController =
       Get.put(TransactionController());
   final FilterController filterController = Get.put(FilterController());
-  // final DateRangePickerController dateRangePickerController =
-  //     Get.put(DateRangePickerController());
+
+  final UpdateController updateController = Get.put(
+    UpdateController(),
+  );
 
   @override
   Widget build(BuildContext context) {
@@ -143,18 +146,16 @@ class ScreenHistory extends StatelessWidget {
                         return Slidable(
                           key: UniqueKey(),
                           endActionPane: ActionPane(
-                              dismissible: DismissiblePane(
-                                onDismissed: () {
-                                  transactionController.deleteTransaction(
-                                      id: tr.id);
-                                },
-                              ),
+                              // dismissible: DismissiblePane(
+                              //   onDismissed: () async {
+                              //     await controller.deleteDialog(tr.id);
+                              //   },
+                              // ),
                               motion: const DrawerMotion(),
                               children: [
                                 SlidableAction(
-                                  onPressed: (context) {
-                                    transactionController.deleteTransaction(
-                                        id: tr.id);
+                                  onPressed: (context) async {
+                                    await controller.deleteDialog(tr.id);
                                   },
                                   backgroundColor: const Color(0xFFFE4A49),
                                   foregroundColor: Colors.white,
@@ -162,15 +163,20 @@ class ScreenHistory extends StatelessWidget {
                                   //label: 'Delete',
                                 ),
                               ]),
-                          child: Listtile(
-                              type: tr.transactionType,
-                              ontap: () {
-                                Get.to(() => const ScreenViewTransaction(),
-                                    arguments: tr.id);
-                              },
-                              amount: tr.amount.toDouble(),
-                              date: DateFormat('dd/MM/yyyy').format(tr.date),
-                              title: tr.description),
+                          child: GestureDetector(
+                            onLongPress: () async {
+                              await controller.deleteDialog(tr.id);
+                            },
+                            child: Listtile(
+                                type: tr.transactionType,
+                                ontap: () {
+                                  Get.to(() => const ScreenViewTransaction(),
+                                      arguments: tr.id);
+                                },
+                                amount: tr.amount.toDouble(),
+                                date: DateFormat('dd/MM/yyyy').format(tr.date),
+                                title: tr.description),
+                          ),
                         );
                       },
                       separatorBuilder: (context, index) {

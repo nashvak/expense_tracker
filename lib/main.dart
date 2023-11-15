@@ -20,12 +20,10 @@ void main() async {
   Hive.registerAdapter<Transaction>(TransactionAdapter());
   Hive.registerAdapter<PaymentMode>(PaymentModeAdapter());
   Hive.registerAdapter<TransactionType>(TransactionTypeAdapter());
-
   await Hive.openBox<AuthModel>('AuthBox');
   await Hive.openBox<Transaction>('transactionBox');
   await Hive.openBox<String>('incomeCategoryBox');
   await Hive.openBox<String>('expenseCategoryBox');
-
   NotificationServices().initializeNotifications();
   // tz.initializeTimeZones();
   runApp(const MyApp());

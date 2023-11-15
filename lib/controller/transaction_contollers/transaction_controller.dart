@@ -1,6 +1,8 @@
+import 'package:expense_tracker/constatnts/colors.dart';
 import 'package:expense_tracker/main.dart';
 import 'package:expense_tracker/models/transaction_model/transaction_model.dart';
 import 'package:expense_tracker/view/transaction/snackbars/snackbar.dart';
+import 'package:flutter/material.dart';
 import 'package:hive/hive.dart';
 import 'package:get/get.dart';
 import 'package:syncfusion_flutter_datepicker/datepicker.dart';
@@ -37,17 +39,6 @@ class TransactionController extends GetxController {
       await tr.save().then(
           (value) => snackbarKey.currentState?.showSnackBar(editSnackbar));
     }
-    update();
-  }
-
-// F U N C T I O N   T O   D E L E T E   T R A N S A C T I O N
-  deleteTransaction({required String id}) {
-    Transaction transaction = transactionBox.values.firstWhere(
-      (transaction) => transaction.id == id,
-    );
-    transaction.delete().then(
-        (value) => snackbarKey.currentState?.showSnackBar(deleteSnackbar));
-    //     ScaffoldMessenger.of(context).showSnackBar(deleteTransactionSnackbar));
     update();
   }
 }
