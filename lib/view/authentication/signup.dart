@@ -8,7 +8,7 @@ import 'package:expense_tracker/constatnts/custom_widgets/common/sizedbox.dart';
 import 'package:expense_tracker/view/authentication/validators.dart';
 import 'package:expense_tracker/models/auth_model/auth_model.dart';
 import 'package:expense_tracker/view/authentication/bottomsheets.dart';
-import 'package:expense_tracker/view/home_screen/bottom_nav.dart';
+import 'package:expense_tracker/view/home_screen/widgets/bottom_nav.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:shared_preferences/shared_preferences.dart';

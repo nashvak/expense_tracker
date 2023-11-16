@@ -1,22 +1,24 @@
 import 'package:expense_tracker/constatnts/custom_widgets/home_screen/button.dart';
+import 'package:expense_tracker/controller/filer_controller.dart';
 import 'package:expense_tracker/controller/transaction_contollers/transaction_controller.dart';
 import 'package:expense_tracker/models/transaction_model/transaction_model.dart';
-import 'package:expense_tracker/view/home_screen/balance_card.dart';
-import 'package:expense_tracker/view/home_screen/expense_card.dart';
-import 'package:expense_tracker/view/home_screen/income_card.dart';
+import 'package:expense_tracker/view/home_screen/widgets/balance_card.dart';
+import 'package:expense_tracker/view/home_screen/widgets/expense_card.dart';
+import 'package:expense_tracker/view/home_screen/widgets/income_card.dart';
 import 'package:expense_tracker/view/transaction/screens/view_transaction/view_transaction.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
 import '../../constatnts/colors.dart';
 import '../../constatnts/custom_widgets/common/decoration.dart';
-import 'appbar.dart';
+import 'widgets/appbar.dart';
 
 class ScreenHome extends StatelessWidget {
   ScreenHome({super.key});
 
   final TransactionController transactionController =
       Get.put(TransactionController());
+  final FilterController filterController = Get.put(FilterController());
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -68,18 +70,24 @@ class ScreenHome extends StatelessWidget {
                                       Transaction tr =
                                           controller.sortedList[index];
 
-                                      return Listtile(
-                                          ontap: () {
-                                            Get.to(
-                                                () =>
-                                                    const ScreenViewTransaction(),
-                                                arguments: index);
-                                          },
-                                          amount: tr.amount.toDouble(),
-                                          date: DateFormat('dd/MM/yyyy')
-                                              .format(tr.date),
-                                          title: tr.description,
-                                          type: tr.transactionType);
+                                      return GestureDetector(
+                                        onLongPress: () async {
+                                          await controller
+                                              .deleteTransaction(tr.id);
+                                        },
+                                        child: Listtile(
+                                            ontap: () {
+                                              Get.to(
+                                                  () =>
+                                                      const ScreenViewTransaction(),
+                                                  arguments: tr.id);
+                                            },
+                                            amount: tr.amount.toDouble(),
+                                            date: DateFormat('dd/MM/yyyy')
+                                                .format(tr.date),
+                                            title: tr.description,
+                                            type: tr.transactionType),
+                                      );
                                     },
                                     separatorBuilder: (context, index) {
                                       return const SizedBox(

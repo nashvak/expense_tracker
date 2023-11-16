@@ -1,3 +1,4 @@
+import 'package:expense_tracker/controller/filer_controller.dart';
 import 'package:expense_tracker/models/transaction_model/transaction_model.dart';
 import 'package:expense_tracker/view/transaction/snackbars/snackbar.dart';
 
@@ -40,5 +41,10 @@ class TransactionController extends GetxController {
           .then((value) => ToastUtil.showToast('Transaction edit succesfully'));
     }
     update();
+  }
+
+  deleteTransaction(id) async {
+    FilterController filterController = FilterController();
+    await filterController.deleteDialog(id);
   }
 }
