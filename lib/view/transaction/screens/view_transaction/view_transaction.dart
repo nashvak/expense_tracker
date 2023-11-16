@@ -44,6 +44,8 @@ class _ScreenViewTransactionState extends State<ScreenViewTransaction> {
   TextEditingController dateController = TextEditingController();
   TextEditingController descriptionController = TextEditingController();
 
+  TextEditingController categoryController = TextEditingController();
+
   @override
   void initState() {
     initialization();
@@ -59,6 +61,7 @@ class _ScreenViewTransactionState extends State<ScreenViewTransaction> {
     );
     descriptionController = TextEditingController(text: tr.description);
     updateController.date = tr.date;
+    categoryController.text = tr.catagoryType;
     dateController = TextEditingController(
       text: DateFormat('dd/MM/yyyy').format(updateController.date),
     );
@@ -77,13 +80,80 @@ class _ScreenViewTransactionState extends State<ScreenViewTransaction> {
         date: updateController.date,
         paymentMode: updateController.mode,
         transactionType: updateController.transaction,
-        catagoryType: updateController.catagory,
+        catagoryType: updateController.catagory!,
       );
       transactionController.updateTransaction(
           id: editId, transaction: tr, context: context);
 
       Get.back();
     }
+  }
+
+  void _showDropdown(BuildContext context) {
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          content: Column(
+            children: [
+              const Text('Choose an option:'),
+              GetBuilder<UpdateController>(
+                builder: (controller) {
+                  List<String> a = ui.showCategoryDropdown();
+                  return DropdownButtonFormField<String>(
+                    value: controller.catagory,
+                    items: a.map((String value) {
+                      return DropdownMenuItem<String>(
+                        value: value,
+                        child: Text(value),
+                      );
+                    }).toList(),
+                    onChanged: (String? newValue) async {
+                      await controller.changeCategoryType(newValue);
+                      categoryController.text = controller.catagory!;
+                      Get.back();
+                    },
+                    //
+                    // List<String> a = ui.showCategoryDropdown();
+                    // print(a);
+                    // return DropdownButtonFormField<String>(
+                    //   hint: const Text('Select Catagory '),
+
+                    //   decoration: const InputDecoration(
+                    //     enabledBorder: UnderlineInputBorder(
+                    //       borderSide: BorderSide(
+                    //           color: Appcolor.secondaryColor, width: 1),
+                    //     ),
+                    //     focusedBorder: UnderlineInputBorder(
+                    //       borderSide:
+                    //           BorderSide(color: Appcolor.primaryColor, width: 1),
+                    //     ),
+                    //   ),
+                    //   iconSize: 0,
+                    //   // autovalidateMode:
+                    //   //     AutovalidateMode.onUserInteraction,
+                    //   validator: (value) =>
+                    //       value == null ? "Select Category" : null,
+                    //   // dropdownColor: Appcolor.tertiaryColor,
+                    //   value: descriptionController.text,
+
+                    //   onChanged: (String? newValue) {
+                    //     controller.changeCategoryType(newValue!);
+                    //   },
+                    //   items: a.map((String? mode) {
+                    //     return DropdownMenuItem<String>(
+                    //       value: mode,
+                    //       child: Text(mode!),
+                    //     );
+                    //   }).toList(),
+                  );
+                },
+              ),
+            ],
+          ),
+        );
+      },
+    );
   }
 
   @override
@@ -101,18 +171,7 @@ class _ScreenViewTransactionState extends State<ScreenViewTransaction> {
           style: TextStyle(color: Colors.black),
         ),
         actions: [
-          Padding(
-            padding: const EdgeInsets.only(right: 15),
-            child: GestureDetector(
-              onTap: () {
-                filterController.deleteDialog(editId);
-              },
-              child: const Icon(
-                Icons.delete,
-                color: Appcolor.primaryColor,
-              ),
-            ),
-          ),
+          DeleteButton(editId: editId),
         ],
         elevation: 0,
         backgroundColor: Colors.transparent,
@@ -128,31 +187,68 @@ class _ScreenViewTransactionState extends State<ScreenViewTransaction> {
                   decoration: cardDecoration(color: Colors.white),
                   height: MediaQuery.of(context).size.height / 9,
                   width: MediaQuery.of(context).size.width / 1,
-                  padding: const EdgeInsets.only(left: 20),
+                  padding: const EdgeInsets.only(top: 10, left: 20, right: 20),
                   //color: Colors.red,
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                    crossAxisAlignment: CrossAxisAlignment.start,
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      const Text(
-                        'Transaction type',
-                        style: TextStyle(color: Appcolor.primaryColor),
+                      Column(
+                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          const Text(
+                            'Transaction type',
+                            style: TextStyle(color: Appcolor.primaryColor),
+                          ),
+                          GetBuilder<UpdateController>(
+                            builder: (controller) {
+                              return DropdownButton<TransactionType>(
+                                  onChanged: (TransactionType? newValue) {
+                                    controller.changeTransactionType(newValue);
+                                  },
+                                  items: TransactionType.values
+                                      .map((TransactionType mode) {
+                                    return DropdownMenuItem<TransactionType>(
+                                      value: mode,
+                                      child:
+                                          Text(mode.toString().split('.').last),
+                                    );
+                                  }).toList(),
+                                  value: controller.transaction);
+                            },
+                          ),
+                        ],
                       ),
-                      GetBuilder<UpdateController>(
-                        builder: (controller) {
-                          return DropdownButton<TransactionType>(
-                              onChanged: (TransactionType? newValue) {
-                                controller.changeTransactionType(newValue);
-                              },
-                              items: TransactionType.values
-                                  .map((TransactionType mode) {
-                                return DropdownMenuItem<TransactionType>(
-                                  value: mode,
-                                  child: Text(mode.toString().split('.').last),
-                                );
-                              }).toList(),
-                              value: controller.transaction);
-                        },
+                      Column(
+                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          const Text(
+                            'Payment mode',
+                            style: TextStyle(color: Appcolor.primaryColor),
+                          ),
+                          GetBuilder<UpdateController>(
+                            builder: (controller) {
+                              return DropdownButton<PaymentMode>(
+                                  onChanged: (PaymentMode? newValue) {
+                                    // setState(() {
+                                    //   selectedPaymentMode = newValue!;
+                                    // });
+                                    controller.changePaymentMode(newValue!);
+                                  },
+                                  items: PaymentMode.values.map(
+                                    (PaymentMode mode) {
+                                      return DropdownMenuItem<PaymentMode>(
+                                        value: mode,
+                                        child: Text(
+                                            mode.toString().split('.').last),
+                                      );
+                                    },
+                                  ).toList(),
+                                  value: controller.mode);
+                            },
+                          ),
+                        ],
                       ),
                     ],
                   ),
@@ -162,9 +258,9 @@ class _ScreenViewTransactionState extends State<ScreenViewTransaction> {
                   decoration: cardDecoration(color: Colors.white),
                   height: MediaQuery.of(context).size.height / 6,
                   width: MediaQuery.of(context).size.width,
-                  padding: const EdgeInsets.only(left: 20),
+                  padding: const EdgeInsets.only(top: 10, left: 20),
                   child: Column(
-                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       const Text(
@@ -185,85 +281,25 @@ class _ScreenViewTransactionState extends State<ScreenViewTransaction> {
                 const BlankSpace(
                   height: 30,
                 ),
-                GetBuilder<UpdateController>(
-                  builder: (controller) {
-                    // List<String> category =
-                    //     tr.transactionType == TransactionType.income
-                    //         ? ui.incomeCatagoryTypes
-                    //         : ui.expenseCatagoryTypes;
-                    return Container(
-                      decoration: cardDecoration(color: Appcolor.white),
-                      height: MediaQuery.of(context).size.height / 8,
-                      width: MediaQuery.of(context).size.width / 1,
-                      // padding: const EdgeInsets.only(left: 20),
-                      //color: Colors.red,
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceAround,
-                        children: [
-                          Column(
-                            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              const Text(
-                                'Catagory type',
-                                style: TextStyle(color: Appcolor.primaryColor),
-                              ),
-                              GetBuilder<UpdateController>(
-                                builder: (controller) {
-                                  List<String> a = ui.showCategoryDropdown();
-                                  return DropdownButton<String>(
-                                      onChanged: (String? newValue) {
-                                        controller.changeCategoryType(newValue);
-                                      },
-                                      items: a.map((String mode) {
-                                        return DropdownMenuItem<String>(
-                                          value: mode,
-                                          child: Text(
-                                              mode.toString().split('.').last),
-                                        );
-                                      }).toList(),
-                                      value: controller.catagory);
-                                },
-                              ),
-                            ],
-                          ),
-                          Column(
-                            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              const Text(
-                                'Payment mode',
-                                style: TextStyle(color: Appcolor.primaryColor),
-                              ),
-                              GetBuilder<UpdateController>(
-                                builder: (controller) {
-                                  return DropdownButton<PaymentMode>(
-                                      onChanged: (PaymentMode? newValue) {
-                                        // setState(() {
-                                        //   selectedPaymentMode = newValue!;
-                                        // });
-                                        controller.changePaymentMode(newValue!);
-                                      },
-                                      items: PaymentMode.values.map(
-                                        (PaymentMode mode) {
-                                          return DropdownMenuItem<PaymentMode>(
-                                            value: mode,
-                                            child: Text(mode
-                                                .toString()
-                                                .split('.')
-                                                .last),
-                                          );
-                                        },
-                                      ).toList(),
-                                      value: controller.mode);
-                                },
-                              ),
-                            ],
-                          ),
-                        ],
+                Container(
+                  decoration: cardDecoration(color: Appcolor.white),
+                  height: MediaQuery.of(context).size.height / 11,
+                  width: MediaQuery.of(context).size.width / 1,
+                  padding: const EdgeInsets.only(
+                      top: 10, left: 20, bottom: 20, right: 20),
+                  //color: Colors.red,
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      const Text(
+                        'Catagory type',
+                        style: TextStyle(color: Appcolor.primaryColor),
                       ),
-                    );
-                  },
+                      GestureDetector(
+                          onTap: () {}, child: Text(tr.catagoryType)),
+                    ],
+                  ),
                 ),
                 const BlankSpace(
                   height: 30,
@@ -282,3 +318,62 @@ class _ScreenViewTransactionState extends State<ScreenViewTransaction> {
     );
   }
 }
+
+class DeleteButton extends StatelessWidget {
+  DeleteButton({
+    super.key,
+    required this.editId,
+  });
+
+  final FilterController filterController = Get.put(FilterController());
+  final String editId;
+
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.only(right: 15),
+      child: GestureDetector(
+        onTap: () async {
+          await filterController.deleteDialog(editId);
+        },
+        child: const Icon(
+          Icons.delete,
+          color: Appcolor.primaryColor,
+        ),
+      ),
+    );
+  }
+}
+
+// class TransactionTypeSection extends StatelessWidget {
+//   const TransactionTypeSection({super.key});
+
+//   @override
+//   Widget build(BuildContext context) {
+//     return Column(
+//       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+//       crossAxisAlignment: CrossAxisAlignment.start,
+//       children: [
+//         const Text(
+//           'Transaction type',
+//           style: TextStyle(color: Appcolor.primaryColor),
+//         ),
+//         GetBuilder<UpdateController>(
+//           builder: (controller) {
+//             return DropdownButton<TransactionType>(
+//                 onChanged: (TransactionType? newValue) {
+//                   controller.changeTransactionType(newValue);
+//                 },
+//                 items: TransactionType.values.map((TransactionType mode) {
+//                   return DropdownMenuItem<TransactionType>(
+//                     value: mode,
+//                     child: Text(mode.toString().split('.').last),
+//                   );
+//                 }).toList(),
+//                 value: controller.transaction);
+//           },
+//         ),
+//       ],
+//     );
+//   }
+// }

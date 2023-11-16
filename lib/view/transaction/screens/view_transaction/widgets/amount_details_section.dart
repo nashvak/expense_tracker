@@ -14,12 +14,12 @@ class AmountDetails extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       decoration: cardDecoration(color: Colors.white),
-      height: MediaQuery.of(context).size.height / 9,
+      height: MediaQuery.of(context).size.height / 11,
       width: MediaQuery.of(context).size.width / 1,
-      padding: const EdgeInsets.only(left: 20),
+      padding: const EdgeInsets.only(left: 20, top: 10),
       //color: Colors.red,
       child: Column(
-        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           const Text(

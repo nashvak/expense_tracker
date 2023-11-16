@@ -2,7 +2,7 @@
 
 import 'package:expense_tracker/constatnts/colors.dart';
 import 'package:expense_tracker/controller/transaction_contollers/transaction_controller.dart';
-import 'package:expense_tracker/main.dart';
+
 import 'package:expense_tracker/models/transaction_model/transaction_model.dart';
 import 'package:expense_tracker/view/transaction/snackbars/snackbar.dart';
 
@@ -155,6 +155,7 @@ class FilterController extends GetxController {
       },
       onConfirm: () async {
         await deleteTransaction(id: id);
+        Get.back();
         Get.back();
       },
       buttonColor: Colors.white,

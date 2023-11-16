@@ -19,6 +19,8 @@ class UiController extends GetxController {
 
   Box<String> incomeCategorybox = Hive.box('incomeCategoryBox');
   Box<String> expenseCategorybox = Hive.box('expenseCategoryBox');
+  // get incomeBox => incomeCategorybox;
+  // get expenseBox => expenseCategorybox;
   void initCategoryBox() async {
     if (incomeCategorybox.isEmpty) {
       await incomeCategorybox.addAll(['Salary', 'Allowance', 'Bonus']);

@@ -9,8 +9,6 @@ import 'package:path_provider/path_provider.dart';
 import 'models/auth_model/auth_model.dart';
 // import 'package:timezone/timezone.dart' as tz;
 
-final GlobalKey<ScaffoldMessengerState> snackbarKey =
-    GlobalKey<ScaffoldMessengerState>();
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   Directory directory = await getApplicationDocumentsDirectory();
@@ -39,11 +37,10 @@ class MyApp extends StatefulWidget {
 class _MyAppState extends State<MyApp> {
   @override
   Widget build(BuildContext context) {
-    return GetMaterialApp(
+    return const GetMaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'Expense tracker',
-      scaffoldMessengerKey: snackbarKey,
-      home: const ScreenSplash(),
+      home: ScreenSplash(),
     );
   }
 }

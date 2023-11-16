@@ -1,11 +1,13 @@
+import 'package:expense_tracker/controller/transaction_contollers/transaction_ui_controller.dart';
 import 'package:expense_tracker/models/transaction_model/transaction_model.dart';
 
 import 'package:get/get.dart';
 
 class UpdateController extends GetxController {
+  UiController uiController = UiController();
   late TransactionType transaction;
   late PaymentMode mode;
-  late String catagory;
+  late String? catagory;
   late DateTime date;
 
   //   U P D A T E   D A T E
@@ -33,8 +35,11 @@ class UpdateController extends GetxController {
     update();
   }
 
-  // isContainervisible() {
-  //   iscatagoryVisible = transaction == TransactionType.income ? false : true;
-  //   update();
-  // }
+  displayCategory() {
+    if (transaction == TransactionType.income) {
+      return uiController.incomeCategorybox.values.toList();
+    } else {
+      return uiController.expenseCategorybox.values.toList();
+    }
+  }
 }

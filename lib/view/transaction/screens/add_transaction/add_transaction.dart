@@ -136,6 +136,7 @@ class _ScreenAddTransactionState extends State<ScreenAddTransaction> {
                               controller.showCategoryDropdown();
                           return DropdownButtonFormField<String>(
                             hint: const Text('Select Catagory '),
+
                             decoration: const InputDecoration(
                               enabledBorder: UnderlineInputBorder(
                                 borderSide: BorderSide(
