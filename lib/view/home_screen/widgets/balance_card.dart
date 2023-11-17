@@ -4,6 +4,7 @@ import 'package:expense_tracker/controller/transaction_contollers/balance_calcul
 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:money_formatter/money_formatter.dart';
 
 class BalanceCard extends StatelessWidget {
   BalanceCard({
@@ -24,10 +25,15 @@ class BalanceCard extends StatelessWidget {
         Align(
             alignment: Alignment.center,
             child: GetBuilder<BalanceController>(builder: (controller) {
+              MoneyFormatter fmf =
+                  MoneyFormatter(amount: controller.totalBalance);
               return Text(
-                "₹ ${controller.totalBalance}",
+                "₹ ${fmf.output.compactNonSymbol}",
+                maxLines: 1,
+                overflow: TextOverflow.ellipsis,
                 style: const TextStyle(
                     color: Colors.white,
+                    //  overflow: TextOverflow.ellipsis,
                     fontSize: 32,
                     fontWeight: FontWeight.bold),
               );
