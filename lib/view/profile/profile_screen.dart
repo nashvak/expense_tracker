@@ -106,7 +106,7 @@ class _ScreenProfileState extends State<ScreenProfile> {
                     ),
                     height10,
                     Text(
-                      user.name,
+                      user.name.toString().capitalize!,
                       style: const TextStyle(color: Colors.white, fontSize: 20),
                     ),
                     Text(

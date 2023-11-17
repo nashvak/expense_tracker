@@ -63,17 +63,16 @@ class ScreenHome extends StatelessWidget {
                           child: SizedBox(
                             height: 50,
                             width: MediaQuery.of(context).size.width,
-                            child: GetBuilder<TransactionController>(
+                            child: GetBuilder<FilterController>(
                               builder: (controller) {
                                 return ListView.separated(
                                     itemBuilder: (context, index) {
-                                      Transaction tr =
-                                          controller.sortedList[index];
+                                      Transaction tr = transactionController
+                                          .sortedList[index];
 
                                       return GestureDetector(
                                         onLongPress: () async {
-                                          await controller
-                                              .deleteTransaction(tr.id);
+                                          await controller.deleteDialog(tr.id);
                                         },
                                         child: Listtile(
                                             ontap: () {
@@ -94,8 +93,10 @@ class ScreenHome extends StatelessWidget {
                                         height: 20,
                                       );
                                     },
-                                    itemCount: controller.transactionCount < 4
-                                        ? controller.transactionCount
+                                    itemCount: transactionController
+                                                .transactionCount <
+                                            4
+                                        ? transactionController.transactionCount
                                         : 4);
                               },
                             ),

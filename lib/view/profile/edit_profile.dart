@@ -27,7 +27,8 @@ class _EditProfileState extends State<EditProfile> {
   @override
   void initState() {
     AuthModel user = authController.authBox.getAt(0);
-    nameController = TextEditingController(text: user.name);
+    nameController =
+        TextEditingController(text: user.name.toString().capitalize);
     emailController = TextEditingController(text: user.email);
     super.initState();
   }

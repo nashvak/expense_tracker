@@ -1,6 +1,7 @@
 import 'package:expense_tracker/controller/authentication_section/auth_controller.dart';
 import 'package:expense_tracker/models/auth_model/auth_model.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 class HomescreenAppbar extends StatelessWidget {
   const HomescreenAppbar({
@@ -21,7 +22,7 @@ class HomescreenAppbar extends StatelessWidget {
               style: TextStyle(fontSize: 25, color: Colors.white),
             ),
             Text(
-              user.name,
+              user.name.toString().capitalize!,
               style: const TextStyle(
                 fontSize: 30,
                 color: Colors.white,
