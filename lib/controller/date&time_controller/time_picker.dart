@@ -7,17 +7,29 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 class TimePicker extends GetxController {
   NotificationServices notificationServices = NotificationServices();
-  TimeOfDay? selectedTime;
-  int notificationId = 1;
-  bool isNotificationEnabled = true;
-  bool visibility = true;
-
   @override
-  void onInit() {
-    setdefaultTime();
+  void onInit() async {
+    await loadSwitchState();
+
     super.onInit();
   }
 
+  TimeOfDay? selectedTime;
+  int notificationId = 1;
+  bool _isNotification = false;
+  bool get isNotification => _isNotification;
+  bool visibility = false;
+
+  Future<void> loadSwitchState() async {
+    loadToggleValue();
+    print(_isNotification);
+    if (_isNotification) {
+      setdefaultTime();
+      timeVisibility();
+    }
+
+    update();
+  }
   // late TimeOfDay selectedTime;
 
   setdefaultTime() async {
@@ -63,16 +75,18 @@ class TimePicker extends GetxController {
 
       // Calculate the time difference between now and the scheduled time
       final timeDifference = scheduledTime.difference(DateTime.now());
-      await notificationServices.scheduleNotification(
-        notificationId,
-        'Daily reminder',
-        'Did you record all your transactions.? ',
-        'payload',
-        timeDifference,
-      );
+      if (_isNotification) {
+        await notificationServices.scheduleNotification(
+          notificationId,
+          'Daily reminder',
+          'Did you record all your transactions.? ',
+          'payload',
+          timeDifference,
+        );
 
-      ToastUtil.showToast(
-          'Daily notification scheduled at ${DateFormat.Hm().format(scheduledTime)}');
+        ToastUtil.showToast(
+            'Daily notification scheduled at ${DateFormat.Hm().format(scheduledTime)}');
+      }
     }
     update();
   }
@@ -80,15 +94,42 @@ class TimePicker extends GetxController {
   //  C A N C E L   N O T I F I C A T I O N
 
   Future<void> cancelNOtification() async {
-    if (isNotificationEnabled) {
-      await notificationServices.cancelNotification(notificationId);
+    await notificationServices.cancelNotification(notificationId);
+
+    update();
+  }
+
+  onToggle(bool value) async {
+    _isNotification = value;
+    saveToggleValue();
+    visibility = value;
+    timeVisibility();
+    update();
+  }
+
+  timeVisibility() {
+    if (_isNotification == true) {
+      setdefaultTime();
+      visibility = true;
+    } else {
+      cancelNOtification();
+      visibility = false;
     }
     update();
   }
 
-  onToggle(bool value) {
-    isNotificationEnabled = value;
-    visibility = value;
+  saveToggleValue() async {
+    final SharedPreferences prefs = await SharedPreferences.getInstance();
+    prefs.setBool('toggle', _isNotification);
+    visibility = _isNotification;
+    print(_isNotification);
+    update();
+  }
+
+  loadToggleValue() async {
+    final SharedPreferences prefs = await SharedPreferences.getInstance();
+    _isNotification = prefs.getBool('toggle') ?? false;
+
     update();
   }
 }

@@ -64,9 +64,10 @@ class _NotificationPageState extends State<NotificationPage> {
             ListTile(
               contentPadding: const EdgeInsets.all(0),
               trailing: GetBuilder<TimePicker>(
+                init: TimePicker(),
                 builder: (controller) {
                   return Switch.adaptive(
-                    value: controller.isNotificationEnabled,
+                    value: controller.isNotification,
                     onChanged: (value) {
                       controller.onToggle(value);
                     },
@@ -80,37 +81,34 @@ class _NotificationPageState extends State<NotificationPage> {
             ),
             GetBuilder<TimePicker>(
               builder: (controller) {
-                return Visibility(
-                  visible: controller.visibility,
-                  child: Column(
-                    // mainAxisAlignment: MainAxisAlignment.start,
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      const Text(
-                        "Set Time",
-                        style: TextStyle(
-                            fontWeight: FontWeight.bold, fontSize: 20),
-                      ),
-                      GetBuilder<TimePicker>(builder: (controller) {
-                        if (controller.selectedTime != null) {
-                          return ListTile(
-                            contentPadding: const EdgeInsets.all(0),
-                            title:
-                                Text(controller.selectedTime!.format(context)),
-                            trailing: GestureDetector(
-                              onTap: () {
-                                controller.pickTime();
-                              },
-                              child: const Icon(Icons.alarm),
-                            ),
-                          );
-                        } else {
-                          return CircularProgressIndicator();
-                        }
-                      }),
-                    ],
-                  ),
-                );
+                if (controller.selectedTime != null) {
+                  return Visibility(
+                    visible: controller.visibility,
+                    child: Column(
+                      // mainAxisAlignment: MainAxisAlignment.start,
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        const Text(
+                          "Set Time",
+                          style: TextStyle(
+                              fontWeight: FontWeight.bold, fontSize: 20),
+                        ),
+                        ListTile(
+                          contentPadding: const EdgeInsets.all(0),
+                          title: Text(controller.selectedTime!.format(context)),
+                          trailing: GestureDetector(
+                            onTap: () {
+                              controller.pickTime();
+                            },
+                            child: const Icon(Icons.alarm),
+                          ),
+                        ),
+                      ],
+                    ),
+                  );
+                } else {
+                  return CircularProgressIndicator();
+                }
               },
             ),
             // height20,
