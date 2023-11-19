@@ -83,7 +83,7 @@ class _NotificationPageState extends State<NotificationPage> {
               builder: (controller) {
                 if (controller.selectedTime != null) {
                   return Visibility(
-                    visible: controller.visibility,
+                    visible: controller.isVisibility,
                     child: Column(
                       // mainAxisAlignment: MainAxisAlignment.start,
                       crossAxisAlignment: CrossAxisAlignment.start,
@@ -107,7 +107,7 @@ class _NotificationPageState extends State<NotificationPage> {
                     ),
                   );
                 } else {
-                  return CircularProgressIndicator();
+                  return Container();
                 }
               },
             ),

@@ -7,7 +7,7 @@ class NotificationServices {
 
   Future<void> initializeNotifications() async {
     AndroidInitializationSettings androidInitializationSettings =
-        const AndroidInitializationSettings('budget.png');
+        const AndroidInitializationSettings('@mipmap/ic_launcher');
 
     InitializationSettings initializationSettings =
         InitializationSettings(android: androidInitializationSettings);
