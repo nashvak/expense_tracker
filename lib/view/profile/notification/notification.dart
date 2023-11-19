@@ -1,13 +1,11 @@
 import 'package:expense_tracker/constatnts/colors.dart';
 import 'package:expense_tracker/constatnts/custom_widgets/common/sizedbox.dart';
 import 'package:expense_tracker/controller/date&time_controller/time_picker.dart';
-import 'package:expense_tracker/main.dart';
+
 import 'package:expense_tracker/view/profile/notification/notification_settings.dart';
 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:intl/intl.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 
 class NotificationPage extends StatefulWidget {
   const NotificationPage({super.key});
@@ -19,45 +17,6 @@ class NotificationPage extends StatefulWidget {
 class _NotificationPageState extends State<NotificationPage> {
   final TimePicker time = Get.put(TimePicker());
   NotificationServices notificationServices = NotificationServices();
-
-  Future<void> scheduleDailyNotification() async {
-    // Get the user-selected time
-    TimeOfDay? pickedTime = await showTimePicker(
-      context: context,
-      initialTime: TimeOfDay.now(),
-    );
-
-    if (pickedTime != null) {
-      print(pickedTime);
-      final SharedPreferences prefs = await SharedPreferences.getInstance();
-      prefs.setInt('notificationHour', pickedTime.hour);
-      prefs.setInt('notificationMinute', pickedTime.minute);
-      // Schedule the notification
-      DateTime scheduledTime = DateTime(
-        DateTime.now().year,
-        DateTime.now().month,
-        DateTime.now().day,
-        pickedTime.hour,
-        pickedTime.minute,
-      );
-
-      await notificationServices.scheduleNotification(
-        1,
-        'Daily Notification',
-        'This is your daily notification',
-        'payload',
-        scheduledTime,
-      );
-
-      // Inform the user that the notification is scheduled
-      ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(
-          content: Text(
-              'Daily notification scheduled at ${DateFormat.Hm().format(scheduledTime)}'),
-        ),
-      );
-    }
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -115,16 +74,22 @@ class _NotificationPageState extends State<NotificationPage> {
               style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
             ),
             height20,
-            ListTile(
-              contentPadding: const EdgeInsets.all(0),
-              title: Text(time.selectedTime.format(context)),
-              trailing: GestureDetector(
-                onTap: () {
-                  scheduleDailyNotification();
-                },
-                child: const Icon(Icons.alarm),
-              ),
-            ),
+            GetBuilder<TimePicker>(builder: (controller) {
+              if (controller.selectedTime != null) {
+                return ListTile(
+                  contentPadding: const EdgeInsets.all(0),
+                  title: Text(controller.selectedTime!.format(context)),
+                  trailing: GestureDetector(
+                    onTap: () {
+                      controller.pickTime();
+                    },
+                    child: const Icon(Icons.alarm),
+                  ),
+                );
+              } else {
+                return CircularProgressIndicator();
+              }
+            }),
           ],
         ),
       ),

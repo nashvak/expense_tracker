@@ -29,7 +29,7 @@ void main() async {
   tz.initializeTimeZones();
   // Set the default timezone to India
   tz.setLocalLocation(tz.getLocation('Asia/Kolkata'));
-  TimePicker().defaultTime();
+  TimePicker().setdefaultTime();
   //
 
   runApp(const MyApp());
