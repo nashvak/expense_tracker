@@ -8,6 +8,10 @@ import 'package:shared_preferences/shared_preferences.dart';
 class TimePicker extends GetxController {
   NotificationServices notificationServices = NotificationServices();
   TimeOfDay? selectedTime;
+  int notificationId = 1;
+  bool isNotificationEnabled = true;
+  bool visibility = true;
+
   @override
   void onInit() {
     setdefaultTime();
@@ -24,8 +28,6 @@ class TimePicker extends GetxController {
 
     if (storedHour != null && storedMinute != null) {
       selectedTime = TimeOfDay(hour: storedHour, minute: storedMinute);
-      print('In shared preference');
-      print(selectedTime);
     } else {
       selectedTime = const TimeOfDay(hour: 21, minute: 00);
     }
@@ -45,8 +47,7 @@ class TimePicker extends GetxController {
       prefs.setInt('notificationMinute', pickedTime.minute);
       selectedTime =
           TimeOfDay(hour: pickedTime.hour, minute: pickedTime.minute);
-      print("Aftre pickimg");
-      print(selectedTime);
+
       DateTime scheduledTime = DateTime(
         DateTime.now().year,
         DateTime.now().month,
@@ -63,7 +64,7 @@ class TimePicker extends GetxController {
       // Calculate the time difference between now and the scheduled time
       final timeDifference = scheduledTime.difference(DateTime.now());
       await notificationServices.scheduleNotification(
-        1,
+        notificationId,
         'Daily reminder',
         'Did you record all your transactions.? ',
         'payload',
@@ -75,41 +76,19 @@ class TimePicker extends GetxController {
     }
     update();
   }
+
+  //  C A N C E L   N O T I F I C A T I O N
+
+  Future<void> cancelNOtification() async {
+    if (isNotificationEnabled) {
+      await notificationServices.cancelNotification(notificationId);
+    }
+    update();
+  }
+
+  onToggle(bool value) {
+    isNotificationEnabled = value;
+    visibility = value;
+    update();
+  }
 }
-
-//   Future<void> showDailyNotification(
-//       int id, String title, String body, TimeOfDay notificationTime) async {
-//     _scheduledDate = _nextInstanceOfTime(notificationTime);
-//     await flutterLocalNotificationsPlugin.zonedSchedule(
-//       id,
-//       title,
-//       body,
-//       _scheduledDate,
-//       const NotificationDetails(
-//         android: AndroidNotificationDetails(
-//           'daily_notification_channel',
-//           'Daily Notification',
-//         ),
-//       ),
-//       uiLocalNotificationDateInterpretation:
-//           UILocalNotificationDateInterpretation.absoluteTime,
-//       matchDateTimeComponents: DateTimeComponents.time,
-//     );
-//   }
-
-//   tz.TZDateTime _nextInstanceOfTime(TimeOfDay notificationTime) {
-//     final now = tz.TZDateTime.now(_location);
-//     final scheduledDate = tz.TZDateTime(
-//       _location,
-//       now.year,
-//       now.month,
-//       now.day,
-//       notificationTime.hour,
-//       notificationTime.minute,
-//     );
-
-//     return scheduledDate.isBefore(now)
-//         ? scheduledDate.add(const Duration(days: 1))
-//         : scheduledDate;
-//   }
-// }

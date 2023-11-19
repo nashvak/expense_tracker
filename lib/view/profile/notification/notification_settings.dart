@@ -7,7 +7,7 @@ class NotificationServices {
 
   Future<void> initializeNotifications() async {
     AndroidInitializationSettings androidInitializationSettings =
-        const AndroidInitializationSettings('expense_logo');
+        const AndroidInitializationSettings('budget.png');
 
     InitializationSettings initializationSettings =
         InitializationSettings(android: androidInitializationSettings);
@@ -42,5 +42,10 @@ class NotificationServices {
           UILocalNotificationDateInterpretation.absoluteTime,
       matchDateTimeComponents: DateTimeComponents.time,
     );
+  }
+
+  //  CANCEL NOTIFICATION
+  Future<void> cancelNotification(notificationId) async {
+    await flutterLocalNotificationsPlugin.cancel(notificationId);
   }
 }
