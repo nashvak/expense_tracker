@@ -2,8 +2,10 @@ import 'package:expense_tracker/constatnts/colors.dart';
 import 'package:expense_tracker/constatnts/custom_widgets/common/sizedbox.dart';
 import 'package:expense_tracker/controller/date&time_controller/time_picker.dart';
 import 'package:expense_tracker/view/profile/notification/notification_settings.dart';
+
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:intl/intl.dart';
 
 class NotificationPage extends StatefulWidget {
   const NotificationPage({super.key});
@@ -13,8 +15,43 @@ class NotificationPage extends StatefulWidget {
 }
 
 class _NotificationPageState extends State<NotificationPage> {
-  final TimePicker time = Get.put(TimePicker());
+  // final TimePicker time = Get.put(TimePicker());
   NotificationServices notificationServices = NotificationServices();
+
+  Future<void> scheduleDailyNotification() async {
+    // Get the user-selected time
+    TimeOfDay? selectedTime = await showTimePicker(
+      context: context,
+      initialTime: TimeOfDay.now(),
+    );
+
+    if (selectedTime != null) {
+      // Schedule the notification
+      DateTime scheduledTime = DateTime(
+        DateTime.now().year,
+        DateTime.now().month,
+        DateTime.now().day,
+        selectedTime.hour,
+        selectedTime.minute,
+      );
+
+      await notificationServices.scheduleNotification(
+        1,
+        'Daily Notification',
+        'This is your daily notification',
+        'payload',
+        scheduledTime,
+      );
+
+      // Inform the user that the notification is scheduled
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          content: Text(
+              'Daily notification scheduled at ${DateFormat.Hm().format(scheduledTime)}'),
+        ),
+      );
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -72,30 +109,28 @@ class _NotificationPageState extends State<NotificationPage> {
               style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
             ),
             height20,
-            GetBuilder<TimePicker>(
-              builder: ((controller) {
-                return ListTile(
-                  contentPadding: const EdgeInsets.all(0),
-                  title: Text(controller.selectedTime.format(context)),
-                  trailing: GestureDetector(
-                    onTap: () {
-                      controller.pickTime();
-                    },
-                    child: const Icon(Icons.alarm),
-                  ),
-                );
-              }),
-            ),
-            ElevatedButton(
-              onPressed: () {
-                notificationServices.scheduledNotification(
-                    'Notification', 'Did you record?');
-              },
-              child: const Text('send notification'),
+            ListTile(
+              contentPadding: const EdgeInsets.all(0),
+              title: Text(TimeOfDay.now().toString()),
+              trailing: GestureDetector(
+                onTap: () {
+                  scheduleDailyNotification();
+                },
+                child: const Icon(Icons.alarm),
+              ),
             ),
           ],
         ),
       ),
+//             ElevatedButton(
+//               onPressed: () {
+// // notificationServices.scheduleNotification(
+// //                     title: 'Hey',
+// //                     body: ' Did you record your daily transactions',
+// //                     scheduledNotificationDateTime: time.selectedTime)
+//               },
+//               child: const Text('send notification'),
+//             ),
     );
   }
 }

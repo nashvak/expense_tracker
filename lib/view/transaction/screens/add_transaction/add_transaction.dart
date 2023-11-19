@@ -86,7 +86,7 @@ class _ScreenAddTransactionState extends State<ScreenAddTransaction> {
                     onPressed: () async {
                       ToastUtil.showToast("This is a global toast message");
                     },
-                    child: Text('snackbar')),
+                    child: const Text('snackbar')),
                 const CustomToggleSwitch(),
                 const BlankSpace(height: 50),
                 GetBuilder<DatePickerController>(
@@ -211,8 +211,8 @@ class _ScreenAddTransactionState extends State<ScreenAddTransaction> {
                                     color: Appcolor.primaryColor, width: 1),
                               ),
                             ),
-                            validator: (value) =>
-                                value == null ? "Select Payment mode" : null,
+                            // validator: (value) =>
+                            //     value == null ? "Select Payment mode" : null,
                             dropdownColor: Appcolor.tertiaryColor,
                             value: controller.selectedPaymentMode,
                             onChanged: (PaymentMode? newValue) {

@@ -23,6 +23,7 @@ class ScreenSplashState extends State<ScreenSplash> {
 
   @override
   Widget build(BuildContext context) {
+    // var size = MediaQuery.of(context).size.width;
     return Scaffold(
       body: Center(
         child: Column(
