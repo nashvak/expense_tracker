@@ -1,11 +1,13 @@
 import 'package:expense_tracker/constatnts/colors.dart';
 import 'package:expense_tracker/constatnts/custom_widgets/common/sizedbox.dart';
 import 'package:expense_tracker/controller/date&time_controller/time_picker.dart';
+import 'package:expense_tracker/main.dart';
 import 'package:expense_tracker/view/profile/notification/notification_settings.dart';
 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class NotificationPage extends StatefulWidget {
   const NotificationPage({super.key});
@@ -15,24 +17,28 @@ class NotificationPage extends StatefulWidget {
 }
 
 class _NotificationPageState extends State<NotificationPage> {
-  // final TimePicker time = Get.put(TimePicker());
+  final TimePicker time = Get.put(TimePicker());
   NotificationServices notificationServices = NotificationServices();
 
   Future<void> scheduleDailyNotification() async {
     // Get the user-selected time
-    TimeOfDay? selectedTime = await showTimePicker(
+    TimeOfDay? pickedTime = await showTimePicker(
       context: context,
       initialTime: TimeOfDay.now(),
     );
 
-    if (selectedTime != null) {
+    if (pickedTime != null) {
+      print(pickedTime);
+      final SharedPreferences prefs = await SharedPreferences.getInstance();
+      prefs.setInt('notificationHour', pickedTime.hour);
+      prefs.setInt('notificationMinute', pickedTime.minute);
       // Schedule the notification
       DateTime scheduledTime = DateTime(
         DateTime.now().year,
         DateTime.now().month,
         DateTime.now().day,
-        selectedTime.hour,
-        selectedTime.minute,
+        pickedTime.hour,
+        pickedTime.minute,
       );
 
       await notificationServices.scheduleNotification(
@@ -111,7 +117,7 @@ class _NotificationPageState extends State<NotificationPage> {
             height20,
             ListTile(
               contentPadding: const EdgeInsets.all(0),
-              title: Text(TimeOfDay.now().toString()),
+              title: Text(time.selectedTime.format(context)),
               trailing: GestureDetector(
                 onTap: () {
                   scheduleDailyNotification();
