@@ -1,20 +1,19 @@
 import 'dart:developer';
-
 import 'package:expense_tracker/constatnts/colors.dart';
 import 'package:expense_tracker/constatnts/custom_widgets/common/button.dart';
 import 'package:expense_tracker/constatnts/custom_widgets/common/decoration.dart';
 import 'package:expense_tracker/constatnts/custom_widgets/common/sizedbox.dart';
+import 'package:expense_tracker/constatnts/custom_widgets/login&signup/textfield.dart';
 import 'package:expense_tracker/controller/filer_controller.dart';
-
 import 'package:expense_tracker/controller/transaction_contollers/update_ui_controller.dart';
 import 'package:expense_tracker/controller/transaction_contollers/transaction_ui_controller.dart';
 import 'package:expense_tracker/controller/transaction_contollers/transaction_controller.dart';
-
 import 'package:expense_tracker/models/transaction_model/transaction_model.dart';
-import 'package:expense_tracker/view/transaction/screens/view_transaction/widgets/amount_details_section.dart';
-import 'package:expense_tracker/view/transaction/screens/view_transaction/widgets/transaction_details_section.dart';
+import 'package:expense_tracker/view/transaction/screens/view_transaction/widgets/category_field.dart';
+import 'package:expense_tracker/view/transaction/screens/view_transaction/widgets/date_field.dart';
+import 'package:expense_tracker/view/transaction/screens/view_transaction/widgets/delete_button.dart';
 import 'package:expense_tracker/view/transaction/snackbars/snackbar.dart';
-
+import 'package:expense_tracker/view/transaction/validators/validators.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
@@ -46,7 +45,6 @@ class _ScreenViewTransactionState extends State<ScreenViewTransaction> {
   TextEditingController amountController = TextEditingController();
   TextEditingController dateController = TextEditingController();
   TextEditingController descriptionController = TextEditingController();
-
   TextEditingController categoryController = TextEditingController();
 
   @override
@@ -58,7 +56,6 @@ class _ScreenViewTransactionState extends State<ScreenViewTransaction> {
   void initialization() {
     Transaction tr = transactionController.sortedList
         .firstWhere((transaction) => transaction.id == editId);
-
     amountController = TextEditingController(
       text: tr.amount.toString(),
     );
@@ -259,54 +256,43 @@ class _ScreenViewTransactionState extends State<ScreenViewTransaction> {
                     ],
                   ),
                 ),
-                height30,
+
+                const BlankSpace(
+                  height: 30,
+                ),
                 Container(
                   decoration: cardDecoration(color: Colors.white),
-                  height: MediaQuery.of(context).size.height / 6,
+                  height: MediaQuery.of(context).size.height / 4,
                   width: MediaQuery.of(context).size.width,
-                  padding: const EdgeInsets.only(top: 10, left: 20),
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      const Text(
-                        'Transaction details',
-                        style: TextStyle(color: Appcolor.primaryColor),
-                      ),
-                      TransactionDetails(
-                          tr: tr,
-                          descriptionController: descriptionController,
-                          dateController: dateController)
-                    ],
-                  ),
-                ),
-                const BlankSpace(
-                  height: 30,
-                ),
-                AmountDetails(amountController: amountController),
-                const BlankSpace(
-                  height: 30,
-                ),
-                Container(
-                  decoration: cardDecoration(color: Appcolor.white),
-                  height: MediaQuery.of(context).size.height / 11,
-                  width: MediaQuery.of(context).size.width / 1,
                   padding: const EdgeInsets.only(
-                      top: 10, left: 20, bottom: 20, right: 20),
-                  //color: Colors.red,
+                      left: 20, top: 10, bottom: 20, right: 10),
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      const Text(
-                        'Catagory type',
-                        style: TextStyle(color: Appcolor.primaryColor),
-                      ),
-                      GestureDetector(
-                          onTap: () {}, child: Text(tr.catagoryType)),
+                      Datefields(dateController: dateController, tr: tr),
+                      AddTransactionTextField(
+                          validator: amountValidator,
+                          controller: amountController,
+                          title: 'Amout'),
+                      AddTransactionTextField(
+                          validator: descriptionValidator,
+                          controller: descriptionController,
+                          title: 'Description'),
+                      // BlankSpace(
+                      //   height: 10,
+                      // )
                     ],
                   ),
                 ),
+                const BlankSpace(
+                  height: 30,
+                ),
+                // AmountDetails(amountController: amountController),
+                // const BlankSpace(
+                //   height: 30,
+                // ),
+                CategorytypeField(tr: tr),
                 const BlankSpace(
                   height: 30,
                 ),
@@ -325,62 +311,3 @@ class _ScreenViewTransactionState extends State<ScreenViewTransaction> {
     );
   }
 }
-
-class DeleteButton extends StatelessWidget {
-  DeleteButton({
-    super.key,
-    required this.editId,
-  });
-
-  final FilterController filterController = Get.put(FilterController());
-  final String editId;
-
-  @override
-  Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.only(right: 15),
-      child: GestureDetector(
-        onTap: () async {
-          await filterController.deleteDialog(editId);
-        },
-        child: const Icon(
-          Icons.delete,
-          color: Appcolor.primaryColor,
-        ),
-      ),
-    );
-  }
-}
-
-// class TransactionTypeSection extends StatelessWidget {
-//   const TransactionTypeSection({super.key});
-
-//   @override
-//   Widget build(BuildContext context) {
-//     return Column(
-//       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-//       crossAxisAlignment: CrossAxisAlignment.start,
-//       children: [
-//         const Text(
-//           'Transaction type',
-//           style: TextStyle(color: Appcolor.primaryColor),
-//         ),
-//         GetBuilder<UpdateController>(
-//           builder: (controller) {
-//             return DropdownButton<TransactionType>(
-//                 onChanged: (TransactionType? newValue) {
-//                   controller.changeTransactionType(newValue);
-//                 },
-//                 items: TransactionType.values.map((TransactionType mode) {
-//                   return DropdownMenuItem<TransactionType>(
-//                     value: mode,
-//                     child: Text(mode.toString().split('.').last),
-//                   );
-//                 }).toList(),
-//                 value: controller.transaction);
-//           },
-//         ),
-//       ],
-//     );
-//   }
-// }

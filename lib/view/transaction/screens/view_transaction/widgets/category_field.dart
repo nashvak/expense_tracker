@@ -1,38 +1,33 @@
 import 'package:expense_tracker/constatnts/colors.dart';
 import 'package:expense_tracker/constatnts/custom_widgets/common/decoration.dart';
-import 'package:expense_tracker/view/transaction/validators/validators.dart';
+import 'package:expense_tracker/models/transaction_model/transaction_model.dart';
 import 'package:flutter/material.dart';
 
-class AmountDetails extends StatelessWidget {
-  const AmountDetails({
+class CategorytypeField extends StatelessWidget {
+  const CategorytypeField({
     super.key,
-    required this.amountController,
+    required this.tr,
   });
 
-  final TextEditingController amountController;
+  final Transaction tr;
 
   @override
   Widget build(BuildContext context) {
     return Container(
-      decoration: cardDecoration(color: Colors.white),
-      height: MediaQuery.of(context).size.height / 10,
+      decoration: cardDecoration(color: Appcolor.white),
+      height: MediaQuery.of(context).size.height / 11,
       width: MediaQuery.of(context).size.width / 1,
-      padding: const EdgeInsets.only(left: 20, top: 10),
+      padding: const EdgeInsets.only(top: 10, left: 20, bottom: 20, right: 20),
       //color: Colors.red,
       child: Column(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           const Text(
-            'Amount',
+            'Catagory type',
             style: TextStyle(color: Appcolor.primaryColor),
           ),
-          TextFormField(
-            controller: amountController,
-            decoration: const InputDecoration(
-              border: InputBorder.none,
-            ),
-          ),
+          GestureDetector(onTap: () {}, child: Text(tr.catagoryType)),
         ],
       ),
     );

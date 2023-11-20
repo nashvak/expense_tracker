@@ -1,6 +1,6 @@
 import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 import 'package:expense_tracker/constatnts/colors.dart';
-import 'package:expense_tracker/view/transaction/screens/history_screen.dart';
+import 'package:expense_tracker/view/transaction/screens/history_screen/history_screen.dart';
 
 import 'package:expense_tracker/view/transaction/screens/add_transaction/add_transaction.dart';
 import 'package:expense_tracker/view/home_screen/home_screen.dart';
