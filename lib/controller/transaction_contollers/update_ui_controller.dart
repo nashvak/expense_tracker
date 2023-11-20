@@ -30,10 +30,10 @@ class UpdateController extends GetxController {
     update();
   }
 
-  changeCategoryType(newValue) {
-    catagory = newValue;
-    update();
-  }
+  // changeCategoryType(newValue) {
+  //   catagory = newValue;
+  //   update();
+  // }
 
   displayCategory() {
     if (transaction == TransactionType.income) {

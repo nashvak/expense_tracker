@@ -56,9 +56,8 @@ class _ScreenViewTransactionState extends State<ScreenViewTransaction> {
   void initialization() {
     Transaction tr = transactionController.sortedList
         .firstWhere((transaction) => transaction.id == editId);
-    amountController = TextEditingController(
-      text: tr.amount.toString(),
-    );
+
+    amountController = TextEditingController(text: tr.amount.toString());
     descriptionController = TextEditingController(text: tr.description);
     updateController.date = tr.date;
     categoryController.text = tr.catagoryType;
@@ -80,7 +79,7 @@ class _ScreenViewTransactionState extends State<ScreenViewTransaction> {
         date: updateController.date,
         paymentMode: updateController.mode,
         transactionType: updateController.transaction,
-        catagoryType: updateController.catagory!,
+        catagoryType: categoryController.text,
       );
       print(editId);
       filterController.updateTransaction(
@@ -207,6 +206,7 @@ class _ScreenViewTransactionState extends State<ScreenViewTransaction> {
                             builder: (controller) {
                               return DropdownButton<TransactionType>(
                                   onChanged: (TransactionType? newValue) {
+                                    categoryController.text = '';
                                     controller.changeTransactionType(newValue);
                                   },
                                   items: TransactionType.values
@@ -292,7 +292,8 @@ class _ScreenViewTransactionState extends State<ScreenViewTransaction> {
                 // const BlankSpace(
                 //   height: 30,
                 // ),
-                CategorytypeField(tr: tr),
+                CategorytypeField(
+                    categoryController: categoryController, tr: tr),
                 const BlankSpace(
                   height: 30,
                 ),
