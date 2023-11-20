@@ -1,5 +1,6 @@
 import 'package:expense_tracker/constatnts/colors.dart';
 import 'package:expense_tracker/constatnts/custom_widgets/common/decoration.dart';
+import 'package:expense_tracker/view/transaction/validators/validators.dart';
 import 'package:flutter/material.dart';
 
 class AmountDetails extends StatelessWidget {
@@ -14,7 +15,7 @@ class AmountDetails extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       decoration: cardDecoration(color: Colors.white),
-      height: MediaQuery.of(context).size.height / 11,
+      height: MediaQuery.of(context).size.height / 10,
       width: MediaQuery.of(context).size.width / 1,
       padding: const EdgeInsets.only(left: 20, top: 10),
       //color: Colors.red,

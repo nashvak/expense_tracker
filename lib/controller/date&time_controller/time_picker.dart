@@ -1,5 +1,3 @@
-import 'dart:math';
-
 import 'package:expense_tracker/view/profile/notification/notification_settings.dart';
 import 'package:expense_tracker/view/transaction/snackbars/snackbar.dart';
 import 'package:flutter/material.dart';
@@ -49,7 +47,7 @@ class TimePicker extends GetxController {
     } else {
       selectedTime = const TimeOfDay(hour: 11, minute: 00);
     }
-    showNotification(selectedTime!.hour, selectedTime!.hour);
+    showNotification(selectedTime!.hour, selectedTime!.minute);
     update();
   }
 
@@ -114,6 +112,9 @@ class TimePicker extends GetxController {
 
   onToggle(bool value) async {
     _isNotification = value;
+    if (_isNotification) {
+      await notificationServices.requestNotificationPermission();
+    }
     saveToggleValue();
     visibility = value;
     timeVisibility();

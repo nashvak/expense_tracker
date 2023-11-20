@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:expense_tracker/constatnts/colors.dart';
 import 'package:expense_tracker/constatnts/custom_widgets/common/button.dart';
 import 'package:expense_tracker/constatnts/custom_widgets/common/decoration.dart';
@@ -11,6 +13,7 @@ import 'package:expense_tracker/controller/transaction_contollers/transaction_co
 import 'package:expense_tracker/models/transaction_model/transaction_model.dart';
 import 'package:expense_tracker/view/transaction/screens/view_transaction/widgets/amount_details_section.dart';
 import 'package:expense_tracker/view/transaction/screens/view_transaction/widgets/transaction_details_section.dart';
+import 'package:expense_tracker/view/transaction/snackbars/snackbar.dart';
 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -82,79 +85,82 @@ class _ScreenViewTransactionState extends State<ScreenViewTransaction> {
         transactionType: updateController.transaction,
         catagoryType: updateController.catagory!,
       );
-      transactionController.updateTransaction(
+      print(editId);
+      filterController.updateTransaction(
           id: editId, transaction: tr, context: context);
 
       Get.back();
+    } else {
+      ToastUtil.showToast('Please fill all the fields in the form');
     }
   }
 
-  void _showDropdown(BuildContext context) {
-    showDialog(
-      context: context,
-      builder: (BuildContext context) {
-        return AlertDialog(
-          content: Column(
-            children: [
-              const Text('Choose an option:'),
-              GetBuilder<UpdateController>(
-                builder: (controller) {
-                  List<String> a = ui.showCategoryDropdown();
-                  return DropdownButtonFormField<String>(
-                    value: controller.catagory,
-                    items: a.map((String value) {
-                      return DropdownMenuItem<String>(
-                        value: value,
-                        child: Text(value),
-                      );
-                    }).toList(),
-                    onChanged: (String? newValue) async {
-                      await controller.changeCategoryType(newValue);
-                      categoryController.text = controller.catagory!;
-                      Get.back();
-                    },
-                    //
-                    // List<String> a = ui.showCategoryDropdown();
-                    // print(a);
-                    // return DropdownButtonFormField<String>(
-                    //   hint: const Text('Select Catagory '),
+  // void _showDropdown(BuildContext context) {
+  //   showDialog(
+  //     context: context,
+  //     builder: (BuildContext context) {
+  //       return AlertDialog(
+  //         content: Column(
+  //           children: [
+  //             const Text('Choose an option:'),
+  //             GetBuilder<UpdateController>(
+  //               builder: (controller) {
+  //                 List<String> a = ui.showCategoryDropdown();
+  //                 return DropdownButtonFormField<String>(
+  //                   value: controller.catagory,
+  //                   items: a.map((String value) {
+  //                     return DropdownMenuItem<String>(
+  //                       value: value,
+  //                       child: Text(value),
+  //                     );
+  //                   }).toList(),
+  //                   onChanged: (String? newValue) async {
+  //                     await controller.changeCategoryType(newValue);
+  //                     categoryController.text = controller.catagory!;
+  //                     Get.back();
+  //                   },
+  //                   //
+  //                   // List<String> a = ui.showCategoryDropdown();
+  //                   // print(a);
+  //                   // return DropdownButtonFormField<String>(
+  //                   //   hint: const Text('Select Catagory '),
 
-                    //   decoration: const InputDecoration(
-                    //     enabledBorder: UnderlineInputBorder(
-                    //       borderSide: BorderSide(
-                    //           color: Appcolor.secondaryColor, width: 1),
-                    //     ),
-                    //     focusedBorder: UnderlineInputBorder(
-                    //       borderSide:
-                    //           BorderSide(color: Appcolor.primaryColor, width: 1),
-                    //     ),
-                    //   ),
-                    //   iconSize: 0,
-                    //   // autovalidateMode:
-                    //   //     AutovalidateMode.onUserInteraction,
-                    //   validator: (value) =>
-                    //       value == null ? "Select Category" : null,
-                    //   // dropdownColor: Appcolor.tertiaryColor,
-                    //   value: descriptionController.text,
+  //                   //   decoration: const InputDecoration(
+  //                   //     enabledBorder: UnderlineInputBorder(
+  //                   //       borderSide: BorderSide(
+  //                   //           color: Appcolor.secondaryColor, width: 1),
+  //                   //     ),
+  //                   //     focusedBorder: UnderlineInputBorder(
+  //                   //       borderSide:
+  //                   //           BorderSide(color: Appcolor.primaryColor, width: 1),
+  //                   //     ),
+  //                   //   ),
+  //                   //   iconSize: 0,
+  //                   //   // autovalidateMode:
+  //                   //   //     AutovalidateMode.onUserInteraction,
+  //                   //   validator: (value) =>
+  //                   //       value == null ? "Select Category" : null,
+  //                   //   // dropdownColor: Appcolor.tertiaryColor,
+  //                   //   value: descriptionController.text,
 
-                    //   onChanged: (String? newValue) {
-                    //     controller.changeCategoryType(newValue!);
-                    //   },
-                    //   items: a.map((String? mode) {
-                    //     return DropdownMenuItem<String>(
-                    //       value: mode,
-                    //       child: Text(mode!),
-                    //     );
-                    //   }).toList(),
-                  );
-                },
-              ),
-            ],
-          ),
-        );
-      },
-    );
-  }
+  //                   //   onChanged: (String? newValue) {
+  //                   //     controller.changeCategoryType(newValue!);
+  //                   //   },
+  //                   //   items: a.map((String? mode) {
+  //                   //     return DropdownMenuItem<String>(
+  //                   //       value: mode,
+  //                   //       child: Text(mode!),
+  //                   //     );
+  //                   //   }).toList(),
+  //                 );
+  //               },
+  //             ),
+  //           ],
+  //         ),
+  //       );
+  //     },
+  //   );
+  // }
 
   @override
   Widget build(BuildContext context) {
@@ -308,6 +314,7 @@ class _ScreenViewTransactionState extends State<ScreenViewTransaction> {
                   title: 'Update Transaction',
                   onTap: () {
                     updateTransaction();
+                    log(tr.id);
                   },
                 ),
               ],

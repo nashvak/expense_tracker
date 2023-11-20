@@ -1,5 +1,7 @@
 // ignore_for_file: prefer_interpolation_to_compose_strings
 
+import 'dart:developer';
+
 import 'package:expense_tracker/constatnts/colors.dart';
 import 'package:expense_tracker/controller/transaction_contollers/transaction_controller.dart';
 
@@ -160,5 +162,36 @@ class FilterController extends GetxController {
       },
       buttonColor: Colors.white,
     );
+  }
+
+  // F U N C T I O N   T O   U P D A T E   T R A N S A C T I O N
+  updateTransaction(
+      {required String id, required Transaction transaction, context}) async {
+    // Find the index of the transaction to update using the id
+    // final int index = transactionController.sortedList
+    //     .indexWhere((transaction) => transaction.id == id);
+    // transactionController.sortedList.sort((a, b) => b.date.compareTo(a.date));
+    print(" id is");
+
+    print(id);
+
+    print(transaction.id);
+    try {
+      log("blad ${transactionController.transactionBox.keys.toList()}");
+      log("update id $id");
+      // if (index != -1) {
+      if (transactionController.transactionBox.keys.contains(id)) {
+        log(transactionController.transactionBox.get(id).toString());
+        await transactionController.transactionBox.put(id, transaction);
+        ToastUtil.showToast('Transaction edited successfully');
+        update();
+      }
+      // transactionController.sortedList[index] = transaction;
+
+      // }
+    } catch (e) {
+      print('Error updating transaction: $e');
+      ToastUtil.showToast('Error in updating');
+    }
   }
 }

@@ -2,6 +2,7 @@ import 'package:expense_tracker/constatnts/colors.dart';
 import 'package:expense_tracker/constatnts/custom_widgets/common/sizedbox.dart';
 import 'package:expense_tracker/controller/transaction_contollers/update_ui_controller.dart';
 import 'package:expense_tracker/models/transaction_model/transaction_model.dart';
+import 'package:expense_tracker/view/transaction/validators/validators.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get_state_manager/src/simple/get_state.dart';
 import 'package:intl/intl.dart';
@@ -56,8 +57,10 @@ class TransactionDetails extends StatelessWidget {
               children: [
                 TextFormField(
                   controller: descriptionController,
+                  validator: descriptionValidator,
                   decoration: const InputDecoration(
                     border: InputBorder.none,
+
                     // hintText: tr.description,
                   ),
                 ),

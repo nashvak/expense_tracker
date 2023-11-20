@@ -3,14 +3,11 @@ import 'package:expense_tracker/constatnts/custom_widgets/common/button.dart';
 import 'package:expense_tracker/controller/date&time_controller/date_picker_controller.dart';
 import 'package:expense_tracker/controller/transaction_contollers/transaction_ui_controller.dart';
 import 'package:expense_tracker/controller/transaction_contollers/transaction_controller.dart';
-
 import 'package:expense_tracker/models/transaction_model/transaction_model.dart';
 import 'package:expense_tracker/view/transaction/screens/add_transaction/widgets/add_category.dart';
 import 'package:expense_tracker/view/transaction/screens/add_transaction/widgets/toggle_switch.dart';
-import 'package:expense_tracker/view/transaction/snackbars/snackbar.dart';
 import 'package:expense_tracker/view/transaction/validators/validators.dart';
 import 'package:flutter/material.dart';
-
 import 'package:get/get.dart';
 import '../../../../constatnts/custom_widgets/common/sizedbox.dart';
 import '../../../../constatnts/custom_widgets/login&signup/textfield.dart';
@@ -34,8 +31,9 @@ class _ScreenAddTransactionState extends State<ScreenAddTransaction> {
 
   addTransaction() async {
     if (addFormkey.currentState!.validate()) {
+      String id = DateTime.now().microsecondsSinceEpoch.toString();
       Transaction transaction = Transaction(
-        id: DateTime.now().microsecondsSinceEpoch.toString(),
+        id: id,
         description: descriptionController.text,
         amount: double.parse(amountController.text),
         date: date.selectedDate,
@@ -44,7 +42,7 @@ class _ScreenAddTransactionState extends State<ScreenAddTransaction> {
         catagoryType: ui.selectedCategory!,
       );
       transactionController.createTransaction(
-          transaction: transaction, context: context);
+          key: id, transaction: transaction, context: context);
       ui.resetValues();
       date.resetDate();
       descriptionController.clear();
@@ -76,17 +74,12 @@ class _ScreenAddTransactionState extends State<ScreenAddTransaction> {
     resetWhenNavigation();
     return Scaffold(
       body: Padding(
-        padding: const EdgeInsets.only(top: 80, left: 20, right: 20),
+        padding: const EdgeInsets.only(top: 50, left: 20, right: 20),
         child: SingleChildScrollView(
           child: Form(
             key: addFormkey,
             child: Column(
               children: [
-                TextButton(
-                    onPressed: () async {
-                      ToastUtil.showToast("This is a global toast message");
-                    },
-                    child: const Text('snackbar')),
                 const CustomToggleSwitch(),
                 const BlankSpace(height: 50),
                 GetBuilder<DatePickerController>(
@@ -211,8 +204,8 @@ class _ScreenAddTransactionState extends State<ScreenAddTransaction> {
                                     color: Appcolor.primaryColor, width: 1),
                               ),
                             ),
-                            // validator: (value) =>
-                            //     value == null ? "Select Payment mode" : null,
+                            validator: (value) =>
+                                value == null ? "Select Payment mode" : null,
                             dropdownColor: Appcolor.tertiaryColor,
                             value: controller.selectedPaymentMode,
                             onChanged: (PaymentMode? newValue) {

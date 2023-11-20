@@ -48,4 +48,16 @@ class NotificationServices {
   Future<void> cancelNotification(notificationId) async {
     await flutterLocalNotificationsPlugin.cancel(notificationId);
   }
+
+  Future<void> requestNotificationPermission() async {
+    // Request notification permission
+    await flutterLocalNotificationsPlugin
+        .resolvePlatformSpecificImplementation<
+            IOSFlutterLocalNotificationsPlugin>()
+        ?.requestPermissions(
+          alert: true,
+          badge: true,
+          sound: true,
+        );
+  }
 }
