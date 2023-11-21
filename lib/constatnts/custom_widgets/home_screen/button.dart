@@ -93,6 +93,7 @@ class Listtile extends StatelessWidget {
           // ),
           title: Text(
             title,
+            overflow: TextOverflow.ellipsis,
             style: const TextStyle(
               fontSize: 18,
               fontWeight: FontWeight.w500,
@@ -108,6 +109,7 @@ class Listtile extends StatelessWidget {
             ),
           ),
           trailing: Text(
+              overflow: TextOverflow.ellipsis,
               type == TransactionType.expense
                   ? "- ${fmf.output.compactNonSymbol}"
                   : "+ ${fmf.output.compactNonSymbol}",

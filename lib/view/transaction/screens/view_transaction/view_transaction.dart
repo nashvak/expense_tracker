@@ -81,7 +81,7 @@ class _ScreenViewTransactionState extends State<ScreenViewTransaction> {
         transactionType: updateController.transaction,
         catagoryType: categoryController.text,
       );
-      print(editId);
+      // print(editId);
       filterController.updateTransaction(
           id: editId, transaction: tr, context: context);
 

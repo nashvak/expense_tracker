@@ -140,9 +140,8 @@ class ScreenHistory extends StatelessWidget {
                 builder: (controller) {
                   return ListView.separated(
                       itemBuilder: (context, index) {
-                        final tr = transactionController.transactionBox.values
-                            .toList()[index];
-                        print(tr.id);
+                        final tr = controller.sortByFunction[index];
+                        // print(tr.id);
 
                         return Slidable(
                           key: UniqueKey(),

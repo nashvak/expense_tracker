@@ -13,8 +13,7 @@ class GetStartedScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     var screenHeight = MediaQuery.of(context).size.height;
     var screenWidth = MediaQuery.of(context).size.width;
-    print(screenHeight);
-    print(screenWidth);
+
     return Scaffold(
       body: Padding(
         padding: EdgeInsets.only(

@@ -59,7 +59,6 @@ class FilterController extends GetxController {
         .where((element) => element.contains(selectedOption))
         .toList();
     k = nn.join('');
-    print(k);
 
     update();
   }
@@ -125,9 +124,7 @@ class FilterController extends GetxController {
         await changeOption(
             'Date'); // if date is picked,then only this function should work
       }
-    } catch (e) {
-      print(e);
-    }
+    } catch (e) {}
   }
 
 // F U N C T I O N   T O   D E L E T E   T R A N S A C T I O N
@@ -167,30 +164,17 @@ class FilterController extends GetxController {
   // F U N C T I O N   T O   U P D A T E   T R A N S A C T I O N
   updateTransaction(
       {required String id, required Transaction transaction, context}) async {
-    // Find the index of the transaction to update using the id
-    // final int index = transactionController.sortedList
-    //     .indexWhere((transaction) => transaction.id == id);
-    // transactionController.sortedList.sort((a, b) => b.date.compareTo(a.date));
-    print(" id is");
-
-    print(id);
-
-    print(transaction.id);
     try {
-      log("blad ${transactionController.transactionBox.keys.toList()}");
-      log("update id $id");
-      // if (index != -1) {
+      // log("blad ${transactionController.transactionBox.keys.toList()}");
+      // log("update id $id");
+
       if (transactionController.transactionBox.keys.contains(id)) {
         log(transactionController.transactionBox.get(id).toString());
         await transactionController.transactionBox.put(id, transaction);
         ToastUtil.showToast('Transaction edited successfully');
         update();
       }
-      // transactionController.sortedList[index] = transaction;
-
-      // }
     } catch (e) {
-      print('Error updating transaction: $e');
       ToastUtil.showToast('Error in updating');
     }
   }

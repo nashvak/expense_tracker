@@ -72,8 +72,6 @@ class TimePicker extends GetxController {
   }
 
   showNotification(int hour, int minute) async {
-    print(hour);
-    print(minute);
     DateTime scheduledTime = DateTime(
       DateTime.now().year,
       DateTime.now().month,
@@ -136,7 +134,7 @@ class TimePicker extends GetxController {
     final SharedPreferences prefs = await SharedPreferences.getInstance();
     prefs.setBool('toggle', _isNotification);
     visibility = _isNotification;
-    print(_isNotification);
+    // print(_isNotification);
     update();
   }
 

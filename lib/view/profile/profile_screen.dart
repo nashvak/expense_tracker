@@ -1,8 +1,6 @@
 import 'dart:io';
-
 import 'package:expense_tracker/constatnts/colors.dart';
 import 'package:expense_tracker/constatnts/custom_widgets/common/sizedbox.dart';
-
 import 'package:expense_tracker/controller/authentication_section/auth_controller.dart';
 import 'package:expense_tracker/controller/transaction_contollers/transaction_controller.dart';
 import 'package:expense_tracker/models/auth_model/auth_model.dart';

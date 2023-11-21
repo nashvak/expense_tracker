@@ -1,5 +1,6 @@
 import 'dart:io';
 
+import 'package:expense_tracker/controller/date&time_controller/time_picker.dart';
 import 'package:expense_tracker/models/transaction_model/transaction_model.dart';
 import 'package:expense_tracker/view/authentication/splash_screen.dart';
 import 'package:expense_tracker/view/profile/notification/notification_settings.dart';
@@ -24,11 +25,11 @@ void main() async {
   await Hive.openBox<Transaction>('transactionBox');
   await Hive.openBox<String>('incomeCategoryBox');
   await Hive.openBox<String>('expenseCategoryBox');
-  // NotificationService().initNotification();
+  NotificationServices().initializeNotifications();
   tz.initializeTimeZones();
   // Set the default timezone to India
   tz.setLocalLocation(tz.getLocation('Asia/Kolkata'));
-  // TimePicker().loadSwitchState();
+  TimePicker().loadSwitchState();
   //
 
   runApp(const MyApp());
