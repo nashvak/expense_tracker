@@ -81,7 +81,7 @@ class _ScreenViewTransactionState extends State<ScreenViewTransaction> {
         transactionType: updateController.transaction,
         catagoryType: categoryController.text,
       );
-      // print(editId);
+      print(editId);
       filterController.updateTransaction(
           id: editId, transaction: tr, context: context);
 
@@ -90,73 +90,6 @@ class _ScreenViewTransactionState extends State<ScreenViewTransaction> {
       ToastUtil.showToast('Please fill all the fields in the form');
     }
   }
-
-  // void _showDropdown(BuildContext context) {
-  //   showDialog(
-  //     context: context,
-  //     builder: (BuildContext context) {
-  //       return AlertDialog(
-  //         content: Column(
-  //           children: [
-  //             const Text('Choose an option:'),
-  //             GetBuilder<UpdateController>(
-  //               builder: (controller) {
-  //                 List<String> a = ui.showCategoryDropdown();
-  //                 return DropdownButtonFormField<String>(
-  //                   value: controller.catagory,
-  //                   items: a.map((String value) {
-  //                     return DropdownMenuItem<String>(
-  //                       value: value,
-  //                       child: Text(value),
-  //                     );
-  //                   }).toList(),
-  //                   onChanged: (String? newValue) async {
-  //                     await controller.changeCategoryType(newValue);
-  //                     categoryController.text = controller.catagory!;
-  //                     Get.back();
-  //                   },
-  //                   //
-  //                   // List<String> a = ui.showCategoryDropdown();
-  //                   // print(a);
-  //                   // return DropdownButtonFormField<String>(
-  //                   //   hint: const Text('Select Catagory '),
-
-  //                   //   decoration: const InputDecoration(
-  //                   //     enabledBorder: UnderlineInputBorder(
-  //                   //       borderSide: BorderSide(
-  //                   //           color: Appcolor.secondaryColor, width: 1),
-  //                   //     ),
-  //                   //     focusedBorder: UnderlineInputBorder(
-  //                   //       borderSide:
-  //                   //           BorderSide(color: Appcolor.primaryColor, width: 1),
-  //                   //     ),
-  //                   //   ),
-  //                   //   iconSize: 0,
-  //                   //   // autovalidateMode:
-  //                   //   //     AutovalidateMode.onUserInteraction,
-  //                   //   validator: (value) =>
-  //                   //       value == null ? "Select Category" : null,
-  //                   //   // dropdownColor: Appcolor.tertiaryColor,
-  //                   //   value: descriptionController.text,
-
-  //                   //   onChanged: (String? newValue) {
-  //                   //     controller.changeCategoryType(newValue!);
-  //                   //   },
-  //                   //   items: a.map((String? mode) {
-  //                   //     return DropdownMenuItem<String>(
-  //                   //       value: mode,
-  //                   //       child: Text(mode!),
-  //                   //     );
-  //                   //   }).toList(),
-  //                 );
-  //               },
-  //             ),
-  //           ],
-  //         ),
-  //       );
-  //     },
-  //   );
-  // }
 
   @override
   Widget build(BuildContext context) {
@@ -256,7 +189,6 @@ class _ScreenViewTransactionState extends State<ScreenViewTransaction> {
                     ],
                   ),
                 ),
-
                 const BlankSpace(
                   height: 30,
                 ),
@@ -288,10 +220,6 @@ class _ScreenViewTransactionState extends State<ScreenViewTransaction> {
                 const BlankSpace(
                   height: 30,
                 ),
-                // AmountDetails(amountController: amountController),
-                // const BlankSpace(
-                //   height: 30,
-                // ),
                 CategorytypeField(
                     categoryController: categoryController, tr: tr),
                 const BlankSpace(

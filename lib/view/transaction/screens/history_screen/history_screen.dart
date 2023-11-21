@@ -7,6 +7,10 @@ import 'package:expense_tracker/controller/filer_controller.dart';
 
 import 'package:expense_tracker/controller/transaction_contollers/transaction_controller.dart';
 import 'package:expense_tracker/controller/transaction_contollers/update_ui_controller.dart';
+import 'package:expense_tracker/view/transaction/screens/history_screen/bottomsheet.dart';
+import 'package:expense_tracker/view/transaction/screens/history_screen/bottomsheet_listtile.dart';
+import 'package:expense_tracker/view/transaction/screens/history_screen/datefilterbtn.dart';
+import 'package:expense_tracker/view/transaction/screens/history_screen/filterby_listtile.dart';
 
 import 'package:expense_tracker/view/transaction/screens/view_transaction/view_transaction.dart';
 import 'package:flutter/material.dart';
@@ -23,6 +27,68 @@ class ScreenHistory extends StatelessWidget {
   final UpdateController updateController = Get.put(
     UpdateController(),
   );
+
+  filterBottomsheet(List<String> filterList) {
+    Get.bottomSheet(
+      backgroundColor: Appcolor.tertiaryColor,
+      Padding(
+        padding: const EdgeInsets.only(top: 20, left: 20, right: 20, bottom: 0),
+        child: Column(
+          children: [
+            BottomsheetAppbar(title: 'Filter by'),
+            BlankSpace(
+              height: 20,
+            ),
+            Expanded(
+              child: ListView.builder(
+                itemBuilder: (context, index) {
+                  return SortingBottomSheet(
+                    ontap: () {
+                      filterController.changeOption(filterList[index]);
+                      Get.back();
+                    },
+                    title: filterList[index],
+                  );
+                },
+                itemCount: filterList.length,
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+
+  categoryBottomsheet(List<String> currentCatagory) {
+    Get.bottomSheet(
+      backgroundColor: Appcolor.tertiaryColor,
+      Padding(
+        padding: const EdgeInsets.only(top: 20, left: 20, right: 20, bottom: 0),
+        child: Column(
+          children: [
+            BottomsheetAppbar(title: 'Filter by category'),
+            BlankSpace(
+              height: 20,
+            ),
+            Expanded(
+              child: ListView.builder(
+                itemBuilder: (context, index) {
+                  return SortingBottomSheet(
+                    ontap: () {
+                      filterController.changeOption(currentCatagory[index]);
+                      Get.back();
+                    },
+                    title: currentCatagory[index],
+                  );
+                },
+                itemCount: currentCatagory.length,
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -49,78 +115,18 @@ class ScreenHistory extends StatelessWidget {
               children: [
                 SortButton(
                   ontap: () {
-                    List filterList = filterController.isFilterIncluded();
-                    Get.bottomSheet(
-                      Container(
-                        color: Colors.white,
-                        child: Column(
-                          children: [
-                            const ListTile(
-                              title: Text(
-                                'Sort By',
-                                style: TextStyle(fontSize: 20),
-                              ),
-                            ),
-                            const Divider(color: Colors.grey, height: 5),
-                            Expanded(
-                              child: ListView.builder(
-                                itemBuilder: (context, index) {
-                                  return SortingBottomSheet(
-                                    ontap: () {
-                                      filterController
-                                          .changeOption(filterList[index]);
-                                      Get.back();
-                                    },
-                                    title: filterList[index],
-                                  );
-                                },
-                                itemCount: filterList.length,
-                              ),
-                            ),
-                          ],
-                        ),
-                      ),
-                    );
+                    List<String> filterList =
+                        filterController.isFilterIncluded();
+                    filterBottomsheet(filterList);
                   },
                   title: "Filter By",
                   icon: const Icon(Icons.sort),
                 ),
                 SortButton(
                   ontap: () {
-                    List currentCatagory =
+                    List<String> currentCatagory =
                         filterController.isCatagoryIncluded();
-
-                    Get.bottomSheet(
-                      Container(
-                        color: Colors.white,
-                        child: Column(
-                          children: [
-                            const ListTile(
-                              title: Text(
-                                'Catagory',
-                                style: TextStyle(fontSize: 20),
-                              ),
-                            ),
-                            const Divider(color: Colors.grey, height: 5),
-                            Expanded(
-                              child: ListView.builder(
-                                itemBuilder: (context, index) {
-                                  return SortingBottomSheet(
-                                    ontap: () {
-                                      filterController
-                                          .changeOption(currentCatagory[index]);
-                                      Get.back();
-                                    },
-                                    title: currentCatagory[index],
-                                  );
-                                },
-                                itemCount: currentCatagory.length,
-                              ),
-                            ),
-                          ],
-                        ),
-                      ),
-                    );
+                    categoryBottomsheet(currentCatagory);
                   },
                   title: 'Catagory',
                   icon: const Icon(Icons.arrow_drop_down),
@@ -192,60 +198,6 @@ class ScreenHistory extends StatelessWidget {
           ],
         ),
       ),
-    );
-  }
-}
-
-class DateRangeFiltering extends StatelessWidget {
-  const DateRangeFiltering({
-    super.key,
-  });
-
-  @override
-  Widget build(BuildContext context) {
-    return GetBuilder<FilterController>(
-      builder: (controller) {
-        return SortButton(
-          ontap: () {
-            controller.selectDateRange();
-          },
-          title: 'Date',
-          icon: const Icon(Icons.arrow_drop_down),
-        );
-      },
-    );
-  }
-}
-
-class FilteringName extends StatelessWidget {
-  const FilteringName({
-    super.key,
-    // required this.filterController,
-  });
-
-  // final FilterController filterController;
-
-  @override
-  Widget build(BuildContext context) {
-    return GetBuilder<FilterController>(builder: ((controller) {
-      return Text(
-        controller.selectedOption,
-        style: const TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
-      );
-    }));
-  }
-}
-
-class SortingBottomSheet extends StatelessWidget {
-  const SortingBottomSheet(
-      {required this.ontap, required this.title, super.key});
-  final Function() ontap;
-  final String title;
-  @override
-  Widget build(BuildContext context) {
-    return ListTile(
-      title: Text(title),
-      onTap: ontap,
     );
   }
 }

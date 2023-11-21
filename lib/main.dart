@@ -8,6 +8,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:path_provider/path_provider.dart';
+
 import 'models/auth_model/auth_model.dart';
 import 'package:timezone/timezone.dart' as tz;
 import 'package:timezone/data/latest.dart' as tz;
@@ -49,6 +50,9 @@ class _MyAppState extends State<MyApp> {
     super.initState();
   }
 
+// Future<void> checkPermission() async{
+//   final PermissionStatus permissionResult=await location.hasPermission()
+// }
   @override
   Widget build(BuildContext context) {
     return const GetMaterialApp(

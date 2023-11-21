@@ -26,7 +26,7 @@ class TimePicker extends GetxController {
 
   Future<void> loadSwitchState() async {
     await loadToggleValue();
-    // print(_isNotification);
+    print(_isNotification);
     if (_isNotification) {
       setdefaultTime();
       visibility = _isNotification;
@@ -108,6 +108,7 @@ class TimePicker extends GetxController {
     update();
   }
 
+  //  T O G G L E    S W I T C H    N O T I F I C A T I O N   O N    O R   O F F
   onToggle(bool value) async {
     _isNotification = value;
     if (_isNotification) {
@@ -119,6 +120,7 @@ class TimePicker extends GetxController {
     update();
   }
 
+  //  T I M E   V I S I B L E   O R   N O T
   timeVisibility() {
     if (_isNotification == true) {
       setdefaultTime();
@@ -130,6 +132,7 @@ class TimePicker extends GetxController {
     update();
   }
 
+  //  S A V E    T O   S H A R E D   P R E F E R E N C E
   saveToggleValue() async {
     final SharedPreferences prefs = await SharedPreferences.getInstance();
     prefs.setBool('toggle', _isNotification);
@@ -137,6 +140,8 @@ class TimePicker extends GetxController {
     // print(_isNotification);
     update();
   }
+
+//  G E T   V A L U E   F R O M   S H A R E D   P R E F E R E N C E
 
   loadToggleValue() async {
     final SharedPreferences prefs = await SharedPreferences.getInstance();

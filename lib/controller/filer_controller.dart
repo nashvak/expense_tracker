@@ -152,12 +152,13 @@ class FilterController extends GetxController {
       onCancel: () {
         Get.back();
       },
+      confirmTextColor: Appcolor.primaryColor,
       onConfirm: () async {
         await deleteTransaction(id: id);
         Get.back();
         Get.back();
       },
-      buttonColor: Colors.white,
+      buttonColor: Colors.transparent,
     );
   }
 

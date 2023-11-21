@@ -4,6 +4,7 @@ import 'package:expense_tracker/constatnts/custom_widgets/common/sizedbox.dart';
 import 'package:expense_tracker/constatnts/custom_widgets/common/textstyle.dart';
 import 'package:expense_tracker/controller/authentication_section/auth_controller.dart';
 import 'package:expense_tracker/models/auth_model/auth_model.dart';
+import 'package:expense_tracker/view/transaction/screens/history_screen/bottomsheet.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
@@ -37,57 +38,40 @@ class _EditProfileState extends State<EditProfile> {
   bool isButtonEnabled = false;
   cameraOrGallery() {
     Get.bottomSheet(
-        backgroundColor: Appcolor.tertiaryColor,
-        Padding(
-          padding:
-              const EdgeInsets.only(top: 20, left: 20, right: 20, bottom: 0),
-          child: Column(
-            children: [
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      backgroundColor: Appcolor.tertiaryColor,
+      Padding(
+        padding: const EdgeInsets.only(top: 20, left: 20, right: 20, bottom: 0),
+        child: Column(
+          children: [
+            BottomsheetAppbar(title: 'Edit Profile'),
+            height20,
+            Container(
+              color: Appcolor.white,
+              child: Wrap(
                 children: [
-                  const Text(
-                    'Edit Profile',
-                    style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                  ListTile(
+                    onTap: () async {
+                      image = await authController.getImag(true);
+                      Get.back();
+                    },
+                    leading: const Icon(Icons.camera),
+                    title: const Text('Camera'),
                   ),
-                  CircleAvatar(
-                    backgroundColor: Appcolor.white,
-                    child: IconButton(
-                      onPressed: () {
-                        Get.back();
-                      },
-                      icon: const Icon(Icons.close),
-                    ),
-                  ),
+                  ListTile(
+                    onTap: () async {
+                      image = await authController.getImag(false);
+                      Get.back();
+                    },
+                    leading: const Icon(Icons.photo),
+                    title: const Text('Gallery'),
+                  )
                 ],
               ),
-              height20,
-              Container(
-                color: Appcolor.white,
-                child: Wrap(
-                  children: [
-                    ListTile(
-                      onTap: () async {
-                        image = await authController.getImag(true);
-                        Get.back();
-                      },
-                      leading: const Icon(Icons.camera),
-                      title: const Text('Camera'),
-                    ),
-                    ListTile(
-                      onTap: () async {
-                        image = await authController.getImag(false);
-                        Get.back();
-                      },
-                      leading: const Icon(Icons.photo),
-                      title: const Text('Gallery'),
-                    )
-                  ],
-                ),
-              ),
-            ],
-          ),
-        ));
+            ),
+          ],
+        ),
+      ),
+    );
   }
 
   editProfile() async {
@@ -135,7 +119,7 @@ class _EditProfileState extends State<EditProfile> {
                     Icons.check,
                     color:
                         authController.nameButton && authController.emailButton
-                            ? Colors.blue
+                            ? Appcolor.primaryColor
                             : Colors.grey,
                   ));
             },
