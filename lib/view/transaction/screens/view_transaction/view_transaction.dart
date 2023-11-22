@@ -27,7 +27,6 @@ class ScreenViewTransaction extends StatefulWidget {
 
 class _ScreenViewTransactionState extends State<ScreenViewTransaction> {
   final String editId = Get.arguments;
-
   final TransactionController transactionController = Get.put(
     TransactionController(),
   );
@@ -41,7 +40,6 @@ class _ScreenViewTransactionState extends State<ScreenViewTransaction> {
     FilterController(),
   );
   final updateFormkey = GlobalKey<FormState>();
-
   TextEditingController amountController = TextEditingController();
   TextEditingController dateController = TextEditingController();
   TextEditingController descriptionController = TextEditingController();
@@ -81,7 +79,7 @@ class _ScreenViewTransactionState extends State<ScreenViewTransaction> {
         transactionType: updateController.transaction,
         catagoryType: categoryController.text,
       );
-      print(editId);
+      // print(editId);
       filterController.updateTransaction(
           id: editId, transaction: tr, context: context);
 

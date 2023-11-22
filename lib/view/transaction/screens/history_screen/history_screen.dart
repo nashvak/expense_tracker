@@ -35,8 +35,8 @@ class ScreenHistory extends StatelessWidget {
         padding: const EdgeInsets.only(top: 20, left: 20, right: 20, bottom: 0),
         child: Column(
           children: [
-            BottomsheetAppbar(title: 'Filter by'),
-            BlankSpace(
+            const BottomsheetAppbar(title: 'Filter by'),
+            const BlankSpace(
               height: 20,
             ),
             Expanded(
@@ -66,8 +66,8 @@ class ScreenHistory extends StatelessWidget {
         padding: const EdgeInsets.only(top: 20, left: 20, right: 20, bottom: 0),
         child: Column(
           children: [
-            BottomsheetAppbar(title: 'Filter by category'),
-            BlankSpace(
+            const BottomsheetAppbar(title: 'Filter by category'),
+            const BlankSpace(
               height: 20,
             ),
             Expanded(

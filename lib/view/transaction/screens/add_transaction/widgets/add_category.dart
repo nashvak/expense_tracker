@@ -19,8 +19,12 @@ class AddCategory extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        iconTheme: const IconThemeData(color: Appcolor.white),
         backgroundColor: Appcolor.primaryColor,
-        title: const Text('Add Category'),
+        title: const Text(
+          'Add Category',
+          style: TextStyle(color: Appcolor.white),
+        ),
         elevation: 0,
         actions: [
           IconButton(

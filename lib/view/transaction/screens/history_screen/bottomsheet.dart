@@ -12,7 +12,7 @@ class BottomsheetAppbar extends StatelessWidget {
       children: [
         Text(
           title,
-          style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+          style: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
         ),
         CircleAvatar(
           backgroundColor: Appcolor.white,

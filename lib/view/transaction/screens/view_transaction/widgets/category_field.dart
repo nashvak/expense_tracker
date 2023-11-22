@@ -12,7 +12,7 @@ import 'package:get/get.dart';
 class CategorytypeField extends StatelessWidget {
   final TextEditingController categoryController;
 
-  CategorytypeField({
+  const CategorytypeField({
     super.key,
     required this.tr,
     required this.categoryController,
@@ -27,8 +27,8 @@ class CategorytypeField extends StatelessWidget {
         padding: const EdgeInsets.only(top: 20, left: 20, right: 20, bottom: 0),
         child: Column(
           children: [
-            BottomsheetAppbar(title: 'Change category'),
-            BlankSpace(
+            const BottomsheetAppbar(title: 'Change category'),
+            const BlankSpace(
               height: 20,
             ),
             Expanded(
@@ -68,9 +68,15 @@ class CategorytypeField extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          const Text(
-            'Catagory type',
-            style: TextStyle(color: Appcolor.primaryColor),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              const Text(
+                'Catagory type',
+                style: TextStyle(color: Appcolor.primaryColor),
+              ),
+              TextButton(onPressed: () {}, child: Text("Add")),
+            ],
           ),
           TextFormField(
             controller: categoryController,

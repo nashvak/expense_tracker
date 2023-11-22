@@ -7,7 +7,7 @@ import 'package:expense_tracker/constatnts/custom_widgets/common/decoration.dart
 import 'package:expense_tracker/constatnts/custom_widgets/common/sizedbox.dart';
 import 'package:expense_tracker/view/authentication/validators.dart';
 import 'package:expense_tracker/models/auth_model/auth_model.dart';
-import 'package:expense_tracker/view/authentication/bottomsheets.dart';
+import 'package:expense_tracker/view/authentication/image_picker_bottomsheet.dart';
 import 'package:expense_tracker/view/home_screen/widgets/bottom_nav.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -102,7 +102,7 @@ class _ScreenSignupState extends State<ScreenSignup> {
                           ),
                           GestureDetector(
                             onTap: () {
-                              cameraOrGallery();
+                              cameraOrGallery('Add Photo');
                             },
                             child: GetBuilder<AuthController>(
                               builder: (controller) {

@@ -2,7 +2,7 @@ import 'package:expense_tracker/constatnts/colors.dart';
 import 'package:expense_tracker/constatnts/custom_widgets/common/sizedbox.dart';
 import 'package:expense_tracker/controller/date&time_controller/time_picker.dart';
 
-import 'package:expense_tracker/view/profile/notification/notification_settings.dart';
+import 'package:expense_tracker/view/notification/notification_settings.dart';
 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -115,15 +115,7 @@ class _NotificationPageState extends State<NotificationPage> {
           ],
         ),
       ),
-//             ElevatedButton(
-//               onPressed: () {
-// // notificationServices.scheduleNotification(
-// //                     title: 'Hey',
-// //                     body: ' Did you record your daily transactions',
-// //                     scheduledNotificationDateTime: time.selectedTime)
-//               },
-//               child: const Text('send notification'),
-//             ),
+//
     );
   }
 }

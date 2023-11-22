@@ -43,7 +43,7 @@ class _EditProfileState extends State<EditProfile> {
         padding: const EdgeInsets.only(top: 20, left: 20, right: 20, bottom: 0),
         child: Column(
           children: [
-            BottomsheetAppbar(title: 'Edit Profile'),
+            const BottomsheetAppbar(title: 'Edit Profile'),
             height20,
             Container(
               color: Appcolor.white,
@@ -54,7 +54,7 @@ class _EditProfileState extends State<EditProfile> {
                       image = await authController.getImag(true);
                       Get.back();
                     },
-                    leading: const Icon(Icons.camera),
+                    leading: const Icon(Icons.camera_alt),
                     title: const Text('Camera'),
                   ),
                   ListTile(
@@ -154,10 +154,11 @@ class _EditProfileState extends State<EditProfile> {
                                     ),
                                   ),
                                   const CircleAvatar(
-                                    radius: 15,
+                                    radius: 17,
                                     backgroundColor: Colors.white,
                                     child: Icon(
-                                      Icons.edit,
+                                      Icons.camera_alt,
+                                      size: 20,
                                       color: Appcolor.secondaryColor,
                                     ),
                                   ),

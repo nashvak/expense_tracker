@@ -124,7 +124,9 @@ class FilterController extends GetxController {
         await changeOption(
             'Date'); // if date is picked,then only this function should work
       }
-    } catch (e) {}
+    } catch (e) {
+      ToastUtil.showToast('Something went wrong');
+    }
   }
 
 // F U N C T I O N   T O   D E L E T E   T R A N S A C T I O N

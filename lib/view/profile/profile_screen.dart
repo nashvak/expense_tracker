@@ -6,7 +6,7 @@ import 'package:expense_tracker/controller/transaction_contollers/transaction_co
 import 'package:expense_tracker/models/auth_model/auth_model.dart';
 import 'package:expense_tracker/view/authentication/get_started.dart';
 import 'package:expense_tracker/view/profile/edit_profile.dart';
-import 'package:expense_tracker/view/profile/notification/notification.dart';
+import 'package:expense_tracker/view/notification/notification.dart';
 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';

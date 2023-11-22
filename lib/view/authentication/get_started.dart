@@ -22,36 +22,41 @@ class GetStartedScreen extends StatelessWidget {
           top: screenHeight * .07,
           // bottom: screenHeight * 0.05,
         ),
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.start,
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: [
-            Image.asset(
-              'images/expense-logo.png',
-            ),
-            Text(
-              "Welcome",
-              style: GoogleFonts.gabriela(
-                  fontSize: 32, fontWeight: FontWeight.bold),
-            ),
-            BlankSpace(
-              height: screenWidth * 0.05,
-            ),
-            const Text(
-              'A minimalistic expense tracker app to track all your income & expenses without any hussle',
-              textAlign: TextAlign.center,
-              style: TextStyle(fontSize: 17),
-            ),
-            BlankSpace(
-              height: screenWidth * 0.05,
-            ),
-            SignupButton(
-              title: "Get Started",
-              onTap: () {
-                Get.off(() => const ScreenSignup());
-              },
-            ),
-          ],
+        child: Center(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.start,
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              BlankSpace(
+                height: screenHeight * 0.1,
+              ),
+              Image.asset(
+                'images/expense-logo.png',
+              ),
+              Text(
+                "Welcome",
+                style: GoogleFonts.gabriela(
+                    fontSize: 32, fontWeight: FontWeight.bold),
+              ),
+              BlankSpace(
+                height: screenHeight * 0.01,
+              ),
+              const Text(
+                'A minimalistic expense tracker app to track all your income & expenses without any hussle',
+                textAlign: TextAlign.center,
+                style: TextStyle(fontSize: 17),
+              ),
+              BlankSpace(
+                height: screenHeight * 0.1,
+              ),
+              SignupButton(
+                title: "Get Started",
+                onTap: () {
+                  Get.off(() => const ScreenSignup());
+                },
+              ),
+            ],
+          ),
         ),
       ),
     );

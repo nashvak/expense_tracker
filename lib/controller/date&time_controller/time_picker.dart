@@ -1,4 +1,4 @@
-import 'package:expense_tracker/view/profile/notification/notification_settings.dart';
+import 'package:expense_tracker/view/notification/notification_settings.dart';
 import 'package:expense_tracker/view/transaction/snackbars/snackbar.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -15,21 +15,20 @@ class TimePicker extends GetxController {
   }
 
   TimeOfDay? selectedTime;
-
   int notificationId = 1;
-
   bool _isNotification = false;
   bool get isNotification => _isNotification;
-
   bool visibility = false;
   bool get isVisibility => visibility;
 
   Future<void> loadSwitchState() async {
     await loadToggleValue();
-    print(_isNotification);
+    // print(_isNotification);
     if (_isNotification) {
-      setdefaultTime();
+      await setdefaultTime();
       visibility = _isNotification;
+    } else {
+      await cancelNOtification();
     }
 
     update();
@@ -65,9 +64,10 @@ class TimePicker extends GetxController {
       selectedTime =
           TimeOfDay(hour: pickedTime.hour, minute: pickedTime.minute);
       showNotification(pickedTime.hour, pickedTime.minute);
-    } else {
-      showNotification(selectedTime!.hour, selectedTime!.hour);
     }
+    // else {
+    //   showNotification(selectedTime!.hour, selectedTime!.hour);
+    // }
     update();
   }
 
