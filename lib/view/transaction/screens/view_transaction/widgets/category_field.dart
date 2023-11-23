@@ -68,15 +68,9 @@ class CategorytypeField extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              const Text(
-                'Catagory type',
-                style: TextStyle(color: Appcolor.primaryColor),
-              ),
-              TextButton(onPressed: () {}, child: Text("Add")),
-            ],
+          const Text(
+            'Catagory type',
+            style: TextStyle(color: Appcolor.primaryColor),
           ),
           TextFormField(
             controller: categoryController,

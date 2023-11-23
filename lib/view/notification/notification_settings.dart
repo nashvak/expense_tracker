@@ -22,8 +22,7 @@ class NotificationServices {
 
   notificationDetails() {
     AndroidNotificationDetails androidPlatformChannelSpecifics =
-        const AndroidNotificationDetails(
-            'daily_notification_channel', 'Daily Notification Channel',
+        const AndroidNotificationDetails('channel id', 'channel name',
             importance: Importance.max, priority: Priority.high);
     final NotificationDetails platformChannelSpecifics =
         NotificationDetails(android: androidPlatformChannelSpecifics);

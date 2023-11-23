@@ -14,7 +14,7 @@ class FilteringName extends StatelessWidget {
   Widget build(BuildContext context) {
     return GetBuilder<FilterController>(builder: ((controller) {
       return Text(
-        controller.selectedOption,
+        controller.selectedOption.toString().capitalize!,
         style: const TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
       );
     }));
