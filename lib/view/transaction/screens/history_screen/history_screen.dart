@@ -143,6 +143,7 @@ class ScreenHistory extends StatelessWidget {
                   return ListView.separated(
                       itemBuilder: (context, index) {
                         final tr = controller.sortByFunction[index];
+
                         // print(tr.id);
 
                         return Slidable(

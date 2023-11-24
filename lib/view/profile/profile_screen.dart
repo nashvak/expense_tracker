@@ -49,7 +49,7 @@ class _ScreenProfileState extends State<ScreenProfile> {
     Get.defaultDialog(
       title: 'Erase data',
       middleText:
-          'This will remove all your data.Are you sure to delete all data.',
+          'This will remove all your data. Are you sure to delete all data.',
       backgroundColor: Appcolor.white,
       radius: 20,
       contentPadding: const EdgeInsets.all(10),

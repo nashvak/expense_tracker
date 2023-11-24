@@ -20,7 +20,7 @@ class TransactionController extends GetxController {
     super.onInit();
   }
 
-  //  S O R T  T H E  L I S T   A C C O R D I N G   T O   D A T E
+  //  S O R T   T H E   L I S T    A C C O R D I N G    T O    D A T E
   List<Transaction> get sortedList {
     List<Transaction> boxList = transactionBox.values.toList();
     boxList.sort((a, b) => b.date.compareTo(a.date));

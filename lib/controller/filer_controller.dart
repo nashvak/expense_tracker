@@ -82,16 +82,20 @@ class FilterController extends GetxController {
       return transactionController.sortedList
           .where((transaction) => transaction.paymentMode == PaymentMode.bank)
           .toList();
+    } else if (selectedOption == 'card') {
+      return transactionController.sortedList
+          .where((transaction) => transaction.paymentMode == PaymentMode.card)
+          .toList();
     } else if (selectedOption == 'Date') {
       // print(endDate);
 
-      return transactionController.sortedList
-          .where((transaction) =>
-              (transaction.date.isAfter(startDate) &&
-                  transaction.date.isBefore(endDate)) ||
-              transaction.date.isAtSameMomentAs(endDate) ||
-              transaction.date.isAtSameMomentAs(startDate))
+      List<Transaction> datefilter = transactionController.sortedList
+          .where((transaction) => (transaction.date
+                  .isAfter(startDate.subtract(const Duration(days: 1))) &&
+              transaction.date.isBefore(endDate.add(const Duration(days: 1)))))
           .toList();
+      datefilter.sort((a, b) => b.date.compareTo(a.date));
+      return datefilter;
     } else if (selectedOption == k.toString()) {
       int index = catagoryTitles.indexOf(selectedOption);
       return transactionController.sortedList
