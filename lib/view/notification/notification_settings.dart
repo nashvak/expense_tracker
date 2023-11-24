@@ -1,10 +1,14 @@
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
+import 'package:rxdart/rxdart.dart';
 import 'package:timezone/timezone.dart' as tz;
 
 class NotificationServices {
   final FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin =
       FlutterLocalNotificationsPlugin();
 
+  static final onNotification = BehaviorSubject<String?>();
+
+  //
   Future<void> initializeNotifications() async {
     AndroidInitializationSettings androidInitializationSettings =
         const AndroidInitializationSettings('@mipmap/ic_launcher');
@@ -12,6 +16,13 @@ class NotificationServices {
     InitializationSettings initializationSettings =
         InitializationSettings(android: androidInitializationSettings);
     await flutterLocalNotificationsPlugin.initialize(initializationSettings);
+
+    /// WHEN APP IS CLOSED
+    final details =
+        await flutterLocalNotificationsPlugin.getNotificationAppLaunchDetails();
+    if (details != null && details.didNotificationLaunchApp) {
+      // onNotification.add(details.payload);
+    }
   }
 
   Future showNotification(
@@ -48,15 +59,15 @@ class NotificationServices {
     await flutterLocalNotificationsPlugin.cancel(notificationId);
   }
 
-  Future<void> requestNotificationPermission() async {
-    // Request notification permission
-    await flutterLocalNotificationsPlugin
-        .resolvePlatformSpecificImplementation<
-            IOSFlutterLocalNotificationsPlugin>()
-        ?.requestPermissions(
-          alert: true,
-          badge: true,
-          sound: true,
-        );
-  }
+  // Future<void> requestNotificationPermission() async {
+  //   // Request notification permission
+  //   await flutterLocalNotificationsPlugin
+  //       .resolvePlatformSpecificImplementation<
+  //           IOSFlutterLocalNotificationsPlugin>()
+  //       ?.requestPermissions(
+  //         alert: true,
+  //         badge: true,
+  //         sound: true,
+  //       );
+  // }
 }

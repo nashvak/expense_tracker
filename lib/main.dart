@@ -1,5 +1,4 @@
 import 'dart:io';
-
 import 'package:expense_tracker/controller/date&time_controller/time_picker.dart';
 import 'package:expense_tracker/models/transaction_model/transaction_model.dart';
 import 'package:expense_tracker/view/authentication/splash_screen.dart';
@@ -30,8 +29,6 @@ void main() async {
   // Set the default timezone to India
   tz.setLocalLocation(tz.getLocation('Asia/Kolkata'));
   TimePicker().loadSwitchState();
-  //
-
   runApp(const MyApp());
 }
 
@@ -46,12 +43,14 @@ class _MyAppState extends State<MyApp> {
   @override
   void initState() {
     NotificationServices().initializeNotifications();
+    listenNotifications();
     super.initState();
   }
 
-// Future<void> checkPermission() async{
-//   final PermissionStatus permissionResult=await location.hasPermission()
-// }
+  listenNotifications() {
+    NotificationServices.onNotification.stream.listen((event) {});
+  }
+
   @override
   Widget build(BuildContext context) {
     return const GetMaterialApp(

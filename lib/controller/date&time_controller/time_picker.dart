@@ -44,7 +44,7 @@ class TimePicker extends GetxController {
     if (storedHour != null && storedMinute != null) {
       selectedTime = TimeOfDay(hour: storedHour, minute: storedMinute);
     } else {
-      selectedTime = const TimeOfDay(hour: 11, minute: 00);
+      selectedTime = const TimeOfDay(hour: 21, minute: 30);
     }
     showNotification(selectedTime!.hour, selectedTime!.minute);
     update();
@@ -63,6 +63,7 @@ class TimePicker extends GetxController {
       prefs.setInt('notificationMinute', pickedTime.minute);
       selectedTime =
           TimeOfDay(hour: pickedTime.hour, minute: pickedTime.minute);
+
       showNotification(pickedTime.hour, pickedTime.minute);
     }
     // else {
@@ -111,9 +112,9 @@ class TimePicker extends GetxController {
   //  T O G G L E    S W I T C H    N O T I F I C A T I O N   O N    O R   O F F
   onToggle(bool value) async {
     _isNotification = value;
-    if (_isNotification) {
-      await notificationServices.requestNotificationPermission();
-    }
+    // if (_isNotification) {
+    //   await notificationServices.requestNotificationPermission();
+    // }
     saveToggleValue();
     visibility = value;
     timeVisibility();
@@ -124,10 +125,8 @@ class TimePicker extends GetxController {
   timeVisibility() {
     if (_isNotification == true) {
       setdefaultTime();
-      visibility = true;
     } else {
       cancelNOtification();
-      visibility = false;
     }
     update();
   }
@@ -136,7 +135,7 @@ class TimePicker extends GetxController {
   saveToggleValue() async {
     final SharedPreferences prefs = await SharedPreferences.getInstance();
     prefs.setBool('toggle', _isNotification);
-    visibility = _isNotification;
+
     // print(_isNotification);
     update();
   }

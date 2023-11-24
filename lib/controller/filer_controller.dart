@@ -84,6 +84,7 @@ class FilterController extends GetxController {
           .toList();
     } else if (selectedOption == 'Date') {
       // print(endDate);
+
       return transactionController.sortedList
           .where((transaction) =>
               (transaction.date.isAfter(startDate) &&
@@ -93,7 +94,6 @@ class FilterController extends GetxController {
           .toList();
     } else if (selectedOption == k.toString()) {
       int index = catagoryTitles.indexOf(selectedOption);
-      //print('index=' + index.toString());
       return transactionController.sortedList
           .where((transaction) =>
               transaction.catagoryType == catagoryTitles[index])
