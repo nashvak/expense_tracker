@@ -114,7 +114,7 @@ class _ScreenAddTransactionState extends State<ScreenAddTransaction> {
                   children: [
                     const Text(
                       'Category',
-                      style: TextStyle(fontSize: 13),
+                      style: TextStyle(fontSize: 15),
                     ),
                     const BlankSpace(width: 30),
                     SizedBox(
@@ -126,7 +126,7 @@ class _ScreenAddTransactionState extends State<ScreenAddTransaction> {
                           return DropdownButtonFormField<String>(
                             hint: const Text(
                               'Select Catagory ',
-                              style: TextStyle(fontSize: 13),
+                              style: TextStyle(fontSize: 15),
                             ),
 
                             decoration: const InputDecoration(
@@ -181,7 +181,7 @@ class _ScreenAddTransactionState extends State<ScreenAddTransaction> {
                   children: [
                     const Text(
                       'Account',
-                      style: TextStyle(fontSize: 13),
+                      style: TextStyle(fontSize: 15),
                     ),
                     SizedBox(
                       width: Get.width * 0.6,
@@ -190,7 +190,7 @@ class _ScreenAddTransactionState extends State<ScreenAddTransaction> {
                           return DropdownButtonFormField<PaymentMode>(
                             hint: const Text(
                               'Payment mode ',
-                              style: TextStyle(fontSize: 13),
+                              style: TextStyle(fontSize: 15),
                             ),
                             decoration: const InputDecoration(
                               enabledBorder: UnderlineInputBorder(

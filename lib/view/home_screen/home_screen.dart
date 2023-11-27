@@ -116,8 +116,9 @@ class ScreenHome extends StatelessWidget {
               height: 200,
               //width: MediaQuery.of(context).size.width,
               child: Container(
-                decoration: cardDecoration(
-                    color: const Color.fromARGB(255, 6, 14, 109)),
+                decoration:
+                    cardDecoration(color: Color.fromARGB(255, 3, 3, 94)),
+                // color: const Color.fromARGB(255, 6, 14, 109)),
                 child: Stack(
                   children: [
                     Column(
