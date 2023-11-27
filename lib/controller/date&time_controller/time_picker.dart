@@ -90,8 +90,8 @@ class TimePicker extends GetxController {
     if (_isNotification) {
       await notificationServices.scheduleNotification(
         notificationId,
-        'Daily reminder',
-        'Did you record all your transactions.? ',
+        'Reminder',
+        'Did you record all your transactions today.? ',
         'payload',
         timeDifference,
       );

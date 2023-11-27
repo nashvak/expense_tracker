@@ -12,12 +12,13 @@ class NotificationServices {
   Future<void> initializeNotifications() async {
     AndroidInitializationSettings androidInitializationSettings =
         const AndroidInitializationSettings('budgeticon');
-// /// W H E N    A P P    I S   C L O S E D
-//     final details =
-//         await flutterLocalNotificationsPlugin.getNotificationAppLaunchDetails();
-//     if (details != null && details.didNotificationLaunchApp) {
-//        onNotification.add(details.payload);
-//     }
+
+    /// W H E N    A P P    I S   C L O S E D   O N   B A C K G R O U N D
+    final details =
+        await flutterLocalNotificationsPlugin.getNotificationAppLaunchDetails();
+    if (details != null && details.didNotificationLaunchApp) {
+      // onNotification.add(details.payload);
+    }
     InitializationSettings initializationSettings =
         InitializationSettings(android: androidInitializationSettings);
     await flutterLocalNotificationsPlugin.initialize(
