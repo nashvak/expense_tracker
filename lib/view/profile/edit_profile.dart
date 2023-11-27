@@ -4,7 +4,7 @@ import 'package:expense_tracker/constatnts/custom_widgets/common/sizedbox.dart';
 import 'package:expense_tracker/constatnts/custom_widgets/common/textstyle.dart';
 import 'package:expense_tracker/controller/authentication_section/auth_controller.dart';
 import 'package:expense_tracker/models/auth_model/auth_model.dart';
-import 'package:expense_tracker/view/transaction/screens/history_screen/bottomsheet.dart';
+import 'package:expense_tracker/view/history_screen/bottomsheet.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';

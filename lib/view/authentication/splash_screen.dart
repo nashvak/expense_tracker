@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'package:expense_tracker/constatnts/custom_widgets/common/sizedbox.dart';
 import 'package:expense_tracker/controller/authentication_section/splashscreen_contoller.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -31,10 +32,13 @@ class ScreenSplashState extends State<ScreenSplash> {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Image.asset(
-              'images/expense-logo.png',
-              width: 200,
-              height: 200,
+              'images/budget.png',
+              width: 70,
+              height: 70,
               fit: BoxFit.fitHeight,
+            ),
+            BlankSpace(
+              height: 10,
             ),
             Text(
               'Expensly',

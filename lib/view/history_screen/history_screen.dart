@@ -5,10 +5,10 @@ import 'package:expense_tracker/constatnts/custom_widgets/common/textstyle.dart'
 import 'package:expense_tracker/controller/filer_controller.dart';
 import 'package:expense_tracker/controller/transaction_contollers/transaction_controller.dart';
 import 'package:expense_tracker/controller/transaction_contollers/update_ui_controller.dart';
-import 'package:expense_tracker/view/transaction/screens/history_screen/bottomsheet.dart';
-import 'package:expense_tracker/view/transaction/screens/history_screen/bottomsheet_listtile.dart';
-import 'package:expense_tracker/view/transaction/screens/history_screen/datefilterbtn.dart';
-import 'package:expense_tracker/view/transaction/screens/history_screen/filterby_listtile.dart';
+import 'package:expense_tracker/view/history_screen/bottomsheet.dart';
+import 'package:expense_tracker/view/history_screen/bottomsheet_listtile.dart';
+import 'package:expense_tracker/view/history_screen/datefilterbtn.dart';
+import 'package:expense_tracker/view/history_screen/filterby_listtile.dart';
 import 'package:expense_tracker/view/transaction/screens/view_transaction/view_transaction.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
@@ -101,7 +101,7 @@ class ScreenHistory extends StatelessWidget {
         iconTheme: const IconThemeData(color: Colors.black),
       ),
       body: Padding(
-        padding: const EdgeInsets.only(left: 20, right: 20, top: 30),
+        padding: const EdgeInsets.only(left: 20, right: 20, top: 20),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.start,
           crossAxisAlignment: CrossAxisAlignment.start,
@@ -131,7 +131,7 @@ class ScreenHistory extends StatelessWidget {
               ],
             ),
             const BlankSpace(
-              height: 30,
+              height: 20,
             ),
             const FilteringName(),
             const BlankSpace(

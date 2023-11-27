@@ -82,7 +82,7 @@ class AddTransactionTextField extends StatelessWidget {
       children: [
         Text(
           title,
-          style: const TextStyle(fontSize: 15),
+          style: const TextStyle(fontSize: 13),
         ),
         SizedBox(
           width: Get.width * 0.6,

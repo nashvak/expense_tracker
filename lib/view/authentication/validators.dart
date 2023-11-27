@@ -15,14 +15,11 @@ String? nameValidator(String? value) {
 
 String? numberValidator(String? value) {
   if (value == null || value.isEmpty) {
-    // Get.snackbar('oops.!', 'Please enter a password');
     return 'Please enter phone number';
   }
 
-  if (value.length < 10 || value.length > 10) {
+  if (value.length != 10) {
     return 'Invalid number';
-    //Get.snackbar('oops.!', 'Password must be at least 8 characters long');
-    // return '';
   }
   return null;
 }

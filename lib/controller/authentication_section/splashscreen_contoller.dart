@@ -10,7 +10,7 @@ class SplashScreenContoller extends GetxController {
     var pref = await SharedPreferences.getInstance();
     var isLoggedIn = pref.getBool(keyToLogin);
 
-    Timer(const Duration(seconds: 1), () {
+    Timer(const Duration(seconds: 5), () {
       if (isLoggedIn != null) {
         if (isLoggedIn) {
           Get.offAll(() => const BottomNav());

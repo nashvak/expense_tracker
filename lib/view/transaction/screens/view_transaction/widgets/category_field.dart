@@ -3,8 +3,8 @@ import 'package:expense_tracker/constatnts/custom_widgets/common/decoration.dart
 import 'package:expense_tracker/constatnts/custom_widgets/common/sizedbox.dart';
 import 'package:expense_tracker/controller/transaction_contollers/update_ui_controller.dart';
 import 'package:expense_tracker/models/transaction_model/transaction_model.dart';
-import 'package:expense_tracker/view/transaction/screens/history_screen/bottomsheet.dart';
-import 'package:expense_tracker/view/transaction/screens/history_screen/bottomsheet_listtile.dart';
+import 'package:expense_tracker/view/history_screen/bottomsheet.dart';
+import 'package:expense_tracker/view/history_screen/bottomsheet_listtile.dart';
 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';

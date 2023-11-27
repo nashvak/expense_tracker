@@ -33,8 +33,9 @@ class SortButton extends StatelessWidget {
             children: [
               Text(
                 title,
+                overflow: TextOverflow.ellipsis,
                 style:
-                    const TextStyle(fontSize: 16, fontWeight: FontWeight.w500),
+                    const TextStyle(fontSize: 11, fontWeight: FontWeight.w500),
               ),
               const BlankSpace(
                 width: 5,

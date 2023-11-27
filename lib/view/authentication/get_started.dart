@@ -28,10 +28,15 @@ class GetStartedScreen extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
               BlankSpace(
-                height: screenHeight * 0.1,
+                height: screenHeight * 0.2,
               ),
               Image.asset(
-                'images/expense-logo.png',
+                'images/budget.png',
+                width: 150,
+                height: 150,
+              ),
+              BlankSpace(
+                height: screenHeight * 0.05,
               ),
               Text(
                 "Welcome",
@@ -52,7 +57,9 @@ class GetStartedScreen extends StatelessWidget {
               SignupButton(
                 title: "Get Started",
                 onTap: () {
-                  Get.off(() => const ScreenSignup());
+                  Get.off(
+                    () => const ScreenSignup(),
+                  );
                 },
               ),
             ],

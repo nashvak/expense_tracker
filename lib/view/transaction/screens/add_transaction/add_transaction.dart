@@ -81,7 +81,7 @@ class _ScreenAddTransactionState extends State<ScreenAddTransaction> {
             child: Column(
               children: [
                 const CustomToggleSwitch(),
-                const BlankSpace(height: 50),
+                const BlankSpace(height: 30),
                 GetBuilder<DatePickerController>(
                   builder: (controller) {
                     return AddTransactionTextField(
@@ -101,26 +101,22 @@ class _ScreenAddTransactionState extends State<ScreenAddTransaction> {
                     );
                   },
                 ),
-                const BlankSpace(
-                  height: 30,
-                ),
+                const BlankSpace(height: 10),
                 AddTransactionTextField(
                   type: const TextInputType.numberWithOptions(decimal: true),
                   validator: amountValidator,
                   controller: amountController,
                   title: 'Amount',
                 ),
-                const BlankSpace(height: 30),
+                const BlankSpace(height: 10),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     const Text(
                       'Category',
-                      style: TextStyle(fontSize: 15),
+                      style: TextStyle(fontSize: 13),
                     ),
-                    const BlankSpace(
-                      width: 30,
-                    ),
+                    const BlankSpace(width: 30),
                     SizedBox(
                       width: Get.width * 0.5,
                       child: GetBuilder<UiController>(
@@ -128,7 +124,10 @@ class _ScreenAddTransactionState extends State<ScreenAddTransaction> {
                           List<String> categoryItems =
                               controller.showCategoryDropdown();
                           return DropdownButtonFormField<String>(
-                            hint: const Text('Select Catagory '),
+                            hint: const Text(
+                              'Select Catagory ',
+                              style: TextStyle(fontSize: 13),
+                            ),
 
                             decoration: const InputDecoration(
                               enabledBorder: UnderlineInputBorder(
@@ -170,30 +169,29 @@ class _ScreenAddTransactionState extends State<ScreenAddTransaction> {
                         child: const Icon(Icons.add)),
                   ],
                 ),
-                const BlankSpace(
-                  height: 30,
-                ),
+                const BlankSpace(height: 10),
                 AddTransactionTextField(
                   validator: descriptionValidator,
                   controller: descriptionController,
                   title: 'Description',
                 ),
-                const BlankSpace(
-                  height: 30,
-                ),
+                const BlankSpace(height: 10),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     const Text(
                       'Account',
-                      style: TextStyle(fontSize: 15),
+                      style: TextStyle(fontSize: 13),
                     ),
                     SizedBox(
                       width: Get.width * 0.6,
                       child: GetBuilder<UiController>(
                         builder: (controller) {
                           return DropdownButtonFormField<PaymentMode>(
-                            hint: const Text('Payment mode '),
+                            hint: const Text(
+                              'Payment mode ',
+                              style: TextStyle(fontSize: 13),
+                            ),
                             decoration: const InputDecoration(
                               enabledBorder: UnderlineInputBorder(
                                 borderSide: BorderSide(
