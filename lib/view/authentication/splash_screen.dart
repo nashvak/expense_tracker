@@ -37,7 +37,7 @@ class ScreenSplashState extends State<ScreenSplash> {
               height: 70,
               fit: BoxFit.fitHeight,
             ),
-            BlankSpace(
+            const BlankSpace(
               height: 10,
             ),
             Text(

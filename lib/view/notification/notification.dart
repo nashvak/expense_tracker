@@ -39,9 +39,9 @@ class _NotificationPageState extends State<NotificationPage> {
             mainAxisAlignment: MainAxisAlignment.start,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              const Row(
+              Row(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                children: [
+                children: const [
                   CircleAvatar(
                     backgroundColor: Colors.white,
                     child: Icon(

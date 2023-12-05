@@ -107,10 +107,10 @@ class _ScreenSignupState extends State<ScreenSignup> {
                             child: GetBuilder<AuthController>(
                               builder: (controller) {
                                 return (image == null)
-                                    ? const Stack(
+                                    ? Stack(
                                         alignment: Alignment.bottomCenter,
                                         children: [
-                                          Padding(
+                                          const Padding(
                                             padding: EdgeInsets.all(10.0),
                                             child: CircleAvatar(
                                               radius: 50,
@@ -120,7 +120,7 @@ class _ScreenSignupState extends State<ScreenSignup> {
                                                   'images/user-logo.png'),
                                             ),
                                           ),
-                                          CircleAvatar(
+                                          const CircleAvatar(
                                             radius: 15,
                                             backgroundColor: Colors.white,
                                             child: Icon(

@@ -17,6 +17,7 @@ void main() async {
   Hive.init(directory.path);
   Hive.initFlutter();
   Hive.registerAdapter<AuthModel>(AuthModelAdapter());
+
   Hive.registerAdapter<Transaction>(TransactionAdapter());
   Hive.registerAdapter<PaymentMode>(PaymentModeAdapter());
   Hive.registerAdapter<TransactionType>(TransactionTypeAdapter());
