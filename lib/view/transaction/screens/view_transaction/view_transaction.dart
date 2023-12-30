@@ -100,7 +100,7 @@ class _ScreenViewTransactionState extends State<ScreenViewTransaction> {
         iconTheme: const IconThemeData(color: Colors.black),
         centerTitle: true,
         title: const Text(
-          "Edit",
+          "Update",
           style: TextStyle(color: Colors.black),
         ),
         actions: [

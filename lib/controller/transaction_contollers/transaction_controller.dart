@@ -6,19 +6,19 @@ import 'package:expense_tracker/view/transaction/snackbars/snackbar.dart';
 
 import 'package:hive/hive.dart';
 import 'package:get/get.dart';
-import 'package:syncfusion_flutter_datepicker/datepicker.dart';
+// import 'package:syncfusion_flutter_datepicker/datepicker.dart';
 
 class TransactionController extends GetxController {
-  DateRangePickerController dateRangePickerController =
-      DateRangePickerController();
+  // DateRangePickerController dateRangePickerController =
+  //     DateRangePickerController();
   final transactionBox = Hive.box<Transaction>('transactionBox');
 
-  @override
-  void onInit() {
-    // Load transactions when the controller is initialized
+  // @override
+  // void onInit() {
+  //   // Load transactions when the controller is initialized
 
-    super.onInit();
-  }
+  //   super.onInit();
+  // }
 
   //  S O R T   T H E   L I S T    A C C O R D I N G    T O    D A T E
   List<Transaction> get sortedList {

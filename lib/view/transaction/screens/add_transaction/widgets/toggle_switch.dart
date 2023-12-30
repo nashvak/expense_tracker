@@ -26,7 +26,7 @@ class CustomToggleSwitch extends StatelessWidget {
           fontSize: 17,
           activeBgColor: const [Appcolor.primaryColor],
           activeFgColor: Colors.white,
-          inactiveBgColor: const Color.fromARGB(255, 162, 162, 163),
+          inactiveBgColor: Color.fromARGB(255, 238, 204, 163),
           totalSwitches: 2,
           labels: const ['Income', 'Expense'],
           onToggle: (index) {

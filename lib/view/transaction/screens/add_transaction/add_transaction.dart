@@ -125,7 +125,7 @@ class _ScreenAddTransactionState extends State<ScreenAddTransaction> {
                               controller.showCategoryDropdown();
                           return DropdownButtonFormField<String>(
                             hint: const Text(
-                              'Select Catagory ',
+                              '',
                               style: TextStyle(fontSize: 15),
                             ),
 
@@ -189,7 +189,7 @@ class _ScreenAddTransactionState extends State<ScreenAddTransaction> {
                         builder: (controller) {
                           return DropdownButtonFormField<PaymentMode>(
                             hint: const Text(
-                              'Payment mode ',
+                              '',
                               style: TextStyle(fontSize: 15),
                             ),
                             decoration: const InputDecoration(

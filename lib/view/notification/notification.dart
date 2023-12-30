@@ -39,9 +39,9 @@ class _NotificationPageState extends State<NotificationPage> {
             mainAxisAlignment: MainAxisAlignment.start,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Row(
+              const Row(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                children: const [
+                children: [
                   CircleAvatar(
                     backgroundColor: Colors.white,
                     child: Icon(
@@ -55,7 +55,7 @@ class _NotificationPageState extends State<NotificationPage> {
                   ),
                   Expanded(
                     child: Text(
-                        'You can now set the alarm directly on Money Manager, Therefore Money manager would remind you at your selected time of the day to the key in your data.'),
+                        'You can now set the alarm directly on Expense Manager, Therefore Expense manager would remind you at your selected time of the day to the key in your data.'),
                   )
                 ],
               ),

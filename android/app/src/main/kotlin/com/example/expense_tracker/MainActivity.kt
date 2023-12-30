@@ -1,4 +1,4 @@
-package in.selfstack.expense_tracker
+package com.selfstack.expensetracker
 
 import io.flutter.embedding.android.FlutterActivity
 
