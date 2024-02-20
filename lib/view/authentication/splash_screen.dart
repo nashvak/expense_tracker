@@ -16,9 +16,11 @@ class ScreenSplashState extends State<ScreenSplash> {
   SplashScreenContoller splash = Get.put(SplashScreenContoller());
 
   Timer? _timer;
+
   @override
   void initState() {
     splash.checkScreen(context);
+
     super.initState();
   }
 

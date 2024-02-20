@@ -13,6 +13,13 @@ import 'package:timezone/data/latest.dart' as tz;
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
+  // Perform initialization tasks asynchronously
+  await _initializeApp();
+
+  runApp(const MyApp());
+}
+
+Future<void> _initializeApp() async {
   Directory directory = await getApplicationDocumentsDirectory();
   Hive.init(directory.path);
   Hive.initFlutter();
@@ -29,11 +36,12 @@ void main() async {
   // Set the default timezone to India
   tz.setLocalLocation(tz.getLocation('Asia/Kolkata'));
   TimePicker().loadSwitchState();
-  runApp(const MyApp());
 }
 
 class MyApp extends StatefulWidget {
-  const MyApp({super.key});
+  const MyApp({
+    super.key,
+  });
 
   @override
   State<MyApp> createState() => _MyAppState();
