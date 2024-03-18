@@ -6,7 +6,7 @@ import 'package:expense_tracker/controller/transaction_contollers/transaction_co
 import 'package:expense_tracker/models/auth_model/auth_model.dart';
 import 'package:expense_tracker/view/authentication/get_started.dart';
 import 'package:expense_tracker/view/profile/edit_profile.dart';
-import 'package:expense_tracker/view/notification/notification.dart';
+// import 'package:expense_tracker/view/notification/notification.dart';
 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -145,17 +145,17 @@ class _ScreenProfileState extends State<ScreenProfile> {
                         },
                       ),
                       height20,
-                      ProfileCard(
-                        title: 'Notifications',
-                        icon: Icons.notifications,
-                        backgroundColor:
-                            const Color.fromARGB(255, 184, 207, 238),
-                        iconColor: const Color.fromARGB(255, 37, 121, 231),
-                        ontap: () {
-                          Get.to(() => const NotificationPage());
-                        },
-                      ),
-                      height20,
+                      // ProfileCard(
+                      //   title: 'Notifications',
+                      //   icon: Icons.notifications,
+                      //   backgroundColor:
+                      //       const Color.fromARGB(255, 184, 207, 238),
+                      //   iconColor: const Color.fromARGB(255, 37, 121, 231),
+                      //   ontap: () {
+                      //     Get.to(() => const NotificationPage());
+                      //   },
+                      // ),
+                      // height20,
                       ProfileCard(
                         title: 'Erase all data',
                         icon: Icons.delete,

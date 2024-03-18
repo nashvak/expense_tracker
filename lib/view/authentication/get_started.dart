@@ -2,7 +2,6 @@ import 'package:expense_tracker/constatnts/custom_widgets/common/sizedbox.dart';
 import 'package:expense_tracker/view/authentication/signup.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:google_fonts/google_fonts.dart';
 
 import '../../constatnts/custom_widgets/common/button.dart';
 
@@ -40,8 +39,7 @@ class GetStartedScreen extends StatelessWidget {
               ),
               Text(
                 "Welcome",
-                style: GoogleFonts.gabriela(
-                    fontSize: 32, fontWeight: FontWeight.bold),
+                style: TextStyle(fontSize: 32, fontWeight: FontWeight.bold),
               ),
               BlankSpace(
                 height: screenHeight * 0.01,
