@@ -23,8 +23,9 @@ class BalanceCard extends StatelessWidget {
           ),
         ),
         Align(
-            alignment: Alignment.center,
-            child: GetBuilder<BalanceController>(builder: (controller) {
+          alignment: Alignment.center,
+          child: GetBuilder<BalanceController>(
+            builder: (controller) {
               MoneyFormatter fmf =
                   MoneyFormatter(amount: controller.totalBalance);
               return Text(
@@ -37,7 +38,9 @@ class BalanceCard extends StatelessWidget {
                     fontSize: 32,
                     fontWeight: FontWeight.bold),
               );
-            })),
+            },
+          ),
+        ),
       ],
     );
   }

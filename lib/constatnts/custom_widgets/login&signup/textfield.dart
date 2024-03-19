@@ -85,7 +85,7 @@ class AddTransactionTextField extends StatelessWidget {
           style: const TextStyle(fontSize: 15),
         ),
         SizedBox(
-          width: Get.width * 0.6,
+          width: Get.width * 0.5,
           child: TextFormField(
             onTap: ontap,
             readOnly: readonly,

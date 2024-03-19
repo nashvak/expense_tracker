@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
 
-import 'package:google_fonts/google_fonts.dart';
-
 import '../../colors.dart';
 
 class SignupButton extends StatelessWidget {
@@ -27,7 +25,7 @@ class SignupButton extends StatelessWidget {
         child: Center(
           child: Text(
             title,
-            style: GoogleFonts.lato(
+            style: const TextStyle(
                 fontSize: 20, fontWeight: FontWeight.w700, color: Colors.white),
           ),
         ),
@@ -62,7 +60,7 @@ class CustomButton extends StatelessWidget {
           child: Center(
             child: Text(
               title,
-              style: GoogleFonts.lato(
+              style: const TextStyle(
                   fontSize: 17,
                   fontWeight: FontWeight.w500,
                   color: Appcolor.primaryColor),

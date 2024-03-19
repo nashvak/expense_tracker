@@ -37,7 +37,7 @@ class GetStartedScreen extends StatelessWidget {
               BlankSpace(
                 height: screenHeight * 0.05,
               ),
-              Text(
+              const Text(
                 "Welcome",
                 style: TextStyle(fontSize: 32, fontWeight: FontWeight.bold),
               ),

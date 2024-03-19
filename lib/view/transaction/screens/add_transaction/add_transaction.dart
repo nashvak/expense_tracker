@@ -116,21 +116,34 @@ class _ScreenAddTransactionState extends State<ScreenAddTransaction> {
                       'Category',
                       style: TextStyle(fontSize: 15),
                     ),
-                    const BlankSpace(width: 30),
-                    SizedBox(
+                    Container(
                       width: Get.width * 0.5,
+                      color: Colors.amber,
                       child: GetBuilder<UiController>(
                         builder: (controller) {
                           List<String> categoryItems =
                               controller.showCategoryDropdown();
                           return DropdownButtonFormField<String>(
-                            hint: const Text(
-                              '',
-                              style: TextStyle(fontSize: 15),
+                            hint: Container(
+                              color: Colors.red,
+                              child: const Text(
+                                '',
+                                style: TextStyle(
+                                  fontSize: 15,
+                                ),
+                              ),
                             ),
 
-                            decoration: const InputDecoration(
-                              enabledBorder: UnderlineInputBorder(
+                            decoration: InputDecoration(
+                              suffixIcon: IconButton(
+                                  onPressed: () {
+                                    ui.selectedCategory = null;
+                                    Get.to(
+                                      () => AddCategory(),
+                                    );
+                                  },
+                                  icon: const Icon(Icons.add)),
+                              enabledBorder: const UnderlineInputBorder(
                                 borderSide: BorderSide(
                                     color: Appcolor.secondaryColor, width: 1),
                               ),
@@ -146,27 +159,27 @@ class _ScreenAddTransactionState extends State<ScreenAddTransaction> {
                                 value == null ? "Select Category" : null,
                             // dropdownColor: Appcolor.tertiaryColor,
                             value: controller.selectedCategory,
+
                             onChanged: (String? newValue) {
                               controller.changeCatagory(newValue!);
                             },
                             items: categoryItems.map((String mode) {
                               return DropdownMenuItem<String>(
                                 value: mode,
-                                child: Text(mode),
+                                child: SizedBox(
+                                  width: Get.width * 0.5 -
+                                      60, // Adjust width as needed
+                                  child: Text(
+                                    mode,
+                                    overflow: TextOverflow.ellipsis,
+                                  ),
+                                ),
                               );
                             }).toList(),
                           );
                         },
                       ),
-                    ),
-                    GestureDetector(
-                        onTap: () {
-                          ui.selectedCategory = null;
-                          Get.to(
-                            () => AddCategory(),
-                          );
-                        },
-                        child: const Icon(Icons.add)),
+                    )
                   ],
                 ),
                 const BlankSpace(height: 10),
@@ -184,7 +197,7 @@ class _ScreenAddTransactionState extends State<ScreenAddTransaction> {
                       style: TextStyle(fontSize: 15),
                     ),
                     SizedBox(
-                      width: Get.width * 0.6,
+                      width: Get.width * 0.5,
                       child: GetBuilder<UiController>(
                         builder: (controller) {
                           return DropdownButtonFormField<PaymentMode>(

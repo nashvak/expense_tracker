@@ -2,7 +2,6 @@ import 'dart:async';
 import 'package:expense_tracker/constatnts/custom_widgets/common/sizedbox.dart';
 import 'package:expense_tracker/controller/authentication_section/splashscreen_contoller.dart';
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:get/get.dart';
 
 class ScreenSplash extends StatefulWidget {
@@ -42,9 +41,9 @@ class ScreenSplashState extends State<ScreenSplash> {
             const BlankSpace(
               height: 10,
             ),
-            Text(
+            const Text(
               'Expensly',
-              style: GoogleFonts.lato(fontSize: 25),
+              style: TextStyle(fontSize: 25),
             )
           ],
         ),

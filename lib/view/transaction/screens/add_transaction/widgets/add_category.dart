@@ -105,6 +105,7 @@ class AddCategory extends StatelessWidget {
                         contentPadding: const EdgeInsets.all(0),
                         title: Text(
                           categoryItems[index],
+                          overflow: TextOverflow.ellipsis,
                         ),
                         trailing: IconButton(
                           onPressed: () {

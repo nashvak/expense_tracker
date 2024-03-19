@@ -10,7 +10,6 @@ import 'package:expense_tracker/view/profile/edit_profile.dart';
 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:google_fonts/google_fonts.dart';
 
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -224,7 +223,7 @@ class ProfileCard extends StatelessWidget {
               )),
           title: Text(
             title,
-            style: GoogleFonts.lato(fontSize: 20, fontWeight: FontWeight.w600),
+            style: const TextStyle(fontSize: 20, fontWeight: FontWeight.w600),
           ),
         ),
       ),

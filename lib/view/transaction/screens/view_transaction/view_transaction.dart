@@ -1,4 +1,3 @@
-import 'dart:developer';
 import 'package:expense_tracker/constatnts/colors.dart';
 import 'package:expense_tracker/constatnts/custom_widgets/common/button.dart';
 import 'package:expense_tracker/constatnts/custom_widgets/common/decoration.dart';
@@ -192,7 +191,7 @@ class _ScreenViewTransactionState extends State<ScreenViewTransaction> {
                 ),
                 Container(
                   decoration: cardDecoration(color: Colors.white),
-                  height: MediaQuery.of(context).size.height / 4,
+                  // height: MediaQuery.of(context).size.height / 4,
                   width: MediaQuery.of(context).size.width,
                   padding: const EdgeInsets.only(
                       left: 20, top: 10, bottom: 20, right: 10),
@@ -227,7 +226,7 @@ class _ScreenViewTransactionState extends State<ScreenViewTransaction> {
                   title: 'Update Transaction',
                   onTap: () {
                     updateTransaction();
-                    log(tr.id);
+                    // log(tr.id);
                   },
                 ),
               ],

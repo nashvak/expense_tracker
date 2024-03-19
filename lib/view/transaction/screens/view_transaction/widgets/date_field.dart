@@ -33,8 +33,8 @@ class Datefields extends StatelessWidget {
             DateTime? dates = await showDatePicker(
                 context: context,
                 initialDate: tr.date,
-                firstDate: DateTime(2023),
-                lastDate: DateTime(2024));
+                firstDate: DateTime(2024),
+                lastDate: DateTime.now());
 
             if (dates != null) {
               cont.updateDate(dates);
