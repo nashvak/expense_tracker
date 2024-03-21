@@ -28,8 +28,14 @@ class BalanceCard extends StatelessWidget {
             builder: (controller) {
               MoneyFormatter fmf =
                   MoneyFormatter(amount: controller.totalBalance);
+              String originalString = fmf.output.compactNonSymbol.toString();
+              // if (originalString.contains('-')) {
+              //   String news = originalString.replaceAll('-', '');
+              // }
               return Text(
-                "₹ ${fmf.output.compactNonSymbol}",
+                originalString.contains('-')
+                    ? "₹ -${fmf.output.compactNonSymbol.replaceAll('-', '')}"
+                    : "₹ ${fmf.output.compactNonSymbol}",
                 maxLines: 1,
                 overflow: TextOverflow.ellipsis,
                 style: const TextStyle(

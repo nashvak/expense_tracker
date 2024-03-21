@@ -201,6 +201,8 @@ class _ScreenViewTransactionState extends State<ScreenViewTransaction> {
                     children: [
                       Datefields(dateController: dateController, tr: tr),
                       AddTransactionTextField(
+                          type: const TextInputType.numberWithOptions(
+                              decimal: true),
                           validator: amountValidator,
                           controller: amountController,
                           title: 'Amout'),

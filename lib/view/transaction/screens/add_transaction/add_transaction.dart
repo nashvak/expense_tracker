@@ -118,16 +118,16 @@ class _ScreenAddTransactionState extends State<ScreenAddTransaction> {
                     ),
                     Container(
                       width: Get.width * 0.5,
-                      color: Colors.amber,
+                      // color: Colors.amber,
                       child: GetBuilder<UiController>(
                         builder: (controller) {
                           List<String> categoryItems =
                               controller.showCategoryDropdown();
                           return DropdownButtonFormField<String>(
                             hint: Container(
-                              color: Colors.red,
+                              // color: Colors.red,
                               child: const Text(
-                                '',
+                                'Select category',
                                 style: TextStyle(
                                   fontSize: 15,
                                 ),

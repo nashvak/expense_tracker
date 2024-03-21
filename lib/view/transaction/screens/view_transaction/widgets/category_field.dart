@@ -60,7 +60,7 @@ class CategorytypeField extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       decoration: cardDecoration(color: Appcolor.white),
-      height: MediaQuery.of(context).size.height / 7,
+      // height: MediaQuery.of(context).size.height / 7,
       width: MediaQuery.of(context).size.width / 1,
       padding: const EdgeInsets.only(top: 10, left: 20, bottom: 20, right: 20),
       //color: Colors.red,
