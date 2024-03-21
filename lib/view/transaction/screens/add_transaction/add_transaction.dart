@@ -124,26 +124,23 @@ class _ScreenAddTransactionState extends State<ScreenAddTransaction> {
                           List<String> categoryItems =
                               controller.showCategoryDropdown();
                           return DropdownButtonFormField<String>(
-                            hint: Container(
-                              // color: Colors.red,
-                              child: const Text(
-                                'Select category',
-                                style: TextStyle(
-                                  fontSize: 15,
-                                ),
+                            hint: const Text(
+                              '',
+                              style: TextStyle(
+                                fontSize: 15,
                               ),
                             ),
 
-                            decoration: InputDecoration(
-                              suffixIcon: IconButton(
-                                  onPressed: () {
-                                    ui.selectedCategory = null;
-                                    Get.to(
-                                      () => AddCategory(),
-                                    );
-                                  },
-                                  icon: const Icon(Icons.add)),
-                              enabledBorder: const UnderlineInputBorder(
+                            decoration: const InputDecoration(
+                              // suffixIcon: IconButton(
+                              //     onPressed: () {
+                              //       ui.selectedCategory = null;
+                              //       Get.to(
+                              //         () => AddCategory(),
+                              //       );
+                              //     },
+                              //     icon: const Icon(Icons.add)),
+                              enabledBorder: UnderlineInputBorder(
                                 borderSide: BorderSide(
                                     color: Appcolor.secondaryColor, width: 1),
                               ),
@@ -152,12 +149,12 @@ class _ScreenAddTransactionState extends State<ScreenAddTransaction> {
                                     color: Appcolor.primaryColor, width: 1),
                               ),
                             ),
-                            iconSize: 0,
+                            // iconSize: 0,
                             // autovalidateMode:
                             //     AutovalidateMode.onUserInteraction,
                             validator: (value) =>
                                 value == null ? "Select Category" : null,
-                            // dropdownColor: Appcolor.tertiaryColor,
+                            dropdownColor: Appcolor.tertiaryColor,
                             value: controller.selectedCategory,
 
                             onChanged: (String? newValue) {
@@ -242,6 +239,18 @@ class _ScreenAddTransactionState extends State<ScreenAddTransaction> {
                     onTap: () {
                       addTransaction();
                     }),
+                Container(
+                  alignment: Alignment.topRight,
+                  child: TextButton(
+                    onPressed: () {
+                      ui.selectedCategory = null;
+                      Get.to(
+                        () => AddCategory(),
+                      );
+                    },
+                    child: Text("Add Category"),
+                  ),
+                ),
               ],
             ),
           ),
